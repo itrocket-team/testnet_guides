@@ -1,5 +1,5 @@
 <div>
-<h1 align="left" style="display: flex;"> Tick Node Setup for Testnet — uptick_7000-2</h1>
+<h1 align="left" style="display: flex;"> Uptick Node Setup for Testnet — uptick_7000-2</h1>
 <img src="https://user-images.githubusercontent.com/79756157/205509209-512319b4-59dc-415d-a1ce-29bdeedc20f7.jpg"  style="float: right;" width="100" height="100"></img>
 </div>
 
