@@ -181,8 +181,8 @@ $faucet <YOUR_WALLET_ADDRESS>
 Save wallet and validator address
 
 ```bash
-UPTICK_WALLET_ADDRESS=$(uptickd keys show $WALLET -a)
-UPTICK_VALOPER_ADDRESS=$(uptickd keys show $WALLET --bech val -a)
+UPTICK_WALLET_ADDRESS=$(uptickd keys show $UPTICK_WALLET -a)
+UPTICK_VALOPER_ADDRESS=$(uptickd keys show $UPTICK_WALLET --bech val -a)
 echo "export UPTICK_WALLET_ADDRESS="${UPTICK_WALLET_ADDRESS} >> $HOME/.bash_profile
 echo "export UPTICK_VALOPER_ADDRESS="${UPTICK_VALOPER_ADDRESS} >> $HOME/.bash_profile
 source $HOME/.bash_profile
