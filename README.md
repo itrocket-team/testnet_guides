@@ -175,7 +175,7 @@ Telegram - [@SEM3gs](https://t.me/SEM3gs)
 <br />
 Email -  itrocket7@gmail.com
 
-Website Link: [https://itrocket.net](https://github.com/itrocket.net)
+Website Link: [https://itrocket.net](https://itrocket.net)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
