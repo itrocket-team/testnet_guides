@@ -9,14 +9,14 @@ Official documentation:
 Explorer:
 >-  https://celestia.explorers.guru/
 
-- [Set up Validator node](https://docs.celestia.org/nodes/overview/)  
-- [Set up Bridge node](https://docs.celestia.org/nodes/overview/)  
-- [Set up Light node](https://docs.celestia.org/nodes/overview/)  
-- [Set up Full node](https://docs.celestia.org/nodes/overview/) 
+- [Set up Validator node](https://github.com/marutyan/testnet_guides/tree/main/celestia)  
+- [Set up Bridge node](https://github.com/marutyan/testnet_guides/blob/main/celestia/bridge.md)  
+- [Set up Light node](https://github.com/marutyan/testnet_guides/blob/main/celestia/light.md)  
+- [Set up Full node](https://github.com/marutyan/testnet_guides/blob/main/celestia/full.md) 
 
  You can run Validator and Bridge Node on same machine
->1. [Set up Validator node](https://docs.celestia.org/nodes/overview/)
->2. [Set up Bridge node on same machine](https://docs.celestia.org/nodes/overview/) 
+>1. [Set up Validator node](https://github.com/marutyan/testnet_guides/tree/main/celestia)
+>2. [Set up Bridge node on same machine](https://github.com/marutyan/testnet_guides/blob/main/celestia/bridge.md) 
 
 ## Set up a Celestia Validator node
 ### Hardware Requirements
