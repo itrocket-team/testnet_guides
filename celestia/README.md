@@ -249,7 +249,6 @@ celestia-appd tx staking create-validator \
   --pubkey  $(celestia-appd tendermint show-validator) \
   --moniker $CELESTIA_MONIKER \
   --chain-id $CELESTIA_CHAIN_ID \
-  --gas=auto
 ```
   
 You can add `--website` `--security-contact` `--identity` `--details` flags in it needed
