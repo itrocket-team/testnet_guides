@@ -465,11 +465,11 @@ curl localhost:${CELESTIA_PORT}657/consensus_state
 ```bash
 sudo systemctl stop celestia-appd
 sudo systemctl disable celestia-appd
-sudo rm -rf /etc/systemd/system/uptick*
+sudo rm -rf /etc/systemd/system/celestia-appd*
 sudo systemctl daemon-reload
 sudo rm $(which celestia-appd)
-sudo rm -rf $HOME/.celestia-appd
-sudo rm -fr $HOME/uptick
-sed -i "/UPTICK_/d" $HOME/.bash_profile
+sudo rm -rf $HOME/.celestia-app
+sudo rm -fr $HOME/celestia-app
+sed -i "/CELESTIA_/d" $HOME/.bash_profile
 ```
 
