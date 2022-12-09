@@ -411,13 +411,13 @@ uptickd tx gov vote 1 yes --from $UPTICK_WALLET --chain-id $UPTICK_CHAIN_ID
 Withdraw all rewards
 
 ```bash
-uptickd tx distribution withdraw-all-rewards --from $WALLET --chain-id $UPTICK_CHAIN_ID --gas auto --gas-adjustment 1.3
+uptickd tx distribution withdraw-all-rewards --from $UPTICK_WALLET --chain-id $UPTICK_CHAIN_ID --gas auto --gas-adjustment 1.3
 ```
 
 Withdraw rewards with commision
 
 ```bash
-uptickd tx distribution withdraw-rewards $UPTICK_VALOPER_ADDRESS --from $WALLET --commission --chain-id $UPTICK_CHAIN_ID --gas auto --gas-adjustment 1.3
+uptickd tx distribution withdraw-rewards $UPTICK_VALOPER_ADDRESS --from $UPTICK_WALLET --commission --chain-id $UPTICK_CHAIN_ID --gas auto --gas-adjustment 1.3
 ```
 
 Check balance 
@@ -429,13 +429,13 @@ uptickd query bank balances $UPTICK_WALLET_ADDRESS
 Delegate stake
 
 ```bash
-uptickd tx staking delegate $UPTICK_VALOPER_ADDRESS 5000000000000000000auptick --from $WALLET --chain-id $UPTICK_CHAIN_ID --gas=auto --gas-adjustment 1.3
+uptickd tx staking delegate $UPTICK_VALOPER_ADDRESS 5000000000000000000auptick --from $UPTICK_WALLET --chain-id $UPTICK_CHAIN_ID --gas=auto --gas-adjustment 1.3
 ```
 
 Redelegate stake to another validator
 
 ```bash
-uptickd tx staking redelegate <srcValidatorAddress> <destValidatorAddress> 5000000000000000000auptick --from $WALLET --chain-id $UPTICK_CHAIN_ID --gas auto --gas-adjustment 1.3
+uptickd tx staking redelegate <srcValidatorAddress> <destValidatorAddress> 5000000000000000000auptick --from $UPTICK_WALLET --chain-id $UPTICK_CHAIN_ID --gas auto --gas-adjustment 1.3
 ```
 
 ### Validator operation
@@ -449,7 +449,7 @@ uptickd tx staking edit-validator \
   --website="<your_website>" \
   --details="<your_validator_description>" \
   --chain-id=$UPTICK_CHAIN_ID \
-  --from=$WALLET
+  --from=$UPTICK_WALLET
 ```
 
 Validator info
@@ -468,7 +468,7 @@ uptickd q slashing signing-info $(uptickd tendermint show-validator)
 Unjail validator
 
 ```bash
-uptickd tx slashing unjail --broadcast-mode=block --from $WALLET --chain-id $UPTICK_CHAIN_ID --gas auto --gas-adjustment 1.5
+uptickd tx slashing unjail --broadcast-mode=block --from $UPTICK_WALLET --chain-id $UPTICK_CHAIN_ID --gas auto --gas-adjustment 1.5
 ```
 
 Consensus state
