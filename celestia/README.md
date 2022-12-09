@@ -248,7 +248,7 @@ celestia-appd tx staking create-validator \
   --min-self-delegation "1" \
   --pubkey  $(celestia-appd tendermint show-validator) \
   --moniker $CELESTIA_MONIKER \
-  --chain-id $CELESTIA_CHAIN_ID \
+  --chain-id $CELESTIA_CHAIN_ID
 ```
   
 You can add `--website` `--security-contact` `--identity` `--details` flags in it needed
