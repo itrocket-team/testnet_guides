@@ -1,6 +1,6 @@
 <div>
 <h1 align="left" style="display: flex;"> Celestia Node Setup for Testnet — mamaki</h1>
-<img src="https://github.com/marutyan/patterns/blob/main/logos/celestia.png"  style="float: right;" width="100" height="100"></img>
+<img src="https://avatars.githubusercontent.com/u/54859940?s=200&v=4"  style="float: right;" width="100" height="100"></img>
 </div>
 
 Official documentation:
@@ -14,9 +14,9 @@ Explorer:
 - [Set up Light node](https://github.com/marutyan/testnet_guides/blob/main/celestia/light.md)  
 - [Set up Full node](https://github.com/marutyan/testnet_guides/blob/main/celestia/full.md) 
 
- You can run Validator and Bridge Node on same machine
+ You can run Validator and Bridge Node on the same machine
 >1. [Set up Validator node](https://github.com/marutyan/testnet_guides/tree/main/celestia)
->2. [Set up Bridge node on same machine](https://github.com/marutyan/testnet_guides/blob/main/celestia/bridge.md) 
+>2. [Set up Bridge node on the same machine](https://github.com/marutyan/testnet_guides/blob/main/celestia/bridge.md) 
 
 ## Set up a Celestia Validator node
 ### Hardware Requirements
@@ -29,10 +29,10 @@ Explorer:
 
 Update packages and Install dependencies
 
-```bash
+~~~bash
 sudo apt update && sudo apt upgrade -y
 sudo apt install curl git wget htop tmux build-essential jq make gcc -y
-```
+~~~
 
 Replace your wallet and moniker `<YOUR_WALLET_NAME>` `<YOUR_MONIKER>` without `<>`, save and import variables into system
 
