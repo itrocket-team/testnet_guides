@@ -1,6 +1,6 @@
 <div>
 <h1 align="left" style="display: flex;"> Celestia Light node Setup for Testnet — mamaki</h1>
-<img src="https://github.com/marutyan/patterns/blob/main/logos/celestia.png"  style="float: right;" width="100" height="100"></img>
+<img src="https://avatars.githubusercontent.com/u/54859940?s=200&v=4"  style="float: right;" width="100" height="100"></img>
 </div>
 
 Official documentation:
