@@ -11,7 +11,8 @@ sudo systemctl stop nibid
 Configure
 
 ~~~bash
-cd $HOME peers="d8ced042dee3d657e8b9e9a8fcec6d8760764c49@65.109.92.79:12656" 
+cd $HOME 
+peers="d8ced042dee3d657e8b9e9a8fcec6d8760764c49@65.109.92.79:12656" 
 config=$HOME/.nibid/config/config.toml 
 SNAP_RPC=65.109.92.79:12657
 sed -i.bak -e "s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $config 
