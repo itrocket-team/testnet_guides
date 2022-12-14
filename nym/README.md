@@ -130,6 +130,12 @@ sudo systemctl enable nym-mixnode
 sudo systemctl start nym-mixnode && sudo journalctl -u nym-mixnode -f
 ~~~
 
+(Optional) describe your mix node
+
+~~~bash
+nym-mixnode describe --id $NYM_MONIKER
+~~~
+
 ##To check mixed packets
 
 ~~~bash
