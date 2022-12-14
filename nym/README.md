@@ -136,7 +136,7 @@ sudo systemctl start nym-mixnode && sudo journalctl -u nym-mixnode -f
 nym-mixnode describe --id $NYM_MONIKER
 ~~~
 
-##To check mixed packets
+## To check mixed packets
 
 ~~~bash
 sudo journalctl -u nym-mixnode -f | grep "Since startup mixed"
