@@ -156,7 +156,7 @@ Set the default to allow outgoing connections, deny all incoming, allow ssh and 
 sudo ufw default allow outgoing 
 sudo ufw default deny incoming 
 sudo ufw allow ssh/tcp 
-sudo ufw allow 1789,1790,8000,22,80,443/tcp
+sudo ufw allow 1789,1790,8000/tcp
 sudo ufw enable
 ~~~
 
