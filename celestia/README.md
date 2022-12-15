@@ -64,6 +64,7 @@ Download and build binaries
 ```bash
 cd $HOME
 rm -rf celestia-app
+rm $HOME/.celestia-app/config/genesis.json
 git clone https://github.com/celestiaorg/celestia-app.git
 cd celestia-app/
 APP_VERSION=v0.11.1
