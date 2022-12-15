@@ -233,7 +233,8 @@ Before creating a validator, you need to fund your wallet, go to the [Celestia d
 $request <YOUR_WALLET_ADDRESS>
 ```
 
-Save wallet and validator address
+Save wallets and validator addresses
+>Replace your ERC-20 address `PUT_YOUR_ERC20_ADDRESS>` without `<>`
 
 ```bash
 ERC20_ADDRESS="<PUT_YOUR_ERC20_ADDRESS>"
