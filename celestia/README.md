@@ -1,5 +1,5 @@
 <div>
-<h1 align="left" style="display: flex;"> Celestia Node Setup for Testnet — mamaki</h1>
+<h1 align="left" style="display: flex;"> Celestia Node Setup for Testnet — mocha</h1>
 <img src="https://avatars.githubusercontent.com/u/54859940?s=200&v=4"  style="float: right;" width="100" height="100"></img>
 </div>
 
@@ -35,12 +35,13 @@ sudo apt install curl git wget htop tmux build-essential jq make gcc -y
 ~~~
 
 Replace your wallet and moniker `<YOUR_WALLET_NAME>` `<YOUR_MONIKER>` without `<>`, save and import variables into system
+>
 
 ```bash
 CELESTIA_PORT=11
 echo "export CELESTIA_WALLET="<YOUR_WALLET_NAME>"" >> $HOME/.bash_profile
 echo "export CELESTIA_MONIKER="<YOUR_MONIKER>"" >> $HOME/.bash_profile
-echo "export CELESTIA_CHAIN_ID="mamaki"" >> $HOME/.bash_profile
+echo "export CELESTIA_CHAIN_ID="mocha"" >> $HOME/.bash_profile
 echo "export CELESTIA_PORT="${CELESTIA_PORT}"" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 ```
@@ -65,7 +66,7 @@ cd $HOME
 rm -rf celestia-app
 git clone https://github.com/celestiaorg/celestia-app.git
 cd celestia-app/
-APP_VERSION=v0.6.0
+APP_VERSION=v0.11.1
 git checkout tags/$APP_VERSION -b $APP_VERSION
 make install
 ```
@@ -88,15 +89,17 @@ celestia-appd init $CELESTIA_MONIKER --chain-id $CELESTIA_CHAIN_ID
 Download genesis
 
 ```bash
-cp $HOME/networks/mamaki/genesis.json $HOME/.celestia-app/config
+cp $HOME/networks/mocha/genesis.json $HOME/.celestia-app/config
 ```
 
 Set seeds and peers
 
 ```bash
-BOOTSTRAP_PEERS=$(curl -sL https://raw.githubusercontent.com/celestiaorg/networks/master/mamaki/bootstrap-peers.txt | tr -d '\n')
-echo $BOOTSTRAP_PEERS
-sed -i.bak -e "s/^bootstrap-peers *=.*/bootstrap-peers = \"$BOOTSTRAP_PEERS\"/" $HOME/.celestia-app/config/config.toml
+SEEDS=""
+PEERS="eaa763cde89fcf5a8fe44274a5ee3ce24bce2c5b@64.227.18.169:26656,0d0f0e4a149b50a96207523a5408611dae2796b6@198.199.82.109:26656,c2870ce12cfb08c4ff66c9ad7c49533d2bd8d412@178.170.47.171:26656"
+SEED_MODE="true"
+sed -i -e 's|^seeds *=.*|seeds = "'$SEEDS'"|; s|^persistent_peers *=.*|persistent_peers = "'$PEERS'"|' $HOME/.celestia-app/config/config.toml
+sed -i -e "s/^seed_mode *=.*/seed_mode = \"$SEED_MODE\"/" $HOME/.celestia-app/config/config.toml
 ```
 
 Set gustom ports in app.toml file
@@ -113,12 +116,12 @@ s%^ws-address = \"0.0.0.0:8546\"%ws-address = \"0.0.0.0:${CELESTIA_PORT}546\"%" 
 Set gustom ports in config.toml file
 
 ```bash
-sed -i.bak -e "s%^proxy-app = \"tcp://127.0.0.1:26658\"%proxy_app = \"tcp://127.0.0.1:${CELESTIA_PORT}658\"%; 
+sed -i.bak -e "s%^proxy_app = \"tcp://127.0.0.1:26658\"%proxy_app = \"tcp://127.0.0.1:${CELESTIA_PORT}658\"%; 
 s%^laddr = \"tcp://127.0.0.1:26657\"%laddr = \"tcp://0.0.0.0:${CELESTIA_PORT}657\"%; 
-s%^pprof-laddr = \"localhost:6060\"%pprof_laddr = \"localhost:${CELESTIA_PORT}060\"%;
+s%^pprof_laddr = \"localhost:6060\"%pprof_laddr = \"localhost:${CELESTIA_PORT}060\"%;
 s%^laddr = \"tcp://0.0.0.0:26656\"%laddr = \"tcp://0.0.0.0:${CELESTIA_PORT}656\"%;
-s%^external-address = \"\"%external_address = \"$(wget -qO- eth0.me):${CELESTIA_PORT}656\"%;
-s%^prometheus-listen-addr = \":26660\"%prometheus_listen_addr = \":${CELESTIA_PORT}660\"%" $HOME/.celestia-app/config/config.toml
+s%^external_address = \"\"%external_address = \"$(wget -qO- eth0.me):${CELESTIA_PORT}656\"%;
+s%^prometheus_listen_addr = \":26660\"%prometheus_listen_addr = \":${CELESTIA_PORT}660\"%" $HOME/.celestia-app/config/config.toml
 ```
 
 Configure validator mode
@@ -157,7 +160,7 @@ cd $HOME
 rm -rf ~/.celestia-app/data
 mkdir -p ~/.celestia-app/data
 SNAP_NAME=$(curl -s https://snaps.qubelabs.io/celestia/ | \
-    egrep -o ">mamaki.*tar" | tr -d ">")
+    egrep -o ">mocha.*tar" | tr -d ">")
 wget -O - https://snaps.qubelabs.io/celestia/${SNAP_NAME} | tar xf - \
     -C ~/.celestia-app/data/
 ```
@@ -191,11 +194,31 @@ sudo systemctl restart celestia-appd && sudo journalctl -u celestia-appd -f
 ```
 
 ## Create wallet
-To create a new wallet, use the following command. don’t forget to save the mnemonic
+### 2 new flags should be added in the new Mocha testnet 
+>`--evm-address` This flag should contain a 0x EVM address.  
+>`--orchestrator-address` This flag should contain a newly-generated celestia1 Celestia address  
+ 
+To create a new Ethereum  wallet, use the following guide
+>Visit https://metamask.io/ and locate the extension that is compatible with your browser. 
+Click and install the appropriate extension.
+Once downloaded and installed, click on the extension icon and follow the prompts to create and confirm your password.  
+Next, accept the term of use and give the extension the go-ahead to reveal your seed phrase. It is advisable to store multiple copies of these secret words in secure locations. Once you have backed up your seed phrase, the account registration process is complete.  
+To view your ETH or ERC-20 address, navigate and select the Deposit Ether Directly tab. Then click on View Account to see and copy your ERC-20 address.
+
+To create a new Celestia wallets, use the following command. don’t forget to save the mnemonic. 
+### You need 2 Celestia addresses 
+
+1 - `$CELESTIA_WALLET` - Validator wallet addresss 
 
 ```bash
 celestia-appd keys add $CELESTIA_WALLET
-```
+``` 
+
+2 -  `CELESTIA_WALLET_1` - Orchestrator-address
+
+~~~bash
+celestia-appd keys add ${CELESTIA_WALLET}_1
+~~~
 
 (optional) To restore exexuting wallet, use the following command
 
@@ -204,8 +227,8 @@ celestia-appd keys add $CELESTIA_WALLET --recover
 ```
 
 Fund your wallet 
-Before creating a validator, you need to fund your wallet, go to the [Celestia discord server](https://discord.gg/celestiacommunity) and  and navigate to mamaki-faucet channel
-
+Before creating a validator, you need to fund your wallet, go to the [Celestia discord server](https://discord.gg/celestiacommunity) and  and navigate to mocha-faucet channel
+ 
 ```bash
 $request <YOUR_WALLET_ADDRESS>
 ```
@@ -213,10 +236,14 @@ $request <YOUR_WALLET_ADDRESS>
 Save wallet and validator address
 
 ```bash
+ERC20_ADDRESS="<PUT_YOUR_ERC20_ADDRESS>"
 CELESTIA_WALLET_ADDRESS=$(celestia-appd keys show $CELESTIA_WALLET -a)
 CELESTIA_VALOPER_ADDRESS=$(celestia-appd keys show $CELESTIA_WALLET --bech val -a)
+ORCHESTRATOR_ADDRESS=$(celestia-appd keys show ${CELESTIA_WALLET}_1 --bech val -a)
 echo "export CELESTIA_WALLET_ADDRESS="${CELESTIA_WALLET_ADDRESS} >> $HOME/.bash_profile
+echo "export CELESTIA_ORCHESTRATOR_ADDRESS="${ORCHESTRATOR_ADDRESS} >> $HOME/.bash_profile
 echo "export CELESTIA_VALOPER_ADDRESS="${CELESTIA_VALOPER_ADDRESS} >> $HOME/.bash_profile
+echo "export EVM_ADDRESS="'$ERC20_ADDRESS' >> $HOME/.bash_profile
 source $HOME/.bash_profile
 ```
 
@@ -248,7 +275,11 @@ celestia-appd tx staking create-validator \
   --min-self-delegation "1" \
   --pubkey  $(celestia-appd tendermint show-validator) \
   --moniker $CELESTIA_MONIKER \
-  --chain-id $CELESTIA_CHAIN_ID
+  --chain-id $CELESTIA_CHAIN_ID \
+  --evm-address $EVM_ADDRESS \
+  --orchestrator-address $CELESTIA_ORCHESTRATOR_ADDRESS \
+  --gas auto \
+  --gas-adjustment 1.3
 ```
   
 You can add `--website` `--security-contact` `--identity` `--details` flags in it needed
