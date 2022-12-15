@@ -241,7 +241,7 @@ Save wallets and validator addresses
 ERC20_ADDRESS="<PUT_YOUR_ERC20_ADDRESS>"
 CELESTIA_WALLET_ADDRESS=$(celestia-appd keys show $CELESTIA_WALLET -a)
 CELESTIA_VALOPER_ADDRESS=$(celestia-appd keys show $CELESTIA_WALLET --bech val -a)
-ORCHESTRATOR_ADDRESS=$(celestia-appd keys show ${CELESTIA_WALLET}_1 --bech val -a)
+ORCHESTRATOR_ADDRESS=$(celestia-appd keys show ${CELESTIA_WALLET}_1 -a)
 echo "export CELESTIA_WALLET_ADDRESS="${CELESTIA_WALLET_ADDRESS} >> $HOME/.bash_profile
 echo "export CELESTIA_ORCHESTRATOR_ADDRESS="${ORCHESTRATOR_ADDRESS} >> $HOME/.bash_profile
 echo "export CELESTIA_VALOPER_ADDRESS="${CELESTIA_VALOPER_ADDRESS} >> $HOME/.bash_profile
@@ -269,7 +269,7 @@ Create validator
 
 ```bash
 celestia-appd tx staking create-validator \
-  --amount 9000000utia \
+  --amount 1000000utia \
   --from $CELESTIA_WALLET \
   --commission-max-change-rate "0.01" \
   --commission-max-rate "0.2" \
@@ -278,8 +278,8 @@ celestia-appd tx staking create-validator \
   --pubkey  $(celestia-appd tendermint show-validator) \
   --moniker $CELESTIA_MONIKER \
   --chain-id $CELESTIA_CHAIN_ID \
-  --evm-address $EVM_ADDRESS \
-  --orchestrator-address $CELESTIA_ORCHESTRATOR_ADDRESS \
+  --evm-address "$EVM_ADDRESS" \
+  --orchestrator-address "$CELESTIA_ORCHESTRATOR_ADDRESS" \
   --gas auto \
   --gas-adjustment 1.3
 ```
