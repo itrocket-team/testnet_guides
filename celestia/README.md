@@ -245,7 +245,7 @@ ORCHESTRATOR_ADDRESS=$(celestia-appd keys show ${CELESTIA_WALLET}_1 --bech val -
 echo "export CELESTIA_WALLET_ADDRESS="${CELESTIA_WALLET_ADDRESS} >> $HOME/.bash_profile
 echo "export CELESTIA_ORCHESTRATOR_ADDRESS="${ORCHESTRATOR_ADDRESS} >> $HOME/.bash_profile
 echo "export CELESTIA_VALOPER_ADDRESS="${CELESTIA_VALOPER_ADDRESS} >> $HOME/.bash_profile
-echo "export EVM_ADDRESS="'$ERC20_ADDRESS' >> $HOME/.bash_profile
+echo "export EVM_ADDRESS=""$ERC20_ADDRESS" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 ```
 
