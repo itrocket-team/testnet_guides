@@ -27,6 +27,17 @@ Explorer:
   
 ### Manual installation
 
+Delete mamaki
+
+~~~bash
+sudo systemctl stop celestia-appd
+sudo systemctl disable celestia-appd
+sudo rm /etc/systemd/system/celestia-appd*
+sudo systemctl daemon-reload
+cd $HOME
+rm -rf .celestia-app celestia-app networks
+~~~
+
 Update packages and Install dependencies
 
 ~~~bash
@@ -221,7 +232,7 @@ celestia-appd keys add $CELESTIA_WALLET
 celestia-appd keys add ${CELESTIA_WALLET}_1
 ~~~
 
-(optional) To restore exexuting wallet, use the following command
+(optional) Recover wallet from mamaki, use the following command
 
 ```bash
 celestia-appd keys add $CELESTIA_WALLET --recover
