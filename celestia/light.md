@@ -72,7 +72,7 @@ cd ~/celestia-node
 ./cel-key add $CEL_WALLET --keyring-backend test --node.type light --recover
 ~~~
 
-Initialize the bridge node
+Initialize the light node
 >Please enable RPC and gRPC on your validator node, and allow these ports in firewall rules
 
 ```bash
