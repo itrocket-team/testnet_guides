@@ -13,7 +13,7 @@
     <br />
     We develop tools to help community and projects including: API, RPC, GRPC, State Sync Services, IBC Relayers.
     <br />
-    <a href="https://github.com/marutyan/testnet_guides"><strong>Explore the docs</strong></a>
+    Mainnet guides are available here: <a href="https://github.com/marutyan/mainnet_guides"><strong>https://github.com/marutyan/mainnet_guides</strong></a>
     <br />
     <br />
     <a href="https://itrocket.net/" target="_blank">Visit our website</a>
