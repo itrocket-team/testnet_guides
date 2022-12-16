@@ -289,8 +289,8 @@ celestia-appd tx staking create-validator \
   --pubkey  $(celestia-appd tendermint show-validator) \
   --moniker $CELESTIA_MONIKER \
   --chain-id $CELESTIA_CHAIN_ID \
-  --evm-address "$EVM_ADDRESS" \
-  --orchestrator-address "$CELESTIA_ORCHESTRATOR_ADDRESS" \
+  --evm-address $EVM_ADDRESS \
+  --orchestrator-address $CELESTIA_ORCHESTRATOR_ADDRESS \
   --gas auto \
   --gas-adjustment 1.3
 ```
