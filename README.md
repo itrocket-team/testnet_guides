@@ -147,11 +147,6 @@ Contributions are what make the open source community such an amazing place to l
 If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
 Don't forget to give the project a star! Thanks again!
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
 <br/>
 
 
@@ -161,7 +156,7 @@ Don't forget to give the project a star! Thanks again!
 We are team of DevOps engineers from Armenia :armenia:. We are crypto enthusiasts & node operators in various crypto ecosystems. Our goal is to help millions of people effectively manage their crypto assets!
 
 We think you may like our services because:
-* Low commission.
+* We have low commission.
 * We use ssh keys to login in our servers and disable password login and configure a firewall with a limited connection. All our keys are stored in a safe place and we are using a hardware key where it is possible. Our priority is security and reliability of your funds.
 * We run nodes on dedicated servers in Europe, USA and Canada. We use monitoring tools 24/7 with Prometheus metrics, Grafana dashboard and telegram bots alerting system.
 <br />
@@ -174,7 +169,7 @@ Twitter - [@SEM23404846](https://twitter.com/SEM23404846)
 Telegram - [@SEM3gs](https://t.me/SEM3gs)
 <br />
 Email -  itrocket7@gmail.com
-
+<br />
 Website Link: [https://itrocket.net](https://itrocket.net)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
