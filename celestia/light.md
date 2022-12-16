@@ -77,7 +77,6 @@ Initialize the bridge node
 
 ```bash
 celestia light init --core.ip <VALIDATOR_NODE_IP> --core.grpc.port <VALIDATOR_NODE_GRPC_PORT> --core.rpc.port <VALIDATOR_NODE_RPC_PORT> --keyring.accname $CEL_WALLET
-# celestia light init --core.ip 146.19.24.52 --core.grpc.port "20090" --core.rpc.port 20657 --keyring.accname $CEL_WALLET
 ```
 
 Create Service file
