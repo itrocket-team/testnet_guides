@@ -361,7 +361,7 @@ celestia-appd query bank balances $CELESTIA_WALLET_ADDRESS
 transfer funds
 
 ```bash
-celestia-appd tx bank send $CELESTIA_WALLET_ADDRESS <TO_CELESTIA_WALLET_ADDRESS> 1000000000000000000auptick --gas auto --gas-adjustment 1.3
+celestia-appd tx bank send $CELESTIA_WALLET_ADDRESS <TO_CELESTIA_WALLET_ADDRESS> 1000000000000000000utia --gas auto --gas-adjustment 1.3
 ```
 
 lists of wallets
