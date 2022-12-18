@@ -1,6 +1,6 @@
 <div>
 <h1 align="left" style="display: flex;"> Quicksilver Node Setup for Mainnet — quicksilver-1</h1>
-<img src="https://github.com/marutyan/mainnet_guides/blob/main/logos/quicksilver.jpg"  style="float: right;" width="100" height="100"></img>
+<img src="https://github.com/marutyan/testnet_guides/blob/main/logos/quicksilver.jpg"  style="float: right;" width="100" height="100"></img>
 </div>
 
 Official documentation:
