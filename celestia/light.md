@@ -30,7 +30,7 @@ install go
 
 ```bash
 cd $HOME
-VER="1.19.3"
+VER="1.19.4"
 wget "https://golang.org/dl/go$VER.linux-amd64.tar.gz"
 sudo tar -C /usr/local -xzf "go$VER.linux-amd64.tar.gz"
 rm -rf  "go$VER.linux-amd64.tar.gz"
@@ -53,7 +53,7 @@ cd $HOME
 rm -rf celestia-node
 git clone https://github.com/celestiaorg/celestia-node.git
 cd celestia-node/
-git checkout tags/v0.6.0
+git checkout tags/v0.6.1
 make install
 make cel-key
 ```
