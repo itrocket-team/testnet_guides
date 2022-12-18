@@ -6,7 +6,7 @@
 [![Issues][issues-shield]][issues-url]
 
 <div>
-  <h1 align="center">Testnet Guides by ITRocket Team!</h1>
+  <h1 align="center">Guides by ITRocket Team!</h1>
    
   <p align="center">
     On this page you can find guides that will be useful for node operators.
