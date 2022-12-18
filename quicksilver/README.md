@@ -180,6 +180,11 @@ echo "export QUICKSILVER_VALOPER_ADDRESS="${QUICKSILVER_VALOPER_ADDRESS} >> $HOM
 source $HOME/.bash_profile
 ~~~
 
+## (OPTIONAL) State Sync
+
+In order not to wait for a long synchronization, you can use our StateSync guide:
+> https://github.com/marutyan/testnet_guides/blob/main/quicksilver/statesync.md
+
 ## Create validator
 
 before creating a validator, you need to check the balance and make sure that the node is synched
