@@ -13,9 +13,6 @@
     <br />
     We develop tools to help community and projects including: API, RPC, GRPC, State Sync Services, IBC Relayers.
     <br />
-    Mainnet guides are available here: <a href="https://github.com/marutyan/mainnet_guides"><strong>https://github.com/marutyan/mainnet_guides</strong></a>
-    <br />
-    <br />
     <a href="https://itrocket.net/" target="_blank">Visit our website</a>
     ·
     <a href="https://github.com/marutyan/testnet_guides/issues">Report Bug</a>
@@ -136,6 +133,24 @@
       </a>
       <br>HAQQ
     </td>  
+    <td align="center" width="120">
+      <a href="#debabin-stack" >
+        <img src="https://avatars.githubusercontent.com/u/87823599?s=200&v=4" width="65" height="65" alt="Forta" />
+      </a>
+      <br>Forta
+    </td>
+    <td align="center" width="120">
+      <a href="#debabin-stack">
+        <img src="https://avatars.githubusercontent.com/u/51752891?s=200&v=4" width="65" height="65" alt="NYM" />
+      </a>
+      <br>NYM
+    </td>
+    <td align="center" width="120">
+      <a href="#debabin-stack" >
+        <img src="https://user-images.githubusercontent.com/79756157/208154617-a0750dbd-0aba-43a8-904b-32b248442f74.jpg" width="65" height="65" alt="Quicksilver" />
+      </a>
+      <br>Quicksilver
+    </td> 
    </tr>
 </table>
 <br>
