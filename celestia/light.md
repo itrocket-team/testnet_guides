@@ -58,7 +58,7 @@ make install
 make cel-key
 ```
 
-Add cel_key
+Add cel_key `you can use your orchestrator address`
 
 ~~~bash
 cd ~/celestia-node
