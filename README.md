@@ -22,7 +22,7 @@
   </p>
 </div>
 
-<h2 align="left" id="list-testnets"> 🌐 List of testnets</h2>
+<h2 align="left" id="list-testnets"> 🌐 List of testnets and mainnets</h2>
 
  
 <table width='100%'>
