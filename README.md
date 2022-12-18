@@ -22,7 +22,7 @@
   </p>
 </div>
 
-<h2 align="left" id="list-testnets"> 🌐 List of testnets and mainnets</h2>
+<h2 align="left" id="list-testnets"> 🌐 List of testnets</h2>
 
  
 <table width='100%'>
@@ -133,25 +133,34 @@
       </a>
       <br>HAQQ
     </td>  
-    <td align="center" width="120">
+   </tr>
+</table>
+<br>
+
+<h2 align="left" id="list-mainnets"> 🌐 List of mainnets</h2>
+
+<table width='100%'>
+  <tr>
+      <td align="center" width="96">
       <a href="#debabin-stack" >
-        <img src="https://avatars.githubusercontent.com/u/87823599?s=200&v=4" width="65" height="65" alt="Forta" />
+        <img src="https://avatars.githubusercontent.com/u/87823599?s=200&v=4" width="45" height="45" alt="Forta" />
       </a>
       <br>Forta
     </td>
-    <td align="center" width="120">
+    <td align="center" width="96">
       <a href="#debabin-stack">
-        <img src="https://avatars.githubusercontent.com/u/51752891?s=200&v=4" width="65" height="65" alt="NYM" />
+        <img src="https://avatars.githubusercontent.com/u/51752891?s=200&v=4" width="45" height="45" alt="NYM" />
       </a>
       <br>NYM
     </td>
-    <td align="center" width="120">
+    <td align="center" width="96">
       <a href="#debabin-stack" >
-        <img src="https://user-images.githubusercontent.com/79756157/208154617-a0750dbd-0aba-43a8-904b-32b248442f74.jpg" width="65" height="65" alt="Quicksilver" />
+        <img src="https://user-images.githubusercontent.com/79756157/208154617-a0750dbd-0aba-43a8-904b-32b248442f74.jpg" width="45" height="45" alt="Quicksilver" />
       </a>
       <br>Quicksilver
     </td> 
-   </tr>
+   </tr>  
+  
 </table>
 <br>
 
