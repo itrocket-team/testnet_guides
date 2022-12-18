@@ -62,7 +62,7 @@ echo "export CEL_WALLET="wallet_1"" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 ~~~
 
-You can create your key for your node by following the cel-key instructions
+You can create your key for your node by following the cel-key instructions `you can use your orchestrator address`
 
 ~~~bash
 cd $HOME/celestia-node
