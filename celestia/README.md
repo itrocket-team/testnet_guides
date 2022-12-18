@@ -239,7 +239,7 @@ celestia-appd keys add $CELESTIA_WALLET --recover
 ```
 
 Fund your wallet 
-Before creating a validator, you need to fund your wallet, go to the [Celestia discord server](https://discord.gg/celestiacommunity) and  and navigate to mocha-faucet channel
+Before creating a validator, you need to fund your wallet, go to the [Celestia discord server](https://discord.gg/celestiacommunity) and  and navigate to mocha-faucet channel. `please fund your orchestrator address too, if you want to run Celestia bridge, Full or Light node`
  
 ```bash
 $request <YOUR_WALLET_ADDRESS>
