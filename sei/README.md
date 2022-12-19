@@ -78,7 +78,7 @@ Set seeds and peers
 
 ~~~bash
 SEEDS="f97a75fb69d3a5fe893dca7c8d238ccc0bd66a8f@sei-seed.p2p.brocha.in:30514"
-PEERS="59f519729903be6d82fe0286890077b1ce6a8622@rpc.sei.ppnv.space:06656,"
+PEERS="59f519729903be6d82fe0286890077b1ce6a8622@rpc.sei.ppnv.space:06656"
 sed -i -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.sei/config/config.toml
 ~~~
 
