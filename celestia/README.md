@@ -291,8 +291,10 @@ celestia-appd tx staking create-validator \
   --chain-id $CELESTIA_CHAIN_ID \
   --evm-address $EVM_ADDRESS \
   --orchestrator-address $CELESTIA_ORCHESTRATOR_ADDRESS \
-  --gas auto \
-  --gas-adjustment 1.3
+   --gas=auto \
+  --gas-adjustment=1.5 \
+  --fees=1000utia \
+  -y
 ```
   
 You can add `--website` `--security-contact` `--identity` `--details` flags in it needed
