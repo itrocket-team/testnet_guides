@@ -26,11 +26,11 @@ sudo apt update && sudo apt upgrade -y
 sudo apt install curl git wget htop tmux build-essential jq make lz4 gcc -y
 ~~~
 
-Replace your wallet and moniker `<YOUR_WALLET_NAME>` `<YOUR_MONIKER>` without `<>`, save and import variables into system
+Replace your moniker `<YOUR_MONIKER>` without `<>`, save and import variables into system
 
 ~~~bash
 NOLUS_PORT=16
-echo "export NOLUS_WALLET="<YOUR_WALLET_NAME>"" >> $HOME/.bash_profile
+echo "export NOLUS_WALLET="wallet"" >> $HOME/.bash_profile
 echo "export NOLUS_MONIKER="<YOUR_MONIKER>"" >> $HOME/.bash_profile
 echo "export NOLUS_CHAIN_ID="nolus-rila"" >> $HOME/.bash_profile
 echo "export NOLUS_PORT="${NOLUS_PORT}"" >> $HOME/.bash_profile
