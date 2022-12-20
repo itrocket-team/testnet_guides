@@ -174,7 +174,7 @@ sudo systemctl restart humansd && sudo journalctl -u humansd -f
 ## (OPTIONAL) State Sync
 
 In order not to wait for a long synchronization, you can use our StateSync guide:
-> https://github.com/marutyan/testnet_guides/blob/main/sei/statesync.md
+> https://github.com/itrocket-team/testnet_guides/blob/main/humans/statesync.md
 
 ## Create wallet
 To create a new wallet, use the following command. don’t forget to save the mnemonic
