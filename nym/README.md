@@ -69,7 +69,7 @@ Download and build binaries
 cd $HOME
 git clone https://github.com/nymtech/nym.git
 cd nym
-git checkout release/v1.1.3
+git checkout release/v1.1.4
 cargo build
 ~~~
 
