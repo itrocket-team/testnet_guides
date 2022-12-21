@@ -29,7 +29,7 @@ sudo apt install curl git wget htop tmux build-essential jq make gcc -y
 Replace your moniker `<YOUR_MONIKER>` without `<>`, save and import variables into system
 
 ~~~bash
-NIBIRU_PORT=18
+NIBIRU_PORT=12
 echo "export NIBIRU_WALLET="wallet"" >> $HOME/.bash_profile
 echo "export NIBIRU_MONIKER="<YOUR_MONIKER>"" >> $HOME/.bash_profile
 echo "export NIBIRU_CHAIN_ID="nibiru-testnet-2"" >> $HOME/.bash_profile

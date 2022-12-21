@@ -22,7 +22,7 @@ BLOCK_HEIGHT=$((LATEST_HEIGHT - 2000)); \
 TRUST_HASH=$(curl -s "$SNAP_RPC/block?height=$BLOCK_HEIGHT" | jq -r .result.block_id.hash) 
 ~~~
 
-Ñheck is the state sync information available
+Nheck is the state sync information available
 
 ~~~bash
 echo $LATEST_HEIGHT $BLOCK_HEIGHT $TRUST_HASH
