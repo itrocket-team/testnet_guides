@@ -1,5 +1,5 @@
 <div>
-<h1 align="left" style="display: flex;"> Nibiru Node Setup for Testnet — nibiru-testnet-2</h1>
+<h1 align="left" style="display: flex;"> Nibiru Node Setup for Testnet â€” nibiru-testnet-2</h1>
 <img src="https://avatars.githubusercontent.com/u/95279816?s=200&v=4"  style="float: right;" width="100" height="100"></img>
 </div>
 
@@ -80,9 +80,6 @@ Set seeds and peers
 ~~~bash
 NETWORK=nibiru-testnet-2
 sed -i 's|seeds =.*|seeds = "'$(curl -s https://networks.testnet.nibiru.fi/$NETWORK/seeds)'"|g' $HOME/.nibid/config/config.toml
-SEEDS=""
-PEERS="f8610c8c491e8d18e8b566c47ec13f34176f451c@35.185.124.166:26656,ed6bec50bf3db42d7caa3e7e57e118f50c944dca@34.23.132.200:26656"
-sed -i -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.nibid/config/config.toml
 ~~~
 
 Set gustom ports in app.toml file
@@ -158,7 +155,7 @@ sudo systemctl restart nibid && sudo journalctl -u nibid -f
 ~~~
 
 ## Create wallet
-To create a new wallet, use the following command. don’t forget to save the mnemonic
+To create a new wallet, use the following command. donâ€™t forget toÂ save the mnemonic
 
 ~~~bash
 nibid keys add $NIBIRU_WALLET
