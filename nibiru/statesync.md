@@ -1,16 +1,9 @@
-## (OPTIONAL) Nibiru State Sync
+## (OPTIONAL) Nibiru State Sync, one command
 
 In order not to wait for a long synchronization, you can use our StateSync guide
 
-Stop the service 
-
 ~~~bash
 sudo systemctl stop nibid
-~~~
-
-Configure
-
-~~~bash
 cd $HOME 
 peers="a08e5b25443d038b08230177456ee23196509dd5@65.109.92.79:12656" 
 config=$HOME/.nibid/config/config.toml 
@@ -26,9 +19,5 @@ s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$BLOCK_HEIGHT| ;
 s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"| ;
 s|^(seeds[[:space:]]+=[[:space:]]+).*$|\1\"\"|" $config
 nibid tendermint unsafe-reset-all --home $HOME/.nibid --keep-addr-book
-~~~
-Restart the service and check the log
-
-~~~bash
 sudo systemctl restart nibid && sudo journalctl -u nibid -f
 ~~~
