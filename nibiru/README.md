@@ -1,5 +1,5 @@
 <div>
-<h1 align="left" style="display: flex;"> Nibiru Node Setup for Testnet â€” nibiru-testnet-1</h1>
+<h1 align="left" style="display: flex;"> Nibiru Node Setup for Testnet — nibiru-testnet-2</h1>
 <img src="https://avatars.githubusercontent.com/u/95279816?s=200&v=4"  style="float: right;" width="100" height="100"></img>
 </div>
 
@@ -7,19 +7,14 @@ Official documentation:
 >- [Validator setup instructions](https://docs.nibiru.fi/run-nodes/testnet/)
 
 Explorer:
->-  https://nibiru.explorers.guru/validators
+>-  https://testnet-2.nibiru.fi/validators
 
 
 ## Hardware Requirements
-### Minimum Hardware Requirements
- - 2CPU
- - 4GB RAM
- - 100GB of disk space (SSD)
-
-### Recommended Hardware Requirements 
+### Minimum Hardware Requirements 
  - 4x CPUs
- - 8GB RAM
- - 200GB of storage (SSD or NVME)
+ - 16GB RAM
+ - 500GB of disk space (SSD)
 
 ## Set up your nibiru node
 ### Manual installation
@@ -31,13 +26,13 @@ sudo apt update && sudo apt upgrade -y
 sudo apt install curl git wget htop tmux build-essential jq make gcc -y
 ~~~
 
-Replace your wallet and moniker `<YOUR_WALLET_NAME>` `<YOUR_MONIKER>` without `<>`, save and import variables into system
+Replace your moniker `<YOUR_MONIKER>` without `<>`, save and import variables into system
 
 ~~~bash
-NIBIRU_PORT=12
-echo "export NIBIRU_WALLET="<YOUR_WALLET_NAME>"" >> $HOME/.bash_profile
+NIBIRU_PORT=18
+echo "export NIBIRU_WALLET="wallet"" >> $HOME/.bash_profile
 echo "export NIBIRU_MONIKER="<YOUR_MONIKER>"" >> $HOME/.bash_profile
-echo "export NIBIRU_CHAIN_ID="nibiru-testnet-1"" >> $HOME/.bash_profile
+echo "export NIBIRU_CHAIN_ID="nibiru-testnet-2"" >> $HOME/.bash_profile
 echo "export NIBIRU_PORT="${NIBIRU_PORT}"" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 ~~~
@@ -46,7 +41,7 @@ install go
 
 ~~~bash
 cd $HOME
-VER="1.18.3"
+VER="1.19.3"
 wget "https://golang.org/dl/go$VER.linux-amd64.tar.gz"
 sudo tar -C /usr/local -xzf "go$VER.linux-amd64.tar.gz"
 rm -rf  "go$VER.linux-amd64.tar.gz"
@@ -61,7 +56,7 @@ Download and build binaries
 cd $HOME
 git clone https://github.com/NibiruChain/nibiru
 cd nibiru
-git checkout v0.15.0
+git checkout v0.16.2
 make install 
 ~~~
 Config and init app
@@ -69,18 +64,22 @@ Config and init app
 ~~~bash
 nibid config node tcp://localhost:${NIBIRU_PORT}657
 nibid config chain-id $NIBIRU_CHAIN_ID
+nibid config keyring-backend test
 nibid init $NIBIRU_MONIKER --chain-id $NIBIRU_CHAIN_ID
 ~~~
 
 Download genesis
 
 ~~~bash
-curl -s https://rpc.testnet-1.nibiru.fi/genesis | jq -r .result.genesis > ~/.nibid/config/genesis.json
+NETWORK=nibiru-testnet-2
+curl -s https://networks.testnet.nibiru.fi/$NETWORK/genesis > $HOME/.nibid/config/genesis.json
 ~~~
 
 Set seeds and peers
 
 ~~~bash
+NETWORK=nibiru-testnet-2
+sed -i 's|seeds =.*|seeds = "'$(curl -s https://networks.testnet.nibiru.fi/$NETWORK/seeds)'"|g' $HOME/.nibid/config/config.toml
 SEEDS=""
 PEERS="f8610c8c491e8d18e8b566c47ec13f34176f451c@35.185.124.166:26656,ed6bec50bf3db42d7caa3e7e57e118f50c944dca@34.23.132.200:26656"
 sed -i -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.nibid/config/config.toml
@@ -124,19 +123,6 @@ sed -i -e "s/prometheus = false/prometheus = true/" $HOME/.nibid/config/config.t
 sed -i -e "s/^indexer *=.*/indexer = \"null\"/" $HOME/.nibid/config/config.toml
 ~~~
 
-Update block time parameters
-~~~bash
-CONFIG_TOML="$HOME/.nibid/config/config.toml"
- sed -i 's/timeout_propose =.*/timeout_propose = "100ms"/g' $HOME/.nibid/config/config.toml
- sed -i 's/timeout_propose_delta =.*/timeout_propose_delta = "500ms"/g' $HOME/.nibid/config/config.toml
- sed -i 's/timeout_prevote =.*/timeout_prevote = "100ms"/g' $HOME/.nibid/config/config.toml
- sed -i 's/timeout_prevote_delta =.*/timeout_prevote_delta = "500ms"/g' $HOME/.nibid/config/config.toml
- sed -i 's/timeout_precommit =.*/timeout_precommit = "100ms"/g' $HOME/.nibid/config/config.toml
- sed -i 's/timeout_precommit_delta =.*/timeout_precommit_delta = "500ms"/g' $HOME/.nibid/config/config.toml
- sed -i 's/timeout_commit =.*/timeout_commit = "1s"/g' $HOME/.nibid/config/config.toml
- sed -i 's/skip_timeout_commit =.*/skip_timeout_commit = false/g' $HOME/.nibid/config/config.toml
-~~~
-
 Clean old data
 
 ~~~bash
@@ -172,7 +158,7 @@ sudo systemctl restart nibid && sudo journalctl -u nibid -f
 ~~~
 
 ## Create wallet
-To create a new wallet, use the following command. donâ€™t forget toÂ save the mnemonic
+To create a new wallet, use the following command. don’t forget to save the mnemonic
 
 ~~~bash
 nibid keys add $NIBIRU_WALLET
