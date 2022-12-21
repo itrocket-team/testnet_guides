@@ -28,4 +28,4 @@ Restart service and check log
 sudo systemctl restart nym-mixnode && sudo journalctl -u nym-mixnode -f
 ~~~
 
-Open Nym wallet application, go to  Bonding -> Node Setting and update version to 1.1.4
+>Open Nym wallet application, go to  Bonding -> Node Setting and update version to 1.1.4
