@@ -171,11 +171,7 @@ Save wallet and validator address
 
 ~~~bash
 NIBIRU_WALLET_ADDRESS=$(nibid keys show $NIBIRU_WALLET -a)
-~~~
-~~~bash
 NIBIRU_VALOPER_ADDRESS=$(nibid keys show $NIBIRU_WALLET --bech val -a)
-~~~
-~~~bash
 echo "export NIBIRU_WALLET_ADDRESS="${NIBIRU_WALLET_ADDRESS} >> $HOME/.bash_profile
 echo "export NIBIRU_VALOPER_ADDRESS="${NIBIRU_VALOPER_ADDRESS} >> $HOME/.bash_profile
 source $HOME/.bash_profile
