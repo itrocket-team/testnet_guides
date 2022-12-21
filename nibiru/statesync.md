@@ -12,7 +12,7 @@ Configure
 
 ~~~bash
 cd $HOME 
-peers="d8ced042dee3d657e8b9e9a8fcec6d8760764c49@65.109.92.79:12656" 
+peers="a08e5b25443d038b08230177456ee23196509dd5@65.109.92.79:12656" 
 config=$HOME/.nibid/config/config.toml 
 SNAP_RPC=65.109.92.79:12657
 sed -i.bak -e "s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $config 
@@ -30,10 +30,10 @@ echo $LATEST_HEIGHT $BLOCK_HEIGHT $TRUST_HASH
 
 Configure the state sync
 ~~~bash
-sed -i.bak -E "s|^(enable[[:space:]]+=[[:space:]]+).*$|\1true| ; \
-s|^(rpc_servers[[:space:]]+=[[:space:]]+).*$|\1\"$SNAP_RPC,$SNAP_RPC\"| ; \
-s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$BLOCK_HEIGHT| ; \
-s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"| ; \
+sed -i.bak -E "s|^(enable[[:space:]]+=[[:space:]]+).*$|\1true| ;
+s|^(rpc_servers[[:space:]]+=[[:space:]]+).*$|\1\"$SNAP_RPC,$SNAP_RPC\"| ;
+s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$BLOCK_HEIGHT| ;
+s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"| ;
 s|^(seeds[[:space:]]+=[[:space:]]+).*$|\1\"\"|" $config
 ~~~
 
