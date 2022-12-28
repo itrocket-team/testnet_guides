@@ -56,7 +56,7 @@ Download and build binaries
 cd $HOME
 git clone https://github.com/NibiruChain/nibiru
 cd nibiru
-git checkout v0.16.2
+git checkout v0.16.3
 make install 
 ~~~
 Config and init app
