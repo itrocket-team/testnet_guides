@@ -23,7 +23,7 @@ sudo apt install curl git wget htop tmux build-essential jq make lz4 gcc -y
 Replace your moniker `<YOUR_MONIKER>` without `<>`, save and import variables into system
 
 ~~~bash
-HAQQ_PORT=18
+HAQQ_PORT=19
 echo "export WALLET="wallet"" >> $HOME/.bash_profile
 echo "export MONIKER="<YOUR_MONIKER>"" >> $HOME/.bash_profile
 echo "export HAQQ_CHAIN_ID="haqq_54211-3"" >> $HOME/.bash_profile
