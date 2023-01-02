@@ -140,12 +140,6 @@ WantedBy=multi-user.target
 EOF
 ~~~
 
-(OPTIONAL) State Sync
-
-In order not to wait for a long synchronization, you can use our StateSync guide:
-> https://github.com/marutyan/testnet_guides/blob/main/haqq/statesync.md
-
-
 Enable and start service
 
 ~~~bash
@@ -153,6 +147,11 @@ sudo systemctl daemon-reload
 sudo systemctl enable haqqd
 sudo systemctl restart haqqd && sudo journalctl -u haqqd -f
 ~~~
+
+## (OPTIONAL) State Sync
+
+In order not to wait for a long synchronization, you can use our StateSync guide:
+> https://github.com/marutyan/testnet_guides/blob/main/haqq/statesync.md
 
 ## Create wallet
 To create a new wallet, use the following command. don’t forget to save the mnemonic
