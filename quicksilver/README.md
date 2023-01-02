@@ -57,7 +57,7 @@ rm -rf ~/quicksilver
 git clone https://github.com/ingenuity-build/quicksilver
 cd quicksilver
 git fetch origin --tags
-git checkout v1.0.0
+git checkout v1.1.0
 make install
 ~~~
 
