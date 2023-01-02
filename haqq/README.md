@@ -1,6 +1,6 @@
 <div>
 <h1 align="left" style="display: flex;"> Haqq Node Setup for Testnet — haqq_54211-3</h1>
-<img src="https://islamiccoin.net/logo.svg"  style="float: right;" width="100" height="100"></img>
+<img src="https://github.com/itrocket-team/testnet_guides/blob/main/logos/haqq.png"  style="float: right;" width="100" height="100"></img>
 </div>
 
 Official documentation:
