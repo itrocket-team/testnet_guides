@@ -1,4 +1,4 @@
-## (OPTIONAL) Nibiru State Sync
+## (OPTIONAL) Haqq State Sync
 
 In order not to wait for a long synchronization, you can use our StateSync guide
 
