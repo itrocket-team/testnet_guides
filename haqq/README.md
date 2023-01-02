@@ -140,6 +140,12 @@ WantedBy=multi-user.target
 EOF
 ~~~
 
+## (OPTIONAL) State Sync
+
+In order not to wait for a long synchronization, you can use our StateSync guide:
+> https://github.com/marutyan/testnet_guides/blob/main/haqq/statesync.md
+
+
 Enable and start service
 
 ~~~bash
@@ -177,12 +183,6 @@ source $HOME/.bash_profile
 
 Fund your wallet 
 Before creating a validator, you need to fund your wallet, go to the [Haqq faucet page](https://testedge2.haqq.network/) and  and claim test tockens
-
-
-## (OPTIONAL) State Sync
-
-In order not to wait for a long synchronization, you can use our StateSync guide:
-> https://github.com/marutyan/testnet_guides/blob/main/haqq/statesync.md
 
 
 ## Create validator
