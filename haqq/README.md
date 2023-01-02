@@ -1,6 +1,6 @@
 <div>
 <h1 align="left" style="display: flex;"> Haqq Node Setup for Testnet — haqq_54211-3</h1>
-<img src="https://avatars.githubusercontent.com/u/97603871?s=200&v=4"  style="float: right;" width="100" height="100"></img>
+<img src="https://islamiccoin.net/logo.svg"  style="float: right;" width="100" height="100"></img>
 </div>
 
 Official documentation:
@@ -140,7 +140,7 @@ WantedBy=multi-user.target
 EOF
 ~~~
 
-## (OPTIONAL) State Sync
+(OPTIONAL) State Sync
 
 In order not to wait for a long synchronization, you can use our StateSync guide:
 > https://github.com/marutyan/testnet_guides/blob/main/haqq/statesync.md
