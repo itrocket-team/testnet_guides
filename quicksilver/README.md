@@ -1,5 +1,5 @@
 <div>
-<h1 align="left" style="display: flex;"> Quicksilver Node Setup for Mainnet — quicksilver-1</h1>
+<h1 align="left" style="display: flex;"> Quicksilver Node Setup for Mainnet — quicksilver-2</h1>
 <img src="https://github.com/marutyan/testnet_guides/blob/main/logos/quicksilver.jpg"  style="float: right;" width="100" height="100"></img>
 </div>
 
@@ -32,7 +32,7 @@ Replace your wallet and moniker `<YOUR_WALLET_NAME>` `<YOUR_MONIKER>` without `<
 QUICKSILVER_PORT=15
 echo "export QUICKSILVER_WALLET="<YOUR_WALLET_NAME>"" >> $HOME/.bash_profile
 echo "export QUICKSILVER_MONIKER="<YOUR_MONIKER>"" >> $HOME/.bash_profile
-echo "export QUICKSILVER_CHAIN_ID="quicksilver-1"" >> $HOME/.bash_profile
+echo "export QUICKSILVER_CHAIN_ID="quicksilver-2"" >> $HOME/.bash_profile
 echo "export QUICKSILVER_PORT="${QUICKSILVER_PORT}"" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 ~~~
@@ -56,8 +56,8 @@ Download and build binaries
 rm -rf ~/quicksilver
 git clone https://github.com/ingenuity-build/quicksilver
 cd quicksilver
-git fetch origin --tags
-git checkout v1.1.0
+git fetch
+git checkout v1.2.0
 make install
 ~~~
 
@@ -77,7 +77,10 @@ quicksilverd init $QUICKSILVER_MONIKER --chain-id $QUICKSILVER_CHAIN_ID
 Download genesis and addrbook
 
 ~~~bash
-curl -s https://raw.githubusercontent.com/ingenuity-build/mainnet/main/genesis.json > ~/.quicksilverd/config/genesis.json
+wget https://raw.githubusercontent.com/ingenuity-build/mainnet/main/migrate-genesis.py
+wget https://raw.githubusercontent.com/ingenuity-build/mainnet/main/export-quicksilver-1-115000.json
+python3 migrate-genesis.py
+cp genesis.json ~/.quicksilverd/config/genesis.json
 ~~~
 
 Set seeds and peers
