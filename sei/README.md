@@ -355,13 +355,13 @@ seid tx gov vote 1 yes --from $SEI_WALLET --chain-id $SEI_CHAIN_ID
 Withdraw all rewards
 
 ~~~bash
-seid tx distribution withdraw-all-rewards --from $SEI_WALLET --chain-id $SEI_CHAIN_ID --gas auto --gas-adjustment 1.3
+seid tx distribution withdraw-all-rewards --from $SEI_WALLET --chain-id $SEI_CHAIN_ID
 ~~~
 
 Withdraw rewards with commision
 
 ~~~bash
-seid tx distribution withdraw-rewards $SEI_VALOPER_ADDRESS --from $SEI_WALLET --commission --chain-id $SEI_CHAIN_ID --gas auto --gas-adjustment 1.3
+seid tx distribution withdraw-rewards $SEI_VALOPER_ADDRESS --from $SEI_WALLET --commission --chain-id $SEI_CHAIN_ID
 ~~~
 
 Check balance 
