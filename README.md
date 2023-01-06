@@ -47,6 +47,12 @@
     </td>
     <td align="center" width="96">
       <a href="#debabin-stack" >
+        <img src="https://avatars.githubusercontent.com/u/54859940?s=200&v=4" width="45" height="45" alt="Figma" />
+      </a>
+      <br>Celestia
+    </td>
+    <td align="center" width="96">
+      <a href="#debabin-stack" >
         <img src="https://avatars.githubusercontent.com/u/72395063?s=200&v=4" width="45" height="45" alt="Figma" />
       </a>
       <br>Gear
