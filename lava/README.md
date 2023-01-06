@@ -1,6 +1,6 @@
 <div>
 <h1 align="left" style="display: flex;"> Lava Validator node setup for testnet - lava-testnet-1</h1>
-<img src="https://docs.lavanet.xyz/img/lava_logo.svg"  style="float: right;" width="100" height="100"></img>
+<img src="https://raw.githubusercontent.com/itrocket-team/testnet_guides/main/logos/lava.jpg"  style="float: right;" width="100" height="100"></img>
 </div>
 
 Official documentation:
