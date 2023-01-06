@@ -132,6 +132,12 @@
         <img src="https://avatars.githubusercontent.com/u/97603871?s=200&v=4" width="45" height="45" alt="Figma" />
       </a>
       <br>HAQQ
+    </td>
+     <td align="center" width="96">
+      <a href="#debabin-stack" >
+        <img src="https://raw.githubusercontent.com/itrocket-team/testnet_guides/main/logos/lava.jpg?s=200&v=4" width="45" height="45" alt="Figma" />
+      </a>
+      <br>Lava
     </td>  
    </tr>
 </table>
