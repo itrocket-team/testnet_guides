@@ -60,12 +60,6 @@ git checkout 0.4.0
 make install
 ~~~
 
-Check version
-~~~bash
-lavad version --long | grep -e version
-#0.4.0-rc2-e2c69db
-~~~
-
 Config and init app
 
 ~~~bash
@@ -465,6 +459,7 @@ sudo systemctl disable lavad
 sudo rm -rf /etc/systemd/system/lavad*
 sudo rm $(which lavad)
 sudo rm -rf $HOME/.lava
+sudo rm -rf $HOME/lava
 sed -i "/LAVA_/d" $HOME/.bash_profile
 ~~~
 
