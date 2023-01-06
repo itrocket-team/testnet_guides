@@ -56,6 +56,12 @@
         <img src="https://avatars.githubusercontent.com/u/72395063?s=200&v=4" width="45" height="45" alt="Figma" />
       </a>
       <br>Gear
+     </td>
+    <td align="center" width="96">
+      <a href="#debabin-stack" >
+        <img src="https://github.com/itrocket-team/testnet_guides/blob/main/logos/haqq.png?s=200&v=4" width="45" height="45" alt="Figma" />
+      </a>
+      <br>Haqq
     </td>
     <td align="center" width="96">
       <a href="#debabin-stack" >
