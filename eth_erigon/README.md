@@ -1,5 +1,8 @@
 # ETH goerly testnet full node installation guide with erigon
 
+Official documentation:
+>- [Erigon Full node](https://github.com/ledgerwatch/erigon)
+
 Update packages and Install dependencies
 
 ~~~bash
