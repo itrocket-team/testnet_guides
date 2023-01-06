@@ -41,7 +41,7 @@ install go
 
 ~~~bash
 cd $HOME
-VER="1.19.3"
+VER="1.19.4"
 wget "https://golang.org/dl/go$VER.linux-amd64.tar.gz"
 sudo tar -C /usr/local -xzf "go$VER.linux-amd64.tar.gz"
 rm -rf  "go$VER.linux-amd64.tar.gz"
@@ -54,6 +54,7 @@ Download and build binaries
 
 ~~~bash
 cd $HOME
+rm -rf $HOME/lava
 git clone https://github.com/lavanet/lava.git
 cd lava
 git checkout 0.4.0
