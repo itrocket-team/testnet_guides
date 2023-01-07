@@ -12,8 +12,8 @@ Configure
 
 ~~~bash
 cd $HOME 
-peers="b87ae2a43e27bd0360ea1b868c8cb9e98d612fce@65.109.92.79:19656"  
-SNAP_RPC=65.109.92.79:19657
+peers="b87ae2a43e27bd0360ea1b868c8cb9e98d612fce@https://haqq-testnet-peer.itrocket.net:443"  
+SNAP_RPC=https://haqq-testnet-rpc.itrocket.net:443
 sed -i.bak -e "s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $HOME/.haqqd/config/config.toml 
 sed -i.bak -e "s/^snapshot-interval *=.*/snapshot-interval = \"1000\"/" $HOME/.haqqd/config/app.toml 
 LATEST_HEIGHT=$(curl -s $SNAP_RPC/block | jq -r .result.block.header.height); \ 
