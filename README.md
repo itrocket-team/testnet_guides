@@ -216,7 +216,7 @@ Twitter - [@SEM23404846](https://twitter.com/SEM23404846)
 <br />
 Telegram - [@SEM3gs](https://t.me/SEM3gs)
 <br />
-Email -  itrocket7@gmail.com
+Email -  fastrpl@gmail.com
 <br />
 Website Link: [https://itrocket.net](https://itrocket.net)
 
