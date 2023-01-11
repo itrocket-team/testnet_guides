@@ -54,16 +54,18 @@ Download and build binaries
 
 ~~~bash
 cd $HOME
-wget https://lava-binary-upgrades.s3.amazonaws.com/testnet/v0.4.0/lavad
-chmod u+x lavad
-mv lavad $HOME/go/bin
+rm -rf $HOME/lava
+git clone https://github.com/lavanet/lava.git
+cd lava
+git checkout v0.4.3
+make install
 ~~~
 
 Check version
 
 ~~~bash
 lavad version --long | grep version
-#version: 0.4.0-rc2-e2c69db
+#version: 0.4.3
 ~~~
 
 Config and init app
