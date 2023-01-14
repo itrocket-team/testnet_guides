@@ -1,4 +1,4 @@
-## (OPTIONAL) Haqq State Sync
+## (OPTIONAL) Mars State Sync
 
 In order not to wait for a long synchronization, you can use our StateSync guide
 
