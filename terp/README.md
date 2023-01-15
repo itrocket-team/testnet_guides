@@ -120,7 +120,7 @@ sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"50\"/" $HOME/.terp/conf
 Set minimum gas price, enable prometheus and disable indexing
 
 ~~~bash
-sed -i 's/minimum-gas-prices =.*/minimum-gas-prices = "0.0125upersyx"/g' $HOME/.terp/config/app.toml
+sed -i 's/minimum-gas-prices =.*/minimum-gas-prices = "0.0125uterpx"/g' $HOME/.terp/config/app.toml
 sed -i -e "s/prometheus = false/prometheus = true/" $HOME/.terp/config/config.toml
 sed -i -e "s/^indexer *=.*/indexer = \"null\"/" $HOME/.terp/config/config.toml
 ~~~
@@ -213,7 +213,7 @@ Create validator
 
 ~~~bash
 terpd tx staking create-validator \
-  --amount 1000000upersyx \
+  --amount 1000000uterpx \
   --from $TERP_WALLET \
   --commission-max-change-rate "0.01" \
   --commission-max-rate "0.2" \
@@ -293,7 +293,7 @@ terpd query bank balances $TERP_WALLET_ADDRESS
 transfer funds
 
 ~~~bash
-terpd tx bank send $TERP_WALLET_ADDRESS <TO_TERP_WALLET_ADDRESS> 1000000upersyx --gas auto --gas-adjustment 1.3
+terpd tx bank send $TERP_WALLET_ADDRESS <TO_TERP_WALLET_ADDRESS> 1000000uterpx --gas auto --gas-adjustment 1.3
 ~~~
 
 lists of wallets
@@ -387,13 +387,13 @@ terpd query bank balances $TERP_WALLET_ADDRESS
 Delegate stake
 
 ~~~bash
-terpd tx staking delegate $TERP_VALOPER_ADDRESS 1000000upersyx --from $TERP_WALLET --chain-id $TERP_CHAIN_ID --gas=auto --gas-adjustment 1.3
+terpd tx staking delegate $TERP_VALOPER_ADDRESS 1000000uterpx --from $TERP_WALLET --chain-id $TERP_CHAIN_ID --gas=auto --gas-adjustment 1.3
 ~~~
 
 Redelegate stake to another validator
 
 ~~~bash
-terpd tx staking redelegate <srcValidatorAddress> <destValidatorAddress> 1000000upersyx --from $TERP_WALLET --chain-id $TERP_CHAIN_ID --gas auto --gas-adjustment 1.3
+terpd tx staking redelegate <srcValidatorAddress> <destValidatorAddress> 1000000uterpx --from $TERP_WALLET --chain-id $TERP_CHAIN_ID --gas auto --gas-adjustment 1.3
 ~~~
 
 ### Validator operation
