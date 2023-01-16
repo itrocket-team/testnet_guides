@@ -167,9 +167,10 @@ sudo systemctl restart lavad && sudo journalctl -u lavad -f
 Download ITRocket-team snapshot
 
 ~~~bash
+sudo systemctl stop lavad
 cp $HOME/.lava/data/priv_validator_state.json $HOME/.lava/priv_validator_state.json.backup
 rm -rf $HOME/.lava/data
-curl https://snaps.itrocket.net/testnet/lava/snap_lava.tar.lz4 | lz4 -dc - | tar -xf - -C $HOME/.lava
+curl https://files.itrocket.net/testnet/lava/snap_lava.tar.lz4 | lz4 -dc - | tar -xf - -C $HOME/.lava
 mv $HOME/.lava/priv_validator_state.json.backup $HOME/.lava/data/priv_validator_state.json
 ~~~
 
