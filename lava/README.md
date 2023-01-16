@@ -82,7 +82,7 @@ Download genesis and addrbook
 
 ~~~bash
 curl https://raw.githubusercontent.com/K433QLtr6RA9ExEq/GHFkqmTzpdNLDd6T/main/testnet-1/genesis_json/genesis.json > ~/.lava/config/genesis.json
-curl https://snaps.itrocket.net/testnet/lava/addrbook.json > ~/.lava/config/addrbook.json
+curl https://files.itrocket.net/testnet/lava/addrbook.json > ~/.lava/config/addrbook.json
 ~~~
 
 Set seeds and peers
