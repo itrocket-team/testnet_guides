@@ -111,7 +111,7 @@ sudo ufw enable
 ### Delete node
 
 ~~~bash
-tmux kill fleek
+tmux kill-session -t fleek
 sudo rm $HOME/go/bin/ursa
 sudo rm -rf $HOME/.ursa
 sudo rm -fr $HOME/ursa
