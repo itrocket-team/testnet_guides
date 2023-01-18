@@ -114,6 +114,6 @@ sudo ufw enable
 tmux kill-session -t fleek
 sudo rm $HOME/go/bin/ursa
 sudo rm -rf $HOME/.ursa
-sudo rm -fr $HOME/ursa
+sudo rm -rf $HOME/ursa
 ~~~
 
