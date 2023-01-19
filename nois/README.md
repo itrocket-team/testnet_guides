@@ -7,7 +7,7 @@ Official documentation:
 >- [Validator setup instructions](https://docs.nois.network/use-cases/for-validators)
 
 Explorer:
->-  https://testnet.itrocket.net/nois
+>-  https://testnet.itrocket.net/nois/staking
 
 
 ## Hardware Requirements
