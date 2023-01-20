@@ -191,17 +191,6 @@ mv $HOME/.celestia-app/priv_validator_state.json.backup $HOME/.celestia-app/data
 sudo systemctl restart celestia-appd && sudo journalctl -u celestia-appd -f
 ~~~
 
-
-```bash
-cd $HOME
-rm -rf ~/.celestia-app/data
-mkdir -p ~/.celestia-app/data
-SNAP_NAME=$(curl -s https://snaps.qubelabs.io/celestia/ | \
-    egrep -o ">mocha.*tar" | tr -d ">")
-wget -O - https://snaps.qubelabs.io/celestia/${SNAP_NAME} | tar xf - \
-    -C ~/.celestia-app/data/
-```
-
 ## Create wallet
 ### 2 new flags should be added in the new Mocha testnet 
 >`--evm-address` This flag should contain a 0x EVM address.  
