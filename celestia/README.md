@@ -27,17 +27,6 @@ Explorer:
   
 ### Manual installation
 
-Delete mamaki
-
-~~~bash
-sudo systemctl stop celestia-appd
-sudo systemctl disable celestia-appd
-sudo rm /etc/systemd/system/celestia-appd*
-sudo systemctl daemon-reload
-cd $HOME
-rm -rf .celestia-app celestia-app networks
-~~~
-
 Update packages and Install dependencies
 
 ~~~bash
@@ -107,11 +96,9 @@ cp $HOME/networks/mocha/genesis.json $HOME/.celestia-app/config
 Set seeds and peers
 
 ```bash
-SEEDS=""
-PEERS="1afcd97b0bf289700378e18b45dc1f927917bba0@65.109.92.79:11656,eaa763cde89fcf5a8fe44274a5ee3ce24bce2c5b@64.227.18.169:26656,0d0f0e4a149b50a96207523a5408611dae2796b6@198.199.82.109:26656,c2870ce12cfb08c4ff66c9ad7c49533d2bd8d412@178.170.47.171:26656"
-SEED_MODE="true"
+SEEDS="e86a9cc8910ef5741f713ce9325d11d758f20375@celestia-testnet-seed.itrocket.net:443"
+PEERS="1afcd97b0bf289700378e18b45dc1f927917bba0@celestia-testnet-peer.itrocket.net:443,1afcd97b0bf289700378e18b45dc1f927917bba0@65.109.92.79:11656"
 sed -i -e 's|^seeds *=.*|seeds = "'$SEEDS'"|; s|^persistent_peers *=.*|persistent_peers = "'$PEERS'"|' $HOME/.celestia-app/config/config.toml
-sed -i -e "s/^seed_mode *=.*/seed_mode = \"$SEED_MODE\"/" $HOME/.celestia-app/config/config.toml
 ```
 
 Set gustom ports in app.toml file
@@ -146,7 +133,7 @@ Config pruning
 ```bash
 sed -i -e "s/^pruning *=.*/pruning = \"custom\"/" $HOME/.celestia-app/config/app.toml
 sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"100\"/" $HOME/.celestia-app/config/app.toml
-sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"50\"/" $HOME/.celestia-app/config/app.toml
+sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"10\"/" $HOME/.celestia-app/config/app.toml
 ```
 
 Set minimum gas price, enable prometheus and disable indexing
@@ -161,20 +148,6 @@ Clean old data
 
 ```bash
 celestia-appd tendermint unsafe-reset-all --home $HOME/.celestia-app --keep-addr-book
-```
-
-## (Optional) quick-sync with snapshot
-
-Syncing from Genesis can take a long time, depending on your hardware. Using this method you can synchronize your Celestia node very quickly by downloading a recent snapshot of the blockchain
-
-```bash
-cd $HOME
-rm -rf ~/.celestia-app/data
-mkdir -p ~/.celestia-app/data
-SNAP_NAME=$(curl -s https://snaps.qubelabs.io/celestia/ | \
-    egrep -o ">mocha.*tar" | tr -d ">")
-wget -O - https://snaps.qubelabs.io/celestia/${SNAP_NAME} | tar xf - \
-    -C ~/.celestia-app/data/
 ```
 
 Create Service file
@@ -203,6 +176,30 @@ Enable and start service
 sudo systemctl daemon-reload
 sudo systemctl enable celestia-appd
 sudo systemctl restart celestia-appd && sudo journalctl -u celestia-appd -f
+```
+
+## (Optional) quick-sync with snapshot
+
+Syncing from Genesis can take a long time, depending on your hardware. Using this method you can synchronize your Celestia node very quickly by downloading a recent snapshot of the blockchain
+
+~~~bash
+sudo systemctl stop celestia-appd
+cp $HOME/.celestia-app/data/priv_validator_state.json $HOME/.celestia-app/priv_validator_state.json.backup
+rm -rf $HOME/.celestia-app/data
+curl https://files.itrocket.net/testnet/celestia/snap_celestia.tar.lz4 | lz4 -dc - | tar -xf - -C $HOME/.celestia-app
+mv $HOME/.celestia-app/priv_validator_state.json.backup $HOME/.celestia-app/data/priv_validator_state.json
+sudo systemctl restart celestia-appd && sudo journalctl -u celestia-appd -f
+~~~
+
+
+```bash
+cd $HOME
+rm -rf ~/.celestia-app/data
+mkdir -p ~/.celestia-app/data
+SNAP_NAME=$(curl -s https://snaps.qubelabs.io/celestia/ | \
+    egrep -o ">mocha.*tar" | tr -d ">")
+wget -O - https://snaps.qubelabs.io/celestia/${SNAP_NAME} | tar xf - \
+    -C ~/.celestia-app/data/
 ```
 
 ## Create wallet
