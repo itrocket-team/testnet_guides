@@ -35,12 +35,6 @@
     </td>
     <td align="center" width="96">
       <a href="#debabin-stack" >
-        <img src="https://user-images.githubusercontent.com/79756157/205507530-a2877b8a-6a62-4fbd-aa6f-c217d9a39df8.jpg" width="45" height="45" alt="Figma" />
-      </a>
-      <br>BlastAPI
-    </td>
-    <td align="center" width="96">
-      <a href="#debabin-stack" >
         <img src="https://avatars.githubusercontent.com/u/89205890?s=200&v=4" width="45" height="45" alt="Figma" />
       </a>
       <br>Bundlr
@@ -93,14 +87,14 @@
       </a>
       <br>Nibiru
     </td> 
+   </tr>   
+   <tr>
     <td align="center" width="96">
       <a href="#debabin-stack" >
         <img src="https://avatars.githubusercontent.com/u/102132049?s=200&v=4" width="45" height="45" alt="Figma" />
       </a>
       <br>Oasys
     </td> 
-   </tr>   
-   <tr>
     <td align="center" width="96">
       <a href="#debabin-stack" >
         <img src="https://avatars.githubusercontent.com/u/85261160?s=200&v=4" width="45" height="45" alt="Figma" />
