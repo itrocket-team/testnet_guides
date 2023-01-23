@@ -148,6 +148,19 @@ sudo systemctl enable seid
 sudo systemctl restart seid && sudo journalctl -u seid -f
 ~~~
 
+## (Optional) quick-sync with snapshot
+
+Syncing from Genesis can take a long time, depending on your hardware. Using this method you can synchronize your Sei node very quickly by downloading a recent snapshot of the blockchain
+
+~~~bash
+sudo systemctl stop seid
+cp $HOME/.sei/data/priv_validator_state.json $HOME/.sei/priv_validator_state.json.backup
+rm -rf $HOME/.sei/data
+curl https://files.itrocket.net/testnet/sei/snap_sei.tar.lz4 | lz4 -dc - | tar -xf - -C $HOME/.sei
+mv $HOME/.sei/priv_validator_state.json.backup $HOME/.sei/data/priv_validator_state.json
+sudo systemctl restart seid && sudo journalctl -u seid -f
+~~~
+
 ## Create wallet
 To create a new wallet, use the following command. don’t forget to save the mnemonic
 
