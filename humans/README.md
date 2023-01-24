@@ -1,6 +1,6 @@
 <div>
 <h1 align="left" style="display: flex;"> Humans Node Setup for Testnet — testnet-1</h1>
-<img src="https://www.itrocket.net/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fhumans.c7e242ae.jpg&w=1920&q=75"  style="float: right;" width="100" height="100"></img>
+<img src="https://github.com/itrocket-team/testnet_guides/blob/main/logos/humans.jpg"  style="float: right;" width="100" height="100"></img>
 </div>
 
 Official documentation:
