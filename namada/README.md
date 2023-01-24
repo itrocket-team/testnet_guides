@@ -1,5 +1,5 @@
 <div>
-<h1 align="left" style="display: flex;"> Anoma Namada Setup for Testnet — public-testnet-2.0.2feaf2d718c</h1>
+<h1 align="left" style="display: flex;"> Anoma Namada Setup for Testnet — public-testnet-2.1.4014f207f6d</h1>
 <img src="https://avatars.githubusercontent.com/u/87261362?s=200&v=4"  style="float: right;" width="100" height="100"></img>
 </div>
 
