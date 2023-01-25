@@ -1,5 +1,5 @@
 <div>
-<h1 align="left" style="display: flex;"> Terp Node Setup for Testnet — athena-2</h1>
+<h1 align="left" style="display: flex;"> Terp Node Setup for Testnet — athena-3</h1>
 <img src="https://avatars.githubusercontent.com/u/112838174?s=200&v=4"  style="float: right;" width="100" height="100"></img>
 </div>
 
@@ -31,13 +31,13 @@ sudo apt update && sudo apt upgrade -y
 sudo apt install curl git wget htop tmux build-essential jq make lz4 gcc -y
 ~~~
 
-Replace your wallet and moniker `<YOUR_WALLET_NAME>` `<YOUR_MONIKER>` without `<>`, save and import variables into system
+Replace your wallet `<YOUR_MONIKER>` without `<>`, save and import variables into system
 
 ~~~bash
 TERP_PORT=13
-echo "export TERP_WALLET="<YOUR_WALLET_NAME>"" >> $HOME/.bash_profile
+echo "export TERP_WALLET="wallet"" >> $HOME/.bash_profile
 echo "export TERP_MONIKER="<YOUR_MONIKER>"" >> $HOME/.bash_profile
-echo "export TERP_CHAIN_ID="athena-2"" >> $HOME/.bash_profile
+echo "export TERP_CHAIN_ID="athena-3"" >> $HOME/.bash_profile
 echo "export TERP_PORT="${TERP_PORT}"" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 ~~~
@@ -62,7 +62,7 @@ cd $HOME
 rm -rf ~/terp-core
 git clone https://github.com/terpnetwork/terp-core.git
 cd terp-core
-git checkout v0.1.2
+git checkout v0.2.0
 make install
 ~~~
 Config and init app
@@ -76,7 +76,7 @@ terpd init $TERP_MONIKER --chain-id $TERP_CHAIN_ID
 Download genesis and addrbook
 
 ~~~bash
-curl https://raw.githubusercontent.com/terpnetwork/test-net/master/athena-2/genesis.json > ~/.terp/config/genesis.json
+wget -O $HOME/.terp/config/genesis.json https://files.itrocket.net/testnet/terp/genesis.json
 ~~~
 
 Set seeds and peers
