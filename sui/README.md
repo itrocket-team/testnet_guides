@@ -24,7 +24,7 @@ sudo apt update && sudo apt upgrade -y
 sudo apt install make clang pkg-config libssl-dev libclang-dev build-essential git curl ntp jq llvm tmux htop screen unzip cargo cmake tzdata ca-certificates pkg-config cmake -y
 ~~~
 
-Install yq
+Install yq `https://github.com/mikefarah/yq`
 
 ~~~bash
 wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq &&\
