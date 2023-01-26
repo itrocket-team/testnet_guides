@@ -185,10 +185,10 @@ Before creating a validator, you need to fund your wallet, go to the [Realio dis
 !faucet <YOUR_WALLET_ADDRESS>
 ~~~
 
-## (OPTIONAL) State Sync
+## (OPTIONAL) State Sync, Snapshot
 
-In order not to wait for a long synchronization, you can use our StateSync guide:
-> https://github.com/marutyan/testnet_guides/blob/main/realio/statesync.md
+In order not to wait for a long synchronization, you can use our StateSync or Snapshot guide:
+> https://itrocket.net/services/testnet/realio
 
 
 ## Create validator
