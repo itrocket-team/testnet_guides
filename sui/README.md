@@ -66,10 +66,8 @@ mkdir $HOME/.sui
 rm -rf $HOME/sui
 git clone https://github.com/MystenLabs/sui.git
 cd sui
-git remote add upstream https://github.com/MystenLabs/sui
-git fetch upstream
-git checkout --track upstream/testnet
-cargo build -p sui-node -p sui --release
+git pull && git checkout testnet
+cargo build --release --bin sui-node
 sudo mv ~/sui/target/release/sui-node $HOME/go/bin/
 ~~~
 
