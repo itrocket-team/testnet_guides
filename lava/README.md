@@ -131,6 +131,16 @@ sed -i -e "s/prometheus = false/prometheus = true/" $HOME/.lava/config/config.to
 sed -i -e "s/^indexer *=.*/indexer = \"null\"/" $HOME/.lava/config/config.toml
 ~~~
 
+Update params
+
+~~~bash
+sed -i 's/create_empty_blocks = .*/create_empty_blocks = true/g' ~/.lava/config/config.toml
+sed -i 's/create_empty_blocks_interval = ".*s"/create_empty_blocks_interval = "60s"/g' ~/.lava/config/config.toml
+sed -i 's/timeout_propose = ".*s"/timeout_propose = "60s"/g' ~/.lava/config/config.toml
+sed -i 's/timeout_commit = ".*s"/timeout_commit = "60s"/g' ~/.lava/config/config.toml
+sed -i 's/timeout_broadcast_tx_commit = ".*s"/timeout_broadcast_tx_commit = "601s"/g' ~/.lava/config/config.toml
+~~~
+
 Reset chain data
 ~~~bash
 lavad tendermint unsafe-reset-all --home $HOME/.lava
