@@ -57,8 +57,8 @@ cd $HOME
 rm -rf nym
 git clone https://github.com/nymtech/nym.git
 cd nym
-git checkout $(curl -sSL 'https://api.github.com/repos/nymtech/nym/releases' | grep nym-mixnodes | grep -E -o "nym-binaries-v[0-9]\.]?[0-9]\.]?[0-9]\]?" | sort | tail -n 1)
-cargo build --bin nym-client --release
+git checkout release/v1.1.6
+cargo build
 ~~~
 
 Move binaries, add permissions 
