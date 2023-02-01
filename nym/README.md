@@ -1,5 +1,5 @@
 <div>
-<h1 align="left" style="display: flex;"> NYM Mixnode Setup for Mainet</h1>
+<h1 align="left" style="display: flex;"> NYM Mixnode Setup for Mainnet</h1>
 <img src="https://avatars.githubusercontent.com/u/51752891?s=200&v=4"  style="float: right;" width="100" height="100"></img>
 </div>
 
@@ -71,7 +71,7 @@ rm -rf nym
 git clone https://github.com/nymtech/nym.git
 cd nym
 git checkout release/v1.1.6
-cargo build
+cargo build --bin nym-client --release
 ~~~
 
 Move binaries, add permissions 
