@@ -219,7 +219,9 @@ realio-networkd tx staking create-validator \
   --min-self-delegation "1" \
   --pubkey  $(realio-networkd tendermint show-validator) \
   --moniker $MONIKER \
-  --chain-id $REALIO_CHAIN_ID
+  --chain-id $REALIO_CHAIN_ID \
+  --fees 5000000000000000ario \
+  --gas 800000
 ~~~
   
 You can add `--website` `--security-contact` `--identity` `--details` flags in it needed
@@ -402,7 +404,9 @@ realio-networkd tx staking edit-validator \
   --website="<your_website>" \
   --details="<your_validator_description>" \
   --chain-id=$REALIO_CHAIN_ID \
-  --from=$WALLET
+  --from=$WALLET \
+  --fees 5000000000000000ario \
+  --gas 800000
 ~~~
 
 Validator info
