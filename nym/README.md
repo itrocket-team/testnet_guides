@@ -34,19 +34,6 @@ echo "export NYM_MONIKER="<YOUR_MONIKER>"" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 ~~~
 
-install go
-
-~~~bash
-cd $HOME
-VER="1.18.3"
-wget "https://golang.org/dl/go$VER.linux-amd64.tar.gz"
-sudo tar -C /usr/local -xzf "go$VER.linux-amd64.tar.gz"
-rm -rf  "go$VER.linux-amd64.tar.gz"
-echo "export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin" >> $HOME/.bash_profile
-source $HOME/.bash_profile
-go version
-~~~
-
 Install Rust
 
 ~~~bash
@@ -76,8 +63,8 @@ cargo build
 
 Move binaries, add permissions 
 ~~~bash
-mv $HOME/nym/target/debug/nym-mixnode $HOME/go/bin/nym-mixnode
-chmod u+x $HOME/go/bin/nym-mixnode
+mv $HOME/nym/target/debug/nym-mixnode $HOME/nym-mixnode
+chmod u+x $HOME/nym-mixnode
 ~~~
 
 >You can check that your binaries are properly compiled
