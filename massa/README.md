@@ -113,7 +113,7 @@ Enable staking for your address, replace your Wallet address `<YOUR_PASSWORD>` w
 node_start_staking <YOUR_WALLET_ADDRESS>
 ~~~
 
->- Fund your wallet, go to the Massa discord server and  and navigate to `testnet-faucet` channel and put your wallet address
+>- Fund your wallet, go to the Massa discord server and navigate to `testnet-faucet` channel, put your wallet address
 
 After a while, the balance will be displayed in the client interface, usually 1-10 minutes
 
@@ -143,13 +143,13 @@ Go to Massa discord server `testnet-rewwards-registration` channel and write `hi
 wget -qO- eth0.me
 ~~~
 
-Now you need to regitrer your node, replace your Wallet address `<YOUR_WALLET_ADDRESS>` and <DISCORD_ID> without `<>`.  You will find Discord ID in the message from massa-bot
+Now you need to regitrer your node, replace your Wallet address `<YOUR_WALLET_ADDRESS>` and `<DISCORD_ID>` without `<>`.  You will find `Discord ID` in the message from massa-bot
 >Example: node_testnet_rewards_program_ownership_proof your_staking_address `69703435236262333`
 
 ~~~bash
 node_testnet_rewards_program_ownership_proof <YOUR_WALLET_ADDRESS> <DISCORD_ID>
 ~~~
->- In response, you will receive a long key that you need to copy and paste into the Mess-bout chat
+>- In response, you will receive a key that you need to copy and paste into the Massa-bot chat
 
 ### Security
 To protect you keys please save and don`t share your keys, and follow a basic security rules
