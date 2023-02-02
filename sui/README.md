@@ -31,31 +31,19 @@ wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O 
 chmod +x /usr/bin/yq
 ~~~
 
-install rust and cargo
+install rust
 
 ~~~bash
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ~~~
 
-press 1
+`Press 1`
+Install Cargo 
 
 ~~~bash
+sudo apt install cargo -y
 source ~/.cargo/env 
 rustup update stable
-~~~
-
-install go
-
-~~~bash
-cd $HOME
-VER="1.19.3"
-wget "https://golang.org/dl/go$VER.linux-amd64.tar.gz"
-sudo tar -C /usr/local -xzf "go$VER.linux-amd64.tar.gz"
-rm -rf  "go$VER.linux-amd64.tar.gz"
-mkdir -p $HOME/go/bin
-echo "export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin" >> $HOME/.bash_profile
-source $HOME/.bash_profile
-go version
 ~~~
 
 Download and build binaries
@@ -68,7 +56,7 @@ git clone https://github.com/MystenLabs/sui.git
 cd sui
 git pull && git checkout testnet
 cargo build --release --bin sui-node
-sudo mv ~/sui/target/release/sui-node $HOME/go/bin/
+sudo mv ~/sui/target/release/sui-node /usr/bin/
 ~~~
 
 Check version
@@ -114,3 +102,5 @@ sudo systemctl daemon-reload
 sudo systemctl enable suid
 sudo systemctl restart suid && sudo journalctl -u suid -f
 ~~~
+
+## Upgrade
