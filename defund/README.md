@@ -57,7 +57,7 @@ cd $HOME
 rm -rf defund
 git clone https://github.com/defund-labs/defund
 cd defund
-git checkout v0.2.3
+git checkout v0.2.4
 make install
 ~~~
 Config and init app
