@@ -21,7 +21,7 @@ sudo apt update && sudo apt upgrade -y
 sudo apt install curl git wget htop tmux build-essential jq make lz4 gcc -y
 ~~~
 
->Backup keys `skip this point if this is your first installation`
+>Backup keys `skip this point if it your first installation`
 
 ~~~bash
 sudo systemctl stop massad
@@ -39,7 +39,7 @@ tar zxvf massa_TEST.19.2_release_linux.tar.gz
 rm massa_TEST.19.2_release_linux.tar.gz
 ~~~
 
->Restore keys `skip this point if this is your first installation`
+>Restore keys `skip this point if it your first installation`
 
 ~~~bash
 cp $HOME/node_privkey.key_backup $HOME/massa/massa-node/config/node_privkey.key
