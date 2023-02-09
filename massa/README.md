@@ -25,8 +25,8 @@ Download and unzip software
 
 ~~~bash
 cd $HOME
-wget https://github.com/massalabs/massa/releases/download/TEST.19.1/massa_TEST.19.1_release_linux.tar.gz
-tar zxvf massa_TEST.19.1_release_linux.tar.gz
+wget https://github.com/massalabs/massa/releases/download/TEST.19.2/massa_TEST.19.2_release_linux.tar.gz
+tar zxvf massa_TEST.19.2_release_linux.tar.gz
 ~~~
 
 Config  app
