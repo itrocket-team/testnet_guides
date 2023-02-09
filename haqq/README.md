@@ -51,7 +51,7 @@ cd $HOME
 rm -rf haqq
 git clone https://github.com/haqq-network/haqq.git
 cd haqq
-git checkout v1.3.0
+git checkout v1.3.1
 make install
 ~~~
 Config and init app
