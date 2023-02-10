@@ -34,9 +34,9 @@ Download and unzip software
 
 ~~~bash
 cd $HOME
-wget https://github.com/massalabs/massa/releases/download/TEST.19.2/massa_TEST.19.2_release_linux.tar.gz
-tar zxvf massa_TEST.19.2_release_linux.tar.gz
-rm massa_TEST.19.2_release_linux.tar.gz
+wget https://github.com/massalabs/massa/releases/download/TEST.19.3/massa_TEST.19.3_release_linux.tar.gz
+tar zxvf massa_TEST.19.3_release_linux.tar.gz
+rm massa_TEST.19.3_release_linux.tar.gz
 ~~~
 
 >Restore keys `skip this point if it your first installation`
