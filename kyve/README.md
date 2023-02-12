@@ -11,7 +11,7 @@ Explorer:
 
 
 ## Hardware Requirements
-### Recommended Hardware Requirements 
+### Minimum Hardware Requirements 
  - 4 vCPU
  - 8GB RAM
  - 200 GB of storage
