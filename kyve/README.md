@@ -57,7 +57,7 @@ Download and build binaries
 cd $HOME
 wget https://files.kyve.network/chain/v1.0.0-rc0/kyved_linux_amd64.tar.gz
 tar -xvzf kyved_linux_amd64.tar.gz
-mv kyved /usr/local/bin/kyved
+sudo mv kyved /usr/local/bin/kyved
 rm kyved_linux_amd64.tar.gz
 ~~~
 
