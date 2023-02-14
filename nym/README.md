@@ -194,6 +194,7 @@ Move binaries, add permissions
 ~~~bash
 mv $HOME/nym/target/debug/nym-mixnode $HOME/nym-mixnode
 chmod u+x $HOME/nym-mixnode
+sudo systemctl start nym-mixnode && sudo journalctl -u nym-mixnode -f
 ~~~
 
 
