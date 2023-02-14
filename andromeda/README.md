@@ -5,7 +5,7 @@
 
 
 Explorer:
->-  https://testnet.itrocket.net/sei/staking
+>-  https://testnet.itrocket.net/andromeda/staking
 
 
 ## Hardware Requirements
