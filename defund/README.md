@@ -163,6 +163,13 @@ sudo systemctl enable defundd
 sudo systemctl restart defundd && sudo journalctl -u defundd -f
 ~~~
 
+## Snapshot, State Sync (OPTIONAL)
+In order not to wait for a long synchronization, you can use our guides:
+
+>https://itrocket.net/services/testnet/defund/#snap  
+>https://itrocket.net/services/testnet/defund/#sync
+
+
 ## Create wallet
 To create a new wallet, use the following command. don’t forget to save the mnemonic
 
@@ -196,10 +203,6 @@ Before creating a validator, you need to fund your wallet, go to the Defund disc
 ~~~bash
 !faucet <YOUR_WALLET_ADDRESS>
 ~~~
-
-## (OPTIONAL) State Sync
-
-In order not to wait for a long synchronization, you can use our StateSync guide in our service page https://itrocket.net/services/testnet/defund/
 
 
 ## Create validator
