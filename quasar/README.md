@@ -159,6 +159,13 @@ sudo systemctl enable quasarnoded
 sudo systemctl restart quasarnoded && sudo journalctl -u quasarnoded -f
 ~~~
 
+## Snapshot, State Sync (OPTIONAL)
+In order not to wait for a long synchronization, you can use our guides:
+
+>https://itrocket.net/services/testnet/quasar/#snap  
+>https://itrocket.net/services/testnet/quasar/#sync
+
+
 ## Create wallet
 To create a new wallet, use the following command. don’t forget to save the mnemonic
 
