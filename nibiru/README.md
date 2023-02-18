@@ -154,6 +154,12 @@ sudo systemctl enable nibid
 sudo systemctl restart nibid && sudo journalctl -u nibid -f
 ~~~
 
+## Snapshot, State Sync (OPTIONAL)
+In order not to wait for a long synchronization, you can use our guides:
+
+>https://itrocket.net/services/testnet/nibiru/#snap  
+>https://itrocket.net/services/testnet/nibiru/#sync
+
 ## Create wallet
 To create a new wallet, use the following command. don’t forget to save the mnemonic
 
@@ -191,11 +197,6 @@ $request <YOUR_WALLET_ADDRESS>
 FAUCET_URL="https://faucet.testnet-2.nibiru.fi/" 
 curl -X POST -d '{"address": "'"$NIBIRU_WALLET_ADDRESS"'", "coins": ["10000000unibi","100000000000unusd"]}' $FAUCET_URL
 ~~~
-
-## (OPTIONAL) State Sync
-
-In order not to wait for a long synchronization, you can use our StateSync guide:
-> https://github.com/marutyan/testnet_guides/blob/main/nibiru/statesync.md
 
 
 ## Create validator
