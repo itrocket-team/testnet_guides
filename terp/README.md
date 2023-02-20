@@ -1,5 +1,5 @@
 <div>
-<h1 align="left" style="display: flex;"> Terp Node Setup for Testnet — athena-3</h1>
+<h1 align="left" style="display: flex;"> Terp Node Setup for Testnet — athena-4</h1>
 <img src="https://avatars.githubusercontent.com/u/112838174?s=200&v=4"  style="float: right;" width="100" height="100"></img>
 </div>
 
@@ -37,7 +37,7 @@ Replace your wallet `<YOUR_MONIKER>` without `<>`, save and import variables int
 TERP_PORT=13
 echo "export TERP_WALLET="wallet"" >> $HOME/.bash_profile
 echo "export TERP_MONIKER="<YOUR_MONIKER>"" >> $HOME/.bash_profile
-echo "export TERP_CHAIN_ID="athena-3"" >> $HOME/.bash_profile
+echo "export TERP_CHAIN_ID="athena-4"" >> $HOME/.bash_profile
 echo "export TERP_PORT="${TERP_PORT}"" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 ~~~
@@ -62,7 +62,7 @@ cd $HOME
 rm -rf ~/terp-core
 git clone https://github.com/terpnetwork/terp-core.git
 cd terp-core
-git checkout v0.2.0
+git checkout v0.4.0
 make install
 ~~~
 Config and init app
@@ -82,8 +82,8 @@ wget -O $HOME/.terp/config/genesis.json https://files.itrocket.net/testnet/terp/
 Set seeds and peers
 
 ~~~bash
-SEEDS="19a2f912fd1e87bba8d5daf7578d438ce17d0f7f@195.201.197.4:33656"
-PEERS=""
+SEEDS="a6ee57fb457f71530d165afd1901d0d62cd7d7e@terp-testnet-seed.itrocket.net:443"
+PEERS="51d48be3809bb8907c1ef5f747e53cdd0c9ded1b@terp-testnet-peer.itrocket.net:443"
 sed -i -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.terp/config/config.toml
 ~~~
 
