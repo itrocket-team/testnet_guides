@@ -159,6 +159,12 @@ sudo systemctl enable terpd
 sudo systemctl restart terpd && sudo journalctl -u terpd -f
 ~~~
 
+## Snapshot, State Sync (OPTIONAL)
+In order not to wait for a long synchronization, you can use our guides:
+
+>https://itrocket.net/services/testnet/terp/#snap  
+>https://itrocket.net/services/testnet/terp/#sync
+
 ## Create wallet
 To create a new wallet, use the following command. don’t forget to save the mnemonic
 
