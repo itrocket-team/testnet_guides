@@ -53,11 +53,12 @@ go version
 Download and build binaries
 
 ~~~bash
+cd $HOME
 rm -rf ~/quicksilver
 git clone https://github.com/ingenuity-build/quicksilver
 cd quicksilver
 git fetch
-git checkout v1.2.1
+git checkout v1.2.3
 make install
 ~~~
 
@@ -156,6 +157,12 @@ sudo systemctl enable quicksilverd
 sudo systemctl restart quicksilverd && sudo journalctl -u quicksilverd -f
 ~~~
 
+## Snapshot, State Sync (OPTIONAL)
+In order not to wait for a long synchronization, you can use our guides:
+
+>https://itrocket.net/services/mainnet/quicksilver/#snap
+>https://itrocket.net/services/mainnet/quicksilver/#sync
+
 ## Create wallet
 To create a new wallet, use the following command. don’t forget to save the mnemonic
 
@@ -182,11 +189,6 @@ echo "export QUICKSILVER_WALLET_ADDRESS="${QUICKSILVER_WALLET_ADDRESS} >> $HOME/
 echo "export QUICKSILVER_VALOPER_ADDRESS="${QUICKSILVER_VALOPER_ADDRESS} >> $HOME/.bash_profile
 source $HOME/.bash_profile
 ~~~
-
-## (OPTIONAL) State Sync
-
-In order not to wait for a long synchronization, you can use our StateSync guide:
-> https://github.com/marutyan/testnet_guides/blob/main/quicksilver/statesync.md
 
 ## Create validator
 
