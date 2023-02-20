@@ -171,10 +171,11 @@ sudo systemctl enable humansd
 sudo systemctl restart humansd && sudo journalctl -u humansd -f
 ~~~
 
-## (OPTIONAL) State Sync
+## Snapshot, State Sync (OPTIONAL)
+In order not to wait for a long synchronization, you can use our guides:
 
-In order not to wait for a long synchronization, you can use our StateSync guide:
-> https://github.com/itrocket-team/testnet_guides/blob/main/humans/statesync.md
+>https://itrocket.net/services/testnet/humans/#snap  
+>https://itrocket.net/services/testnet/humans/#sync
 
 ## Create wallet
 To create a new wallet, use the following command. don’t forget to save the mnemonic
