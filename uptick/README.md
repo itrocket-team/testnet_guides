@@ -158,6 +158,12 @@ sudo systemctl enable uptickd
 sudo systemctl restart uptickd && sudo journalctl -u uptickd -f
 ```
 
+## Snapshot, State Sync (OPTIONAL)
+In order not to wait for a long synchronization, you can use our guides:
+
+>https://itrocket.net/services/testnet/uptick/#snap  
+>https://itrocket.net/services/testnet/uptick/#sync
+
 ## Create wallet
 To create a new wallet, use the following command. don’t forget to save the mnemonic
 
