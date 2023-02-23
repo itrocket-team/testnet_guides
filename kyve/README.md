@@ -80,7 +80,7 @@ Set seeds and peers
 
 ~~~bash
 SEEDS="de7865a2a4936fd4bb00861ed887f219d8dd73d7@kyve-testnet-seed.itrocket.net:443"
-PEERS="664e06d2d6110c5ba93f8ecfee66f150bad981bf@kyve-testnet-peer.itrocket.net:443"
+PEERS="664e06d2d6110c5ba93f8ecfee66f150bad981bf@kyve-testnet-peer.itrocket.net:443,5f54a853e7224ad32cbe4e5cddead24b512b629f@51.159.191.220:28656,5d79eb04b94300f5a7982e065a6340ba4ebd4da3@45.33.28.253:26656,157e0aca4aa382d62e24ffc7f936a5e8bbf4e90e@207.180.245.116:46656,b2b4479a6cb001ffe39d4a95f31bb6993ae0a256@194.163.190.31:26656,c0c8ed45a6c266c4ebe028788456cb14b44164bb@65.109.37.21:27656,f5a6484b239fdbe3f9c9bad889d737e8a9f153c6@149.102.140.248:46656,cf69d30beecfdd44d497fb56eb61b12bbffaf38f@167.86.72.171:26656,39392cf41c1d7ae8f98b6efaa740dc4abe3002ff@65.109.92.241:20656,72df41dabaa13d194e2aa633b1f9af60c9cbd5a2@45.158.38.38:26656,0a7504c77cbeb0c3ead588972780f4c670f5a377@65.109.135.149:26656"
 sed -i -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.kyve/config/config.toml
 ~~~
 
