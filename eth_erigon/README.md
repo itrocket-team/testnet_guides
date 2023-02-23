@@ -51,7 +51,7 @@ After=network.target
 User=$USER
 Type=simple
 WorkingDirectory=$HOME
-ExecStart=$(which erigon) --datadir $HOME/.ethereum --chain=goerli --http.vhosts '*' --http.port 8545 --http.addr 0.0.0.0 --http.corsdomain '*' --http.api 'eth,erigon,net,web3,trace,txpool' --ws --private.api.addr=localhost:9090 --metrics --metrics.port 6060 --metrics.addr 0.0.0.0
+ExecStart=$(which erigon) --datadir $HOME/.ethereum --chain=goerli --http.vhosts '*' --http.port 8546 --http.addr 0.0.0.0 --http.corsdomain '*' --http.api 'eth,erigon,net,web3,trace,txpool' --ws --private.api.addr=localhost:9091 --metrics --metrics.port 6060 --metrics.addr 0.0.0.0 --authrpc.port=8552 --torrent.port=42068
 Restart=on-failure
 LimitNOFILE=65535
 
