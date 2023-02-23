@@ -39,6 +39,7 @@ mkdir ~/.ethereum
 ~~~
 
 Create service file
+>If you want to run Ethereum mainnet node `$(which erigon)  --datadir="$HOME/.local/share/erigon/" --chain=mainnet --port=30303 --http.port=8545 --authrpc.port=8551 --torrent.port=42069 --private.api.addr=127.0.0.1:9090 --http --ws --http.api=eth,debug,net,trace,web3,erigon`
 
 ~~~bash
 sudo tee <<EOF >/dev/null /etc/systemd/system/erigond.service
