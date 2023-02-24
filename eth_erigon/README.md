@@ -13,7 +13,7 @@ sudo apt install curl build-essential git wget jq make gcc tmux -y
 Install go
 
 ~~~bash
-  ver="1.18.2"
+  ver="1.19.3"
   cd $HOME
   wget "https://golang.org/dl/go$ver.linux-amd64.tar.gz"
   sudo rm -rf /usr/local/go
@@ -26,21 +26,16 @@ Install go
 ## Install Erigon
 
 ~~~bash
+cd $HOME
+rm -rf erigon
 git clone --branch stable --single-branch https://github.com/ledgerwatch/erigon.git
 cd erigon
 make erigon
-~~~
-
-Move binaries and create `.ethereum` folder 
-
-~~~bash
 sudo mv ~/erigon/build/bin/erigon ~/go/bin/erigon
-mkdir ~/.ethereum
 ~~~
 
 Create service file
->If you want to run Ethereum mainnet node `$(which erigon)  --datadir="$HOME/.local/share/erigon/" --chain=mainnet --port=30303 --http.port=8545 --authrpc.port=8551 --torrent.port=42069 --private.api.addr=127.0.0.1:9090 --http --ws --http.api=eth,debug,net,trace,web3,erigon`
-
+>If you want to run Ethereum mainnet node `$(which erigon)  --datadir="$HOME/.local/share/erigon/" --chain=mainnet --port=10305  --http.vhosts '*'  --http.addr 0.0.0.0 --http.port=10545  --http.corsdomain '*' --authrpc.port=10552 --private.api.addr=127.0.0.1:10090 --http --ws --http.api=eth,debug,net,trace,web3,erigon  --metrics --metrics.port 10060 --metrics.addr 0.0.0.0`
 ~~~bash
 sudo tee <<EOF >/dev/null /etc/systemd/system/erigond.service
 [Unit]
