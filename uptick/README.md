@@ -46,7 +46,7 @@ install go
 
 ```bash
 cd $HOME
-VER="1.18.3"
+VER="1.19.3"
 wget "https://golang.org/dl/go$VER.linux-amd64.tar.gz"
 sudo tar -C /usr/local -xzf "go$VER.linux-amd64.tar.gz"
 rm -rf  "go$VER.linux-amd64.tar.gz"
@@ -59,9 +59,10 @@ Download and build binaries
 
 ```bash
 cd $HOME
+rm -rf uptick
 git clone https://github.com/UptickNetwork/uptick.git
 cd uptick
-git checkout v0.2.4
+git checkout v0.2.5
 make install
 ```
 Config and init app
