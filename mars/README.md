@@ -73,8 +73,8 @@ marsd init $MONIKER --chain-id $MARS_CHAIN_ID
 Download genesis and addrbook
 
 ~~~bash
-wget -O $HOME/.mars/config/addrbook.json "https://raw.githubusercontent.com/elangrr/testnet_guide/main/mars/addrbook.json"
-wget -O $HOME/.mars/config/genesis.json "https://raw.githubusercontent.com/elangrr/testnet_guide/main/mars/genesis.json"
+wget -O $HOME/.mars/config/addrbook.json "https://files.itrocket.net/testnet/mars/addrbook.json"
+wget -O $HOME/.mars/config/genesis.json "https://files.itrocket.net/testnet/mars/genesis.json"
 ~~~
 
 Set seeds and peers
@@ -156,6 +156,12 @@ sudo systemctl enable marsd
 sudo systemctl restart marsd && sudo journalctl -u marsd -f
 ~~~
 
+## Snapshot, State Sync (OPTIONAL)
+In order not to wait for a long synchronization, you can use our guides:
+
+>https://itrocket.net/services/testnet/mars/#snap  
+>https://itrocket.net/services/testnet/mars/#sync
+
 ## Create wallet
 To create a new wallet, use the following command. don’t forget to save the mnemonic
 
@@ -181,12 +187,6 @@ source $HOME/.bash_profile
 
 Fund your wallet 
 Before creating a validator, you need to fund your wallet, https://faucet.marsprotocol.io/
-
-## (OPTIONAL) State Sync
-
-In order not to wait for a long synchronization, you can use our StateSync guide:
-> https://github.com/marutyan/testnet_guides/blob/main/mars/statesync.md
-
 
 ## Create validator
 
