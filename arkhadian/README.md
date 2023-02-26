@@ -3,7 +3,7 @@
 </div>
 
 Explorer:
->-  https://testnet.itrocket.net/arkhadian/staking
+>-  https://mainnet.itrocket.net/arkhadian/staking
 
 
 ## Set up your node
