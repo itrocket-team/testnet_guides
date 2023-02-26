@@ -151,8 +151,8 @@ sudo systemctl restart arkhd && sudo journalctl -u arkhd -f
 ## Snapshot, State Sync (OPTIONAL)
 In order not to wait for a long synchronization, you can use our guides:
 
->https://itrocket.net/services/testnet/arkhadian/#snap  
->https://itrocket.net/services/testnet/arkhadian/#sync
+>https://itrocket.net/services/mainnet/arkhadian/#snap  
+>https://itrocket.net/services/mainnet/arkhadian/#sync
 
 
 ## Create wallet
