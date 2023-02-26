@@ -1,5 +1,5 @@
 <div>
-<h1 align="left" style="display: flex;"> Arkhadian Node Setup for Testnet — arkh</h1>
+<h1 align="left" style="display: flex;"> Arkhadian Node Setup for mainnet — arkh</h1>
 </div>
 
 Explorer:
