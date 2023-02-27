@@ -78,8 +78,9 @@ curl -s https://networks.testnet.nibiru.fi/$NETWORK/genesis > $HOME/.nibid/confi
 Set seeds and peers
 
 ~~~bash
-NETWORK=nibiru-testnet-2
-sed -i 's|seeds =.*|seeds = "'$(curl -s https://networks.testnet.nibiru.fi/$NETWORK/seeds)'"|g' $HOME/.nibid/config/config.toml
+SEEDS=""
+PEERS=""
+sed -i -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.nibid/config/config.toml
 ~~~
 
 Set gustom ports in app.toml file
