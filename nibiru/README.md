@@ -7,7 +7,7 @@ Official documentation:
 >- [Validator setup instructions](https://docs.nibiru.fi/run-nodes/testnet/)
 
 Explorer:
->-  https://testnet-2.nibiru.fi/validators
+>-  [https://testnet-2.nibiru.fi/validators](https://testnet.itrocket.net/nibiru/staking)
 
 
 ## Hardware Requirements
