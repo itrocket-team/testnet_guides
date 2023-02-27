@@ -1,5 +1,5 @@
 <div>
-<h1 align="left" style="display: flex;"> Nibiru Node Setup for Testnet — nibiru-testnet-2</h1>
+<h1 align="left" style="display: flex;"> Nibiru Node Setup for Testnet — nibiru-itn-1 </h1>
 <img src="https://avatars.githubusercontent.com/u/95279816?s=200&v=4"  style="float: right;" width="100" height="100"></img>
 </div>
 
@@ -14,7 +14,7 @@ Explorer:
 ### Minimum Hardware Requirements 
  - 4x CPUs
  - 16GB RAM
- - 500GB of disk space (SSD)
+ - 1000GB of disk space (SSD)
 
 ## Set up your nibiru node
 ### Manual installation
@@ -32,7 +32,7 @@ Replace your moniker `<YOUR_MONIKER>` without `<>`, save and import variables in
 NIBIRU_PORT=12
 echo "export NIBIRU_WALLET="wallet"" >> $HOME/.bash_profile
 echo "export NIBIRU_MONIKER="<YOUR_MONIKER>"" >> $HOME/.bash_profile
-echo "export NIBIRU_CHAIN_ID="nibiru-testnet-2"" >> $HOME/.bash_profile
+echo "export NIBIRU_CHAIN_ID="nibiru-itn-1"" >> $HOME/.bash_profile
 echo "export NIBIRU_PORT="${NIBIRU_PORT}"" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 ~~~
@@ -56,7 +56,7 @@ Download and build binaries
 cd $HOME
 git clone https://github.com/NibiruChain/nibiru
 cd nibiru
-git checkout v0.16.3
+git checkout v0.19.2
 make install 
 ~~~
 Config and init app
@@ -71,16 +71,15 @@ nibid init $NIBIRU_MONIKER --chain-id $NIBIRU_CHAIN_ID
 Download genesis
 
 ~~~bash
-NETWORK=nibiru-testnet-2
-curl -s https://networks.testnet.nibiru.fi/$NETWORK/genesis > $HOME/.nibid/config/genesis.json
+NETWORK=nibiru-itn-1
+curl -s https://networks.itn.nibiru.fi/$NETWORK/genesis > $HOME/.nibid/config/genesis.json
 ~~~
 
 Set seeds and peers
 
 ~~~bash
-SEEDS=""
-PEERS=""
-sed -i -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.nibid/config/config.toml
+NETWORK=nibiru-itn-1
+sed -i 's|seeds =.*|seeds = "'$(curl -s https://networks.itn.nibiru.fi/$NETWORK/seeds)'"|g' $HOME/.nibid/config/config.toml
 ~~~
 
 Set gustom ports in app.toml file
