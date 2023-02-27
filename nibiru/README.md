@@ -194,8 +194,9 @@ $request <YOUR_WALLET_ADDRESS>
 >Please note, that current daily limit for the Web Faucet is 10NIBI (10000000unibi) and 100,000 NUSD (100000000000unusd).
 
 ~~~bash
-FAUCET_URL="https://faucet.testnet-2.nibiru.fi/" 
-curl -X POST -d '{"address": "'"$NIBIRU_WALLET_ADDRESS"'", "coins": ["10000000unibi","100000000000unusd"]}' $FAUCET_URL
+FAUCET_URL="https://faucet.itn-1.nibiru.fi/"
+ADDR="$NIBIRU_WALLET_ADDRESS"
+curl -X POST -d '{"address": "'"$ADDR"'", "coins": ["11000000unibi","100000000unusd","100000000uusdt"]}' $FAUCET_URL
 ~~~
 
 
