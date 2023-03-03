@@ -75,7 +75,7 @@ $HOME/nym-mixnode --help
 Config and init app
 
 ~~~bash
-nym-mixnode init --id $NYM_MONIKER --host $(curl ifconfig.me) --wallet-address $NYM_WALLET_ADDRESS
+$HOME/nym-mixnode init --id $NYM_MONIKER --host $(curl ifconfig.me) --wallet-address $NYM_WALLET_ADDRESS
 ~~~
 
 ## Bonding your mix node
@@ -85,7 +85,7 @@ nym-mixnode init --id $NYM_MONIKER --host $(curl ifconfig.me) --wallet-address $
 `Identity Key` `Sphinx Key` `Owner Signature` `Host` `Version` and bond your mixnode
 
 ~~~bash
-nym-mixnode node-details --id $NYM_MONIKER
+$HOME/nym-mixnode node-details --id $NYM_MONIKER
 ~~~
 
 Create Service file
@@ -100,7 +100,7 @@ StartLimitBurst=10
 [Service]
 User=$USER
 LimitNOFILE=65536
-ExecStart=$(which nym-mixnode) run --id $NYM_MONIKER
+ExecStart=$HOME/nym-mixnode run --id $NYM_MONIKER
 KillSignal=SIGINT
 Restart=on-failure
 RestartSec=30
