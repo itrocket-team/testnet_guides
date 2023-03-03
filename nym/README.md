@@ -69,7 +69,7 @@ chmod u+x $HOME/nym-mixnode
 
 >You can check that your binaries are properly compiled
 ~~~bash
-nym-mixnode --help
+$HOME/nym-mixnode --help
 ~~~
 
 Config and init app
