@@ -64,12 +64,10 @@ sudo systemctl enable erigond
 sudo systemctl restart erigond && sudo journalctl -u erigond -f
 ~~~
 
-Once your node is fully synced, the output from above will say `false`. To test your Ethereum RPC node, you can send an RPC request using `cURL`
+To test your Ethereum RPC node, you can send an RPC request using `cURL`
 
 ~~~bash
-curl -X POST http://localhost:8545 \
-  -H "Content-Type: application/json" \
-  --data '{"jsonrpc":"2.0","method":"eth_syncing","params":[],"id":1}'
+curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc": "2.0", "method": "eth_blockNumber", "params": [], "id":1}' localhost:8545
 ~~~
 
 ## Update node
