@@ -1,5 +1,5 @@
 <div>
-<h1 align="left" style="display: flex;"> Ojo Node Setup for Testnet — ojo-devnet</h1>
+<h1 align="left" style="display: flex;"> Ojo Price-feder Setup for Testnet — ojo-devnet</h1>
 <img src="https://avatars.githubusercontent.com/u/110753560?s=200&v=4"  style="float: right;" width="100" height="100"></img>
 </div>
 
