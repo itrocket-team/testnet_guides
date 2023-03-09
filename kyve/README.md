@@ -55,10 +55,10 @@ Download and build binaries
 
 ~~~bash
 cd $HOME
-wget https://files.kyve.network/chain/v1.0.0-rc0/kyved_linux_amd64.tar.gz
+wget https://github.com/KYVENetwork/chain/releases/download/v1.0.0-rc1/kyved_linux_amd64.tar.gz
 tar -xvzf kyved_linux_amd64.tar.gz
-sudo mv kyved /usr/local/bin/kyved
-rm kyved_linux_amd64.tar.gz
+chmod +x ./kyved
+mv kyved $HOME/go/bin/
 ~~~
 
 Config and init app
