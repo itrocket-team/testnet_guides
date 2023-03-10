@@ -59,6 +59,7 @@ wget https://github.com/KYVENetwork/chain/releases/download/v1.0.0-rc1/kyved_lin
 tar -xvzf kyved_linux_amd64.tar.gz
 chmod +x ./kyved
 mv kyved $HOME/go/bin/
+rm kyved_linux_amd64.tar.gz
 ~~~
 
 Config and init app
