@@ -98,7 +98,7 @@ Check linked PRICEFEEDER_ADDRESS
 ojod q oracle feeder-delegation $VALOPER_ADDRESS
 ~~~
 
-Set gustom ports in config.toml file
+Configure config.toml file
 
 ~~~bash
 sed -i '
