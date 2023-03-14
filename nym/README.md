@@ -57,7 +57,7 @@ cd $HOME
 rm -rf nym
 git clone https://github.com/nymtech/nym.git
 cd nym
-git checkout release/v1.1.9
+git checkout release/v1.1.12
 cargo build
 ~~~
 
@@ -180,22 +180,6 @@ To check mixed packets
 sudo journalctl -u nym-mixnode -f | grep "Since startup mixed"
 ~~~
 >If you don't see any mixed packages, just repeat it after a while again
-
-### Update node
-
-~~~bash
-cd nym
-git fetch
-git checkout release/v1.1.9
-cargo build
-~~~
-
-Move binaries, add permissions 
-~~~bash
-mv $HOME/nym/target/debug/nym-mixnode $HOME/nym-mixnode
-chmod u+x $HOME/nym-mixnode
-sudo systemctl start nym-mixnode && sudo journalctl -u nym-mixnode -f
-~~~
 
 
 ### Delete node
