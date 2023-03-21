@@ -66,6 +66,7 @@ Config and init app
 defundd config node tcp://localhost:${DEFUND_PORT}657
 defundd config keyring-backend test
 defundd config chain-id $DEFUND_CHAIN_ID
+rm -rf $HOME/.defund/config/genesis.json
 defundd init $MONIKER --chain-id $DEFUND_CHAIN_ID
 ~~~
 
