@@ -73,7 +73,7 @@ Download genesis and addrbook
 
 ~~~bash
 wget -O $HOME/.defund/config/genesis.json https://files.itrocket.net/testnet/defund/genesis.json
-wget -O $HOME/.defund/config/addrbook.json https://files.itrocket.net/mainnet/defund/addrbook.json
+wget -O $HOME/.defund/config/addrbook.json https://files.itrocket.net/testnet/defund/addrbook.json
 ~~~
 
 Set seeds and peers
