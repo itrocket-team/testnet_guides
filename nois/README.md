@@ -1,5 +1,5 @@
 <div>
-<h1 align="left" style="display: flex;"> Nois Node Validator Setup for Testnet — nois-testnet-003</h1>
+<h1 align="left" style="display: flex;"> Nois Node Validator Setup for Testnet — nois-testnet-004</h1>
 <img src="https://raw.githubusercontent.com/itrocket-team/testnet_guides/main/logos/nois.png"  style="float: right;" width="100" height="100"></img>
 </div>
 
@@ -33,7 +33,7 @@ Replace your moniker `<YOUR_MONIKER>` without `<>`, save and import variables in
 NOIS_PORT=21
 echo "export WALLET="wallet"" >> $HOME/.bash_profile
 echo "export MONIKER="<YOUR_MONIKER>"" >> $HOME/.bash_profile
-echo "export NOIS_CHAIN_ID="nois-testnet-003"" >> $HOME/.bash_profile
+echo "export NOIS_CHAIN_ID="nois-testnet-004"" >> $HOME/.bash_profile
 echo "export NOIS_PORT="${NOIS_PORT}"" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 ~~~
@@ -56,12 +56,11 @@ Download and build binaries
 
 ~~~bash
 cd $HOME
-rm -rf $HOME/full-node
-git clone https://github.com/noislabs/full-node.git 
-cd full-node/full-node/
-git checkout nois-testnet-003
-./build.sh
-mv $HOME/full-node/full-node/out/noisd $HOME/go/bin/
+rm -rf $HOME/noisd
+git clone https://github.com/noislabs/noisd.git
+cd noisd
+git checkout v0.6.0
+make install
 ~~~
 
 Config and init app
@@ -77,14 +76,15 @@ noisd init $MONIKER --chain-id $NOIS_CHAIN_ID
 Download genesis and addrbook
 
 ~~~bash
-wget -O "$HOME/.noisd/config/genesis.json" https://raw.githubusercontent.com/noislabs/testnets/main/nois-testnet-003/genesis.json
+wget -O $HOME/.noisd/config/genesis.json https://files.itrocket.net/testnet/nois/genesis.json
+wget -O $HOME/.noisd/config/addrbook.json https://files.itrocket.net/testnet/nois/addrbook.json
 ~~~
 
 Set seeds and peers
 
 ~~~bash
 SEEDS="da81dd66bca4bba509163dbd06b4a6b2e05c2e12@nois-testnet-seed.itrocket.net:443"
-PEERS="5ecd40831e453845587cbd03534e68a7b9fc3576@nois-testnet-peer.itrocket.net:443,bf5bbdf9ac1ccd72d7b29c3fbcc7e99ff89fd053@node-0.noislabs.com:26656"
+PEERS="5ecd40831e453845587cbd03534e68a7b9fc3576@nois-testnet-peer.itrocket.net:443"
 sed -i -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.noisd/config/config.toml
 ~~~
 
@@ -108,19 +108,6 @@ s%^pprof_laddr = \"localhost:6060\"%pprof_laddr = \"localhost:${NOIS_PORT}060\"%
 s%^laddr = \"tcp://0.0.0.0:26656\"%laddr = \"tcp://0.0.0.0:${NOIS_PORT}656\"%;
 s%^external_address = \"\"%external_address = \"$(wget -qO- eth0.me):${NOIS_PORT}656\"%;
 s%^prometheus_listen_addr = \":26660\"%prometheus_listen_addr = \":${NOIS_PORT}660\"%" $HOME/.noisd/config/config.toml
-~~~
-
-Update config.toml
-
-~~~bash
-CONFIG_DIR="$HOME/.noisd/config"
-sed -i 's/^timeout_propose =.*$/timeout_propose = "2000ms"/' $CONFIG_DIR/config.toml \
-  && sed -i 's/^timeout_propose_delta =.*$/timeout_propose_delta = "500ms"/' $CONFIG_DIR/config.toml \
-  && sed -i 's/^timeout_prevote =.*$/timeout_prevote = "1s"/' $CONFIG_DIR/config.toml \
-  && sed -i 's/^timeout_prevote_delta =.*$/timeout_prevote_delta = "500ms"/' $CONFIG_DIR/config.toml \
-  && sed -i 's/^timeout_precommit =.*$/timeout_precommit = "1s"/' $CONFIG_DIR/config.toml \
-  && sed -i 's/^timeout_precommit_delta =.*$/timeout_precommit_delta = "500ms"/' $CONFIG_DIR/config.toml \
-  && sed -i 's/^timeout_commit =.*$/timeout_commit = "1800ms"/' $CONFIG_DIR/config.toml
 ~~~
 
 Config pruning
@@ -172,6 +159,12 @@ sudo systemctl enable noisd
 sudo systemctl restart noisd && sudo journalctl -u noisd -f
 ~~~
 
+## Snapshot, State Sync (OPTIONAL)
+In order not to wait for a long synchronization, you can use our guides:
+
+>https://itrocket.net/services/testnet/nois/#snap  
+>https://itrocket.net/services/testnet/nois/#sync
+
 ## Create wallet
 To create a new wallet, use the following command. don’t forget to save the mnemonic
 
@@ -201,11 +194,6 @@ Before creating a validator, you need to fund your wallet, go to the [discord se
 ~~~bash
 !faucet <YOUR_WALLET_ADDRESS>
 ~~~
-
-## (OPTIONAL) State Sync
-
-In order not to wait for a long synchronization, you can use our StateSync guide:
-> https://github.com/marutyan/testnet_guides/blob/main/nois/statesync.md
 
 
 ## Create validator
@@ -455,7 +443,7 @@ sudo systemctl disable noisd
 sudo rm -rf /etc/systemd/system/noisd*
 sudo rm $(which noisd)
 sudo rm -rf $HOME/.noisd
-sudo rm -fr $HOME/full-node
+sudo rm -fr $HOME/nois
 sed -i "/NOIS_/d" $HOME/.bash_profile
 ~~~
 
