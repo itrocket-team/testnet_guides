@@ -1,5 +1,5 @@
 <div>
-<h1 align="left" style="display: flex;"> DeFund Node Setup for Testnet — defund-private-4</h1>
+<h1 align="left" style="display: flex;"> DeFund Node Setup for Testnet — orbit-alpha-1</h1>
 <img src="https://avatars.githubusercontent.com/u/95717440?s=200&v=4"  style="float: right;" width="100" height="100"></img>
 </div>
 
@@ -32,7 +32,7 @@ Replace your moniker `<YOUR_MONIKER>` without `<>`, save and import variables in
 DEFUND_PORT=18
 echo "export WALLET="wallet"" >> $HOME/.bash_profile
 echo "export MONIKER="<YOUR_MONIKER>"" >> $HOME/.bash_profile
-echo "export DEFUND_CHAIN_ID="defund-private-4"" >> $HOME/.bash_profile
+echo "export DEFUND_CHAIN_ID="orbit-alpha-1"" >> $HOME/.bash_profile
 echo "export DEFUND_PORT="${DEFUND_PORT}"" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 ~~~
@@ -57,7 +57,7 @@ cd $HOME
 rm -rf defund
 git clone https://github.com/defund-labs/defund
 cd defund
-git checkout v0.2.5
+git checkout v0.2.6
 make install
 ~~~
 Config and init app
@@ -72,21 +72,14 @@ defundd init $MONIKER --chain-id $DEFUND_CHAIN_ID
 Download genesis and addrbook
 
 ~~~bash
-cd
-curl -s https://raw.githubusercontent.com/defund-labs/testnet/main/defund-private-4/genesis.json > ~/.defund/config/genesis.json
-~~~
-
-Check genesys file 
-
-~~~bash
-sha256sum ~/.defund/config/genesis.json
-#output must be: db13a33fbb4048c8701294de79a42a2b5dff599d653c0ee110390783c833208b
+wget -O $HOME/.defund/config/genesis.json https://files.itrocket.net/testnet/defund/genesis.json
+wget -O $HOME/.defund/config/addrbook.json https://files.itrocket.net/mainnet/defund/addrbook.json
 ~~~
 
 Set seeds and peers
 
 ~~~bash
-SEEDS="74e6425e7ec76e6eaef92643b6181c42d5b8a3b8@defund-testnet-seed.itrocket.net:443,d837b7f78c03899d8964351fb95c78e84128dff6@174.83.6.129:30791,f03f3a18bae28f2099648b1c8b1eadf3323cf741@162.55.211.136:26656,f8fa20444c3c56a2d3b4fdc57b3fd059f7ae3127@148.251.43.226:56656,70a1f41dea262730e7ab027bcf8bd2616160a9a9@142.132.202.86:17000"
+SEEDS="74e6425e7ec76e6eaef92643b6181c42d5b8a3b8@defund-testnet-seed.itrocket.net:443"
 PEERS="6ebe0fd3fd0990feec2dd1e09fe06b766b6b67d0@defund-testnet-peer.itrocket.net:443,d837b7f78c03899d8964351fb95c78e84128dff6@174.83.6.129:30791,f03f3a18bae28f2099648b1c8b1eadf3323cf741@162.55.211.136:26656,f8fa20444c3c56a2d3b4fdc57b3fd059f7ae3127@148.251.43.226:56656,70a1f41dea262730e7ab027bcf8bd2616160a9a9@142.132.202.86:17000"
 sed -i -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.defund/config/config.toml
 ~~~
