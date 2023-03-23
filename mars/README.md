@@ -58,7 +58,7 @@ cd $HOME
 rm -rf hub
 git clone https://github.com/mars-protocol/hub.git
 cd hub
-git checkout v1.0.0-rc7
+git checkout v2.0.0-rc0
 make install
 ~~~
 Config and init app
