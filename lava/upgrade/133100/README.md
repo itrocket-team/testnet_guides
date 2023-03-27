@@ -1,5 +1,5 @@
 ## Upgrade to v0.8.1
-height: 133100
+height: 133100 
 
 ~~~bash
 sudo systemctl stop lavad
