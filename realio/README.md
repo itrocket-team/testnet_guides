@@ -1,5 +1,5 @@
 <div>
-<h1 align="left" style="display: flex;"> Realio Node Setup for Testnet — realionetwork_1110-2</h1>
+<h1 align="left" style="display: flex;"> Realio Node Setup for Testnet — realionetwork_3300-1</h1>
 <img src="https://avatars.githubusercontent.com/u/73153279?s=200&v=4"  style="float: right;" width="100" height="100"></img>
 </div>
 
@@ -32,7 +32,7 @@ Replace your moniker `<YOUR_MONIKER>` without `<>`, save and import variables in
 REALIO_PORT=23
 echo "export WALLET="wallet"" >> $HOME/.bash_profile
 echo "export MONIKER="<YOUR_MONIKER>"" >> $HOME/.bash_profile
-echo "export REALIO_CHAIN_ID="realionetwork_1110-2"" >> $HOME/.bash_profile
+echo "export REALIO_CHAIN_ID="realionetwork_3300-1"" >> $HOME/.bash_profile
 echo "export REALIO_PORT="${REALIO_PORT}"" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 ~~~
@@ -56,9 +56,9 @@ Download and build binaries
 ~~~bash
 cd $HOME
 rm -rf realio-networ
-git clone https://github.com/realiotech/realio-network.git
+git clone https://github.com/realiotech/realio-network
 cd realio-network
-git checkout v0.7.2
+git checkout v0.8.0-rc2
 make install
 ~~~
 Config and init app
@@ -73,7 +73,7 @@ realio-networkd init $MONIKER --chain-id $REALIO_CHAIN_ID
 Download genesis and addrbook
 
 ~~~bash
-curl https://raw.githubusercontent.com/realiotech/testnets/master/realionetwork_1110-2/genesis.json > $HOME/.realio-network/config/genesis.json
+curl https://raw.githubusercontent.com/realiotech/testnets/main/realionetwork_3300-1/genesis.json > $HOME/.realio-network/config/genesis.json
 ~~~
 
 Set seeds and peers
