@@ -76,7 +76,7 @@ uptickd init $UPTICK_MONIKER --chain-id $UPTICK_CHAIN_ID
 Download genesis
 
 ```bash
-wget -O $HOME/.uptickd/config/genesis.json https://raw.githubusercontent.com/UptickNetwork/uptick-testnet/main/uptick_7000-2/genesis.json
+curl -o $HOME/.uptickd/config/genesis.json https://raw.githubusercontent.com/UptickNetwork/uptick-mainnet/master/uptick_117-1/genesis.json
 ```
 
 Set seeds and peers
