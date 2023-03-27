@@ -55,7 +55,7 @@ Download and build binaries
 
 ~~~bash
 cd $HOME
-rm -rf realio-networ
+rm -rf realio-network
 git clone https://github.com/realiotech/realio-network
 cd realio-network
 git checkout v0.8.0-rc2
@@ -79,8 +79,8 @@ curl https://raw.githubusercontent.com/realiotech/testnets/main/realionetwork_33
 Set seeds and peers
 
 ~~~bash
-SEEDS="aa194e9f9add331ee8ba15d2c3d8860c5a50713f@143.110.230.177:26656"
-PEERS=""
+SEEDS="ee23c6b2367c7df0d71a7def5540cda879a06dab@realio-testnet-seed.itrocket.net:23656"
+PEERS="1057d9a2d9231093b4aadf3015efff8293290859@realio-testnet-peer.itrocket.net:23656"
 sed -i -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.realio-network/config/config.toml
 ~~~
 
