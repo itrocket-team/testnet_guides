@@ -1,5 +1,5 @@
 <div>
-<h1 align="left" style="display: flex;"> Uptick Node Setup for Testnet — uptick_7000-2</h1>
+<h1 align="left" style="display: flex;"> Uptick Node Setup for Mainnet — uptick_117-1</h1>
 <img src="https://user-images.githubusercontent.com/79756157/205509209-512319b4-59dc-415d-a1ce-29bdeedc20f7.jpg"  style="float: right;" width="100" height="100"></img>
 </div>
 
@@ -7,7 +7,7 @@ Official documentation:
 >- [Validator setup instructions](https://docs.uptick.network/testnet/)
 
 Explorer:
->-  https://explorer.testnet.uptick.network/uptick-network-testnet
+>-  https://explorer.mainnet.uptick.network/uptick-network-testnet
 
 
 ## Hardware Requirements
@@ -34,10 +34,10 @@ sudo apt install curl git wget htop tmux build-essential jq make gcc -y
 Replace your wallet and moniker `<YOUR_WALLET_NAME>` `<YOUR_MONIKER>` without `<>`, save and import variables into system
 
 ```bash
-UPTICK_PORT=10
+UPTICK_PORT=35
 echo "export UPTICK_WALLET="<YOUR_WALLET_NAME>"" >> $HOME/.bash_profile
 echo "export UPTICK_MONIKER="<YOUR_MONIKER>"" >> $HOME/.bash_profile
-echo "export UPTICK_CHAIN_ID="uptick_7000-2"" >> $HOME/.bash_profile
+echo "export UPTICK_CHAIN_ID="uptick_117-1"" >> $HOME/.bash_profile
 echo "export UPTICK_PORT="${UPTICK_PORT}"" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 ```
@@ -62,7 +62,7 @@ cd $HOME
 rm -rf uptick
 git clone https://github.com/UptickNetwork/uptick.git
 cd uptick
-git checkout v0.2.5
+git checkout v0.2.4
 make install
 ```
 Config and init app
@@ -83,7 +83,7 @@ Set seeds and peers
 
 ```bash
 SEEDS=""
-PEERS="eecdfb17919e59f36e5ae6cec2c98eeeac05c0f2@peer0.testnet.uptick.network:26656,178727600b61c055d9b594995e845ee9af08aa72@peer1.testnet.uptick.network:26656,f97a75fb69d3a5fe893dca7c8d238ccc0bd66a8f@uptick-seed.p2p.brocha.in:30554,94b63fddfc78230f51aeb7ac34b9fb86bd042a77@uptick-testnet-rpc.p2p.brocha.in:30556,902a93963c96589432ee3206944cdba392ae5c2d@65.108.42.105:27656"
+PEERS="170397e75ca2b0f4e9f3b1bb5d0d23f9b10f01c7@uptick-sentry-1.p2p.brocha.in:30597,c0b33353fb70d8d71dcb9c8848b3b4207bd56951@uptick-sentry-2.p2p.brocha.in:30598,23e76540bea9b6851b92e280d7e0c123a0d49521@uptick-sentry-3.p2p.brocha.in:30599,94b63fddfc78230f51aeb7ac34b9fb86bd042a77@uptick-rpc.p2p.brocha.in:30601,f97a75fb69d3a5fe893dca7c8d238ccc0bd66a8f@uptick.seed.brocha.in:30600,48e7e8ca23b636f124e70092f4ba93f98606f604@54.37.129.164:55056"
 sed -i -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.uptickd/config/config.toml
 ```
 
@@ -162,8 +162,8 @@ sudo systemctl restart uptickd && sudo journalctl -u uptickd -f
 ## Snapshot, State Sync (OPTIONAL)
 In order not to wait for a long synchronization, you can use our guides:
 
->https://itrocket.net/services/testnet/uptick/#snap  
->https://itrocket.net/services/testnet/uptick/#sync
+>https://itrocket.net/services/mainnet/uptick/#snap  
+>https://itrocket.net/services/mainnet/uptick/#sync
 
 ## Create wallet
 To create a new wallet, use the following command. don’t forget to save the mnemonic
