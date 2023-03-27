@@ -155,6 +155,12 @@ sudo systemctl enable realio-networkd
 sudo systemctl restart realio-networkd && sudo journalctl -u realio-networkd -f
 ~~~
 
+## Snapshot, State Sync (OPTIONAL)
+In order not to wait for a long synchronization, you can use our guides:
+
+>https://itrocket.net/services/testnet/realio/#snap  
+>https://itrocket.net/services/testnet/realio/#sync
+
 ## Create wallet
 To create a new wallet, use the following command. don’t forget to save the mnemonic
 
@@ -184,11 +190,6 @@ Before creating a validator, you need to fund your wallet, go to the [Realio dis
 ~~~bash
 !faucet <YOUR_WALLET_ADDRESS>
 ~~~
-
-## (OPTIONAL) State Sync, Snapshot
-
-In order not to wait for a long synchronization, you can use our StateSync or Snapshot guide:
-> https://itrocket.net/services/testnet/realio
 
 
 ## Create validator
