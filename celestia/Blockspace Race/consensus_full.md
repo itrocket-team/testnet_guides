@@ -193,8 +193,8 @@ sudo ufw enable
 ## Delete full node 
 
 ~~~bash
-sudo systemctl stop celestia-full
-sudo systemctl disable celestia-full
-sudo rm /etc/systemd/system/celestia-full*
-rm -rf $HOME/celestia-node $HOME/.celestia-app $HOME/.celestia-full-mocha
+sudo systemctl stop celestia-appd
+sudo systemctl disable celestia-appd
+sudo rm /etc/systemd/system/celestia-appd*
+rm -rf $HOME/networks $HOME/celestia-app
 ~~~
