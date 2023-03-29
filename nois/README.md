@@ -1,9 +1,5 @@
 <div>
-<<<<<<< HEAD
-<h1 align="left" style="display: flex;"> Nois Node Validator Setup for Testnet — nois-testnet-005</h1>
-=======
 <h1 align="left" style="display: flex;"> Nois Node Validator Setup for Mainnet — nois-1</h1>
->>>>>>> 0d7c3df (update docs)
 <img src="https://raw.githubusercontent.com/itrocket-team/testnet_guides/main/logos/nois.png"  style="float: right;" width="100" height="100"></img>
 </div>
 
