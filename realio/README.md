@@ -58,7 +58,7 @@ cd $HOME
 rm -rf realio-network
 git clone https://github.com/realiotech/realio-network
 cd realio-network
-git checkout v0.8.0-rc2
+git checkout v0.8.0-rc3
 make install
 ~~~
 Config and init app
