@@ -1,5 +1,5 @@
 <div>
-<h1 align="left" style="display: flex;"> Nois Node Validator Setup for Testnet — nois-testnet-004</h1>
+<h1 align="left" style="display: flex;"> Nois Node Validator Setup for Testnet — nois-testnet-005</h1>
 <img src="https://raw.githubusercontent.com/itrocket-team/testnet_guides/main/logos/nois.png"  style="float: right;" width="100" height="100"></img>
 </div>
 
@@ -33,7 +33,7 @@ Replace your moniker `<YOUR_MONIKER>` without `<>`, save and import variables in
 NOIS_PORT=21
 echo "export WALLET="wallet"" >> $HOME/.bash_profile
 echo "export MONIKER="<YOUR_MONIKER>"" >> $HOME/.bash_profile
-echo "export NOIS_CHAIN_ID="nois-testnet-004"" >> $HOME/.bash_profile
+echo "export NOIS_CHAIN_ID="nois-testnet-005"" >> $HOME/.bash_profile
 echo "export NOIS_PORT="${NOIS_PORT}"" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 ~~~
@@ -59,7 +59,7 @@ cd $HOME
 rm -rf $HOME/noisd
 git clone https://github.com/noislabs/noisd.git
 cd noisd
-git checkout v0.6.0
+git checkout v1.0.0
 make install
 ~~~
 
@@ -76,14 +76,14 @@ noisd init $MONIKER --chain-id $NOIS_CHAIN_ID
 Download genesis and addrbook
 
 ~~~bash
-wget -O $HOME/.noisd/config/genesis.json https://files.itrocket.net/testnet/nois/genesis.json
+wget -O $HOME/.noisd/config/genesis.json https://raw.githubusercontent.com/noislabs/networks/main/nois-testnet-005/genesis.json
 wget -O $HOME/.noisd/config/addrbook.json https://files.itrocket.net/testnet/nois/addrbook.json
 ~~~
 
 Set seeds and peers
 
 ~~~bash
-SEEDS="da81dd66bca4bba509163dbd06b4a6b2e05c2e12@nois-testnet-seed.itrocket.net:443"
+SEEDS="bf07906c7cf0f23606c83be15624be2c67b3929c@139.59.154.47:17356,da81dd66bca4bba509163dbd06b4a6b2e05c2e12@nois-testnet-seed.itrocket.net:443"
 PEERS="5ecd40831e453845587cbd03534e68a7b9fc3576@nois-testnet-peer.itrocket.net:443"
 sed -i -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.noisd/config/config.toml
 ~~~
