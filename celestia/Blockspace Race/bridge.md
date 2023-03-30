@@ -90,8 +90,10 @@ sudo systemctl daemon-reload
 sudo systemctl enable celestia-bridge
 sudo systemctl restart celestia-bridge && sudo journalctl -u celestia-bridge -f
 ```
-Next go to the dashboard to complete task, put your wallet `address` and `Bridge Node ID`
->This is an RPC call in order to get your node's peerId information. NOTE: You can only generate an auth token after initializing and starting your celestia-node.
+## Task: Deploy Bridge Node
+>To complete task, put your wallet `address` and `Bridge Node ID` on [dahboard](https://celestia.knack.com/theblockspacerace)
+
+This is an RPC call in order to get your node's peerId information. NOTE: You can only generate an auth token after initializing and starting your celestia-node.
 
 ~~~bash
 NODE_TYPE=bridge
@@ -108,8 +110,37 @@ curl -X POST \
      http://localhost:26658
 ~~~
 
+## Task: Restart Your Node With Metrics Flags for Tracking Uptime
+>To complete task, add metric flag, restart node and complete task on [dahboard](https://celestia.knack.com/theblockspacerace)
 
-Delete bridge node
+Update service file
+
+```bash
+sudo tee /etc/systemd/system/celestia-bridge.service > /dev/null <<EOF
+[Unit]
+Description=celestia bridge
+After=network-online.target
+
+[Service]
+User=$USER
+ExecStart=$(which celestia) bridge start --p2p.network blockspacerace --metrics.tls=false --metrics --metrics.endpoint otel.celestia.tools:4318
+Restart=on-failure
+RestartSec=3
+LimitNOFILE=65535
+
+[Install]
+WantedBy=multi-user.target
+EOF
+```
+
+Restart service
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl restart celestia-bridge && sudo journalctl -u celestia-bridge -f
+```
+
+## Delete bridge node
 
 ~~~bash
 sudo systemctl stop celestia-bridge
