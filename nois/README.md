@@ -33,11 +33,9 @@ Replace your moniker `<YOUR_MONIKER>` without `<>`, save and import variables in
 NOIS_PORT=36
 echo "export WALLET="wallet"" >> $HOME/.bash_profile
 echo "export MONIKER="<YOUR_MONIKER>"" >> $HOME/.bash_profile
-<<<<<<< HEAD
 echo "export NOIS_CHAIN_ID="nois-testnet-005"" >> $HOME/.bash_profile
 =======
 echo "export NOIS_CHAIN_ID="nois-1"" >> $HOME/.bash_profile
->>>>>>> 0d7c3df (update docs)
 echo "export NOIS_PORT="${NOIS_PORT}"" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 ~~~
@@ -80,25 +78,19 @@ noisd init $MONIKER --chain-id $NOIS_CHAIN_ID
 Download genesis and addrbook
 
 ~~~bash
-<<<<<<< HEAD
 wget -O $HOME/.noisd/config/genesis.json https://raw.githubusercontent.com/noislabs/networks/main/nois-testnet-005/genesis.json
 wget -O $HOME/.noisd/config/addrbook.json https://files.itrocket.net/testnet/nois/addrbook.json
-=======
 wget -O $HOME/.noisd/config/genesis.json https://files.itrocket.net/mainnet/nois/genesis.json
 wget -O $HOME/.noisd/config/addrbook.json https://files.itrocket.net/mainnet/nois/addrbook.json
->>>>>>> 0d7c3df (update docs)
 ~~~
 
 Set seeds and peers
 
 ~~~bash
-<<<<<<< HEAD
 SEEDS="bf07906c7cf0f23606c83be15624be2c67b3929c@139.59.154.47:17356,da81dd66bca4bba509163dbd06b4a6b2e05c2e12@nois-testnet-seed.itrocket.net:443"
 PEERS="5ecd40831e453845587cbd03534e68a7b9fc3576@nois-testnet-peer.itrocket.net:443"
-=======
 SEEDS="c8db99691545545402a1c45fa897f3cb1a05aea6@nois-mainnet-seed.itrocket.net:36656"
 PEERS=""
->>>>>>> 0d7c3df (update docs)
 sed -i -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.noisd/config/config.toml
 ~~~
 
