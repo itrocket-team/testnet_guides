@@ -58,7 +58,7 @@ rm -rf ~/quicksilver
 git clone https://github.com/ingenuity-build/quicksilver
 cd quicksilver
 git fetch
-git checkout v1.2.4
+git checkout v1.2.9
 make install
 ~~~
 
