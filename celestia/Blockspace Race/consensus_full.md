@@ -145,7 +145,6 @@ wget -O - https://snaps.qubelabs.io/celestia/${SNAP_NAME} | tar xf - \
 ~~~
     
 Create Service file
-Replace validator node ip address in `<PUT_VALIDATOR_NODE_IP>` without `<>`
 
 ```bash
 sudo tee /etc/systemd/system/celestia-appd.service > /dev/null <<EOF
