@@ -50,10 +50,10 @@ make cel-key
 ```
 
 Config and init app
->Please enable RPC and gRPC on your validator node, and allow these ports in firewall rules
+>Please enable RPC and gRPC on your FULL node, and allow these ports in firewall rules
 
 ```bash
-celestia bridge init --core.ip <VALIDATOR_NODE_IP> --core.grpc.port <VALIDATOR_NODE_GRPC_PORT> --core.rpc.port <VALIDATOR_NODE_RPC_PORT> --p2p.network blockspacerace
+celestia bridge init --core.ip <FULL_NODE_IP> --core.grpc.port <FULL_NODE_GRPC_PORT> --core.rpc.port <FULL_NODE_RPC_PORT> --p2p.network blockspacerace
 ```
 
 Once you start the Bridge Node, a wallet key will be generated for you. You will need to fund that address with Testnet tokens to pay for PayForBlob transactions. You can find the address by running the following command:
