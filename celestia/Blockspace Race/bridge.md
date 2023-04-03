@@ -60,7 +60,7 @@ Once you start the Bridge Node, a wallet key will be generated for you. You will
 
 ~~~bash
 cd $HOME/celestia-node
-./cel-key list --node.type bridge --keyring-backend test --p2p.network blockspacerace-0
+./cel-key list --node.type bridge --keyring-backend test --p2p.network blockspacerace
 ~~~
 
 Create Service file
@@ -73,7 +73,7 @@ After=network-online.target
 
 [Service]
 User=$USER
-ExecStart=$(which celestia) bridge start --p2p.network blockspacerace
+ExecStart=$(which celestia) bridge start  --core.ip <FULL_NODE_IP> --core.grpc.port <FULL_NODE_GRPC_PORT> --core.rpc.port <FULL_NODE_RPC_PORT> --keyring.accname my_celes_key --p2p.network blockspacerace
 Restart=on-failure
 RestartSec=3
 LimitNOFILE=65535
@@ -123,7 +123,7 @@ After=network-online.target
 
 [Service]
 User=$USER
-ExecStart=$(which celestia) bridge start --p2p.network blockspacerace --metrics.tls=false --metrics --metrics.endpoint otel.celestia.tools:4318
+ExecStart=$(which celestia) bridge start  --core.ip <FULL_NODE_IP> --core.grpc.port <FULL_NODE_GRPC_PORT> --core.rpc.port <FULL_NODE_RPC_PORT> --keyring.accname my_celes_key --p2p.network blockspacerace --metrics.tls=false --metrics --metrics.endpoint otel.celestia.tools:4318
 Restart=on-failure
 RestartSec=3
 LimitNOFILE=65535
