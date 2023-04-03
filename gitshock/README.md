@@ -59,13 +59,13 @@ Clone Repository and create a JWT Secret to create a new secret key
 cd $HOME
 rm -rf testnet-list
 git clone https://github.com/gitshock-labs/testnet-list
-mkdir $HOME/geth-data
+mkdir $HOME/.ethereum
 ~~~
 
 Create a JWT Secret to create a new secret key by running this command 
 
 ~~~bash
-cd $HOME/geth-data
+cd $HOME/.ethereum
 openssl rand -hex 32 | tr -d "\n" > "jwt.hex"
 ~~~
 
@@ -73,13 +73,13 @@ Create a new execution layer account
 >Your new account is locked with a password. Please give a password. Do not forget this password. A public address of the key will be generated (public address of the key will look like 0x.. something). Then a path of the secret key file will also be generated, save it .You’ll need to save them in a safe place directly and you can share the PUBLIC KEY, and don’t EVEN Share your path to the secret key
 
 ~~~bash
-geth account new --datadir $HOME/geth-data
+geth account new --datadir $HOME/.ethereum
 ~~~
 
 Run this command to write custom genesis block 
 
 ~~~bash
-geth --datadir $HOME/geth-data init $HOME/testnet-list/execution/genesis.json 
+geth --datadir $HOME/.ethereum init $HOME/testnet-list/execution/genesis.json 
 ~~~
 
 Create service file
@@ -93,7 +93,7 @@ After=network.target
 [Service]
 User=$USER
 Type=simple
-ExecStart=$(which geth) --datadir $HOME/geth-data \
+ExecStart=$(which geth) --datadir $HOME/.ethereum \
 --http --http.api "engine,eth,web3,net,admin" \
 --http.corsdomain "*" \
 --http.vhosts "*" \
@@ -106,7 +106,7 @@ ExecStart=$(which geth) --datadir $HOME/geth-data \
 --discovery.port 30303 \
 --port 30303 \
 --authrpc.addr 0.0.0.0 \
---authrpc.jwtsecret "$HOME/geth-data/jwt.hex" \
+--authrpc.jwtsecret $HOME/.ethereum/jwt.hex \
 --gcmode="archive" \
 --networkid 1881 \
 --syncmode full \
@@ -197,7 +197,7 @@ nohup lighthouse beacon \
 --enr-tcp-port=9000 \
 --discovery-port=9000 \
 --graffiti $MONIKER \
---jwt-secrets $HOME/geth-data/jwt.hex \
+--jwt-secrets $HOME/.ethereum/jwt.hex \
 --suggested-fee-recipient="$FEE_ADDRESS" \
 > $HOME/beacon_1.log &
 ~~~
@@ -240,7 +240,7 @@ bn \
 --enr-tcp-port 9001 \
 --port 9001 \
 --enr-address 65.108.72.253 \
---execution-jwt $HOME/geth-data/jwt.hex \
+--execution-jwt $HOME/.ethereum/jwt.hex \
 --suggested-fee-recipient="$FEE_ADDRESS" \
 --boot-nodes=${ENR} \
 > $HOME/beacon_2.log &
