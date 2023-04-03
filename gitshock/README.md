@@ -277,14 +277,3 @@ sudo systemctl start systemd-timesyncd
 timedatectl status 
 ~~~
 
-### Delete node
-
-~~~bash
-sudo systemctl stop gethd
-sudo systemctl disable gethd
-sudo rm -rf /etc/systemd/system/gethd*
-sudo rm $(which geth)
-sudo rm -rf $HOME/.gitshock
-sudo rm -fr $HOME/lighthouse
-~~~
-
