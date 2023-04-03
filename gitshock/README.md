@@ -94,21 +94,22 @@ After=network.target
 User=$USER
 Type=simple
 ExecStart=$(which geth) --datadir $HOME/geth-data \
---http --http.api="engine,eth,web3,net,admin" \
---ws --ws.api="engine,eth,web3,net,debug" \
+--http --http.api "engine,eth,web3,net,admin" \
+--http.corsdomain "*" \
+--http.vhosts "*" \
+--http.addr 0.0.0.0 \
 --http.port 8545 \
+--ws --ws.api="engine,eth,web3,net,debug" \
+--ws.addr 0.0.0.0 \
+--ws.port 8546 \
 --authrpc.port 8551 \
 --discovery.port 30303 \
 --port 30303 \
---http.addr 0.0.0.0 \
 --authrpc.addr 0.0.0.0 \
---authrpc.jwtsecret="$HOME/geth-data/jwt.hex" \
---http.corsdomain="*" \
---http.vhosts=* \
---bloomfilter.size 2048 \
+--authrpc.jwtsecret "$HOME/geth-data/jwt.hex" \
 --gcmode="archive" \
---networkid=1881 \
---syncmode=full \
+--networkid 1881 \
+--syncmode full \
 --identity $MONIKER \
 --cache 2048 \
 --bootnodes="enode://e3b6cbacb5b918ea46104ca295101a53f159d06769e4d5730b4edd95e0880b4ca84bccb5d0c7ca70cf95dfeccef92bb6caa0533be667e4bb0114fc12051989cb@212.47.241.173:30303,enode://45b4fff6ab970e1e490deea8a5f960d806522fafdb33c8eaa38bc0ae970efc2256fc5746f0ecfec770af24c44864a3e6772a64f2e9f031f96fd4af7fd0483110@147.75.71.217:30304,enode://0e2b41699b95e8c915f4f5d18962c0d2db35dc22d3abbebbd25fc48221d1039943240ad37a6e9d853c0b4ea45da7b6b5203a7127b5858c946fc040cace8d2d63@147.75.71.217:30303,enode://787282effee17f9a9da49b3376f475b1521846ee924c962595e672ee9b90290e39b9f2fb67a5f34fb1f4964353cd6ef2a989c110d53b8fd169d8481c44f93119@44.202.92.152:30303" 
