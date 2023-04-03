@@ -178,6 +178,8 @@ git checkout stable
 make
 ~~~
 
+Run Consensus Layer
+
 ~~~bash
 nohup lighthouse beacon \
 --testnet-dir $HOME/testnet-list/consensus \
