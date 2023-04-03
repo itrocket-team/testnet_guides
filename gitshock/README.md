@@ -169,7 +169,7 @@ rustup update stable
 
 Install Ligthouse
 
-~~~bash
+~~~
 cd $HOME
 rm -rf lighthouse
 git clone https://github.com/sigp/lighthouse.git
@@ -180,7 +180,7 @@ make
 
 Run Consensus Layer
 
-~~~bash
+~~~
 nohup lighthouse beacon \
 --testnet-dir $HOME/testnet-list/consensus \
 --datadir $HOME/beacon-1 \
