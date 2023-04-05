@@ -53,7 +53,7 @@ Config and init app
 >Please enable RPC and gRPC on your FULL node, and allow these ports in firewall rules
 
 ```bash
-celestia bridge init --core.ip <FULL_NODE_IP> --core.grpc.port <FULL_NODE_GRPC_PORT> --core.rpc.port <FULL_NODE_RPC_PORT> --p2p.network blockspacerace
+celestia bridge init --core.ip localhost --core.grpc.port ${CELESTIA_PORT}090 --core.rpc.port ${CELESTIA_PORT}657  --keyring.accname my_celes_key --p2p.network blockspacerace
 ```
 
 Once you start the Bridge Node, a wallet key will be generated for you. You will need to fund that address with Testnet tokens to pay for PayForBlob transactions. You can find the address by running the following command:
