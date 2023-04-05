@@ -73,8 +73,7 @@ After=network-online.target
 
 [Service]
 User=$USER
-ExecStart=$(which celestia) bridge start  --core.ip localhost --core.grpc.port ${CELESTIA_PORT}090 --core.rpc.port ${CELESTIA_PORT}657 --keyring.accname my_celes_key --p2p.network blockspacerace
-
+ExecStart=$(which celestia) bridge start  --core.ip localhost --core.grpc.port ${CELESTIA_PORT}090 --core.rpc.port ${CELESTIA_PORT}657 --keyring.accname my_celes_key --p2p.network blockspacerace --metrics.tls=false --metrics --metrics.endpoint otel.celestia.tools:4318
 Restart=on-failure
 RestartSec=3
 LimitNOFILE=65535
@@ -110,36 +109,6 @@ curl -X POST \
      -d '{"jsonrpc":"2.0","id":0,"method":"p2p.Info","params":[]}' \
      http://localhost:26658
 ~~~
-
-## Task: Restart Your Node With Metrics Flags for Tracking Uptime
->To complete task, add metric flag, restart node and complete task on [dahboard](https://celestia.knack.com/theblockspacerace)
-
-Update service file
-
-```bash
-sudo tee /etc/systemd/system/celestia-bridge.service > /dev/null <<EOF
-[Unit]
-Description=celestia bridge
-After=network-online.target
-
-[Service]
-User=$USER
-ExecStart=$(which celestia) bridge start  --core.ip localhost --core.grpc.port ${CELESTIA_PORT}090 --core.rpc.port ${CELESTIA_PORT}657 --keyring.accname my_celes_key --p2p.network blockspacerace --metrics.tls=false --metrics --metrics.endpoint otel.celestia.tools:4318
-Restart=on-failure
-RestartSec=3
-LimitNOFILE=65535
-
-[Install]
-WantedBy=multi-user.target
-EOF
-```
-
-Restart service
-
-```bash
-sudo systemctl daemon-reload
-sudo systemctl restart celestia-bridge && sudo journalctl -u celestia-bridge -f
-```
 
 ## Delete bridge node
 
