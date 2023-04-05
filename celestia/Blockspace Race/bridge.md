@@ -73,7 +73,7 @@ After=network-online.target
 
 [Service]
 User=$USER
-ExecStart=$(which celestia) bridge start  --core.ip <FULL_NODE_IP> --core.grpc.port <FULL_NODE_GRPC_PORT> --core.rpc.port <FULL_NODE_RPC_PORT> --keyring.accname my_celes_key --p2p.network blockspacerace
+ExecStart=$(which celestia) bridge start  --core.ip localhost --core.grpc.port ${CELESTIA_PORT}090 --core.rpc.port ${CELESTIA_PORT}657 --keyring.accname my_celes_key --p2p.network blockspacerace
 
 Restart=on-failure
 RestartSec=3
@@ -124,7 +124,7 @@ After=network-online.target
 
 [Service]
 User=$USER
-ExecStart=$(which celestia) bridge start  --core.ip <FULL_NODE_IP> --core.grpc.port <FULL_NODE_GRPC_PORT> --core.rpc.port <FULL_NODE_RPC_PORT> --keyring.accname my_celes_key --p2p.network blockspacerace --metrics.tls=false --metrics --metrics.endpoint otel.celestia.tools:4318
+ExecStart=$(which celestia) bridge start  --core.ip localhost --core.grpc.port ${CELESTIA_PORT}090 --core.rpc.port ${CELESTIA_PORT}657 --keyring.accname my_celes_key --p2p.network blockspacerace --metrics.tls=false --metrics --metrics.endpoint otel.celestia.tools:4318
 Restart=on-failure
 RestartSec=3
 LimitNOFILE=65535
