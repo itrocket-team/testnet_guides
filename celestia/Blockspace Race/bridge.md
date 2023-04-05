@@ -53,7 +53,7 @@ Config and init app
 >Please enable RPC and gRPC on your FULL node, and allow these ports in firewall rules
 
 ```bash
-celestia bridge init --core.ip localhost --core.grpc.port ${CELESTIA_PORT}090 --core.rpc.port ${CELESTIA_PORT}657  --keyring.accname my_celes_key --p2p.network blockspacerace
+celestia bridge init --core.ip localhost --p2p.network blockspacerace
 ```
 
 Once you start the Bridge Node, a wallet key will be generated for you. You will need to fund that address with Testnet tokens to pay for PayForBlob transactions. You can find the address by running the following command:
@@ -73,7 +73,7 @@ After=network-online.target
 
 [Service]
 User=$USER
-ExecStart=$(which celestia) bridge start  --core.ip localhost --core.grpc.port ${CELESTIA_PORT}090 --core.rpc.port ${CELESTIA_PORT}657 --keyring.accname my_celes_key --p2p.network blockspacerace --metrics.tls=false --metrics --metrics.endpoint otel.celestia.tools:4318
+ExecStart=$(which celestia) bridge start  --core.ip localhost --core.grpc.port ${CELESTIA_PORT}090 --core.rpc.port ${CELESTIA_PORT}657 --p2p.network blockspacerace --metrics.tls=false --metrics --metrics.endpoint otel.celestia.tools:4318
 Restart=on-failure
 RestartSec=3
 LimitNOFILE=65535
