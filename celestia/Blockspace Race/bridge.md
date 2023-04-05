@@ -74,6 +74,7 @@ After=network-online.target
 [Service]
 User=$USER
 ExecStart=$(which celestia) bridge start  --core.ip <FULL_NODE_IP> --core.grpc.port <FULL_NODE_GRPC_PORT> --core.rpc.port <FULL_NODE_RPC_PORT> --keyring.accname my_celes_key --p2p.network blockspacerace
+
 Restart=on-failure
 RestartSec=3
 LimitNOFILE=65535
