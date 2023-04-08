@@ -110,6 +110,14 @@ curl -X POST \
      http://localhost:26658
 ~~~
 
+## Usefull commands
+Check bridge wallet balance
+
+~~~bash
+curl -s http://localhost:26659/balance | jq
+~~~
+
+
 ## Delete bridge node
 
 ~~~bash
