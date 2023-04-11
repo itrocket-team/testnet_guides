@@ -96,8 +96,8 @@ cp $HOME/networks/mocha/genesis.json $HOME/.celestia-app/config
 Set seeds and peers
 
 ```bash
-SEEDS="e86a9cc8910ef5741f713ce9325d11d758f20375@celestia-testnet-seed.itrocket.net:443"
-PEERS="1afcd97b0bf289700378e18b45dc1f927917bba0@celestia-testnet-peer.itrocket.net:443,1afcd97b0bf289700378e18b45dc1f927917bba0@65.109.92.79:11656"
+SEEDS=""
+PEERS="1afcd97b0bf289700378e18b45dc1f927917bba0@65.109.92.79:11656"
 sed -i -e 's|^seeds *=.*|seeds = "'$SEEDS'"|; s|^persistent_peers *=.*|persistent_peers = "'$PEERS'"|' $HOME/.celestia-app/config/config.toml
 ```
 
@@ -177,19 +177,6 @@ sudo systemctl daemon-reload
 sudo systemctl enable celestia-appd
 sudo systemctl restart celestia-appd && sudo journalctl -u celestia-appd -f
 ```
-
-## (Optional) quick-sync with snapshot
-
-Syncing from Genesis can take a long time, depending on your hardware. Using this method you can synchronize your Celestia node very quickly by downloading a recent snapshot of the blockchain
-
-~~~bash
-sudo systemctl stop celestia-appd
-cp $HOME/.celestia-app/data/priv_validator_state.json $HOME/.celestia-app/priv_validator_state.json.backup
-rm -rf $HOME/.celestia-app/data
-curl https://files.itrocket.net/testnet/celestia/snap_celestia.tar.lz4 | lz4 -dc - | tar -xf - -C $HOME/.celestia-app
-mv $HOME/.celestia-app/priv_validator_state.json.backup $HOME/.celestia-app/data/priv_validator_state.json
-sudo systemctl restart celestia-appd && sudo journalctl -u celestia-appd -f
-~~~
 
 ## Create wallet
 ### 2 new flags should be added in the new Mocha testnet 
