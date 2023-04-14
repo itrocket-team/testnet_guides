@@ -27,7 +27,7 @@ install go
 
 ```bash
 cd $HOME
-VER="1.19.1"
+VER="1.20"
 wget "https://golang.org/dl/go$VER.linux-amd64.tar.gz"
 sudo tar -C /usr/local -xzf "go$VER.linux-amd64.tar.gz"
 rm -rf  "go$VER.linux-amd64.tar.gz"
@@ -43,7 +43,7 @@ cd $HOME
 rm -rf celestia-node 
 git clone https://github.com/celestiaorg/celestia-node.git 
 cd celestia-node/ 
-git checkout tags/v0.8.2 
+git checkout tags/v0.9.0 
 make build 
 make install 
 make cel-key 
@@ -53,6 +53,7 @@ Config and init app
 >Please enable RPC and gRPC on your FULL node, and allow these ports in firewall rules
 
 ```bash
+celestia bridge unsafe-reset-store --p2p.network blockspacerace
 celestia bridge init --core.ip localhost --p2p.network blockspacerace
 ```
 
