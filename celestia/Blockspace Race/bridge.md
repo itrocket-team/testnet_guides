@@ -118,6 +118,10 @@ Check bridge wallet balance
 curl -s http://localhost:26659/balance | jq
 ~~~
 
+~~~
+chmod -R 700 .celestia-bridge-blockspacerace-0
+~~~
+
 
 ## Delete bridge node
 
