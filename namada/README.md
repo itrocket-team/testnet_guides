@@ -1,5 +1,5 @@
 <div>
-<h1 align="left" style="display: flex;"> Anoma Namada Setup for Testnet — public-testnet-2.1.4014f207f6d</h1>
+<h1 align="left" style="display: flex;"> Anoma Namada Setup for Testnet — public-testnet-7.0.3c5a38dc983</h1>
 <img src="https://avatars.githubusercontent.com/u/87261362?s=200&v=4"  style="float: right;" width="100" height="100"></img>
 </div>
 
@@ -34,7 +34,7 @@ echo "export ALIAS="CHOOSE_A_NAME_FOR_YOUR_VALIDATOR"" >> $HOME/.bash_profile
 echo "export WALLET="CHOOSE_A_WALLET_NAME"" >> $HOME/.bash_profile
 echo "export PUBLIC_IP=$(wget -qO- eth0.me)" >> $HOME/.bash_profile
 echo "export TM_HASH="v0.1.4-abciplus"" >> $HOME/.bash_profile
-echo "export CHAIN_ID="public-testnet-2.1.4014f207f6d"" >> $HOME/.bash_profile
+echo "export CHAIN_ID="public-testnet-7.0.3c5a38dc983"" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 ~~~
 
@@ -60,7 +60,7 @@ cd $HOME
 rm -rf namada
 git clone https://github.com/anoma/namada
 cd namada
-git checkout v0.15.0
+git checkout v0.15.1
 make build-release
 sudo cp -r $HOME/namada/target/release/namada* /usr/local/bin/
 ~~~
@@ -87,11 +87,13 @@ tendermint version
 #0.1.4-abciplus
 ~~~
 
-Run full node
+
+
+Run node
 
 ~~~bash
 cd $HOME
-namada client utils join-network --chain-id $CHAIN_ID
+namada client utils join-network --chain-id $CHAIN_ID --genesis-validator $ALIAS
 ~~~
 
 Create Service file
