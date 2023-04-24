@@ -7,7 +7,7 @@ Official documentation:
 >- [Validator setup instructions](https://docs.namada.net/testnets/environment-setup.html)
 
 Explorer
->- https://namada.world/
+>- https://namadaexplorer.com/
 
 ## Hardware Requirements
 ### Recommended Hardware Requirements 
