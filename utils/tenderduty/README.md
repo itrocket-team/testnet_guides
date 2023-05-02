@@ -1,4 +1,4 @@
-# COSMOS node protecting and monitoring guide with tenderduty
+# COSMOS based node protecting and monitoring guide with tenderduty
 
 ## Update packages and Install dependencies
 
