@@ -1,13 +1,13 @@
 # COSMOS node protecting and monitoring guide with tenderduty
 
-### Update packages and Install dependencies
+## Update packages and Install dependencies
 
 ~~~
 sudo apt update && sudo apt upgrade -y
 sudo apt install curl build-essential git wget jq make gcc tmux pkg-config libssl-dev libleveldb-dev tar -y
 ~~~
 
-Install go
+## Install go
 
 ~~~
 ver="1.18.2"
@@ -164,7 +164,7 @@ sudo systemctl start tenderdutyd && sudo journalctl -fu tenderdutyd
 Default port on tenderduty is 8888
 
 ## Turn on firewall to protect your server and open the required port
->Default RPC port is 26656, prometheus - 26660 and tenderduty - 8888. if you have custom ports on your node or have another nodes in this server, check it and open custom ports!
+>Default P2P port is 26656, prometheus - 26660 and tenderduty - 8888. if you have custom ports on your node or have another nodes in this server, check it and open custom ports!
 
 ~~~
 sudo apt install ufw 
@@ -178,9 +178,9 @@ sudo ufw enable
 
 Configure Telegram alerting
 Open telegram and find @BotFather 
-1 - Create telegram bot via @BotFather, customize it and get bot API token [how_to](https://www.siteguarding.com/en/how-to-get-telegram-bot-api-token)
-2 - Create the group: alarm . Customize them, add the bot in your chat and get chats IDs [how_to](https://stackoverflow.com/questions/32423837/telegram-bot-how-to-get-a-group-chat-id)
-3 - Open config.yml file 
+- Create telegram bot via @BotFather, customize it and get bot API token [how_to](https://www.siteguarding.com/en/how-to-get-telegram-bot-api-token)
+- Create the group: alarm . Customize them, add the bot in your chat and get chats IDs [how_to](https://stackoverflow.com/questions/32423837/telegram-bot-how-to-get-a-group-chat-id)
+- Open config.yml file 
 >change enabled: no to enabled: yes
 api_key: '5555555555:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' to  api_key: '<YOUR_BOT_API_KEY>'
 channel: "-666666666" to channel: "<YOUR_GROUP_CHAT_ID>"
