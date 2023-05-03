@@ -1,10 +1,10 @@
 <div>
-<h1 align="left" style="display: flex;"> Humans Node Setup for Testnet — testnet-1</h1>
+<h1 align="left" style="display: flex;"> Humans Node Setup for Testnet — humans_3000-1</h1>
 <img src="https://github.com/itrocket-team/testnet_guides/blob/main/logos/humans.jpg"  style="float: right;" width="100" height="100"></img>
 </div>
 
 Official documentation:
->- [Validator setup instructions](https://github.com/humansdotai/docs-humans/blob/master/run-nodes/testnet/joining-testnet.md)
+>- [Validator setup instructions](https://github.com/humansdotai/testnets/blob/master/Install.md)
 
 Explorer:
 >-  https://explorer.humans.zone/humans-testnet
@@ -12,10 +12,10 @@ Explorer:
 
 ## Hardware Requirements
 ### Minimal Hardware Requirements 
- - Memory: 8 GB RAM
- - CPU: Quad-Core
- - Disk: 250 GB SSD Storage
- - Bandwidth: 1 Gbps for Download / 100 Mbps for Upload
+ - 6 or more physical CPU cores
+ - At least 500GB of SSD disk storage
+ - At least 32GB of memory (RAM)
+ - Bandwidth: At least 1000mbps network bandwidth
 
 ## Set up your Humans node
 ### Manual installation
@@ -31,9 +31,9 @@ Replace your moniker `<YOUR_MONIKER>` without `<>`, save and import variables in
 
 ~~~bash
 HUMANS_PORT=17
-echo "export HUMANS_WALLET="wallet"" >> $HOME/.bash_profile
-echo "export HUMANS_MONIKER="<YOUR_MONIKER>"" >> $HOME/.bash_profile
-echo "export HUMANS_CHAIN_ID="testnet-1"" >> $HOME/.bash_profile
+echo "export WALLET="wallet"" >> $HOME/.bash_profile
+echo "export MONIKER="<YOUR_MONIKER>"" >> $HOME/.bash_profile
+echo "export HUMANS_CHAIN_ID="humans_3000-1"" >> $HOME/.bash_profile
 echo "export HUMANS_PORT="${HUMANS_PORT}"" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 ~~~
@@ -58,31 +58,28 @@ cd $HOME
 rm -rf ~/humans
 git clone https://github.com/humansdotai/humans
 cd humans
-git checkout v1.0.0
-go build -o humansd cmd/humansd/main.go
-mv humansd ~/go/bin/humansd
+git checkout tags/v0.1.0
+make install
 ~~~
 Config and init app
 
 ~~~bash
 humansd config node tcp://localhost:${HUMANS_PORT}657
-humansd config chain-id $HUMANS_CHAIN_ID
-humansd config keyring-backend test
-humansd init $HUMANS_MONIKER --chain-id $HUMANS_CHAIN_ID
+humansd config chain-id humans_3000-1
+humansd init "$MONIKER" --chain-id humans_3000-1
 ~~~
 
 Download genesis and addrbook
 
 ~~~bash
-curl -s https://rpc-testnet.humans.zone/genesis | jq -r .result.genesis > $HOME/.humans/config/genesis.json
+wget -O $HOME/.humansd/config/genesis.json "https://raw.githubusercontent.com/humansdotai/testnets/master/friction/genesis-M1-P3.json"
 ~~~
 
 Set seeds and peers
 
 ~~~bash
-SEEDS=""
-PEERS="1df6735ac39c8f07ae5db31923a0d38ec6d1372b@45.136.40.6:26656,9726b7ba17ee87006055a9b7a45293bfd7b7f0fc@45.136.40.16:26656,6e84cde074d4af8a9df59d125db3bf8d6722a787@45.136.40.18:26656,eda3e2255f3c88f97673d61d6f37b243de34e9d9@45.136.40.13:26656,4de8c8acccecc8e0bed4a218c2ef235ab68b5cf2@45.136.40.12:26656"
-sed -i -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.humans/config/config.toml
+SEEDS="6ce9a9acc23594ec75516617647286fe546f83ca@humans-testnet-seed.itrocket.net:17656"
+sed -i -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.humansd/config/config.toml
 ~~~
 
 Set gustom ports in app.toml file
@@ -93,7 +90,7 @@ s%^address = \":8080\"%address = \":${HUMANS_PORT}080\"%;
 s%^address = \"0.0.0.0:9090\"%address = \"0.0.0.0:${HUMANS_PORT}090\"%; 
 s%^address = \"0.0.0.0:9091\"%address = \"0.0.0.0:${HUMANS_PORT}091\"%; 
 s%^address = \"0.0.0.0:8545\"%address = \"0.0.0.0:${HUMANS_PORT}545\"%; 
-s%^ws-address = \"0.0.0.0:8546\"%ws-address = \"0.0.0.0:${HUMANS_PORT}546\"%" $HOME/.humans/config/app.toml
+s%^ws-address = \"0.0.0.0:8546\"%ws-address = \"0.0.0.0:${HUMANS_PORT}546\"%" $HOME/.humansd/config/app.toml
 ~~~
 
 Set gustom ports in config.toml file
@@ -104,37 +101,35 @@ s%^laddr = \"tcp://127.0.0.1:26657\"%laddr = \"tcp://0.0.0.0:${HUMANS_PORT}657\"
 s%^pprof_laddr = \"localhost:6060\"%pprof_laddr = \"localhost:${HUMANS_PORT}060\"%;
 s%^laddr = \"tcp://0.0.0.0:26656\"%laddr = \"tcp://0.0.0.0:${HUMANS_PORT}656\"%;
 s%^external_address = \"\"%external_address = \"$(wget -qO- eth0.me):${HUMANS_PORT}656\"%;
-s%^prometheus_listen_addr = \":26660\"%prometheus_listen_addr = \":${HUMANS_PORT}660\"%" $HOME/.humans/config/config.toml
+s%^prometheus_listen_addr = \":26660\"%prometheus_listen_addr = \":${HUMANS_PORT}660\"%" $HOME/.humansd/config/config.toml
 ~~~
 
 Config pruning
 
 ~~~bash
-sed -i -e "s/^pruning *=.*/pruning = \"nothing\"/" $HOME/.humans/config/app.toml
-sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"100\"/" $HOME/.humans/config/app.toml
-sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"50\"/" $HOME/.humans/config/app.toml
+sed -i -e "s/^pruning *=.*/pruning = \"nothing\"/" $HOME/.humansd/config/app.toml
+sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"100\"/" $HOME/.humansd/config/app.toml
+sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"50\"/" $HOME/.humansd/config/app.toml
 ~~~
 
-Set minimum gas price, enable prometheus and disable indexing
+Set minimum gas price and disable indexing
 
 ~~~bash
-sed -i 's/minimum-gas-prices =.*/minimum-gas-prices = "0.025uheart"/g' $HOME/.humans/config/app.toml
-sed -i -e "s/prometheus = false/prometheus = true/" $HOME/.humans/config/config.toml
-sed -i -e "s/^indexer *=.*/indexer = \"null\"/" $HOME/.humans/config/config.toml
+sed -i 's/minimum-gas-prices =.*/minimum-gas-prices = "1800000000aheart"/g' $HOME/.humansd/config/app.toml
+sed -i -e "s/^indexer *=.*/indexer = \"null\"/" $HOME/.humansd/config/config.toml
 ~~~
 
-Update block time parameters
+Update parameters
 
 ~~~bash
-CONFIG_TOML="$HOME/.humans/config/config.toml"
- sed -i 's/timeout_propose =.*/timeout_propose = "100ms"/g' $CONFIG_TOML
- sed -i 's/timeout_propose_delta =.*/timeout_propose_delta = "500ms"/g' $CONFIG_TOML
- sed -i 's/timeout_prevote =.*/timeout_prevote = "100ms"/g' $CONFIG_TOML
- sed -i 's/timeout_prevote_delta =.*/timeout_prevote_delta = "500ms"/g' $CONFIG_TOML
- sed -i 's/timeout_precommit =.*/timeout_precommit = "100ms"/g' $CONFIG_TOML
- sed -i 's/timeout_precommit_delta =.*/timeout_precommit_delta = "500ms"/g' $CONFIG_TOML
- sed -i 's/timeout_commit =.*/timeout_commit = "1s"/g' $CONFIG_TOML
- sed -i 's/skip_timeout_commit =.*/skip_timeout_commit = false/g' $CONFIG_TOML
+sed -i 's/create_empty_blocks =.*/create_empty_blocks = false/g' $HOME/.humansd/config/config.toml
+sed -i -e "s/prometheus = false/prometheus = true/" $HOME/.humansd/config/config.toml
+sed -i 's/create_empty_blocks_interval =.*/create_empty_blocks_interval = "30s"/g' $HOME/.humansd/config/config.toml
+sed -i 's/timeout_propose =.*/timeout_propose = "30s"/g' $HOME/.humansd/config/config.toml
+sed -i 's/timeout_propose_delta =.*/timeout_propose_delta = "5s"/g' $HOME/.humansd/config/config.toml
+sed -i 's/timeout_prevote =.*/timeout_prevote = "10s"/g' $HOME/.humansd/config/config.toml
+sed -i 's/timeout_prevote_delta =.*/timeout_prevote_delta = "5s"/g' $HOME/.humansd/config/config.toml
+sed -i 's/cors_allowed_origins =.*/cors_allowed_origins = ["*"]/g' $HOME/.humansd/config/config.toml
 ~~~
 
 Clean old data
@@ -181,32 +176,24 @@ In order not to wait for a long synchronization, you can use our guides:
 To create a new wallet, use the following command. don’t forget to save the mnemonic
 
 ~~~bash
-humansd keys add $HUMANS_WALLET
+humansd keys add $WALLET
 ~~~
 
 (optional) To restore exexuting wallet, use the following command
 
 ~~~bash
-humansd keys add $HUMANS_WALLET --recover
+humansd keys add $WALLET --recover
 ~~~
 
 Save wallet and validator address
 
 ~~~bash
-HUMANS_WALLET_ADDRESS=$(humansd keys show $HUMANS_WALLET -a)
-HUMANS_VALOPER_ADDRESS=$(humansd keys show $HUMANS_WALLET --bech val -a)
-echo "export HUMANS_WALLET_ADDRESS="${HUMANS_WALLET_ADDRESS} >> $HOME/.bash_profile
+WALLET_ADDRESS=$(humansd keys show $WALLET -a)
+HUMANS_VALOPER_ADDRESS=$(humansd keys show $WALLET --bech val -a)
+echo "export WALLET_ADDRESS="${WALLET_ADDRESS} >> $HOME/.bash_profile
 echo "export HUMANS_VALOPER_ADDRESS="${HUMANS_VALOPER_ADDRESS} >> $HOME/.bash_profile
 source $HOME/.bash_profile
 ~~~
-
-Fund your wallet 
-Before creating a validator, you need to fund your wallet, go to the [Humans discord server](https://discord.gg/humansdotai) and  and navigate to `testnet-faucet` channel
-
-~~~bash
-$request <YOUR_WALLET_ADDRESS>
-~~~
-
 
 ## Create validator
 
@@ -221,23 +208,23 @@ humansd status 2>&1 | jq .SyncInfo
 Check your balance
 
 ~~~bash
-humansd query bank balances $HUMANS_WALLET_ADDRESS
+humansd query bank balances $WALLET_ADDRESS
 ~~~
 
 Create validator
 
 ~~~bash
 humansd tx staking create-validator \
-  --amount 9000000uheart \
-  --from $HUMANS_WALLET \
+  --amount 1000000uheart \
+  --from $WALLET \
   --commission-max-change-rate "0.01" \
   --commission-max-rate "0.2" \
   --commission-rate "0.05" \
   --min-self-delegation "1" \
   --pubkey  $(humansd tendermint show-validator) \
-  --moniker $HUMANS_MONIKER \
+  --moniker $MONIKER \
   --chain-id $HUMANS_CHAIN_ID \
-  --fees 5000uheart \
+  --gas auto --gas-adjustment 1.5 \
   -y
 ~~~
   
@@ -289,13 +276,13 @@ sudo systemctl restart humansd
 check balance
 
 ~~~bash
-humansd query bank balances $HUMANS_WALLET_ADDRESS
+humansd query bank balances $WALLET_ADDRESS
 ~~~
 
 transfer funds
 
 ~~~bash
-humansd tx bank send $HUMANS_WALLET_ADDRESS <TO_HUMANS_WALLET_ADDRESS> 1000000uheart --gas auto --gas-adjustment 1.3
+humansd tx bank send $WALLET_ADDRESS <TO_WALLET_ADDRESS> 1000000uheart --gas auto --gas-adjustment 1.3
 ~~~
 
 lists of wallets
@@ -307,7 +294,7 @@ humansd keys list
 delete wallet
 
 ~~~bash
-humansd keys delete $HUMANS_WALLET
+humansd keys delete $WALLET
 ~~~
 
 ### Node information
@@ -339,7 +326,7 @@ curl -sS http://localhost:${HUMANS_PORT}657/net_info | jq -r '.result.peers[] | 
 ### Voting
 
 ~~~bash
-humansd tx gov vote 1 yes --from $HUMANS_WALLET --chain-id $HUMANS_CHAIN_ID
+humansd tx gov vote 1 yes --from $WALLET --chain-id $HUMANS_CHAIN_ID
 ~~~
 
 ### Staking, Delegation and Rewards
@@ -347,31 +334,31 @@ humansd tx gov vote 1 yes --from $HUMANS_WALLET --chain-id $HUMANS_CHAIN_ID
 Withdraw all rewards
 
 ~~~bash
-humansd tx distribution withdraw-all-rewards --from $HUMANS_WALLET --chain-id $HUMANS_CHAIN_ID --gas auto --gas-adjustment 1.3
+humansd tx distribution withdraw-all-rewards --from $WALLET --chain-id $HUMANS_CHAIN_ID --gas auto --gas-adjustment 1.3
 ~~~
 
 Withdraw rewards with commision
 
 ~~~bash
-humansd tx distribution withdraw-rewards $HUMANS_VALOPER_ADDRESS --from $HUMANS_WALLET --commission --chain-id $HUMANS_CHAIN_ID --gas auto --gas-adjustment 1.3
+humansd tx distribution withdraw-rewards $HUMANS_VALOPER_ADDRESS --from $WALLET --commission --chain-id $HUMANS_CHAIN_ID --gas auto --gas-adjustment 1.3
 ~~~
 
 Check balance 
 
 ~~~bash
-humansd query bank balances $HUMANS_WALLET_ADDRESS
+humansd query bank balances $WALLET_ADDRESS
 ~~~
 
 Delegate stake
 
 ~~~bash
-humansd tx staking delegate $HUMANS_VALOPER_ADDRESS 1000000uheart --from $HUMANS_WALLET --chain-id $HUMANS_CHAIN_ID --gas=auto --gas-adjustment 1.3
+humansd tx staking delegate $HUMANS_VALOPER_ADDRESS 1000000uheart --from $WALLET --chain-id $HUMANS_CHAIN_ID --gas=auto --gas-adjustment 1.3
 ~~~
 
 Redelegate stake to another validator
 
 ~~~bash
-humansd tx staking redelegate <srcValidatorAddress> <destValidatorAddress> 1000000uheart --from $HUMANS_WALLET --chain-id $HUMANS_CHAIN_ID --gas auto --gas-adjustment 1.3
+humansd tx staking redelegate <srcValidatorAddress> <destValidatorAddress> 1000000uheart --from $WALLET --chain-id $HUMANS_CHAIN_ID --gas auto --gas-adjustment 1.3
 ~~~
 
 ### Validator operation
@@ -385,7 +372,7 @@ humansd tx staking edit-validator \
   --website="<your_website>" \
   --details="<your_validator_description>" \
   --chain-id=$HUMANS_CHAIN_ID \
-  --from=$HUMANS_WALLET
+  --from=$WALLET
 ~~~
 
 Jailing info
@@ -397,7 +384,7 @@ humansd q slashing signing-info $(humansd tendermint show-validator)
 Unjail validator
 
 ~~~bash
-humansd tx slashing unjail --broadcast-mode=block --from $HUMANS_WALLET --chain-id $HUMANS_CHAIN_ID --gas auto --gas-adjustment 1.5
+humansd tx slashing unjail --broadcast-mode=block --from $WALLET --chain-id $HUMANS_CHAIN_ID --gas auto --gas-adjustment 1.5
 ~~~
 
 Consensus state
