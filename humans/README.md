@@ -239,6 +239,18 @@ You can add `--website` `--security-contact` `--identity` `--details` flags in i
 
 ### Monitoring
 If you want to have set up a monitoring and alert system use [our cosmos nodes monitoring guide with tenderduty](https://teletype.in/@itrocket/bdJAHvC_q8h)
+
+>Team plan to monitoring the system resources, please enable metrics, open RPC, API, EVM RPC, EVM WebSocket, EVM Metrics, proxy_app, P2P port. If in some of these points in the settings it is specified 127.0.0.1 change to 0.0.0.0
+
+~~~
+sudo ufw allow from 45.136.40.0/22 to any port ${HUMANS_PORT}545 proto tcp
+sudo ufw allow from 45.136.40.0/22 to any port ${HUMANS_PORT}546 proto tcp
+sudo ufw allow from 45.136.40.0/22 to any port ${HUMANS_PORT}317 proto tcp
+sudo ufw allow from 45.136.40.0/22 to any port ${HUMANS_PORT}657 proto tcp
+sudo ufw allow from 45.136.40.0/22 to any port ${HUMANS_PORT}660 proto tcp
+sudo ufw allow from 45.136.40.0/22 to any port ${HUMANS_PORT}658 proto tcp
+sudo ufw allow from 45.136.40.0/22 to any port ${HUMANS_PORT}065 proto tcp
+~~~
   
 ### Security
 To protect you keys please don`t share your privkey, mnemonic and follow a basic security rules
