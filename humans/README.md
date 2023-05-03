@@ -336,6 +336,7 @@ curl -sS http://localhost:${HUMANS_PORT}657/net_info | jq -r '.result.peers[] | 
 ~~~
 
 ### Voting
+>Proposals options 'Yes' 'No' 'No with veto' 'Abstain'
 
 ~~~bash
 humansd tx gov vote 1 yes --from $WALLET --chain-id $HUMANS_CHAIN_ID
