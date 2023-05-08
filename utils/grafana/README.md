@@ -74,7 +74,7 @@ EOF
 ~~~
 sudo systemctl enable cosmos-exporter
 sudo systemctl start cosmos-exporter
-sudo systemctl status cosmos-exporter && sudo journalctl -u cosmos-exporter -f
+sudo systemctl restart cosmos-exporter && sudo journalctl -u cosmos-exporter -f
 ~~~
 
 ## Install node-exporter
