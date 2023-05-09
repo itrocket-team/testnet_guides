@@ -26,13 +26,18 @@ sudo apt install curl git wget htop tmux build-essential jq make gcc tar clang p
 install go
 
 ```bash
-cd $HOME
-VER="1.20"
+cd ~
+! [ -x "$(command -v go)" ] && {
+VER="1.20.1"
 wget "https://golang.org/dl/go$VER.linux-amd64.tar.gz"
+sudo rm -rf /usr/local/go
 sudo tar -C /usr/local -xzf "go$VER.linux-amd64.tar.gz"
-rm -rf  "go$VER.linux-amd64.tar.gz"
-echo "export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin" >> $HOME/.bash_profile
-source $HOME/.bash_profile
+rm "go$VER.linux-amd64.tar.gz"
+[ ! -f ~/.bash_profile ] && touch ~/.bash_profile
+echo "export PATH=$PATH:/usr/local/go/bin:~/go/bin" >> ~/.bash_profile
+source ~/.bash_profile
+}
+[ ! -d ~/go/bin ] && mkdir -p ~/go/bin
 go version
 ```
 
@@ -53,7 +58,6 @@ Config and init app
 >Please enable RPC and gRPC on your FULL node, and allow these ports in firewall rules
 
 ```bash
-celestia bridge unsafe-reset-store --p2p.network blockspacerace
 celestia bridge init --core.ip localhost --p2p.network blockspacerace
 ```
 
