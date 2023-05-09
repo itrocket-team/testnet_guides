@@ -62,7 +62,6 @@ make cel-key
 ```
 
 Config and init app
->Please enable RPC and gRPC on your FULL node, and allow these ports in firewall rules
 
 ```bash
 celestia bridge init --core.ip localhost --p2p.network blockspacerace
