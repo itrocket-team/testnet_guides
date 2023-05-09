@@ -88,7 +88,7 @@ wget -O $HOME/.celestia-app/config/addrbook.json https://testnet-files.itrocket.
 ```
 
 Set seeds and peers
-
+>You can find more peers here: https://itrocket.net/services/testnet/celestia/#peer
 ```bash
 SEEDS="fedea9723696360d429a23792225594779cc7cd7@celestia-testnet-seed.itrocket.net:11656"
 PEERS="193acd7bf7049b425d7b95c24e02250fce8ad45c@celestia-testnet-peer.itrocket.net:11656"
