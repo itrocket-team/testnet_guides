@@ -71,8 +71,10 @@ cd $HOME/celestia-node
 
 Add your Full node RPC and gRPC ports
 
+~~~bash
 RPC_PORT="<PUT_FULL_NODE_RPC_PORT>"
 GRPC_PORT="<PUT_FULL_NODE_GRPC_PORT>"
+~~~
 
 Create Service file
 
