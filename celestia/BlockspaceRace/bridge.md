@@ -68,6 +68,11 @@ cd $HOME/celestia-node
 ./cel-key list --node.type bridge --keyring-backend test --p2p.network blockspacerace
 ~~~
 
+Add your Full node RPC and gRPC ports
+
+RPC_PORT="<PUT_FULL_NODE_RPC_PORT>"
+GRPC_PORT="<PUT_FULL_NODE_GRPC_PORT>"
+
 Create Service file
 
 ```bash
@@ -78,7 +83,7 @@ After=network-online.target
 
 [Service]
 User=$USER
-ExecStart=$(which celestia) bridge start  --core.ip localhost --core.grpc.port ${CELESTIA_PORT}090 --core.rpc.port ${CELESTIA_PORT}657 --p2p.network blockspacerace --metrics.tls=false --metrics --metrics.endpoint otel.celestia.tools:4318  --gateway --gateway.addr localhost --gateway.port 26659 --keyring.accname my_celes_key
+ExecStart=$(which celestia) bridge start  --core.ip localhost --core.grpc.port $RPC_PORT --core.rpc.port $GRPC_PORT --p2p.network blockspacerace --metrics.tls=false --metrics --metrics.endpoint otel.celestia.tools:4318  --gateway --gateway.addr localhost --gateway.port 26659 --keyring.accname my_celes_key
 Restart=on-failure
 RestartSec=3
 LimitNOFILE=65535
@@ -95,6 +100,7 @@ sudo systemctl daemon-reload
 sudo systemctl enable celestia-bridge
 sudo systemctl restart celestia-bridge && sudo journalctl -u celestia-bridge -f
 ```
+
 ## Task: Deploy Bridge Node
 >To complete task, put your wallet `address` and `Bridge Node ID` on [dahboard](https://celestia.knack.com/theblockspacerace)
 
@@ -121,6 +127,8 @@ Check bridge wallet balance
 ~~~bash
 curl -s http://localhost:26659/balance | jq
 ~~~
+
+Optional, if you want transferring keys to another server, you will need to issue permissions
 
 ~~~
 chmod -R 700 .celestia-bridge-blockspacerace-0
