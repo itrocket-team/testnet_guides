@@ -69,6 +69,11 @@ cd $HOME/celestia-node
 ./cel-key list --node.type bridge --keyring-backend test --p2p.network blockspacerace
 ~~~
 
+Reset node
+~~~bash
+celestia bridge unsafe-reset-store --p2p.network blockspacerace
+~~~
+
 Add your Full node RPC and gRPC ports
 
 ~~~bash
