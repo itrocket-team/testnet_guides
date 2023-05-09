@@ -3,8 +3,7 @@
 <img src="https://avatars.githubusercontent.com/u/54859940?s=200&v=4"  style="float: right;" width="100" height="100"></img>
 </div>
 
-Official documentation:
->- [Validator setup instructions](https://docs.celestia.org/nodes/blockspace-race/)
+Official documentation: [Validator setup instructions](https://docs.celestia.org/nodes/blockspace-race/)
 
 Explorer:
 >-  https://testnet.itrocket.net/celestia/staking
