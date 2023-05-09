@@ -150,12 +150,6 @@ reset network
 ~~~bash 
 celestia-appd tendermint unsafe-reset-all --home $HOME/.celestia-app 
 ~~~
-
-Download snapshot
-
-~~~bash
-curl https://testnet-files.itrocket.net/celestia/snap_celestia.tar.lz4 | lz4 -dc - | tar -xf - -C $HOME/.celestia-app
-~~~
     
 Create Service file
 
