@@ -15,6 +15,7 @@ Official documentation:
 
 ## Set up a Celestia bridge node 
 ### Manual installation
+>In this case Full node and bridge node located on the same server, if you want to install on different servers, change the value `localhost` to your full node IP address
 
 Update packages and Install dependencies
 
@@ -128,7 +129,7 @@ Check bridge wallet balance
 curl -s http://localhost:26659/balance | jq
 ~~~
 
-Optional, if you want transferring keys to another server, you will need to issue permissions
+(Optional) If you want transferring keys to another server, you will need to add permissions
 
 ~~~
 chmod -R 700 .celestia-bridge-blockspacerace-0
