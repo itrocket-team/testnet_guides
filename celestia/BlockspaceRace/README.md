@@ -9,6 +9,7 @@ Official documentation:
 Explorer:
 >-  https://testnet.itrocket.net/celestia/staking
 
+- [Set up Validator node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/BlockspaceRace/README.md)
 - [Set up Bridge node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/BlockspaceRace/bridge.md)  
 - [Set up Light node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/BlockspaceRace/light.md)  
 - [Set up Full node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/BlockspaceRace/full.md)
