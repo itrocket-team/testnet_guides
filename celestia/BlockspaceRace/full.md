@@ -6,12 +6,19 @@
 Official documentation:
 >- [Validator setup instructions](https://docs.celestia.org/nodes/consensus-full-node/)
 
+Explorer:
+>-  https://testnet.itrocket.net/celestia/staking
+
+- [Set up Bridge node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/BlockspaceRace/bridge.md) 
+- [Set up Validator node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/BlockspaceRace/README.md)
+- [Set up Full node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/BlockspaceRace/full.md) 
+- [Set up Light node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/BlockspaceRace/light.md)  
 
 ## Hardware Requirements
- - Memory: 8 GB RAM
- - CPU: Quad-Core
- - Disk: 250 GB SSD Storage
- - Bandwidth: 1 Gbps for Download/100 Mbps for Upload
+- Memory: 8 GB RAM
+- CPU: Quad-Core
+- Disk: 250 GB SSD Storage
+- Bandwidth: 1 Gbps for Download/1 Gbps for Upload
 
 ## Set up a Celestia Full node 
 ### Manual installation
@@ -26,13 +33,18 @@ sudo apt install curl git wget htop tmux build-essential jq make gcc tar clang p
 install go
 
 ```bash
-cd $HOME
-VER="1.19.1"
+cd ~
+! [ -x "$(command -v go)" ] && {
+VER="1.20.2"
 wget "https://golang.org/dl/go$VER.linux-amd64.tar.gz"
+sudo rm -rf /usr/local/go
 sudo tar -C /usr/local -xzf "go$VER.linux-amd64.tar.gz"
-rm -rf  "go$VER.linux-amd64.tar.gz"
-echo "export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin" >> $HOME/.bash_profile
-source $HOME/.bash_profile
+rm "go$VER.linux-amd64.tar.gz"
+[ ! -f ~/.bash_profile ] && touch ~/.bash_profile
+echo "export PATH=$PATH:/usr/local/go/bin:~/go/bin" >> ~/.bash_profile
+source ~/.bash_profile
+}
+[ ! -d ~/go/bin ] && mkdir -p ~/go/bin
 go version 
 ```
 
@@ -82,11 +94,11 @@ cp $HOME/networks/blockspacerace/genesis.json $HOME/.celestia-app/config
 ~~~
 
 Set seeds and peers:
-
+>You can find more peers here: https://itrocket.net/services/testnet/celestia/#peer
 ~~~bash
-PEERS="be935b5942fd13c739983a53416006c83837a4d2@178.170.47.171:26656,cea09c9ac235a143d4b6a9d1ba5df6902b2bc2bd@95.214.54.28:20656,5c9cfba00df2aaa9f9fe26952e4bf912e3f1e8ee@195.3.221.5:26656,7b2f4cb70f04f2e9befb6ace66ce1ac7b3bea5b4@178.239.197.179:26656,7ee2ba21197d58679cfc1517b5bbc6465bed387a@65.109.67.25:26656,dc0656ab58280d641c8d10311d86627255bec8a1@148.251.85.27:26656,ccbd6262d0324e2e858594b639f4296cc4952c93@13.57.127.89:26656,a507b2bda6d2974c84ae1e8a8b788fc9e44d01f7@142.132.131.184:26656,9768290c60a746ee97ef1a5bcb8bee69066475e8@65.109.80.150:2600"
-SEEDS="0293f2cf7184da95bc6ea6ff31c7e97578b9c7ff@65.109.106.95:26656,8f14ec71e1d712c912c27485a169c2519628cfb6@celest-test-seed.theamsolutions.info:22256"
-sed -i -e 's|^seeds *=.*|seeds = "'$SEEDS'"|; s|^persistent_peers *=.*|persistent_peers = "'$PEERS'"|' $HOME/.celestia-app/config/config.toml
+SEEDS="fedea9723696360d429a23792225594779cc7cd7@celestia-testnet-seed.itrocket.net:11656"
+PEERS="193acd7bf7049b425d7b95c24e02250fce8ad45c@celestia-testnet-peer.itrocket.net:11656"
+sed -i -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.celestia-app/config/config.toml
 ~~~
 
 Set gustom ports in app.toml file
@@ -126,6 +138,14 @@ EXTERNAL_ADDRESS=$(wget -qO- eth0.me)
 sed -i.bak -e "s/^external-address = \"\"/external-address = \"$EXTERNAL_ADDRESS:${CELESTIA_PORT}656\"/" $HOME/.celestia-app/config/config.toml
 ~~~
 
+Set minimum gas price, enable prometheus and disable indexing
+
+```bash
+sed -i -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"0.0utia\"/" $HOME/.celestia-app/config/app.toml
+sed -i -e "s/prometheus = false/prometheus = true/" $HOME/.celestia-app/config/config.toml
+sed -i -e "s/^indexer *=.*/indexer = \"null\"/" $HOME/.celestia-app/config/config.toml
+```
+
 reset network
 
 ~~~bash 
@@ -135,13 +155,7 @@ celestia-appd tendermint unsafe-reset-all --home $HOME/.celestia-app
 Download snapshot
 
 ~~~bash
-cd $HOME
-rm -rf ~/.celestia-app/data
-mkdir -p ~/.celestia-app/data
-SNAP_NAME=$(curl -s https://snaps.qubelabs.io/celestia/ | \
-egrep -o ">blockspacerace.*tar" | tr -d ">")
-wget -O - https://snaps.qubelabs.io/celestia/${SNAP_NAME} | tar xf - \
--C ~/.celestia-app/data/
+curl https://testnet-files.itrocket.net/celestia/snap_celestia.tar.lz4 | lz4 -dc - | tar -xf - -C $HOME/.celestia-app
 ~~~
     
 Create Service file
@@ -187,6 +201,14 @@ sudo ufw default deny incoming
 sudo ufw allow ssh/tcp 
 sudo ufw allow ${CELESTIA_PORT}656/tcp
 sudo ufw enable
+~~~
+
+Please open access to RPC and gRPC ports for your Full node and light node IP addresses.
+
+~~~bash
+IP_ADDRESS="<PUT_IP_ADDRESS>"
+sudo ufw allow from $IP_ADDRESS to any port ${CELESTIA_PORT}090
+sudo ufw allow from $IP_ADDRESS to any port ${CELESTIA_PORT}657
 ~~~
 
 ## Delete full node 
