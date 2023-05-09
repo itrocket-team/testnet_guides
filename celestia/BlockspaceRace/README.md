@@ -12,7 +12,7 @@ Explorer:
 - [Set up Bridge node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/BlockspaceRace/bridge.md)  
 - [Set up Light node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/BlockspaceRace/light.md)  
   
-### Validator node Manual installation
+### Set up Validator node (Manual installation)
 
 Update packages and Install dependencies
 
