@@ -9,9 +9,9 @@ Official documentation:
 Explorer:
 >-  https://testnet.itrocket.net/celestia/staking
 
-- [Set up Bridge node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/Blockspace%20Race/bridge.md)  
-- [Set up Light node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/Blockspace%20Race/light.md)  
-- [Set up Full node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/Blockspace%20Race/full.md)
+- [Set up Bridge node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/BlockspaceRace/bridge.md)  
+- [Set up Light node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/BlockspaceRace/light.md)  
+- [Set up Full node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/BlockspaceRace/full.md)
   
 ### Validator node Manual installation
 
@@ -255,7 +255,7 @@ celestia-appd tx staking create-validator \
   --evm-address $EVM_ADDRESS \
   --gas=auto \
   --gas-adjustment=1.5 \
-  --fees 3000utia
+  --fees 5000utia
 ```
   
 You can add `--website` `--security-contact` `--identity` `--details` flags in it needed
