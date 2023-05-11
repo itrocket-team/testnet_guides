@@ -166,7 +166,7 @@ EOF
 ```
 
 Download snapshot
-
+>You can find more services on our website: https://itrocket.net/services/testnet/celestia/
 ~~~bash
 curl https://testnet-files.itrocket.net/celestia/snap_celestia.tar.lz4 | lz4 -dc - | tar -xf - -C $HOME/.celestia-app
 ~~~
