@@ -267,7 +267,9 @@ You can add `--website` `--security-contact` `--identity` `--details` flags in i
 ```
 
 ### Monitoring
-If you want to have set up a monitoring and alert system use [our cosmos nodes monitoring guide with tenderduty](https://teletype.in/@itrocket/bdJAHvC_q8h)
+We'll also provide information on how to set up node monitoring, which is an important aspect of ensuring its smooth operation.  
+If you want to have set up a monitoring and alert system use [our cosmos nodes monitoring guide with tenderduty](https://teletype.in/@itrocket/bdJAHvC_q8h)  
+Stay tuned!
   
 ### Security
 To protect you keys please don`t share your privkey, mnemonic and follow a basic security rules
