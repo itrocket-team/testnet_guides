@@ -1,10 +1,9 @@
 # <img src="https://avatars.githubusercontent.com/u/54859940?s=200&v=4" style="border-radius: 50%; vertical-align: middle;" width="35" height="35" /> Celestia Node Setup Guide
-> for Celestia testnet — blockspacerace-0
-
+> For Celestia Testnet — blockspacerace-0
 
 Celestia is a new technology that powers, scales and secures Web3 applications. They introduced a new modular blockchain architecture that solves the core scaling problems of today’s blockchains. In this guide we will share our installation commands of a Celestia validator node with the help of <img src="https://itrocket.net//whiteLogoCrop.ico" style="border-radius: 50%; vertical-align: middle;" width="15" height="15" /> ITRocket Team  services. 
 
-If you want to see setup guides for bridge, full or light node they can be found here:
+Guides for bridge, full or light node can be found here:
 | Setup Full node           | [Link](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/BlockspaceRace/full.md) |
 |---------------------------|-------------------------------------|
 | Setup Bridge node         | [Link](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/BlockspaceRace/bridge.md) |
@@ -16,21 +15,15 @@ Before we get started make sure that your server (computer) meets the minimum re
 - **CPU**: 6 cores
 - **Disk**: 500 GB SSD Storage
 - **Bandwidth**: 1 Gbps for Download/1 Gbps for Upload
-
-
   
-## Set up Validator node (Manual installation)
-
-Update packages and Install dependencies
-
-~~~bash
+## Setup Validator node (Manual installation)
+1. **Prerequisites.** Ensure system packages are up-to-date and install dependencies:
+```bash
 sudo apt update && sudo apt upgrade -y
 sudo apt install curl git wget htop tmux build-essential jq make gcc -y
-~~~
-
-Type your wallet and moniker `<YOUR_WALLET_NAME>` `<YOUR_MONIKER>` without `<>`, save and import variables into system
+  ```
+2. **Setup Environment Variables.** Type your wallet and moniker `<YOUR_WALLET_NAME>` `<YOUR_MONIKER>` without `<>`, save and import variables into system
 >
-
 ```bash
 CELESTIA_PORT=11
 echo "export WALLET="<YOUR_WALLET_NAME>"" >> $HOME/.bash_profile
@@ -39,9 +32,7 @@ echo "export CHAIN_ID="blockspacerace-0"" >> $HOME/.bash_profile
 echo "export CELESTIA_PORT="${CELESTIA_PORT}"" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 ```
-
-Install go
-
+3. **Install go**
 ```bash
 cd ~
 ! [ -x "$(command -v go)" ] && {
@@ -58,8 +49,7 @@ source ~/.bash_profile
 go version
 ```
 
-Download and build binaries
-
+4. **Download and build binaries**
 ```bash
 cd $HOME 
 rm -rf celestia-app 
@@ -69,16 +59,14 @@ APP_VERSION=v0.13.2
 git checkout tags/$APP_VERSION -b $APP_VERSION 
 make install
 ```
-Setup the P2P networks
-
+5. **Setup the P2P networks**
 ```bash
 cd $HOME
 rm -rf networks
 git clone https://github.com/celestiaorg/networks.git
 ```
 
-Config and init app
-
+6. **Config and init app**
 ```bash
 celestia-appd config node tcp://localhost:${CELESTIA_PORT}657
 celestia-appd config keyring-backend os
@@ -86,14 +74,13 @@ celestia-appd config chain-id $CHAIN_ID
 celestia-appd init $MONIKER --chain-id $CHAIN_ID
 ```
 
-Download genesis
-
+7. **Download genesis**
 ```bash
 wget -O $HOME/.celestia-app/config/genesis.json https://testnet-files.itrocket.net/celestia/genesis.json
 wget -O $HOME/.celestia-app/config/addrbook.json https://testnet-files.itrocket.net/celestia/addrbook.json
 ```
 
-Set seeds and peers
+8. **Set seeds and peers**
 >You can find more peers here: https://itrocket.net/services/testnet/celestia/#peer
 ```bash
 SEEDS="fedea9723696360d429a23792225594779cc7cd7@celestia-testnet-seed.itrocket.net:11656"
@@ -101,8 +88,7 @@ PEERS="193acd7bf7049b425d7b95c24e02250fce8ad45c@celestia-testnet-peer.itrocket.n
 sed -i -e 's|^seeds *=.*|seeds = "'$SEEDS'"|; s|^persistent_peers *=.*|persistent_peers = "'$PEERS'"|' $HOME/.celestia-app/config/config.toml
 ```
 
-Set gustom ports in app.toml file
-
+9. **Set gustom ports in app.toml file**
 ```bash
 sed -i.bak -e "s%^address = \"tcp://0.0.0.0:1317\"%address = \"tcp://0.0.0.0:${CELESTIA_PORT}317\"%;
 s%^address = \":8080\"%address = \":${CELESTIA_PORT}080\"%;
@@ -112,8 +98,7 @@ s%^address = \"0.0.0.0:8545\"%address = \"0.0.0.0:${CELESTIA_PORT}545\"%;
 s%^ws-address = \"0.0.0.0:8546\"%ws-address = \"0.0.0.0:${CELESTIA_PORT}546\"%" $HOME/.celestia-app/config/app.toml
 ```
 
-Set gustom ports in config.toml file
-
+10. **Set gustom ports in config.toml file**
 ```bash
 sed -i.bak -e "s%^proxy_app = \"tcp://127.0.0.1:26658\"%proxy_app = \"tcp://127.0.0.1:${CELESTIA_PORT}658\"%; 
 s%^laddr = \"tcp://127.0.0.1:26657\"%laddr = \"tcp://0.0.0.0:${CELESTIA_PORT}657\"%; 
@@ -123,22 +108,20 @@ s%^external_address = \"\"%external_address = \"$(wget -qO- eth0.me):${CELESTIA_
 s%^prometheus_listen_addr = \":26660\"%prometheus_listen_addr = \":${CELESTIA_PORT}660\"%" $HOME/.celestia-app/config/config.toml
 ```
 
-Config pruning
-
+11. **Config pruning**
 ```bash
 sed -i -e "s/^pruning *=.*/pruning = \"nothing\"/" $HOME/.celestia-app/config/app.toml
 sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"100\"/" $HOME/.celestia-app/config/app.toml
 sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"10\"/" $HOME/.celestia-app/config/app.toml
 ```
 
-Configure EXTERNAL_ADDRESS
-
+12. **Configure EXTERNAL_ADDRESS**
 ~~~bash
 EXTERNAL_ADDRESS=$(wget -qO- eth0.me)
 sed -i.bak -e "s/^external-address = \"\"/external-address = \"$EXTERNAL_ADDRESS:26656\"/" $HOME/.celestia-app/config/config.toml
 ~~~
 
-Set minimum gas price, enable prometheus and disable indexing
+13. **Set minimum gas price, enable prometheus and disable indexing**
 
 ```bash
 sed -i -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"0.01utia\"/" $HOME/.celestia-app/config/app.toml
@@ -146,14 +129,13 @@ sed -i -e "s/prometheus = false/prometheus = true/" $HOME/.celestia-app/config/c
 sed -i -e "s/^indexer *=.*/indexer = \"null\"/" $HOME/.celestia-app/config/config.toml
 ```
 
-reset network
+14. **Reset network**
 
 ~~~bash 
 celestia-appd tendermint unsafe-reset-all --home $HOME/.celestia-app 
 ~~~
 
-Create Service file
-
+15. **Create Service file**
 ```bash
 sudo tee /etc/systemd/system/celestia-validatord.service > /dev/null <<EOF
 [Unit]
@@ -172,14 +154,13 @@ WantedBy=multi-user.target
 EOF
 ```
 
-Download snapshot
+16. **Download snapshot**
 >You can find more services on our website: https://itrocket.net/services/testnet/celestia/
 ~~~bash
 curl https://testnet-files.itrocket.net/celestia/snap_celestia.tar.lz4 | lz4 -dc - | tar -xf - -C $HOME/.celestia-app
 ~~~
 
-Enable and start service
-
+17. **Enable and start service**
 ```bash
 sudo systemctl daemon-reload
 sudo systemctl enable celestia-validatord
