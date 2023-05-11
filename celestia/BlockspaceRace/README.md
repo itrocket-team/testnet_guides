@@ -454,7 +454,8 @@ sudo rm -rf $HOME/.celestia-app
 sudo rm -fr $HOME/celestia-app
 sed -i "/CELESTIA_/d" $HOME/.bash_profile
 ```
-
 </details>
+
+<img src="https://itrocket.net/logo.svg" style="width: 100%; fill: white" />
 
 
