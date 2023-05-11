@@ -1,18 +1,25 @@
-<div>
-<h1 align="left" style="display: flex;"> Celestia Node Setup for Testnet — blockspacerace-0</h1>
-<img src="https://avatars.githubusercontent.com/u/54859940?s=200&v=4"  style="float: right;" width="100" height="100"></img>
-</div>
+# <img src="https://avatars.githubusercontent.com/u/54859940?s=200&v=4" style="border-radius: 50%; vertical-align: middle;" width="35" height="35" /> Celestia Node Setup Guide
+> for Celestia testnet — blockspacerace-0
 
-Official documentation: [Validator setup instructions](https://docs.celestia.org/nodes/blockspace-race/)
 
-Explorer:
->-  https://testnet.itrocket.net/celestia/staking  
+Celestia is a new technology that powers, scales and secures Web3 applications. They introduced a new modular blockchain architecture that solves the core scaling problems of today’s blockchains. In this guide we will share our installation commands of a Celestia validator node with the help of <img src="https://itrocket.net//whiteLogoCrop.ico" style="border-radius: 50%; vertical-align: middle;" width="15" height="15" /> ITRocket Team  services. 
 
-- [Setup Full node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/BlockspaceRace/full.md)
-- [Setup Bridge node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/BlockspaceRace/bridge.md)  
-- [Setup Light node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/BlockspaceRace/light.md)  
+If you want to see setup guides for bridge, full or light node they can be found here:
+| Setup Full node           | [Link](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/BlockspaceRace/full.md) |
+|---------------------------|-------------------------------------|
+| Setup Bridge node         | [Link](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/BlockspaceRace/bridge.md) |
+| Setup Light node          | [Link](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/BlockspaceRace/light.md) |  
+
+## Requirements
+Before we get started make sure that your server (computer) meets the minimum requirements:
+- **Memory**: 8 GB RAM
+- **CPU**: 6 cores
+- **Disk**: 500 GB SSD Storage
+- **Bandwidth**: 1 Gbps for Download/1 Gbps for Upload
+
+
   
-### Set up Validator node (Manual installation)
+## Set up Validator node (Manual installation)
 
 Update packages and Install dependencies
 
@@ -21,7 +28,7 @@ sudo apt update && sudo apt upgrade -y
 sudo apt install curl git wget htop tmux build-essential jq make gcc -y
 ~~~
 
-Replace your wallet and moniker `<YOUR_WALLET_NAME>` `<YOUR_MONIKER>` without `<>`, save and import variables into system
+Type your wallet and moniker `<YOUR_WALLET_NAME>` `<YOUR_MONIKER>` without `<>`, save and import variables into system
 >
 
 ```bash
@@ -33,7 +40,7 @@ echo "export CELESTIA_PORT="${CELESTIA_PORT}"" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 ```
 
-install go
+Install go
 
 ```bash
 cd ~
@@ -296,7 +303,7 @@ sudo ufw allow from $IP_ADDRESS to any port ${CELESTIA_PORT}090
 sudo ufw allow from $IP_ADDRESS to any port ${CELESTIA_PORT}657
 ~~~
 
-## Usefull commands
+## Useful commands ⭐
 ### Service commands
 check logs
 
