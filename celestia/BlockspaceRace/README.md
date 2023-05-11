@@ -6,7 +6,11 @@
 Official documentation: [Validator setup instructions](https://docs.celestia.org/nodes/blockspace-race/)
 
 Explorer:
->-  https://testnet.itrocket.net/celestia/staking
+>-  https://testnet.itrocket.net/celestia/staking  
+
+More useful services you can find on our website: 
+>- https://itrocket.net/services/testnet/celestia/  
+
 
 - [Set up Full node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/BlockspaceRace/full.md)
 - [Set up Bridge node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/BlockspaceRace/bridge.md)  
