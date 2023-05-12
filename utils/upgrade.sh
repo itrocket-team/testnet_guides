@@ -12,28 +12,24 @@ while getopts u:v:n:i:b:h:p: flag; do
   p) PORT_RPC=$OPTARG ;;
   *) echo "WARN: unknown parameter: ${OPTARG}"
   esac
- done
+done
 
 printLogo
+sleep 3
 
 echo -e "$GREEN NODE WILL BE UPDATED AT BLOCK: $HEIGHT TO VERSION: $VER ON \n"
 for((;;)); do
-	height=$(${BINARY} status |& jq -r .SyncInfo.latest_block_height)
-	if ((height>=$UPD_HEIGHT)); then
-
-		sudo systemctl stop ${BINARY}
-		cd $HOME
-		sudo systemctl restart ${BINARY}
-			sleep 1
-		done
-		height=$(${BINARY} status |& jq -r .SyncInfo.latest_block_height)
-		if ((height>$UPD_HEIGHT)); then
-			echo -e "$GREEN_COLOR NODE WAS SUCCESFULLY UPDATED TO $VERSION \n"
-		fi
-		${BINARY} version --long | head
-		break
-	else
-		echo -e "${GREEN_COLOR}$height ($(( BLOCK - height  )) blocks left)"
-	fi
-	sleep 5
+  elysd status
+  height=$(${BINARY} status |& jq -r .SyncInfo.latest_block_height)
+    if ((height==$UPD_HEIGHT)); then
+      mv /home/elys/elys/build/elysd /home/elys/go/bin/elysd
+    systemctl restart $BINARY
+      echo restart
+    break
+  else
+      echo $height
+  fi
+  sleep 5
 done
+sleep 600
+#tmux kill-session
