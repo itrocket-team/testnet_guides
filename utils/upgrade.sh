@@ -17,7 +17,7 @@ done
 printLogo
 sleep 3
 
-echo -e "$GREEN NODE WILL BE UPDATED AT BLOCK: $HEIGHT TO $VERSION ON \n"
+echo -e "$GREEN NODE WILL BE UPDATED AT BLOCK: $HEIGHT TO $VERSION{NC}"
 for((;;)); do
   elysd status
   height=$(${BINARY} status |& jq -r .SyncInfo.latest_block_height)
