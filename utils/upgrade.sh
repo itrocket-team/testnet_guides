@@ -2,12 +2,11 @@
 sudo -v
 source <(curl -s https://raw.githubusercontent.com/itrocket-team/testnet_guides/main/utils/common.sh)
 
-while getopts u:b:v:o:n:p:h:i:r: flag; do
+while getopts u:b:v:n:p:h:i:r: flag; do
   case "${flag}" in
   u) UPD_HEIGHT=$OPTARG ;;
   b) BINARY=$OPTARG ;;
   v) VERSION=$OPTARG ;;
-  o) OLD_BIN_PATH=$OPTARG ;;
   n) NEW_BIN_PATH=$OPTARG ;;
   p) PROJECT_NAME=$OPTARG ;;
   h) PROJECT_HOME=$OPTARG ;;
@@ -23,7 +22,7 @@ sleep 2
 for((;;)); do
   height=$(${BINARY} status |& jq -r .SyncInfo.latest_block_height)
     if ((height==$UPD_HEIGHT)); then
-      sudo mv $NEW_BIN_PATH $OLD_BIN_PATH
+      sudo mv $NEW_BIN_PATH $(which $BINARY)
       sudo systemctl restart $BINARY
       echo -e "$GREEN restarting...${NC}"
       
