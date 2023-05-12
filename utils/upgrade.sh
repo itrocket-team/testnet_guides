@@ -32,4 +32,5 @@ for((;;)); do
   fi
   sleep 4
 done
-journalctl -u $BINARY -f
+sleep 6000
+tmux kill-session
