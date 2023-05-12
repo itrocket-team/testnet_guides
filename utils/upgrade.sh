@@ -7,8 +7,8 @@ while getopts u:b:v:o:n:p:h:i:r: flag; do
   u) UPD_HEIGHT=$OPTARG ;;
   b) BINARY=$OPTARG ;;
   v) VERSION=$OPTARG ;;
-  o) OLD_BIN=$OPTARG ;;
-  n) NEW_BIN=$OPTARG ;;
+  o) OLD_BIN_PATH=$OPTARG ;;
+  n) NEW_BIN_PATH=$OPTARG ;;
   p) PROJECT_NAME=$OPTARG ;;
   h) PROJECT_HOME=$OPTARG ;;
   i) CHAIN_ID=$OPTARG ;;
@@ -23,7 +23,7 @@ sleep 2
 for((;;)); do
   height=$(${BINARY} status |& jq -r .SyncInfo.latest_block_height)
     if ((height==$UPD_HEIGHT)); then
-      sudo mv $NEW_BIN $OLD_BIN
+      sudo mv $NEW_BIN_PATH $OLD_BIN_PATH
       sudo systemctl restart $BINARY
       echo -e "$GREEN restarting...${NC}"
       
