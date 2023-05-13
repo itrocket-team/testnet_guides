@@ -243,7 +243,7 @@ celestia-appd tx staking create-validator \
 
 ### Monitoring 🔍
 We'll also provide information on how to set up node monitoring, which is an important aspect of ensuring its smooth operation.  
-If you want to have set up a monitoring and alert system use [our Celestia nodes monitoring guide with tenderduty]https://github.com/itrocket-team/testnet_guides/blob/main/celestia/BlockspaceRace/tenderduty.md)  
+If you want to have set up a monitoring and alert system use [our Celestia nodes monitoring guide with tenderduty](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/BlockspaceRace/tenderduty.md)  
 Stay tuned!
   
 ### Security 🔒
