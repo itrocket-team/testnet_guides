@@ -44,6 +44,9 @@ For simple monitoring without notifications, just change these in the config:
 - valoper_address: celestiavaloper1xxxxxxx... to valoper_address: <YOUR_VALOPER_ADDRESS>
 - `url: tcp://localhost:<VALIDATOR_NODE_RPC_PORT>` TO url: tcp://localhost:<YOUR_NODE_RPC_PORT>
 
+<img src="https://github.com/itrocket-team/patterns/blob/main/utils/celestia_1.jpg" alt="image" style="max-width: 100%;">
+<img src="https://github.com/itrocket-team/patterns/blob/main/utils/Celestia_2.jpg" alt="image" style="max-width: 100%;">
+
 ## Optional 
 If you want to add another node monitoring, you can dublicate this section on conf.yml file
 
