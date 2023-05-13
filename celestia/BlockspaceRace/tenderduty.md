@@ -169,7 +169,7 @@ sudo systemctl start tenderdutyd && sudo journalctl -fu tenderdutyd
 Default port on tenderduty is 8888
 
 ## Turn on firewall to protect your server and open the required port
->Default P2P port is 26656, prometheus - 26660 and tenderduty - 8888. if you have custom ports on your node or have another nodes in this server, check it and open custom ports!
+>Default tenderduty port - 8888. if you have custom ports on your node or have another nodes in this server, check it and open custom ports!
 
 ~~~
 sudo apt install ufw 
@@ -181,6 +181,8 @@ sudo ufw allow 8888/tcp
 sudo ufw enable
 ~~~
 
+<img src="https://github.com/itrocket-team/testnet_guides/blob/main/utils/basket/celestia_4.jpg" alt="image" style="max-width: 100%;">  
+  
 Configure Telegram alerting
 Open telegram and find @BotFather 
 - Create telegram bot via @BotFather, customize it and get bot API token [how_to](https://www.siteguarding.com/en/how-to-get-telegram-bot-api-token)
