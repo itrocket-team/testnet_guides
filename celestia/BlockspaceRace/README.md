@@ -8,6 +8,7 @@ Guides for bridge, full or light node can be found here:
 |---------------------------|-------------------------------------|
 | Setup Bridge node         | [Link](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/BlockspaceRace/bridge.md) |
 | Setup Light node          | [Link](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/BlockspaceRace/light.md) |  
+| Setup Monitoring          | [Link](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/BlockspaceRace/tenderduty.md) |  
 
 
 <details><summary> <h2>📋 Requirements </h2></summary>
