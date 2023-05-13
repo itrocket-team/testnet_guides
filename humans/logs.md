@@ -5,7 +5,7 @@
 
 # Restart your validator three times during Mission 2
 
-### Time of the first restart: Sat 2023-05-13 11:13:29 CEST
+### Restart 1 - 2023-05-13 11:13:29 CEST
 
 ~~~bash
 humans@Ubuntu-2004-focal-64-minimal:~$ sudo systemctl restart humansd && sudo journalctl -u humansd -f
@@ -27,7 +27,7 @@ May 13 12:31:14 Ubuntu-2004-focal-64-minimal humansd[1583718]: 12:31PM INF commi
 May 13 12:31:14 Ubuntu-2004-focal-64-minimal humansd[1583718]: 12:31PM INF indexed block exents height=29148 module=txindex server=node
 ~~~
 
-### Time of the second restart: Sat 2023-05-13 11:26:58 CEST
+### Restart 2 - 2023-05-13 11:26:58 CEST
 
 ~~~bash
 humans@Ubuntu-2004-focal-64-minimal:~$ sudo systemctl restart humansd && sudo journalctl -u humansd -f
@@ -51,7 +51,7 @@ May 13 12:41:39 Ubuntu-2004-focal-64-minimal humansd[2328436]: 12:41PM INF commi
 May 13 12:41:39 Ubuntu-2004-focal-64-minimal humansd[2328436]: 12:41PM INF indexed block exents height=29251 module=txindex server=node
 ~~~
 
-### Time of the third restart: Sat 2023-05-13 11:40:28 CEST
+### Restart 3 - 2023-05-13 11:40:28 CEST
 
 ~~~
 sudo systemctl restart humansd && sudo journalctl -u humansd -f
