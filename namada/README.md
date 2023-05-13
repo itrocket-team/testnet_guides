@@ -60,7 +60,7 @@ cd $HOME
 rm -rf namada
 git clone https://github.com/anoma/namada
 cd namada
-git checkout v0.15.1
+git checkout v0.15.2
 make build-release
 sudo cp -r $HOME/namada/target/release/namada* /usr/local/bin/
 ~~~
