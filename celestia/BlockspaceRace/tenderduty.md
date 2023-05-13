@@ -44,8 +44,8 @@ For simple monitoring without notifications, just change these in the config:
 - valoper_address: celestiavaloper1xxxxxxx... to valoper_address: <YOUR_VALOPER_ADDRESS>
 - `url: tcp://localhost:<VALIDATOR_NODE_RPC_PORT>` TO url: tcp://localhost:<YOUR_NODE_RPC_PORT>
 
-<img src="https://github.com/itrocket-team/patterns/blob/main/utils/celestia_1.jpg" alt="image" style="max-width: 100%;">
-<img src="https://github.com/itrocket-team/patterns/blob/main/utils/Celestia_2.jpg" alt="image" style="max-width: 100%;">
+<img src="https://github.com/itrocket-team/testnet_guides/blob/main/utils/basket/celestia_1.jpg" alt="image" style="max-width: 100%;">
+<img src="https://github.com/itrocket-team/testnet_guides/blob/main/utils/basket/celestia_1.jpg" alt="image" style="max-width: 100%;">
 
 ## Optional 
 If you want to add another node monitoring, you can dublicate this section on conf.yml file
@@ -162,6 +162,8 @@ sudo systemctl daemon-reload
 sudo systemctl enable tenderdutyd
 sudo systemctl start tenderdutyd && sudo journalctl -fu tenderdutyd
 ~~~
+
+<img src="https://github.com/itrocket-team/testnet_guides/blob/main/utils/basket/celestia_3.jpg" alt="image" style="max-width: 100%;">
 
 > You can open dashboard on web browser by using tenderduty port and your server IP http://<YOUR_SERVER_IP>:<PORT>
 Default port on tenderduty is 8888
