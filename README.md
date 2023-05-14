@@ -29,15 +29,9 @@
   <tr>
     <td align="center" width="96">
       <a href="#debabin-stack">
-        <img src="https://user-images.githubusercontent.com/79756157/205507528-262d9736-8442-4641-be99-da873335c727.jpg" width="45" height="45" alt="JavaScript" />
+        <img src="https://pbs.twimg.com/profile_images/1532538144817434625/UknhHKpu_200x200.jpg" width="45" height="45" alt="JavaScript" />
       </a>
-      <br>Axelar
-    </td>
-    <td align="center" width="96">
-      <a href="#debabin-stack" >
-        <img src="https://avatars.githubusercontent.com/u/89205890?s=200&v=4" width="45" height="45" alt="Figma" />
-      </a>
-      <br>Bundlr
+      <br>Andromeda
     </td>
     <td align="center" width="96">
       <a href="#debabin-stack" >
