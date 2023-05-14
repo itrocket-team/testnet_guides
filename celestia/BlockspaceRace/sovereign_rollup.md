@@ -1,7 +1,7 @@
 # <img src="https://avatars.githubusercontent.com/u/54859940?s=200&v=4" style="border-radius: 50%; vertical-align: middle;" width="35" height="35" /> Deploy your own Celestia sovereign rollup
 > For Celestia Testnet — blockspacerace-0
 
-In this tutorial, you will learn how to set up a simple Movie Rating App. The app will be connected to Celestia's data availability (DA) layer using Rollkit, optimized for the blockspacerace network. We will create a blockchain with a module that allows us to write and read data from the blockchain. This module will allow the end user to submit new ratings (Create), view a list of existing ratings on the blockchain (Read), update existing ratings (Update) and remove them (Delete). By following this tutorial you'll learn how to build a simple CRUD applications and build your own one in the future!
+In this tutorial, you'll learn how to create a Movie Rating App connected to Celestia's data availability (DA) layer using Rollkit. We'll build a blockchain with read and write capabilities, enabling users to submit new ratings, view existing ones, update them, and delete them. By following this tutorial, you'll learn to build a CRUD application and how to add custom fields like timestamp to your posts.
 
 
 <details><summary> <h2>📋 Requirements </h2></summary>
