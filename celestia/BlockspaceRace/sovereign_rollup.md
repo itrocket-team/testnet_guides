@@ -1,7 +1,7 @@
 # <img src="https://avatars.githubusercontent.com/u/54859940?s=200&v=4" style="border-radius: 50%; vertical-align: middle;" width="35" height="35" /> Deploy your own Celestia sovereign rollup
 > For Celestia Testnet — blockspacerace-0
 
-In this tutorial, you'll learn how to create a Movie Rating App connected to Celestia's data availability (DA) layer using Rollkit. We'll build a blockchain with read and write capabilities, enabling users to submit new ratings, view existing ones, update them, and delete them. By following this tutorial, you'll learn to build a CRUD application and how to add custom fields like timestamp to your posts.
+In this tutorial, you'll learn how to create a `Movie Rating App` connected to `Celestia's data availability (DA) layer` using `Rollkit`. We'll build a blockchain with read and write capabilities, enabling users to submit new ratings, view existing ones, update them, and delete them. By following this tutorial, you'll learn to build a `CRUD` application and how to add `custom fields` like `timestamp` to your posts.
 
 
 <details><summary> <h2>📋 Requirements </h2></summary>
@@ -238,6 +238,61 @@ txhash: 7EE50514698003609109D041DBA69718325D18F0213ED7E69202DCEEA84C6936
 ```
 ${PROJECT_NAME}d tx ${PROJECT_NAME} delete-post 0 --from $KEY_NAME --keyring-backend test
 ```
+
+_____
+
+At this point we've created a functional CRUD app. But what if we want to add our own fields? Let's find out how it can be done with example field `timestamp`
+
+25. Add custom field(s)
+to struct in `post.pb.go`
+```diff
+type Post struct {
+	Id        uint64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name      string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Rating    string `protobuf:"bytes,3,opt,name=rating,proto3" json:"rating,omitempty"`
+	Creator   string `protobuf:"bytes,4,opt,name=creator,proto3" json:"creator,omitempty"`
++       Timestamp string `protobuf:"bytes,5,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+}
+```
+
+to func in `msg_server_post.go`. Don't forget to do the same at `UpdatePost()` 
+```diff
+import (
+	"context"
+	"fmt"
++       "time"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
+	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+	"itrocket/x/itrocket/types"
+)
+
+func (k msgServer) CreatePost(goCtx context.Context, msg *types.MsgCreatePost) (*types.MsgCreatePostResponse, error) {
+	ctx := sdk.UnwrapSDKContext(goCtx)
++             timestamp := time.Now().Format(time.RFC3339)
+
+	var post = types.Post{
+		Creator: msg.Creator,
+		Name:    msg.Name,
+		Rating:  msg.Rating,
++               Timestamp: timestamp,
+	}
+
+	id := k.AppendPost(
+		ctx,
+		post,
+	)
+
+	return &types.MsgCreatePostResponse{
+		Id: id,
+	}, nil
+}
+```
+
+Now if you perform create and read operations you'll notice that post has timestamp field.
+
+![output](https://github.com/itrocket-team/testnet_guides/assets/79756157/6bfb4fd7-ea1c-41a6-8350-c7cd2e35bd44)
+
 
 ## Congratulations 🎉
 You have successfully built a sovereign rollup! 
