@@ -141,7 +141,12 @@ ${PROJECT_NAME}d collect-gentxs
 ~~~bash 
 ${PROJECT_NAME}d validate-genesis
 ~~~
-18. **Create Service file**
+18. **Config app**
+```
+${PROJECT_NAME}d config keyring-backend test
+${PROJECT_NAME}d config chain-id $CHAIN_ID
+```
+19. **Create Service file**
 ```bash
 sudo tee /etc/systemd/system/${PROJECT_NAME}d.service > /dev/null <<EOF
 [Unit]
@@ -159,18 +164,18 @@ LimitNOFILE=65535
 WantedBy=multi-user.target
 EOF
 ```
-19. **Enable and start service**
+20. **Enable and start service**
 ```bash
 sudo systemctl daemon-reload
 sudo systemctl enable ${PROJECT_NAME}d
 sudo systemctl restart ${PROJECT_NAME}d && sudo journalctl -u ${PROJECT_NAME}d -f
 ```
-20. **Create a your first movie rating post**
+21. **Create a your first movie rating post**
 >Create a movie rating post with name `avengers` and the rating of `5`. When using the `--from` flag to specify the account that will sign a transaction, it's important to ensure that the specified account is available for use. 
 ```
 ${PROJECT_NAME}d tx ${PROJECT_NAME} create-post avengers 5 --from $KEY_NAME --keyring-backend test
 ```
-21. **Read the movies posts**
+22. **Read the movies posts**
 We query the blockchain to see the changes. 
 ```
 ${PROJECT_NAME}d q ${PROJECT_NAME} list-post
@@ -186,7 +191,7 @@ pagination:
   next_key: null
   total: "0"
 ```
-22. **Update the movies list**
+23. **Update the movies list**
 
 Let's update the post and change it to the old soviet film `Mimino`. Let's give it a solid `9` 🤔
 ```
@@ -228,7 +233,7 @@ timestamp: ""
 tx: null
 txhash: 7EE50514698003609109D041DBA69718325D18F0213ED7E69202DCEEA84C6936
 ```
-23. **Delete the post**
+24. **Delete the post**
 > We use `delete-post` and value `0` as our post id is `0`
 ```
 ${PROJECT_NAME}d tx ${PROJECT_NAME} delete-post 0 --from $KEY_NAME --keyring-backend test
