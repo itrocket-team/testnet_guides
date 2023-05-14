@@ -176,6 +176,7 @@ sudo systemctl restart ${PROJECT_NAME}d && sudo journalctl -u ${PROJECT_NAME}d -
 ${PROJECT_NAME}d tx ${PROJECT_NAME} create-post avengers 5 --from $KEY_NAME --keyring-backend test
 ```
 22. **Read the movies posts**
+23. 
 We query the blockchain to see the changes. 
 ```
 ${PROJECT_NAME}d q ${PROJECT_NAME} list-post
