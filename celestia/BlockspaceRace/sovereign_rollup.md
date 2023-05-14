@@ -269,7 +269,7 @@ import (
 
 func (k msgServer) CreatePost(goCtx context.Context, msg *types.MsgCreatePost) (*types.MsgCreatePostResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
-+             timestamp := time.Now().Format(time.RFC3339)
++       timestamp := time.Now().Format(time.RFC3339)
 
 	var post = types.Post{
 		Creator: msg.Creator,
