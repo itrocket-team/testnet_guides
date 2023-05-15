@@ -9,7 +9,7 @@ Guides for bridge, full or light node can be found here:
 | Setup Bridge node         | [Link](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/BlockspaceRace/bridge.md) |
 | Setup Light node          | [Link](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/BlockspaceRace/light.md) |  
 | Setup Monitoring          | [Link](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/BlockspaceRace/tenderduty.md) |  
-| Setup Sovereign rollup          | [Link](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/BlockspaceRace/sovereign_rollup.md) |  
+| Setup Sovereign rollup          | [Link](https://github.com/itrocket-team/testnet_guides/tree/main/celestia/BlockspaceRace/sovereign_rollup) |  
 
 <details><summary> <h2>📋 Requirements </h2></summary>
 <p>  Before we get started make sure that your server (computer) meets the minimum requirements:</p>
