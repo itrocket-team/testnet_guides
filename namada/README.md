@@ -111,7 +111,6 @@ User=$USER
 WorkingDirectory=$HOME
 Environment=NAMADA_LOG=debug
 Environment=NAMADA_TM_STDOUT=true
-Environment="PATH=/bin:/usr/bin:/usr/local/bin"
 ExecStart=$(which namada) namada --base-dir BASE_DIR node ledger run
 Restart=on-failure
 RestartSec=3
