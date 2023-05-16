@@ -64,9 +64,8 @@ cd namada
 git checkout v0.15.3
 make build-release
 sudo cp -r $HOME/namada/target/release/namada* /usr/local/bin/
-cp -r ~/.namada/pre-genesis $BASE_DIR/
 mkdir -p $HOME/.local/share/namada
-mv ~/.namada/pre-genesis $BASE_DIR/
+cp -r ~/.namada/pre-genesis $BASE_DIR/
 ~~~
 
 Check namada version
