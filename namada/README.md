@@ -111,7 +111,7 @@ User=$USER
 WorkingDirectory=$HOME
 Environment=NAMADA_LOG=debug
 Environment=NAMADA_TM_STDOUT=true
-ExecStart=$(which namada) namada --base-dir BASE_DIR node ledger run
+ExecStart=$(which namada) namada --base-dir $BASE_DIR node ledger run
 Restart=on-failure
 RestartSec=3
 LimitNOFILE=65535
