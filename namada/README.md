@@ -35,6 +35,7 @@ echo "export WALLET="CHOOSE_A_WALLET_NAME"" >> $HOME/.bash_profile
 echo "export PUBLIC_IP=$(wget -qO- eth0.me)" >> $HOME/.bash_profile
 echo "export TM_HASH="v0.1.4-abciplus"" >> $HOME/.bash_profile
 echo "export CHAIN_ID="public-testnet-8.0.b92ef72b820"" >> $HOME/.bash_profile
+echo "export BASE_DIR="$HOME/.local/share/namada"" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 ~~~
 
@@ -63,6 +64,7 @@ cd namada
 git checkout v0.15.3
 make build-release
 sudo cp -r $HOME/namada/target/release/namada* /usr/local/bin/
+cp -r ~/.namada/pre-genesis $BASE_DIR/
 ~~~
 
 Check namada version
