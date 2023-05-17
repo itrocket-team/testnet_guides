@@ -30,7 +30,7 @@ while true; do
     fi
 done
 
-echo -e "YOUR NODE WILL BE UPDATED AT BLOCK $GREEN $UPD_HEIGHT ${NC} to VER: $GREEN v${VER} ${NC}"
+echo -e "YOUR NODE WILL BE UPDATED AT BLOCK $GREEN $UPD_HEIGHT ${NC} to $GREEN v${VER} ${NC}"
 printLine
 echo -e "Don't kill the session with $RED CTRL+C ${NC} before update completed"
 echo -e "if you want to disconnect the session use $GREEN CTRL+B D ${NC}"
