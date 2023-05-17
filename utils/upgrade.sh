@@ -18,8 +18,10 @@ done
 
 printLogo
 echo -e "YOUR NODE WILL BE UPDATED AT BLOCK $GREEN $UPD_HEIGHT ${NC}"
+printLine
 echo -e "Don't kill the session with $RED CTRL+C ${NC} before update completed"
 echo -e "if you want to disconnect the session use $GREEN CTRL+B D ${NC}"
+printLine
 sleep 2
 for((;;)); do
   height=$(${BINARY} status |& jq -r .SyncInfo.latest_block_height)
