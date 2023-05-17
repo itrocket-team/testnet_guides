@@ -22,7 +22,7 @@ while true; do
 
     if [[ -n $VER ]]; then
         # the binary is present, we proceed to auto-update
-        echo -e "New Bin version: $GREEN v${VER}"
+        echo -e "New Bin version: $GREEN v${VER} ${NC}"
         break
     else
         echo -e "$RED The binary file is missing. Please BUILD the binary first and then run this script again. ${NC}"
