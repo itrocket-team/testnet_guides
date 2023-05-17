@@ -17,7 +17,8 @@ while getopts u:b:v:n:p:h:i:r: flag; do
 done
 
 printLogo
-echo -e "$GREEN $PROJECT_NAME YOUR NODE WILL BE UPDATED AT BLOCK $UPD_HEIGHT${NC}"
+echo -e "$GREEN $PROJECT_NAME YOUR NODE WILL BE UPDATED AT BLOCK ${NC}$UPD_HEIGHT"
+echo -e "Don't kill the session with $RED CTRL+C ${NC} before update completed, if you want to disconnect the session use $GREEN CTRL+B D ${NC}"
 sleep 2
 for((;;)); do
   height=$(${BINARY} status |& jq -r .SyncInfo.latest_block_height)
