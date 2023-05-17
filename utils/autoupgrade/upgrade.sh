@@ -22,7 +22,7 @@ while true; do
 
     if [[ -n $VER ]]; then
         # the binary is present, we proceed to auto-update
-        echo "New Bin version is $VER"
+        echo "New Bin version is v${VER}"
         break
     else
         echo "$RED The binary file is missing. Please BUILD the binary first and then run this script again. ${NC}"
@@ -30,7 +30,7 @@ while true; do
     fi
 done
 
-echo -e "YOUR NODE WILL BE UPDATED AT BLOCK $GREEN $UPD_HEIGHT ${NC} to VER: $VER"
+echo -e "YOUR NODE WILL BE UPDATED AT BLOCK $GREEN $UPD_HEIGHT ${NC} to VER: $GREEN v${VER} ${NC}"
 printLine
 echo -e "Don't kill the session with $RED CTRL+C ${NC} before update completed"
 echo -e "if you want to disconnect the session use $GREEN CTRL+B D ${NC}"
