@@ -42,12 +42,12 @@ for((;;)); do
     if ((height==$UPD_HEIGHT)); then
       sudo mv $NEW_BIN_PATH $OLD_BIN_PATH
       sudo systemctl restart $BINARY
-      echo -e "$GREEN restarting...${NC}"      
+      echo -e "$GREEN Your node has been updated and restarted, the session will be terminated automatically after 1 hour${NC}"      
     break
   else
       echo $height
   fi
   sleep 4
 done
-sleep 6000
+sleep 3600
 tmux kill-session
