@@ -23,9 +23,10 @@ while true; do
     if [[ -n $VER ]]; then
         # the binary is present, we proceed to auto-update
         echo -e "New Bin version: $GREEN $VER ${NC}"
-        echo -e "Your node RPC port: $GREEN $PORT_RPC ${NC}"
-        echo -e "Builded binary path: $GREEN $NEW_BIN_PATH ${NC}"
-        echo -e "Node binary path: $GREEN $OLD_BIN_PATH ${NC}"
+        printLine
+        echo -e "RPC port: $GREEN $PORT_RPC ${NC}"
+        echo -e "NEW bin path: $GREEN $NEW_BIN_PATH ${NC}"
+        echo -e "OLD bin path: $GREEN $OLD_BIN_PATH ${NC}"
         break
     else
         echo -e "$RED The binary file is missing. Please BUILD the binary first and then run this script again. ${NC}"
