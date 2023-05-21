@@ -57,7 +57,7 @@ cd $HOME
 rm -rf sei-chain
 git clone https://github.com/sei-protocol/sei-chain.git
 cd sei-chain
-git checkout 2.0.40beta
+git checkout  2.0.47beta
 make install
 ~~~
 Config and init app
