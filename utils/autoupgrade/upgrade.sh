@@ -45,7 +45,9 @@ for((;;)); do
     if ((height==$UPD_HEIGHT)); then
       sudo mv $NEW_BIN_PATH $OLD_BIN_PATH
       sudo systemctl restart $BINARY
-      echo -e "$GREEN Your node has been updated and restarted, the session will be terminated automatically after 1 hour${NC}"      
+      printLine
+      echo -e "$GREEN Your node has been updated and restarted, the session will be terminated automatically after 1 hour${NC}"   
+      printLine
     break
   else
       echo $height
