@@ -23,7 +23,6 @@ while true; do
     if [[ -n $VER ]]; then
         # the binary is present, we proceed to auto-update
         echo -e "New Bin version: $GREEN $VER ${NC}"
-        printLine
         echo -e "RPC port: $GREEN $PORT_RPC ${NC}"
         echo -e "NEW bin path: $GREEN $NEW_BIN_PATH ${NC}"
         echo -e "OLD bin path: $GREEN $OLD_BIN_PATH ${NC}"
@@ -34,7 +33,7 @@ while true; do
     fi
 done
 
-echo -e "${NC} YOUR NODE WILL BE UPDATED AT HEIGHT $GREEN $UPD_HEIGHT ${NC} to $GREEN v${VER} ${NC}"
+echo -e "YOUR NODE WILL BE UPDATED AT HEIGHT $GREEN $UPD_HEIGHT ${NC} to $GREEN v${VER} ${NC}"
 printLine
 echo -e "Don't kill the session with $RED CTRL+C ${NC} before update completed"
 echo -e "if you want to disconnect the session use $GREEN CTRL+B D ${NC}"
