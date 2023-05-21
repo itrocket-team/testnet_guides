@@ -36,7 +36,8 @@ echo -e "if you want to disconnect the session use $GREEN CTRL+B D ${NC}"
 printLine
 sleep 2
 for((;;)); do
-  height=$(${BINARY} status |& jq -r .SyncInfo.latest_block_height)
+  #height=$(${BINARY} status |& jq -r .SyncInfo.latest_block_height)
+  height=$(curl -s localhost:$PORT_RPC/status | jq -r .result.sync_info.latest_block_height)
     if ((height==$UPD_HEIGHT)); then
       sudo mv $NEW_BIN_PATH $(which $BINARY)
       sudo systemctl restart $BINARY
