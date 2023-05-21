@@ -33,6 +33,7 @@ while true; do
     fi
 done
 
+printLine
 echo -e "YOUR NODE WILL BE UPDATED AT HEIGHT $GREEN $UPD_HEIGHT ${NC} to $GREEN v${VER} ${NC}"
 printLine
 echo -e "Don't kill the session with $RED CTRL+C ${NC} before update completed"
