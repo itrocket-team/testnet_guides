@@ -7,6 +7,7 @@ while getopts u:b:v:n:p:h:i:r: flag; do
   b) BINARY=$OPTARG ;;
   v) VERSION=$OPTARG ;;
   n) NEW_BIN_PATH=$OPTARG ;;
+  o) OLD_BIN_PATH=$OPTARG ;;
   p) PROJECT_NAME=$OPTARG ;;
   h) PROJECT_HOME=$OPTARG ;;
   i) CHAIN_ID=$OPTARG ;;
@@ -39,7 +40,7 @@ for((;;)); do
   #height=$(${BINARY} status |& jq -r .SyncInfo.latest_block_height)
   height=$(curl -s localhost:$PORT_RPC/status | jq -r .result.sync_info.latest_block_height)
     if ((height==$UPD_HEIGHT)); then
-      sudo mv $NEW_BIN_PATH $(which $BINARY)
+      sudo mv $NEW_BIN_PATH $OLD_BIN_PATH
       sudo systemctl restart $BINARY
       echo -e "$GREEN restarting...${NC}"      
     break
