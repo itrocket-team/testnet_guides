@@ -59,11 +59,11 @@ Download and build namada binaries
 ~~~bash
 cd $HOME
 rm -rf namada
-wget https://github.com/anoma/namada/releases/download/v0.15.3/namada-v0.15.3-Linux-x86_64.tar.gz
-tar -xvf namada-v0.15.3-Linux-x86_64.tar.gz
-mv ~/namada-v0.15.3-Linux-x86_64 ~/namada
+wget https://github.com/anoma/namada/releases/download/v0.15.4/namada-v0.15.4-Linux-x86_64.tar.gz
+tar -xvf namada-v0.15.4-Linux-x86_64.tar.gz
+mv ~/namada-v0.15.4-Linux-x86_64 ~/namada
 mv ~/namada/namada* ~/go/bin
-rm namada-v0.15.3-Linux-x86_64.tar.gz
+rm namada-v0.15.4-Linux-x86_64.tar.gz
 mkdir -p $HOME/.local/share/namada
 cp -r ~/.namada/pre-genesis $BASE_DIR/
 ~~~
