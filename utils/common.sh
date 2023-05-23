@@ -11,7 +11,7 @@ function printLine {
 }
 
 function printGreen {
-  echo -e "${CYAN}${1}${NC}"
+  echo -e "${GREEN}${1}${NC}"
 }
 
 function printRed {
