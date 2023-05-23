@@ -1,5 +1,12 @@
 #!/bin/bash
 
+while getopts g: flag; do
+  case "${flag}" in
+  g) GO_VER=$GO_VER ;;
+  *) echo "WARN: unknown parameter: ${OPTARG}"
+  esac
+done
+
 source <(curl -s https://raw.githubusercontent.com/itrocket-team/testnet_guides/main/utils/common.sh)
 
 printGreen "1. Updating packages..." && sleep 1
@@ -9,10 +16,9 @@ printGreen "2. installing dependencies..." && sleep 1
 sudo apt install curl git wget htop tmux build-essential jq make lz4 gcc unzip -y
 
 printGreen "3. Installing go..." && sleep 1
-# install go, if needed (сюда код установки go в таком же виде как в manual installation)
-cd ~
+cd $HOME
 ! [ -x "$(command -v go)" ] && {
-VER="undefined"
+VER="$GO_VER"
 wget "https://golang.org/dl/go$VER.linux-amd64.tar.gz"
 sudo rm -rf /usr/local/go
 sudo tar -C /usr/local -xzf "go$VER.linux-amd64.tar.gz"
