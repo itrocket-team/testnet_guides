@@ -22,3 +22,5 @@ echo "export PATH=$PATH:/usr/local/go/bin:~/go/bin" >> ~/.bash_profile
 source ~/.bash_profile
 }
 [ ! -d ~/go/bin ] && mkdir -p ~/go/bin
+
+echo $(go version) && sleep 1
