@@ -1,0 +1,24 @@
+#!/bin/bash
+
+source <(curl -s https://raw.githubusercontent.com/itrocket-team/testnet_guides/main/utils/common.sh)
+
+printGreen "1. Updating packages..." && sleep 1
+sudo apt update
+
+printGreen "2. installing dependencies..." && sleep 1
+sudo apt install curl git wget htop tmux build-essential jq make lz4 gcc unzip -y
+
+printGreen "3. Installing go..." && sleep 1
+# install go, if needed (сюда код установки go в таком же виде как в manual installation)
+cd ~
+! [ -x "$(command -v go)" ] && {
+VER="undefined"
+wget "https://golang.org/dl/go$VER.linux-amd64.tar.gz"
+sudo rm -rf /usr/local/go
+sudo tar -C /usr/local -xzf "go$VER.linux-amd64.tar.gz"
+rm "go$VER.linux-amd64.tar.gz"
+[ ! -f ~/.bash_profile ] && touch ~/.bash_profile
+echo "export PATH=$PATH:/usr/local/go/bin:~/go/bin" >> ~/.bash_profile
+source ~/.bash_profile
+}
+[ ! -d ~/go/bin ] && mkdir -p ~/go/bin
