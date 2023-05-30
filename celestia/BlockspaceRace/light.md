@@ -54,7 +54,7 @@ cd $HOME
 rm -rf celestia-node 
 git clone https://github.com/celestiaorg/celestia-node.git 
 cd celestia-node/ 
-git checkout tags/v0.10.0 
+git checkout tags/v0.10.2 
 make build 
 make install 
 make cel-key 
