@@ -169,7 +169,7 @@ sudo systemctl start tenderdutyd && sudo journalctl -fu tenderdutyd
 Default port on tenderduty is 8888
 
 ## Turn on firewall to protect your server and open the required port
->Default tenderduty port - 8888. if you have custom ports on your node or have another nodes in this server, check it and open custom ports!
+>Default tenderduty port - 8888, p2p port - 26656. if you have custom ports on your node or have another nodes in this server, check it and open custom ports!
 
 ~~~
 sudo apt install ufw 
