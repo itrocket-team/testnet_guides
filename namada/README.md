@@ -121,10 +121,9 @@ After=network-online.target
 [Service]
 User=$USER
 WorkingDirectory=$HOME
-Environment=NAMADA_LOG=info
 Environment=TM_LOG_LEVEL=p2p:none,pex:error
 Environment=NAMADA_CMT_STDOUT=true
-ExecStart=$(which namada) --base-dir $BASE_DIR node ledger run
+ExecStart=$(which namada) --base-dir $BASE_DIR ledger run
 Restart=on-failure
 RestartSec=3
 LimitNOFILE=65535
