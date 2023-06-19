@@ -26,6 +26,7 @@ while true; do
         echo -e "RPC port: $GREEN $PORT_RPC ${NC}"
         echo -e "NEW bin path: $GREEN $NEW_BIN_PATH ${NC}"
         echo -e "OLD bin path: $GREEN $OLD_BIN_PATH ${NC}"
+        echo -e "HOME path: $GREEN $PROJECT_HOME ${NC}"
         break
     else
         echo -e "$RED The binary file is missing. Please BUILD the binary first and then run this script again. ${NC}"
@@ -55,5 +56,6 @@ for((;;)); do
   fi
   sleep 4
 done
-sleep 3600
+echo $PROJECT_HOME
+sleep 60
 tmux kill-session
