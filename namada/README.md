@@ -34,7 +34,7 @@ echo "export ALIAS="CHOOSE_A_NAME_FOR_YOUR_VALIDATOR"" >> $HOME/.bash_profile
 echo "export WALLET="CHOOSE_A_WALLET_NAME"" >> $HOME/.bash_profile
 echo "export PUBLIC_IP=$(wget -qO- eth0.me)" >> $HOME/.bash_profile
 echo "export TM_HASH="v0.1.4-abciplus"" >> $HOME/.bash_profile
-echo "export CHAIN_ID="public-testnet-8.0.b92ef72b820"" >> $HOME/.bash_profile
+echo "export CHAIN_ID="public-testnet-9.0.5aa315d1a22"" >> $HOME/.bash_profile
 echo "export BASE_DIR="$HOME/.local/share/namada"" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 ~~~
@@ -54,16 +54,27 @@ go version
 fi
 ~~~
 
+Install CometBFT
+
+~~~
+cd $HOME
+git clone https://github.com/cometbft/cometbft.git
+cd cometbft
+git checkout v0.37.2
+make install
+cometbft version
+~~~
+
 Download and build namada binaries
 
 ~~~bash
 cd $HOME
 rm -rf namada
-wget https://github.com/anoma/namada/releases/download/v0.15.4/namada-v0.15.4-Linux-x86_64.tar.gz
-tar -xvf namada-v0.15.4-Linux-x86_64.tar.gz
-mv ~/namada-v0.15.4-Linux-x86_64 ~/namada
+wget https://github.com/anoma/namada/releases/download/v0.17.3/namada-v0.17.3-Linux-x86_64.tar.gz
+tar -xvf namada-v0.17.3-Linux-x86_64.tar.gz
+mv ~/namada-v0.17.3-Linux-x86_64 ~/namada
 mv ~/namada/namada* ~/go/bin
-rm namada-v0.15.4-Linux-x86_64.tar.gz
+rm namada-v0.17.3-Linux-x86_64.tar.gz
 mkdir -p $HOME/.local/share/namada
 cp -r ~/.namada/pre-genesis $BASE_DIR/
 ~~~
