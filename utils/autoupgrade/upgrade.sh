@@ -23,10 +23,10 @@ while true; do
     if [[ -n $VER ]]; then
         # the binary is present, we proceed to auto-update
         echo -e "New Bin version: $GREEN $VER ${NC}"
+        echo -e "HOME path: $GREEN $PROJECT_HOME ${NC}"
         echo -e "RPC port: $GREEN $PORT_RPC ${NC}"
         echo -e "NEW bin path: $GREEN $NEW_BIN_PATH ${NC}"
         echo -e "OLD bin path: $GREEN $OLD_BIN_PATH ${NC}"
-        echo -e "HOME path: $GREEN $PROJECT_HOME ${NC}"
         break
     else
         echo -e "$RED The binary file is missing. Please BUILD the binary first and then run this script again. ${NC}"
@@ -48,7 +48,7 @@ for((;;)); do
       sudo mv $NEW_BIN_PATH $OLD_BIN_PATH
       sudo systemctl restart $BINARY
       printLine
-      echo -e "$GREEN Your node has been updated and restarted, the session will be terminated automatically after 1 hour${NC}"   
+      echo -e "$GREEN Your node has been updated and restarted, the session will be terminated automatically after 15 min${NC}"   
       printLine
     break
   else
@@ -56,6 +56,6 @@ for((;;)); do
   fi
   sleep 4
 done
-echo $PROJECT_HOME
-sleep 60
+echo "$(date): Your node successfully upgraded to v${VER}" >> $PROJECT_HOME/upgrade.log
+sleep 900
 tmux kill-session
