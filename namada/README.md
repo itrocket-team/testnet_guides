@@ -61,7 +61,8 @@ cd $HOME
 git clone https://github.com/cometbft/cometbft.git
 cd cometbft
 git checkout v0.37.2
-make install
+make build
+sudo cp $HOME/cometbft/build/cometbft /usr/local/bin/
 cometbft version
 ~~~
 
@@ -120,10 +121,9 @@ After=network-online.target
 
 [Service]
 User=$USER
-WorkingDirectory=$HOME
-Environment=TM_LOG_LEVEL=p2p:none,pex:error
 Environment=NAMADA_CMT_STDOUT=true
-ExecStart=$(which namada) --base-dir $BASE_DIR ledger run
+Environment=TM_LOG_LEVEL=p2p:none,pex:error
+ExecStart=$(which namada) ledger run
 Restart=on-failure
 RestartSec=3
 LimitNOFILE=65535
