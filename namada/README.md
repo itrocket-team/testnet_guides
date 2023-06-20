@@ -23,7 +23,13 @@ Update packages and Install dependencies `select 1`
 ~~~bash
 sudo apt update && sudo apt upgrade -y
 sudo apt-get install -y make git-core libssl-dev pkg-config libclang-12-dev build-essential protobuf-compiler
+~~~
+
+Install Rust
+~~~
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+~~~
+~~~
 source "$HOME/.cargo/env"
 ~~~
 
@@ -85,24 +91,6 @@ Check namada version
 ~~~bash
 namada --version
 ~~~
-
-Download and build tendermint
-~~~bash
-cd $HOME
-git clone https://github.com/heliaxdev/tendermint
-cd tendermint
-git checkout $TM_HASH
-make build
-sudo cp $HOME/tendermint/build/tendermint  /usr/local/bin/
-~~~
-
-Check tendermint version
-~~~bash
-tendermint version
-#0.1.4-abciplus
-~~~
-
-
 
 Run node
 
