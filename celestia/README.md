@@ -69,9 +69,7 @@ git clone https://github.com/celestiaorg/celestia-app.git
 cd celestia-app/
 APP_VERSION=v1.0.0-rc7
 git checkout tags/$APP_VERSION -b $APP_VERSION
-make build
 make install
-make cel-key
 ```
 Setup the P2P networks
 
@@ -128,6 +126,7 @@ s%^prometheus_listen_addr = \":26660\"%prometheus_listen_addr = \":${CELESTIA_PO
 Configure validator mode
 ```bash
 sed -i.bak -e "s/^mode *=.*/mode = \"validator\"/" $HOME/.celestia-app/config/config.toml
+sed -i -e "s|^target_height_duration *=.*|timeout_commit = \"11s\"|" $HOME/.celestia-app/config/config.toml
 ```
 
 Config pruning
