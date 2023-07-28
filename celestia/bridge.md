@@ -43,12 +43,12 @@ Download and build binaries
 
 ```bash
 cd $HOME
-rm -rf $HOME/celestia-node
+rm -rf celestia-node
 git clone https://github.com/celestiaorg/celestia-node.git
 cd celestia-node/
-APP_VERSION=v0.6.1
-git checkout tags/$APP_VERSION -b $APP_VERSION
-make install
+git checkout tags/v0.11.0-rc8
+make build
+sudo make install
 make cel-key
 ```
 
