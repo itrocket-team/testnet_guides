@@ -78,11 +78,11 @@ Download and build namada binaries
 cd $HOME
 rm -rf $HOME/.masp-params
 rm -rf namada
-wget https://github.com/anoma/namada/releases/download/v0.17.5/namada-v0.17.5-Linux-x86_64.tar.gz
-tar -xvf namada-v0.17.5-Linux-x86_64.tar.gz
-mv ~/namada-v0.17.5-Linux-x86_64 ~/namada
+wget https://github.com/anoma/namada/releases/download/v0.20.1/namada-v0.20.1-Linux-x86_64.tar.gz
+tar -xvf namada-v0.20.1-Linux-x86_64.tar.gz
+mv ~/namada-v0.20.1-Linux-x86_64 ~/namada
 mv ~/namada/namada* ~/go/bin
-rm namada-v0.17.5-Linux-x86_64.tar.gz
+rm namada-v0.20.1-Linux-x86_64.tar.gz
 mkdir -p $HOME/.local/share/namada
 cp -r ~/.namada/pre-genesis $BASE_DIR/
 ~~~
