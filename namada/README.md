@@ -158,6 +158,12 @@ namadac transfer \
     --signer $ALIAS
 ~~~
 
+Check bonds 
+
+~~~bash
+namada client bonds --owner $ALIAS
+~~~
+
 ## Create validator
 
 before creating a validator, you need to check the balance and make sure that the node is synched
