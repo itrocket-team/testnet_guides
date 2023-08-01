@@ -1,5 +1,5 @@
 <div>
-<h1 align="left" style="display: flex;"> Anoma Namada Setup for Testnet — public-testnet-11.3aaeae0d49ea</h1>
+<h1 align="left" style="display: flex;"> Anoma Namada Setup for Testnet — public-testnet-11.cc649ddd49b0</h1>
 <img src="https://avatars.githubusercontent.com/u/87261362?s=200&v=4"  style="float: right;" width="100" height="100"></img>
 </div>
 
@@ -40,7 +40,7 @@ echo "export ALIAS="CHOOSE_A_NAME_FOR_YOUR_VALIDATOR"" >> $HOME/.bash_profile
 echo "export WALLET="CHOOSE_A_WALLET_NAME"" >> $HOME/.bash_profile
 echo "export PUBLIC_IP=$(wget -qO- eth0.me)" >> $HOME/.bash_profile
 echo "export TM_HASH="v0.1.4-abciplus"" >> $HOME/.bash_profile
-echo "export CHAIN_ID="public-testnet-11.3aaeae0d49ea"" >> $HOME/.bash_profile
+echo "export CHAIN_ID="public-testnet-11.cc649ddd49b0"" >> $HOME/.bash_profile
 echo "export BASE_DIR="$HOME/.local/share/namada"" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 ~~~
