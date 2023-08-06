@@ -24,6 +24,10 @@ Update packages and Install dependencies `select 1`
 sudo apt update && sudo apt upgrade -y
 sudo apt-get install -y make git-core libssl-dev pkg-config libclang-12-dev build-essential protobuf-compiler
 ~~~
+~~~bash
+wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.0g-2ubuntu4_amd64.deb
+sudo dpkg -i libssl1.1_1.1.0g-2ubuntu4_amd64.deb
+~~~
 
 Install Rust
 ~~~
