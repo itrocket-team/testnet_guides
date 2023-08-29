@@ -57,7 +57,7 @@ cd $HOME
 rm -rf nym
 git clone https://github.com/nymtech/nym.git
 cd nym
-git checkout release/v1.2.8
+git checkout release/v1.1.29-snickers
 cargo build
 ~~~
 
