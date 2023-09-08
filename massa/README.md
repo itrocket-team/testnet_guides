@@ -26,7 +26,7 @@ sudo apt install curl git wget htop tmux build-essential jq make lz4 gcc -y
 ~~~bash
 sudo systemctl stop massad
 cp $HOME/massa/massa-node/config/node_privkey.key $HOME/node_privkey.key_backup
-cp $HOME/massa/massa-client/wallet.dat $HOME/wallet.dat_backup
+cp -r $HOME/massa/massa-client/wallets $HOME/wallets_bakup
 ~~~
 
 
@@ -44,7 +44,7 @@ rm massa_TEST.26.1_release_linux.tar.gz
 
 ~~~bash
 cp $HOME/node_privkey.key_backup $HOME/massa/massa-node/config/node_privkey.key
-cp $HOME/wallet.dat_backup $HOME/massa/massa-client/wallet.dat
+cp -r $HOME/wallets_backup $HOME/massa/massa-client/wallets
 ~~~
 
 Config  app
