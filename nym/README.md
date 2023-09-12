@@ -57,7 +57,7 @@ cd $HOME
 rm -rf nym
 git clone https://github.com/nymtech/nym.git
 cd nym
-git checkout release/v1.1.30-twix
+git checkout release/v1.1.31-kitkat
 cargo build
 ~~~
 
