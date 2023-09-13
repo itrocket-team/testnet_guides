@@ -96,9 +96,7 @@ User=$USER
 ExecStart=$(which celestia) bridge start \
 --rpc.port 11058 \
 --gateway.port 11059 \
---metrics.tls=false \
---metrics \
---metrics.endpoint otel.celestia.tools:4318 
+--metrics.tls=false
 Restart=on-failure
 RestartSec=10
 LimitNOFILE=65535
