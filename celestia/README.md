@@ -222,7 +222,7 @@ $request <YOUR_WALLET_ADDRESS>
 Save wallets and validator addresses
 >Replace your ERC-20 address `PUT_YOUR_ERC20_ADDRESS>` without `<>`
 
-```bash
+~~~bash
 ERC20_ADDRESS="<PUT_YOUR_ERC20_ADDRESS>"
 CELESTIA_WALLET_ADDRESS=$(celestia-appd keys show $CELESTIA_WALLET -a)
 CELESTIA_VALOPER_ADDRESS=$(celestia-appd keys show $CELESTIA_WALLET --bech val -a)
