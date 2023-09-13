@@ -90,7 +90,7 @@ celestia-appd init $CELESTIA_MONIKER --chain-id $CELESTIA_CHAIN_ID
 Download genesis
 
 ```bash
-cp $HOME/networks/mocha/genesis.json $HOME/.celestia-app/config
+cp $HOME/networks/mocha-4/genesis.json $HOME/.celestia-app/config
 ```
 
 Set seeds and peers
