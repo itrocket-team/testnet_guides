@@ -140,7 +140,7 @@ sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"10\"/" $HOME/.celestia-
 Set minimum gas price, enable prometheus and disable indexing
 
 ```bash
-sed -i -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"0utia\"/" $HOME/.celestia-app/config/app.toml
+sed -i -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"0.005utia\"/" $HOME/.celestia-app/config/app.toml
 sed -i -e "s/prometheus = false/prometheus = true/" $HOME/.celestia-app/config/config.toml
 sed -i -e "s/^indexer *=.*/indexer = \"null\"/" $HOME/.celestia-app/config/config.toml
 ```
