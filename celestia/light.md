@@ -1,5 +1,5 @@
 <div>
-<h1 align="left" style="display: flex;"> Celestia Light node Setup for Testnet</h1>
+<h1 align="left" style="display: flex;"> Celestia Light node Setup for Testnet - mocha-4</h1>
 <img src="https://avatars.githubusercontent.com/u/54859940?s=200&v=4"  style="float: right;" width="100" height="100"></img>
 </div>
 
@@ -13,7 +13,7 @@ Explorer:
 ## Hardware Requirements
  - Memory: 2 GB RAM
  - CPU: Single Core
- - Disk: 5 GB SSD Storage
+ - Disk: 25 GB SSD Storage (Recommended 50 GB SSD Storage)
  - Bandwidth: 56 Kbps for Download/56 Kbps for Upload
 
 ## Set up a Celestia light node 
@@ -77,11 +77,10 @@ Initialize the light node
 >Please enable RPC and gRPC on your validator node, and allow these ports in firewall rules
 
 ```bash
-celestia light init --core.ip <VALIDATOR_NODE_IP> --core.grpc.port <VALIDATOR_NODE_GRPC_PORT> --core.rpc.port <VALIDATOR_NODE_RPC_PORT> --keyring.accname $CEL_WALLET
+celestia light init --core.ip <RPC_NODE_IP> --core.grpc.port <RPC_NODE_GRPC_PORT> --core.rpc.port <RPC_NODE_RPC_PORT> --keyring.accname $CEL_WALLET
 ```
 
 Create Service file
-Replace validator node ip address in `<PUT_VALIDATOR_NODE_IP>` without `<>`
 
 ```bash
 sudo tee /etc/systemd/system/celestia-light.service > /dev/null <<EOF
