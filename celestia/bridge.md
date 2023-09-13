@@ -1,5 +1,5 @@
 <div>
-<h1 align="left" style="display: flex;"> Celestia Bridge node Setup for Testnet — mocha</h1>
+<h1 align="left" style="display: flex;"> Celestia Bridge node Setup for Testnet</h1>
 <img src="https://avatars.githubusercontent.com/u/54859940?s=200&v=4"  style="float: right;" width="100" height="100"></img>
 </div>
 
@@ -56,24 +56,18 @@ make cel-key
 
 ### Optional: run the bridge node with a custom key
 
-Save your cel-key wallet name and import variables into system
-~~~bash
-echo "export CEL_WALLET="wallet_1"" >> $HOME/.bash_profile
-source $HOME/.bash_profile
-~~~
-
 You can create your key for your node by following the cel-key instructions `you can use your orchestrator address`
 
 ~~~bash
 cd $HOME/celestia-node
-./cel-key add $CEL_WALLET --keyring-backend test --node.type bridge
+./cel-key add bridge_wallet --keyring-backend test --node.type bridge
 ~~~
 
 (Optional) Restore an existing cel_key
 
 ~~~bash
 cd $HOME/celestia-node
-./cel-key add $CEL_WALLET --keyring-backend test --node.type bridge --recover
+./cel-key add bridge_wallet --keyring-backend test --node.type bridge --recover
 ~~~
 
 Once you start the Bridge Node, a wallet key will be generated for you. You will need to fund that address with Testnet tokens to pay for PayForData transactions. You can find the address by running the following command:
@@ -86,7 +80,7 @@ Initialize the bridge node
 
 Please enable RPC and gRPC on your validator node, and allow these ports in firewall rules
 ```bash
-celestia bridge init --core.ip <VALIDATOR_NODE_IP> --core.grpc.port <VALIDATOR_NODE_GRPC_PORT> --core.rpc.port <VALIDATOR_NODE_RPC_PORT> --keyring.accname $CEL_WALLET
+celestia bridge init --core.ip http://localhost --core.grpc.port <VALIDATOR_NODE_GRPX_PORT> --core.rpc.port <VALIDATOR_NODE_RPC_PORT> --keyring.accname bridge_wallet
 ```
 
 Create Service file
@@ -99,9 +93,14 @@ After=network-online.target
 
 [Service]
 User=$USER
-ExecStart=$(which celestia) bridge start
+ExecStart=$(which celestia) bridge start \
+--rpc.port 11058 \
+--gateway.port 11059 \
+--metrics.tls=false \
+--metrics \
+--metrics.endpoint otel.celestia.tools:4318 
 Restart=on-failure
-RestartSec=3
+RestartSec=10
 LimitNOFILE=65535
 
 [Install]
