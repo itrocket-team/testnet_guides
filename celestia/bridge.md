@@ -11,10 +11,10 @@ Explorer:
 
 
 ## Hardware Requirements
- - Memory: 8 GB RAM
- - CPU: Quad-Core
- - Disk: 250 GB SSD Storage
- - Bandwidth: 1 Gbps for Download/100 Mbps for Upload
+ - Memory: 32 GB RAM
+ - CPU: 6 cores
+ - Disk: 5 TB SSD Storage (Recommended 10 TB SSD Storage)
+ - Bandwidth: 1 Gbps for Download/1 Gbps for Upload
 
 ## Set up a Celestia bridge node 
 ### Manual installation
