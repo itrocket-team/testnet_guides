@@ -1,5 +1,5 @@
 <div>
-<h1 align="left" style="display: flex;"> Celestia Bridge node Setup for Testnet</h1>
+<h1 align="left" style="display: flex;"> Celestia Bridge node Setup for Testnet - mocha-4</h1>
 <img src="https://avatars.githubusercontent.com/u/54859940?s=200&v=4"  style="float: right;" width="100" height="100"></img>
 </div>
 
@@ -80,7 +80,7 @@ Initialize the bridge node
 
 Please enable RPC and gRPC on your validator node, and allow these ports in firewall rules
 ```bash
-celestia bridge init --core.ip http://localhost --core.grpc.port <VALIDATOR_NODE_GRPX_PORT> --core.rpc.port <VALIDATOR_NODE_RPC_PORT> --keyring.accname bridge_wallet
+celestia bridge init --core.ip <RPC_NODE_IP_ADDRESS> --core.grpc.port <RPC_NODE_GRPC_PORT> --core.rpc.port <RPC_NODE_RPC_PORT> --keyring.accname bridge_wallet
 ```
 
 Create Service file
