@@ -1,5 +1,5 @@
 <div>
-<h1 align="left" style="display: flex;"> Celestia Node Setup for Testnet — mocha-3</h1>
+<h1 align="left" style="display: flex;"> Celestia Node Setup for Testnet — mocha-4</h1>
 <img src="https://avatars.githubusercontent.com/u/54859940?s=200&v=4"  style="float: right;" width="100" height="100"></img>
 </div>
 
@@ -41,7 +41,7 @@ Replace your wallet and moniker `<YOUR_WALLET_NAME>` `<YOUR_MONIKER>` without `<
 CELESTIA_PORT=11
 echo "export CELESTIA_WALLET="<YOUR_WALLET_NAME>"" >> $HOME/.bash_profile
 echo "export CELESTIA_MONIKER="<YOUR_MONIKER>"" >> $HOME/.bash_profile
-echo "export CELESTIA_CHAIN_ID="mocha-3"" >> $HOME/.bash_profile
+echo "export CELESTIA_CHAIN_ID="mocha-4"" >> $HOME/.bash_profile
 echo "export CELESTIA_PORT="${CELESTIA_PORT}"" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 ```
@@ -50,7 +50,7 @@ install go
 
 ```bash
 cd $HOME
-VER="1.19.3"
+VER="1.21.1"
 wget "https://golang.org/dl/go$VER.linux-amd64.tar.gz"
 sudo tar -C /usr/local -xzf "go$VER.linux-amd64.tar.gz"
 rm -rf  "go$VER.linux-amd64.tar.gz"
@@ -67,7 +67,7 @@ rm -rf celestia-app
 rm $HOME/.celestia-app/config/genesis.json
 git clone https://github.com/celestiaorg/celestia-app.git
 cd celestia-app/
-APP_VERSION=v1.0.0-rc10
+APP_VERSION=v1.0.0-rc14
 git checkout tags/$APP_VERSION -b $APP_VERSION
 make install
 ```
