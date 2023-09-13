@@ -180,7 +180,7 @@ sudo systemctl restart celestia-appd && sudo journalctl -u celestia-appd -f
 ```
 
 ## Create wallet
-### 2 new flags should be added in the new Mocha testnet 
+### 2 new address should be added 
 >`--evm-address` This flag should contain a 0x EVM address.  
 >`--orchestrator-address` This flag should contain a newly-generated celestia1 Celestia address  
  
@@ -206,7 +206,7 @@ celestia-appd keys add $CELESTIA_WALLET
 celestia-appd keys add ${CELESTIA_WALLET}_1
 ~~~
 
-(optional) Recover wallet from mamaki, use the following command
+(optional) Recover wallet, use the following command
 
 ```bash
 celestia-appd keys add $CELESTIA_WALLET --recover
@@ -232,7 +232,7 @@ echo "export CELESTIA_ORCHESTRATOR_ADDRESS="${ORCHESTRATOR_ADDRESS} >> $HOME/.ba
 echo "export CELESTIA_VALOPER_ADDRESS="${CELESTIA_VALOPER_ADDRESS} >> $HOME/.bash_profile
 echo "export EVM_ADDRESS=""$ERC20_ADDRESS" >> $HOME/.bash_profile
 source $HOME/.bash_profile
-```
+~~~
 
 ## Create validator
 
@@ -263,14 +263,12 @@ celestia-appd tx staking create-validator \
   --pubkey  $(celestia-appd tendermint show-validator) \
   --moniker $CELESTIA_MONIKER \
   --chain-id $CELESTIA_CHAIN_ID \
-  --evm-address $EVM_ADDRESS \
-  --orchestrator-address $CELESTIA_ORCHESTRATOR_ADDRESS \
   --gas=auto \
   --gas-adjustment=1.5 \
   --fees=1000utia \
   -y
 ```
-  
+
 You can add `--website` `--security-contact` `--identity` `--details` flags in it needed
 
 ```bash
@@ -279,6 +277,18 @@ You can add `--website` `--security-contact` `--identity` `--details` flags in i
 --identity <KEYBASE_IDENTITY> \
 --details <YOUR_VALIDATOR_DETAILS>
 ```
+
+Register your validator's EVM address
+
+~~~bash
+celestia-appd tx qgb register \
+    "${CELESTIA_VALOPER_ADDRESS}" \
+    "${EVM_ADDRESS}" \
+    --from $CELESTIA_WALLET_ADDRESS \
+    --fees 30000utia \
+    -b block \
+    -y &
+~~~
 
 ### Monitoring
 If you want to have set up a monitoring and alert system use [our cosmos nodes monitoring guide with tenderduty](https://teletype.in/@itrocket/bdJAHvC_q8h)
