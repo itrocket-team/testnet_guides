@@ -21,9 +21,9 @@ Explorer:
 ## Set up a Celestia Validator node
 ### Hardware Requirements
  - Memory: 8 GB RAM
- - CPU: Quad-Core
- - Disk: 250 GB SSD Storage
- - Bandwidth: 1 Gbps for Download/100 Mbps for Upload
+ - CPU: 6 cores
+ - Disk: 500 GB SSD Storage
+ - Bandwidth: 1 Gbps for Download/1 Gbps for Upload
   
 ### Manual installation
 
