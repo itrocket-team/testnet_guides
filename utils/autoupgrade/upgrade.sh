@@ -52,7 +52,7 @@ for((;;)); do
       printLine
     break
   else
-      echo $height
+      echo node height $height
       echo upgrade height $UPD_HEIGHT
   fi
   sleep 4
