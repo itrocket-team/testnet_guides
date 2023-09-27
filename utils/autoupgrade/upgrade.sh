@@ -53,6 +53,7 @@ for((;;)); do
     break
   else
       echo $height
+      echo upgrade height $UPD_HEIGHT
   fi
   sleep 4
 done
