@@ -1,6 +1,11 @@
 #!/bin/bash
 source <(curl -s https://raw.githubusercontent.com/itrocket-team/testnet_guides/main/utils/common.sh)
 
+# Colors
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
+
 while getopts u:b:v:n:o:p:h:i:r: flag; do
   case "${flag}" in
   u) UPD_HEIGHT=$OPTARG ;;
@@ -52,8 +57,8 @@ for((;;)); do
       printLine
     break
   else
-      echo node height $height
-      echo upgrade height $UPD_HEIGHT
+      Node Height: ${GREEN}$height${NC}
+      Upgr Height: ${BLUE}$UPD_HEIGHT${NC}
   fi
   sleep 4
 done
