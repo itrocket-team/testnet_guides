@@ -2,10 +2,10 @@
 source <(curl -s https://raw.githubusercontent.com/itrocket-team/testnet_guides/main/utils/common.sh)
 
 # Colors
-GREEN='\033[0;32m'
-BLUE='\033[0;34m'
-RED='\033[0;31m'
-NC='\033[0m' # No Color
+# GREEN='\033[0;32m'
+# BLUE='\033[0;34m'
+# RED='\033[0;31m'
+# NC='\033[0m' # No Color
 
 while getopts u:b:v:n:o:p:h:i:r: flag; do
   case "${flag}" in
