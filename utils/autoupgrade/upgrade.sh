@@ -72,11 +72,14 @@ for((;;)); do
   remaining_blocks=$((UPD_HEIGHT - height))
   remaining_time=$((remaining_blocks * avg_time))
 
+  # Generate readable time string directly
+  readable_remaining_time=$(printf "%dd %dh %dm %ds" $((remaining_time/86400)) $((remaining_time%86400/3600)) $((remaining_time%3600/60)) $((remaining_time%60)))
+
   echo -e Node Height: ${GREEN}$height${NC}
   echo -e Upgr Height: ${BLUE}$UPD_HEIGHT${NC}
   echo -e "Average Time per Block: ${GREEN}${avg_time}s${NC}"
   echo -e "Remaining Blocks: ${BLUE}${remaining_blocks}${NC}"
-  echo -e "Estimated Remaining Time: ${BLUE}${remaining_time}s${NC}"
+  echo -e "Estimated Remaining Time: ${BLUE}${readable_remaining_time}s${NC}"
 
   if ((height==$UPD_HEIGHT)); then
     sudo mv $NEW_BIN_PATH $OLD_BIN_PATH
