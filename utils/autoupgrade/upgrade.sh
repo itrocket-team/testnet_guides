@@ -71,7 +71,7 @@ for((;;)); do
 
   echo -e Node Height: ${GREEN}$height${NC}
   echo -e Upgr Height: ${BLUE}$UPD_HEIGHT${NC}
-  echo -e "Estimated Time: ${BLUE}${readable_remaining_time}${NC} | Remaining Blocks: ${BLUE}${remaining_blocks}${NC} | Average Time per Block: ${GREEN}${avg_time}s${NC}"
+  echo -e "Estimated Time: ${BLUE}${readable_remaining_time}${NC} | Remaining Blocks: ${GREEN}${remaining_blocks}${NC} | Average Time per Block: ${BLUE}${avg_time}s${NC}"
 
   if ((height==$UPD_HEIGHT)); then
     sudo mv $NEW_BIN_PATH $OLD_BIN_PATH
