@@ -69,8 +69,7 @@ for((;;)); do
   # Generate readable time string directly
   readable_remaining_time=$(printf "%dd %dh %dm %ds" $((remaining_time/86400)) $((remaining_time%86400/3600)) $((remaining_time%3600/60)) $((remaining_time%60)))
 
-  echo -e Node Height: ${GREEN}$height${NC}
-  echo -e Upgr Height: ${BLUE}$UPD_HEIGHT${NC}
+  echo -e Node Height: ${GREEN}$height${NC}, Upgr Height: ${BLUE}$UPD_HEIGHT${NC}
   echo -e "Estimated Time: ${BLUE}${readable_remaining_time}${NC} | Remaining Blocks: ${BLUE}${remaining_blocks}${NC} | Average Time per Block: ${BLUE}${avg_time}s${NC}"
 
   if ((height==$UPD_HEIGHT)); then
