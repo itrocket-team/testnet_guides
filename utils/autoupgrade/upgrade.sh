@@ -57,8 +57,8 @@ for((;;)); do
       printLine
     break
   else
-      Node Height: ${GREEN}$height${NC}
-      Upgr Height: ${BLUE}$UPD_HEIGHT${NC}
+      echo -e Node Height: ${GREEN}$height${NC}
+      echo -e Upgr Height: ${BLUE}$UPD_HEIGHT${NC}
   fi
   sleep 4
 done
