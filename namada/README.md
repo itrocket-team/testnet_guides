@@ -1,5 +1,5 @@
 <div>
-<h1 align="left" style="display: flex;"> Anoma Namada Setup for Testnet — public-testnet-12.fedec12f3428</h1>
+<h1 align="left" style="display: flex;"> Anoma Namada Setup for Testnet — public-testnet-14.5d79b6958580</h1>
 <img src="https://avatars.githubusercontent.com/u/87261362?s=200&v=4"  style="float: right;" width="100" height="100"></img>
 </div>
 
@@ -44,7 +44,7 @@ echo "export ALIAS="CHOOSE_A_NAME_FOR_YOUR_VALIDATOR"" >> $HOME/.bash_profile
 echo "export WALLET="CHOOSE_A_WALLET_NAME"" >> $HOME/.bash_profile
 echo "export PUBLIC_IP=$(wget -qO- eth0.me)" >> $HOME/.bash_profile
 echo "export TM_HASH="v0.1.4-abciplus"" >> $HOME/.bash_profile
-echo "export CHAIN_ID="public-testnet-13.facd514666d5"" >> $HOME/.bash_profile
+echo "export CHAIN_ID="public-testnet-14.5d79b6958580"" >> $HOME/.bash_profile
 echo "export BASE_DIR="$HOME/.local/share/namada"" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 ~~~
@@ -82,11 +82,11 @@ Download and build namada binaries
 cd $HOME
 rm -rf $HOME/.masp-params
 rm -rf namada
-wget https://github.com/anoma/namada/releases/download/v0.22.0/namada-v0.22.0-Linux-x86_64.tar.gz
-tar -xvf namada-v0.22.0-Linux-x86_64.tar.gz
-mv ~/namada-v0.22.0-Linux-x86_64 ~/namada
+wget https://github.com/anoma/namada/releases/download/v0.23.0/namada-v0.23.0-Linux-x86_64.tar.gz
+tar -xvf namada-v0.23.0-Linux-x86_64.tar.gz
+mv ~/namada-v0.23.0-Linux-x86_64 ~/namada
 mv ~/namada/namada* ~/go/bin
-rm namada-v0.22.0-Linux-x86_64.tar.gz
+rm namada-v0.23.0-Linux-x86_64.tar.gz
 mkdir -p $HOME/.local/share/namada
 cp -r ~/.namada/pre-genesis $BASE_DIR/
 ~~~
