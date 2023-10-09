@@ -18,34 +18,15 @@ done
 
 printLogo
 
-# Initialize variables
+# Initialize an empty array to store block times
 block_times=()
 MAX_BLOCK_COUNT=5  # Number of blocks to average over
+
+# Other initialization
 prev_time=$(date +%s)
 
-while true; do
-    VER=$($NEW_BIN_PATH version)
-
-    if [[ -n $VER ]]; then
-        echo -e "New Bin version: $GREEN $VER ${NC}"
-        echo -e "HOME path: $GREEN $PROJECT_HOME ${NC}"
-        echo -e "RPC port: $GREEN $PORT_RPC ${NC}"
-        echo -e "NEW bin path: $GREEN $NEW_BIN_PATH ${NC}"
-        echo -e "OLD bin path: $GREEN $OLD_BIN_PATH ${NC}"
-        break
-    else
-        echo -e "$RED The binary file is missing. Please BUILD the binary first and then run this script again. ${NC}"
-        sleep 5
-    fi
-done
-
-printLine
-echo -e "YOUR NODE WILL BE UPDATED AT HEIGHT $GREEN $UPD_HEIGHT ${NC} to $GREEN ${VER} ${NC}"
-printLine
-echo -e "Don't kill the session with $RED CTRL+C ${NC} before update completed"
-echo -e "if you want to disconnect the session use $GREEN CTRL+B D ${NC}"
-printLine
-sleep 2
+# Your existing code...
+# ...
 
 for((;;)); do
   height=$(curl -s localhost:$PORT_RPC/status | jq -r .result.sync_info.latest_block_height)
@@ -56,13 +37,11 @@ for((;;)); do
   time_interval=$((cur_time - prev_time))
   prev_time=$cur_time
   
-  # Update the block_times array
   block_times=("${block_times[@]}" "$time_interval")
   if [ ${#block_times[@]} -gt $MAX_BLOCK_COUNT ]; then
     block_times=("${block_times[@]:1}")
   fi
   
-  # Calculate average time and remaining time if enough data is present
   if [ ${#block_times[@]} -eq $MAX_BLOCK_COUNT ]; then
     sum_times=0
     for t in "${block_times[@]}"; do
@@ -81,13 +60,13 @@ for((;;)); do
 
   echo -e "Node Height: ${GREEN}$height${NC}"
   echo -e "Upgr Height: ${BLUE}$UPD_HEIGHT${NC}"
-  echo -e "Estimated Time: ${time_display} | Remaining Blocks: ${BLUE}${remaining_blocks}${NC} | Average Time per Block: ${BLUE}${avg_time_display}s${NC}"
+  echo -e "Estimated Time: ${time_display} | Remaining Blocks: ${BLUE}${remaining_blocks}${NC} | Average Time per Block: ${avg_time_display}"
 
-  if ((height == $UPD_HEIGHT)); then
+  if ((height == UPD_HEIGHT)); then
     sudo mv $NEW_BIN_PATH $OLD_BIN_PATH
     sudo systemctl restart $BINARY
     printLine
-    echo -e "$GREEN Your node has been updated and restarted, the session will be terminated automatically after 15 min${NC}"
+    echo -e "$GREEN Your node has been updated and restarted, the session will be terminated automatically after 15 min${NC}"   
     printLine
     break
   fi
@@ -95,6 +74,4 @@ for((;;)); do
   sleep 4
 done
 
-echo "$(date): Your node successfully upgraded to v${VER}" >> $PROJECT_HOME/upgrade.log
-sleep 900
-tmux kill-session
+# ... (Rest of your script)
