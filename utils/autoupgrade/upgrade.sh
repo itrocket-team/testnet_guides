@@ -18,9 +18,10 @@ done
 
 printLogo
 
-# Initialize an empty array to store block times
+# Initialize variables
 block_times=()
 MAX_BLOCK_COUNT=5  # Number of blocks to average over
+prev_time=$(date +%s)
 
 while true; do
     VER=$($NEW_BIN_PATH version)
@@ -46,50 +47,47 @@ echo -e "if you want to disconnect the session use $GREEN CTRL+B D ${NC}"
 printLine
 sleep 2
 
-prev_time=$(date +%s)
-
 for((;;)); do
   height=$(curl -s localhost:$PORT_RPC/status | jq -r .result.sync_info.latest_block_height)
-
+  remaining_blocks=$((UPD_HEIGHT - height))
+  
   # Calculate current time
   cur_time=$(date +%s)
-
-  # Calculate time interval between blocks
   time_interval=$((cur_time - prev_time))
   prev_time=$cur_time
-
-  # Add the new time interval to the array and remove the oldest if the array size exceeds MAX_BLOCK_COUNT
+  
+  # Update the block_times array
   block_times=("${block_times[@]}" "$time_interval")
   if [ ${#block_times[@]} -gt $MAX_BLOCK_COUNT ]; then
     block_times=("${block_times[@]:1}")
   fi
-
-  # If we have enough data, calculate and display the remaining time
+  
+  # Calculate average time and remaining time if enough data is present
   if [ ${#block_times[@]} -eq $MAX_BLOCK_COUNT ]; then
     sum_times=0
     for t in "${block_times[@]}"; do
       sum_times=$((sum_times + t))
     done
     avg_time=$((sum_times / MAX_BLOCK_COUNT))
-
-    remaining_blocks=$((UPD_HEIGHT - height))
+    
     remaining_time=$((remaining_blocks * avg_time))
-
     readable_remaining_time=$(printf "%dd %dh %dm %ds" $((remaining_time/86400)) $((remaining_time%86400/3600)) $((remaining_time%3600/60)) $((remaining_time%60)))
     time_display=${BLUE}${readable_remaining_time}${NC}
+    avg_time_display="${BLUE}${avg_time}s${NC}"
   else
     time_display="Calculating average time..."
-  fi
+    avg_time_display="Calculating Average Time per Block..."
+  }
 
-  echo -e Node Height: ${GREEN}$height${NC}
-  echo -e Upgr Height: ${BLUE}$UPD_HEIGHT${NC}
-  echo -e "Estimated Time: ${time_display} | Remaining Blocks: ${BLUE}${remaining_blocks}${NC} | Average Time per Block: ${BLUE}${avg_time}s${NC}"
+  echo -e "Node Height: ${GREEN}$height${NC}"
+  echo -e "Upgr Height: ${BLUE}$UPD_HEIGHT${NC}"
+  echo -e "Estimated Time: ${time_display} | Remaining Blocks: ${BLUE}${remaining_blocks}${NC} | Average Time per Block: ${BLUE}${avg_time_display}s${NC}"
 
-  if ((height==$UPD_HEIGHT)); then
+  if ((height == $UPD_HEIGHT)); then
     sudo mv $NEW_BIN_PATH $OLD_BIN_PATH
     sudo systemctl restart $BINARY
     printLine
-    echo -e "$GREEN Your node has been updated and restarted, the session will be terminated automatically after 15 min${NC}"   
+    echo -e "$GREEN Your node has been updated and restarted, the session will be terminated automatically after 15 min${NC}"
     printLine
     break
   fi
