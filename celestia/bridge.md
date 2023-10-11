@@ -46,10 +46,11 @@ cd $HOME
 rm -rf celestia-node
 git clone https://github.com/celestiaorg/celestia-node.git
 cd celestia-node/
-git checkout tags/v0.11.0-rc12
+git checkout tags/v0.11.0-rc15
 make build
 sudo make install
 make cel-key
+celestia bridge config-update --p2p.network mocha-4
 ```
 
 >NOTE: If you are running a bridge node for your validator it is highly recommended to request Mocha testnet tokens as this is the testnet used to test out validator operations.  
