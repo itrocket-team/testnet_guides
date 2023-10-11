@@ -67,7 +67,7 @@ rm -rf celestia-app
 rm $HOME/.celestia-app/config/genesis.json
 git clone https://github.com/celestiaorg/celestia-app.git
 cd celestia-app/
-APP_VERSION=v1.0.0-rc14
+APP_VERSION=v1.0.0
 git checkout tags/$APP_VERSION -b $APP_VERSION
 make install
 ```
