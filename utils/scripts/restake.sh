@@ -44,7 +44,7 @@ while true; do
   
   # Решение о рестейке
   if [ "$REWARDS" -gt "$MIN_CLAIME" ]; then
-    echo "Реварды больше минимального порога для клейма. Инициализация..."
+    echo "Реварды больше минимального порога для клейма $MIN_CLAIME. Инициализация..."
     # Вывод ревардов
     echo "Выводим реварды..."
     echo $SUPER_SECURITY_PASSWORD | ${BIN} tx distribution withdraw-rewards $VALOPER_ADDRESS --from $WALLET_ADDRESS --commission --fees ${FEES}${TOKEN} -y
@@ -64,7 +64,7 @@ while true; do
       echo "Недостаточно ревардов и комиссии для рестейка."
     fi
   else
-    echo "Реварды меньше минимального порога для клейма. Пропускаем эту итерацию."
+    echo "Баланс $BAL меньше минимального порога для клейма $MIN_CLAIME. Пропускаем эту итерацию."
   fi
   
   echo "========== Конец итерации =========="
