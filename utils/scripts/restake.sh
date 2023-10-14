@@ -55,7 +55,6 @@ while true; do
     BAL=$($BIN query bank balances $WALLET_ADDRESS --output json | jq -r '.balances[0].amount')
     TOTAL_TO_DELEGATE=$(($BAL - $MIN_BAL))
     echo "Баланс после клейма: $BAL, всего для делегирования: $TOTAL_TO_DELEGATE"
-    sleep 30
     
     # Делегирование
     if (( $BAL > $MIN_CLAIME )); then
@@ -69,5 +68,5 @@ while true; do
   fi
   
   echo "========== Конец итерации =========="
-  sleep 10  # Пауза перед следующей итерацией
+  sleep 5  # Пауза перед следующей итерацией
 done
