@@ -97,7 +97,8 @@ User=$USER
 ExecStart=$(which celestia) bridge start \
 --rpc.port 11058 \
 --gateway.port 11059 \
---metrics.tls=false
+--metrics.tls=false \
+--p2p.network mocha-4
 Restart=on-failure
 RestartSec=10
 LimitNOFILE=65535
