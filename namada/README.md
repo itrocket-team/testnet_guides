@@ -1,21 +1,19 @@
-<div>
-<h1 align="left" style="display: flex;"> Anoma Namada Setup for Testnet — public-testnet-14.5d79b6958580</h1>
-<img src="https://raw.githubusercontent.com/itrocket-team/testnet_guides/main/utils/basket/namada.jpg"  style="float: right;" width="100" height="100"></img>
-</div>
+<h1 align="left"> 
+<img src="https://raw.githubusercontent.com/itrocket-team/testnet_guides/main/utils/basket/namada.jpg" alt="Namada" width="30" height="30">
+ Anoma Namada Setup // Testnet — public-testnet-14.5d79b6958580   
+</h1>
 
-Official documentation:
->- [Validator setup instructions](https://docs.namada.net/testnets/environment-setup.html)
+Official documentation: [validator setup instructions](https://docs.namada.net/testnets/environment-setup.html)
 
-Explorer
->- https://namadaexplorer.com/
+Explorer: https://namadaexplorer.com/
 
-## Hardware Requirements
+## ⚙️ Hardware Requirements
 ### Minimum Hardware Requirements 
  - CPU: x86_64 or arm64 processor with at least 4 physical cores
  - RAM: 8GB DDR4
  - Storage: 1TB
 
-## Set up your node
+## 🔧 Set up your node
 ### Manual installation
 
 Update packages and Install dependencies `select 1`
@@ -139,7 +137,7 @@ sudo systemctl enable namadad
 sudo systemctl restart namadad && sudo journalctl -u namadad -f
 ~~~
 
-### Security
+### 🔒 Security
 
 Set the default to allow outgoing connections, deny all incoming, allow ssh and node p2p port
 
