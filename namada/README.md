@@ -1,6 +1,6 @@
 <div>
 <h1 align="left" style="display: flex;"> Anoma Namada Setup for Testnet — public-testnet-14.5d79b6958580</h1>
-<img src="https://avatars.githubusercontent.com/u/87261362?s=200&v=4"  style="float: right;" width="100" height="100"></img>
+<img src="https://raw.githubusercontent.com/itrocket-team/testnet_guides/main/utils/basket/namada.jpg"  style="float: right;" width="100" height="100"></img>
 </div>
 
 Official documentation:
@@ -151,7 +151,10 @@ sudo ufw allow 26656,26657/tcp
 sudo ufw enable
 ~~~
 
-### Create and fund wallet for Post-Genesis Validator
+</details>
+
+<details>
+  <summary><strong>🔗 Create Post-Genesis Validator</strong></summary>
 
 Create wallet
 
@@ -160,12 +163,6 @@ namada wallet address gen --alias $WALLET
 ~~~
 
 >Fund your wallet from [faucet](https://faucet.heliax.click/)
-
-Check balance
-
-~~~bash
-namada client bonds --owner $ALIAS
-~~~
 
 Create validator
 
@@ -205,11 +202,70 @@ namada client bond \
 Waiting more than 2 epoch and check your status
 
 ~~~bash
-namada client bonded-stake
+namada client bonds --owner $ALIAS
 ~~~
+
+</details>
   
 ### Security
 To protect you keys please don`t share your privkey, mnemonic and follow a basic security rules
 
 ### Set up ssh keys for authentication
 You can use this [guide](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys-on-ubuntu-20-04) to configure ssh authentication and disable password authentication on your server
+
+### Useful commands
+
+Check logs
+
+~~~bash
+sudo journalctl -u namadad -f
+~~~
+
+Check your validator bond status
+~~~bash
+namada client bonds --owner $ALIAS
+~~~
+
+Check all bonded nodes
+~~~bash
+namada client bonded-stake
+~~~
+
+Check balance
+
+~~~bash
+namada client balance --owner $ALIAS --token NAM
+~~~
+
+Stake funds
+
+~~~bash
+namada client bond \
+  --validator $ALIAS \
+  --amount 1500 \
+  --gas-limit 10000000
+~~~
+
+Check Sync status and node info
+
+~~~bash
+curl http://127.0.0.1:26657/status | jq
+~~~
+
+Check consensus state
+
+~~~bash
+curl -s localhost:26657/consensus_state | jq .result.round_state.height_vote_set[0].prevotes_bit_array
+~~~
+
+Full consensus state
+
+~~~bash
+curl -s localhost:12657/dump_consensus_state
+~~~
+
+Your validator votes (prevote)
+
+~~~bash
+curl -s http://localhost:26657/dump_consensus_state | jq '.result.round_state.votes[0].prevotes' | grep $(curl -s http://localhost:26657/status | jq -r '.result.validator_info.address[:12]')
+~~~
