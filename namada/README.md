@@ -10,10 +10,10 @@ Explorer
 >- https://namadaexplorer.com/
 
 ## Hardware Requirements
-### Recommended Hardware Requirements 
- - CPU: x86_64 or arm64 processor with at least 4 physical cores (must support AVX/SSE instruction set)
+### Minimum Hardware Requirements 
+ - CPU: x86_64 or arm64 processor with at least 4 physical cores
  - RAM: 8GB DDR4
- - Storage: at least 500GB SSD (NVMe SSD is recommended. HDD will also work.)
+ - Storage: 1TB
 
 ## Set up your node
 ### Manual installation
@@ -49,21 +49,6 @@ echo "export BASE_DIR="$HOME/.local/share/namada"" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 ~~~
 
-install go
-
-~~~bash
-cd $HOME
-if ! [ -x "$(command -v go)" ]; then
-wget -O go1.19.4.linux-amd64.tar.gz https://golang.org/dl/go1.19.4.linux-amd64.tar.gz
-sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.19.4.linux-amd64.tar.gz && sudo rm go1.19.4.linux-amd64.tar.gz
-echo 'export GOROOT=/usr/local/go' >> $HOME/.bash_profile
-echo 'export GOPATH=$HOME/go' >> $HOME/.bash_profile
-echo 'export GO111MODULE=on' >> $HOME/.bash_profile
-echo 'export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin' >> $HOME/.bash_profile && . $HOME/.bash_profile
-go version
-fi
-~~~
-
 Install CometBFT
 
 ~~~
@@ -85,10 +70,9 @@ rm -rf namada
 wget https://github.com/anoma/namada/releases/download/v0.23.1/namada-v0.23.1-Linux-x86_64.tar.gz
 tar -xvf namada-v0.23.1-Linux-x86_64.tar.gz
 mv ~/namada-v0.23.1-Linux-x86_64 ~/namada
-mv ~/namada/namada* ~/go/bin
+mv ~/namada/namada* /usr/local/bin/
 rm namada-v0.23.1-Linux-x86_64.tar.gz
 mkdir -p $HOME/.local/share/namada
-cp -r ~/.namada/pre-genesis $BASE_DIR/
 ~~~
 
 Check namada version
@@ -97,12 +81,29 @@ Check namada version
 namada --version
 ~~~
 
-Run node
 
-~~~bash
+<details>
+  <summary><strong>🔗 Join-network as Pre-Genesis Validator</strong></summary>
+  <br>
+  
+  📁 *Move your pre-genesis folder to `$BASE_DIR` and join the network:*
+
+  ~~~bash
 cd $HOME
+cp -r ~/.namada/pre-genesis $BASE_DIR/
 namada client utils join-network --chain-id $CHAIN_ID --genesis-validator $ALIAS
 ~~~
+
+</details>
+
+<details>
+  <summary><strong>🔗 Join-network as Full Nodes or Post-Genesis Validator</strong></summary>
+
+~~~bash
+namada client utils join-network --chain-id $CHAIN_ID
+~~~
+
+</details>
 
 Create Service file
 
@@ -114,11 +115,15 @@ After=network-online.target
 
 [Service]
 User=$USER
+WorkingDirectory=$BASE_DIR
+Environment=CMT_LOG_LEVEL=p2p:none,pex:error
 Environment=NAMADA_CMT_STDOUT=true
-Environment=TM_LOG_LEVEL=p2p:none,pex:error
-ExecStart=$(which namada) ledger run
-Restart=on-failure
-RestartSec=3
+Environment=NAMADA_LOG=info
+ExecStart=$(which namada) node ledger run
+StandardOutput=syslog
+StandardError=syslog
+Restart=always
+RestartSec=10
 LimitNOFILE=65535
 
 [Install]
@@ -134,6 +139,8 @@ sudo systemctl enable namadad
 sudo systemctl restart namadad && sudo journalctl -u namadad -f
 ~~~
 
+### Security
+
 Set the default to allow outgoing connections, deny all incoming, allow ssh and node p2p port
 
 ~~~bash
@@ -144,33 +151,25 @@ sudo ufw allow 26656,26657/tcp
 sudo ufw enable
 ~~~
 
+### Create and fund wallet for Post-Genesis Validator
+
 Create wallet
 
 ~~~bash
 namada wallet address gen --alias $WALLET
 ~~~
 
+>Fund your wallet from [faucet](https://faucet.heliax.click/)
 
-Fund your wallet 
-
-~~~bash
-namadac transfer \
-    --token NAM \
-    --amount 1000 \
-    --source faucet \
-    --target $ALIAS \
-    --signer $ALIAS
-~~~
-
-Check bonds 
+Check balance
 
 ~~~bash
 namada client bonds --owner $ALIAS
 ~~~
 
-## Create validator
+Create validator
 
-before creating a validator, you need to check the balance and make sure that the node is synched
+>before creating a validator, you need to check the balance and make sure that the node is synched
 
 Check Sync status, once your node is fully synced, the output from above will say `false`
 
