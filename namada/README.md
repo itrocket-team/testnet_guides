@@ -158,7 +158,7 @@ sudo ufw enable
 </details>
 
 <details>
-  <summary><strong>🔗 Create Post-Genesis Validator (skip this point if you are a pre-genesis validator)</strong></summary>
+  <summary><strong>🔗 Create Post-Genesis Validator (skip this point if you are a pre-genesis validator) </strong></summary>
 
 Create wallet
 
