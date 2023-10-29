@@ -211,7 +211,7 @@ namada client bonds --owner $ALIAS
 
 </details>
 
-### Useful commands
+## 📝 Useful commands
 
 Check logs
 
