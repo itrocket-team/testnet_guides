@@ -269,3 +269,48 @@ Your validator votes (prevote)
 ~~~bash
 curl -s http://localhost:26657/dump_consensus_state | jq '.result.round_state.votes[0].prevotes' | grep $(curl -s http://localhost:26657/status | jq -r '.result.validator_info.address[:12]')
 ~~~
+
+## Upgrade
+
+Stop node and delete `tx_wasm_cache` `vp_wasm_cache`
+~~~bash
+sudo systemctl stop namadad
+cd ${BASE_DIR}/public-testnet-14.5d79b6958580
+rm -rf tx_wasm_cache vp_wasm_cache
+~~~
+
+Update service file
+
+~~~bash
+sudo tee /etc/systemd/system/namadad.service > /dev/null <<EOF
+[Unit]
+Description=namada
+After=network-online.target
+
+[Service]
+User=$USER
+WorkingDirectory=$BASE_DIR
+Environment=CMT_LOG_LEVEL=p2p:none,pex:error
+Environment=NAMADA_CMT_STDOUT=true
+Environment=NAMADA_LOG=info
+ExecStart=$(which namada) node ledger run
+StandardOutput=syslog
+StandardError=syslog
+Restart=always
+RestartSec=10
+LimitNOFILE=65535
+
+[Install]
+WantedBy=multi-user.target
+EOF
+~~~
+
+Enable and restart service
+
+~~~bash
+sudo systemctl daemon-reload
+sudo systemctl enable namadad
+sudo systemctl restart namadad && sudo journalctl -u namadad -f
+~~~
+
+
