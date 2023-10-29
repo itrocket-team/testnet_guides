@@ -268,7 +268,7 @@ Your validator votes (prevote)
 curl -s http://localhost:26657/dump_consensus_state | jq '.result.round_state.votes[0].prevotes' | grep $(curl -s http://localhost:26657/status | jq -r '.result.validator_info.address[:12]')
 ~~~
 
-## Upgrade
+## 🔄 Upgrade
 
 Stop node and delete `tx_wasm_cache` `vp_wasm_cache`
 ~~~bash
