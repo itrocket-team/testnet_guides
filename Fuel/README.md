@@ -2,6 +2,7 @@
 <img src="https://avatars.githubusercontent.com/u/55993183?s=48&v=4" alt="Fuel Beta-4" width="30" height="30">
  Fuel Beta-4 Setup // Testnet — Beta-4   
 </h1>
+
 ### Install rust
 ~~~
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
