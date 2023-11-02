@@ -65,6 +65,8 @@ Download and build namada binaries
 cd $HOME
 rm -rf $HOME/.masp-params
 rm -rf namada
+git clone https://github.com/anoma/namada
+cd namada
 wget https://github.com/anoma/namada/releases/download/v0.23.1/namada-v0.23.1-Linux-x86_64.tar.gz
 tar -xvf namada-v0.23.1-Linux-x86_64.tar.gz
 mv ~/namada-v0.23.1-Linux-x86_64 ~/namada
@@ -269,6 +271,20 @@ curl -s http://localhost:26657/dump_consensus_state | jq '.result.round_state.vo
 ~~~
 
 ## 🔄 Upgrade
+
+Upgrade to v0.23.2
+```
+cd $HOME
+rm -rf namada
+git clone https://github.com/anoma/namada
+cd namada
+git checkout v0.23.2
+make build-release
+sudo mv $HOME/namada/target/release/namada* /usr/local/bin/
+sudo systemctl restart namadad && sudo journalctl -u namadad -f
+```
+
+## If your node stops, try the following steps, if not, ignore it
 
 Stop node and delete `tx_wasm_cache` `vp_wasm_cache`
 ~~~bash
