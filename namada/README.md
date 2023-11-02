@@ -284,7 +284,7 @@ sudo mv $HOME/namada/target/release/namada* /usr/local/bin/
 sudo systemctl restart namadad && sudo journalctl -u namadad -f
 ```
 
-## If your node stops, try the following steps, if not, ignore it
+## If your node  halt, try the following steps, if not, ignore it
 
 Stop node and delete `tx_wasm_cache` `vp_wasm_cache`
 ~~~bash
