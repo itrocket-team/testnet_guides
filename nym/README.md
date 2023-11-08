@@ -57,7 +57,7 @@ cd $HOME
 rm -rf nym
 git clone https://github.com/nymtech/nym.git
 cd nym
-git checkout release/2023.3-kinder
+git checkout release/2023.4-galaxy
 cargo build
 ~~~
 
