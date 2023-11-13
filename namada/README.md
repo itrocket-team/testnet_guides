@@ -63,13 +63,14 @@ cometbft version
 Download and build namada binaries
 
 ~~~bash
-cd $HOME
-rm -rf $HOME/.masp-params
 rm -rf namada
-git clone https://github.com/anoma/namada.git
+git clone https://github.com/anoma/namada
 cd namada
-git checkout v0.23.2
-make install
+wget https://github.com/anoma/namada/releases/download/v0.23.2/namada-v0.23.2-Linux-x86_64.tar.gz
+tar -xvf namada-v0.23.2-Linux-x86_64.tar.gz
+mv ~/namada-v0.23.2-Linux-x86_64 ~/namada
+mv ~/namada/namada* /usr/local/bin/
+rm namada-v0.23.2-Linux-x86_64.tar.gz
 mkdir -p $HOME/.local/share/namada
 ~~~
 
