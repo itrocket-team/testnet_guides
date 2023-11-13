@@ -68,11 +68,11 @@ rm -rf $HOME/.masp-params
 rm -rf namada
 git clone https://github.com/anoma/namada
 cd namada
-wget https://github.com/anoma/namada/releases/download/v0.23.2/namada-v0.23.2-Linux-x86_64.tar.gz
-tar -xvf namada-v0.23.2-Linux-x86_64.tar.gz
+wget https://github.com/anoma/namada/archive/refs/tags/v0.23.2.tar.gz
+tar -xvf v0.23.2.tar.gz
 mv ~/namada-v0.23.2-Linux-x86_64 ~/namada
-mv ~/namada/namada* /usr/local/bin/
-rm namada-v0.23.2-Linux-x86_64.tar.gz
+sudo mv ~/namada/namada* /usr/local/bin/
+rm v0.23.2.tar.gz
 mkdir -p $HOME/.local/share/namada
 ~~~
 
