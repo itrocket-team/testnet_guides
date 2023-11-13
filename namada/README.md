@@ -29,6 +29,7 @@ sudo dpkg -i libssl1.1_1.1.0g-2ubuntu4_amd64.deb
 
 Install Rust
 ~~~
+apt install curl -y
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ~~~
 ~~~
