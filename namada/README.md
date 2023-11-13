@@ -66,13 +66,10 @@ Download and build namada binaries
 cd $HOME
 rm -rf $HOME/.masp-params
 rm -rf namada
-git clone https://github.com/anoma/namada
+git clone https://github.com/anoma/namada.git
 cd namada
-wget https://github.com/anoma/namada/archive/refs/tags/v0.23.2.tar.gz
-tar -xvf v0.23.2.tar.gz
-mv ~/namada-v0.23.2-Linux-x86_64 ~/namada
-sudo mv ~/namada/namada* /usr/local/bin/
-rm v0.23.2.tar.gz
+git checkout v0.23.2
+make install
 mkdir -p $HOME/.local/share/namada
 ~~~
 
