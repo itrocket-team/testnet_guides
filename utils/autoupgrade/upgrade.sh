@@ -26,6 +26,9 @@ block_count=0
 
 while true; do
     VER=$($NEW_BIN_PATH version)
+echo $NEW_BIN_PATH
+echo $VER
+sleep 5
 
     if [[ -n $VER ]]; then
         echo -e "New Bin version: $GREEN $VER ${NC}"
