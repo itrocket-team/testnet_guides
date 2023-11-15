@@ -23,6 +23,21 @@ sudo apt update && sudo apt upgrade -y
 sudo apt-get install -y make git-core libssl-dev pkg-config libclang-12-dev build-essential protobuf-compiler
 ~~~
 
+install go, if needed
+~~~cd $HOME
+! [ -x "$(command -v go)" ] && {
+VER="1.20.3"
+wget "https://golang.org/dl/go$VER.linux-amd64.tar.gz"
+sudo rm -rf /usr/local/go
+sudo tar -C /usr/local -xzf "go$VER.linux-amd64.tar.gz"
+rm "go$VER.linux-amd64.tar.gz"
+[ ! -f ~/.bash_profile ] && touch ~/.bash_profile
+echo "export PATH=$PATH:/usr/local/go/bin:~/go/bin" >> ~/.bash_profile
+source $HOME/.bash_profile
+}
+[ ! -d ~/go/bin ] && mkdir -p ~/go/bin
+~~~
+
 Install Rust
 ~~~
 sudo apt install curl -y
