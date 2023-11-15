@@ -24,7 +24,8 @@ sudo apt-get install -y make git-core libssl-dev pkg-config libclang-12-dev buil
 ~~~
 
 install go, if needed
-~~~cd $HOME
+~~~
+cd $HOME
 ! [ -x "$(command -v go)" ] && {
 VER="1.20.3"
 wget "https://golang.org/dl/go$VER.linux-amd64.tar.gz"
