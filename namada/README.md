@@ -86,7 +86,7 @@ rm namada-v0.23.2-Linux-x86_64.tar.gz
 mkdir -p $HOME/.local/share/namada
 ~~~
 
-Check namada version
+Check Namada version
 
 ~~~bash
 namada --version
