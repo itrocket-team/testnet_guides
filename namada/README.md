@@ -23,7 +23,7 @@ sudo apt update && sudo apt upgrade -y
 sudo apt-get install -y make git-core libssl-dev pkg-config libclang-12-dev build-essential protobuf-compiler
 ~~~
 
-install go, if needed
+install Go, if needed
 ~~~
 cd $HOME
 ! [ -x "$(command -v go)" ] && {
