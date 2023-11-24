@@ -109,6 +109,11 @@ To create a new wallet, use the following command, don’t forget to save `$HOM
 wallet_generate_secret_key
 ~~~
 
+Get secret key
+~~~bash
+wallet_get_secret_key <YOUR_WALLET_ADDRESS>
+~~~
+
 >(optional) To restore exexuting wallet, put you backup files `wallet.dat` to `$HOME/massa/massa-client/wallet.dat` and `node_privkey.key` to `$HOME/massa/massa-node/config/node_privkey.key`
 
 
