@@ -40,13 +40,6 @@ tar zxvf massa_TEST.27.0_release_linux.tar.gz
 rm massa_TEST.27.0_release_linux.tar.gz
 ~~~
 
->Restore keys `skip this point if it your first installation`
-
-~~~bash
-cp $HOME/node_privkey.key_backup $HOME/massa/massa-node/config/node_privkey.key
-cp -r $HOME/wallets_backup $HOME/massa/massa-client/wallets
-~~~
-
 Config  app
 
 ~~~bash
@@ -117,6 +110,14 @@ wallet_generate_secret_key
 ~~~
 
 >(optional) To restore exexuting wallet, put you backup files `wallet.dat` to `$HOME/massa/massa-client/wallet.dat` and `node_privkey.key` to `$HOME/massa/massa-node/config/node_privkey.key`
+
+
+>Restore keys `skip this point if it your first installation`
+
+~~~bash
+cp $HOME/node_privkey.key_backup $HOME/massa/massa-node/config/node_privkey.key
+cp -r $HOME/wallets_backup $HOME/massa/massa-client/wallets
+~~~
 
 To view the wallet address use this command:
 
