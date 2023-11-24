@@ -114,6 +114,11 @@ Get secret key
 wallet_get_secret_key <YOUR_WALLET_ADDRESS>
 ~~~
 
+Get public key
+~~~bash
+wallet_get_public_key <YOUR_WALLET_ADDRESS>
+~~~
+
 >(optional) To restore exexuting wallet, put you backup files `wallet.dat` to `$HOME/massa/massa-client/wallet.dat` and `node_privkey.key` to `$HOME/massa/massa-node/config/node_privkey.key`
 
 
