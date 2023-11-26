@@ -29,7 +29,7 @@ cd $HOME
 tmux new -s monitoring
 ```
 
-## Start Namada node monitoring script
+## Start monitoring script
 Finally, start the Namada node monitoring script:
 ```
 cd $HOME/monitoring/namada.sh
