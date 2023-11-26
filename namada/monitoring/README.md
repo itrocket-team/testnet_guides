@@ -15,6 +15,8 @@ chmod +x namada.sh
 Open telegram and find @BotFather 
 - Create telegram bot via @BotFather, customize it and get bot API token [how_to](https://www.siteguarding.com/en/how-to-get-telegram-bot-api-token)
 - Create the group: alarm . Customize them, add the bot in your chat and get chats IDs [how_to](https://stackoverflow.com/questions/32423837/telegram-bot-how-to-get-a-group-chat-id)
+- Open namada.sh file 
+>change ENABLE=false to ENABLE=true
 
 ## Specify the Your node `RPC_SERVER`, `TELEGRAM_CHAT_ID` and `TELEGRAM_BOT_TOKEN`
 >Configure correct Namada node port - `RPC_SERVER`  
