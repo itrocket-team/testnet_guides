@@ -20,7 +20,8 @@ Open telegram and find @BotFather
 
 ## Specify the Your node `RPC_SERVER`, `TELEGRAM_CHAT_ID` and `TELEGRAM_BOT_TOKEN`
 >Configure correct Namada node port - `RPC_SERVER`  
->Customize `TELEGRAM_CHAT_ID` and `TELEGRAM_BOT_TOKEN`
+>Customize `TELEGRAM_CHAT_ID` and `TELEGRAM_BOT_TOKEN`  
+>Configure `BLOCK_GAP_ALARM` and allow `RESTART` function if needed
 ```
 nano namada.sh
 ```
