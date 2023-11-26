@@ -1,6 +1,6 @@
 # Namada node monitoring script
 
-## Download namada.sh File
+## Download namada.sh file
 To begin, download the `namada.sh` script using the following commands:
 ```
 cd $HOME
