@@ -7,7 +7,7 @@ cd $HOME
 rm -rf $HOME/monitoring
 mkdir $HOME/monitoring
 cd $HOME/monitoring
-wget -O rpc.sh https://raw.githubusercontent.com/itrocket-team/testnet_guides/main/namada/monitoring/namada.sh
+wget -O namada.sh https://raw.githubusercontent.com/itrocket-team/testnet_guides/main/namada/monitoring/namada.sh
 chmod +x namada.sh
 ```
 
