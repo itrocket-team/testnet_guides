@@ -3,6 +3,9 @@
 # Validator Node RPC server address
 RPC_SERVER="http://127.0.0.1:26657"
 
+# Change to true if you want to allow telegram notifications
+ENABLE=false
+
 # Telegram chat ID
 TELEGRAM_CHAT_ID="<TELEGRAM_CHAT_ID>"
 
