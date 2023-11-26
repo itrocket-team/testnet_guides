@@ -11,8 +11,14 @@ wget -O rpc.sh https://raw.githubusercontent.com/itrocket-team/testnet_guides/ma
 chmod +x namada.sh
 ```
 
-## Specify the Your node `RPC port`, telegram `TELEGRAM_CHAT_ID` and `TELEGRAM_BOT_TOKEN`
-Next, specify the parent RPC from which the scanner will retrieve network data:
+### Configure Telegram alerting
+Open telegram and find @BotFather 
+- Create telegram bot via @BotFather, customize it and get bot API token [how_to](https://www.siteguarding.com/en/how-to-get-telegram-bot-api-token)
+- Create the group: alarm . Customize them, add the bot in your chat and get chats IDs [how_to](https://stackoverflow.com/questions/32423837/telegram-bot-how-to-get-a-group-chat-id)
+
+## Specify the Your node `RPC_SERVER`, `TELEGRAM_CHAT_ID` and `TELEGRAM_BOT_TOKEN`
+>Configure correct Namada node port - `RPC_SERVER`  
+>Customize `TELEGRAM_CHAT_ID` and `TELEGRAM_BOT_TOKEN`
 ```
 nano namada.sh
 ```
@@ -23,7 +29,7 @@ cd $HOME
 tmux new -s monitoring
 ```
 
-## Start RPC Scanner
+## Start Namada node monitoring script
 Finally, start the Namada node monitoring script:
 ```
 cd $HOME/monitoring/namada.sh
@@ -31,3 +37,8 @@ sudo /bin/bash namada.sh
 ```
 
 Don't kill the session with `CTRL+C`, if you want to disconnect the session use `CTRL+B D`
+
+>If you want to connect disconnected session use:
+```
+tmux attach -t monitoring
+```
