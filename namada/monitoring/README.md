@@ -30,4 +30,4 @@ cd $HOME/monitoring/namada.sh
 sudo /bin/bash namada.sh
 ```
 
-Don't kill the session with `CTRL+C` before update is completed, if you want to disconnect the session use `CTRL+B D`
+Don't kill the session with `CTRL+C`, if you want to disconnect the session use `CTRL+B D`
