@@ -35,7 +35,7 @@ tmux new -s monitoring
 ## Start monitoring script
 Finally, start the Namada node monitoring script:
 ```
-cd $HOME/monitoring/namada.sh
+cd $HOME/monitoring
 sudo /bin/bash namada.sh
 ```
 
