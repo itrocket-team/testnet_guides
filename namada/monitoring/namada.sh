@@ -23,6 +23,10 @@ EXTERNAL_RPC_SERVER="https://namada-testnet-rpc.itrocket.net:443"
 
 # Function to send a message to Telegram
 send_telegram_message() {
+  if [ "$ENABLE" == "false" ]; then
+    return  # Exit the function if notifications are disabled
+  fi
+
   message="$1"
   # Use curl to send a POST request with the message to Telegram
   curl -s -X POST "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" \
