@@ -16,6 +16,13 @@ Next, specify the parent RPC from which the scanner will retrieve network data:
 ```
 nano namada.sh
 ```
+
+## Create a new tmux session 
+```
+cd $HOME
+tmux new -s monitoring
+```
+
 ## Start RPC Scanner
 Finally, start the Namada node monitoring script:
 ```
