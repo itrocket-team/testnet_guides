@@ -36,7 +36,7 @@ cd $HOME/monitoring/namada.sh
 sudo /bin/bash namada.sh
 ```
 
-Don't kill the session with `CTRL+C`, if you want to disconnect the session use `CTRL+B D`
+Don't stop process with `CTRL+C`, if you want to disconnect the session use `CTRL+B D`, if you want to kill session use `CTRL+B C`
 
 >If you want to connect disconnected session use:
 ```
