@@ -146,7 +146,7 @@ check_validator_activity() {
   fi
 
   for (( i=current_block_height; i>current_block_height-300 && i>PREVIOUS_BLOCK_HEIGHT; i-- )); do
-    echo "Checking block $i..."
+#    echo "Checking block $i..."
     signatures=$(get_signatures $i)
 
     if ! echo "$signatures" | grep -q "$validator_address"; then
@@ -156,7 +156,7 @@ check_validator_activity() {
       echo "Block $i: Missed. Current number of missed blocks: $missed_blocks."
     else
       current_consecutive_missed=0
-#      echo "Block $i: Voted."
+      echo "Checking Block $i: Voted."
     fi
   done
 
