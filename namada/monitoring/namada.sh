@@ -55,7 +55,7 @@ get_node_info() {
       else
         send_telegram_message "Namada Node is not responding, please check it."
       fi
-      echo "Waiting for 5 minutes before rechecking..."
+      echo "Node status is error, waiting for 5 minutes before rechecking..."
       sleep 300
     else
       break  # Exit the loop if the node is available
