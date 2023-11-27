@@ -21,6 +21,12 @@ RESTART=true
 # External RPC server address to get the expected block height
 EXTERNAL_RPC_SERVER="https://namada-testnet-rpc.itrocket.net:443"
 
+# Maximum number of missed blocks that triggers a notification
+MAX_MISSED_BLOCKS=50
+
+# Validator settings, don`t change
+PREVIOUS_BLOCK_HEIGHT=0
+
 # Function to send a message to Telegram
 send_telegram_message() {
   if [ "$ENABLE" == "false" ]; then
@@ -55,7 +61,7 @@ get_node_info() {
       else
         send_telegram_message "Namada Node is not responding, please check it."
       fi
-      echo "Node status is error, waiting for 5 minutes before rechecking..."
+      echo "Waiting for 5 minutes before rechecking..."
       sleep 300
     else
       break  # Exit the loop if the node is available
@@ -98,9 +104,7 @@ done
     catching_up=$(echo "$response" | jq -r '.result.sync_info.catching_up')
     validator_address=$(echo "$response" | jq -r '.result.validator_info.address')
 
-    echo "Block Height: $block_height"
     echo "Catching Up: $catching_up"
-    echo "Validator Address: $validator_address"
 }
 
 # Function to get Validator info
@@ -108,6 +112,81 @@ get_validator_info() {
   # Use curl to send a JSON-RPC request to the node
   validator_info=$(curl -s ${RPC_SERVER}/status | jq -sr '.[].result.validator_info')
   echo "$validator_info"
+  voting_power=$(echo "$response" | jq -r '.result.validator_info.voting_power')
+  
+# Checking for changes in voting_power
+  check_voting_power_change
+}
+
+# Function to get signatures for a block
+get_signatures() {
+  local block_height=$1
+
+  if is_server_available; then
+    # Use EXTERNAL_RPC_SERVER if it's available
+    curl -s "${EXTERNAL_RPC_SERVER}/block?height=${block_height}" | jq -r '.result.block.last_commit.signatures[].validator_address'
+  else
+    # Use RPC_SERVER if EXTERNAL_RPC_SERVER is not available
+    curl -s "${RPC_SERVER}/block?height=${block_height}" | jq -r '.result.block.last_commit.signatures[].validator_address'
+  fi
+}
+
+# Function to check validator activity
+check_validator_activity() {
+  local current_block_height=$1
+  local missed_blocks=0
+  local max_consecutive_missed=0
+  local current_consecutive_missed=0
+
+  echo "Checking validator activity starting from block $current_block_height... "
+
+  if [ "$current_block_height" -le "$PREVIOUS_BLOCK_HEIGHT" ]; then
+    echo "Current block height is not higher than the previously checked height. Exiting the function."
+    return
+  fi
+
+  for (( i=current_block_height; i>current_block_height-300 && i>PREVIOUS_BLOCK_HEIGHT; i-- )); do
+    echo "Checking block $i..."
+    signatures=$(get_signatures $i)
+
+    if ! echo "$signatures" | grep -q "$validator_address"; then
+      missed_blocks=$((missed_blocks+1))
+      current_consecutive_missed=$((current_consecutive_missed+1))
+      max_consecutive_missed=$((max_consecutive_missed < current_consecutive_missed ? current_consecutive_missed : max_consecutive_missed))
+      echo "Block $i: Missed. Current number of missed blocks: $missed_blocks."
+    else
+      current_consecutive_missed=0
+#      echo "Block $i: Voted."
+    fi
+  done
+
+  PREVIOUS_BLOCK_HEIGHT=$current_block_height
+
+  if [ $missed_blocks -gt $MAX_MISSED_BLOCKS ]; then
+    echo "--------------------------------------------------------------------"
+    echo "Validator $validator_address missed $missed_blocks out of the last 300 blocks, with $max_consecutive_missed missed in a row. Sending message to Telegram."
+    send_telegram_message "Validator $validator_address missed $missed_blocks out of the last 300 blocks, with $max_consecutive_missed missed in a row."
+  else
+    echo "--------------------------------------------------------------------"
+    echo "Validator $validator_address missed $missed_blocks blocks out of the last 300."
+  fi
+}
+
+# Function to check for changes in voting_power
+check_voting_power_change() {
+  current_voting_power=$(echo "$validator_info" | jq -r '.voting_power')
+
+  # Only perform the check if PREVIOUS_VOTING_POWER has been set
+  if [ -n "$PREVIOUS_VOTING_POWER" ]; then
+    # Send a message to Telegram if there is a change in the voting_power
+    if [ "$current_voting_power" -ne "$PREVIOUS_VOTING_POWER" ]; then
+      send_telegram_message "Voting Power changed: Previous: $PREVIOUS_VOTING_POWER, Current: $current_voting_power"
+      echo "Voting Power changed: Previous: $PREVIOUS_VOTING_POWER, Current: $current_voting_power"
+    fi
+  fi
+
+  # Update the variable for the next check
+  PREVIOUS_VOTING_POWER=$current_voting_power
 }
 
 # Function to check node status and validator info
@@ -116,7 +195,19 @@ check_node() {
   get_node_info
   echo "Getting Validator Info..."
   get_validator_info
+  
+# Вызов функции проверки активности валидатора
+  if [ -n "$block_height" ] && [ "$voting_power" -gt 0 ]; then
+    check_validator_activity "$block_height"
+  fi
+  
+    echo "Checking node status..."
+  get_node_info
+  echo "Getting Validator Info..."
+  get_validator_info
+  
   echo "Sleeping for 10 minutes..."
+    echo "--------------------------------------------------------------------"
 }
 
 # Infinite loop to check the node every 15 minutes
