@@ -25,7 +25,7 @@ avg_time=0
 block_count=0
 
 while true; do
-    VER=$($NEW_BIN_PATH version)
+    VER=$($NEW_BIN_PATH version 2>&1 | tr -d '\n')
 
     if [[ -n $VER ]]; then
         echo -e "New Bin version: $GREEN $VER ${NC}"
