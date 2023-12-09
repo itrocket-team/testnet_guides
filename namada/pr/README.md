@@ -57,4 +57,4 @@ Fork this repository: https://github.com/anoma/namada-testnets/tree/main/namada-
 
 Create a new file in repository and name it <your_alias_name>.toml   
 
-Create a pull request. Name the request <create_alias.toml> if it is your first pull request, or <update_alias.toml> if you had a pull request earlier.
+Create a pull request. Name the request `Create <alias>.toml` if it is your first pull request, or `Update <alias>.toml` if you had a pull request earlier.
