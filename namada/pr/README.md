@@ -3,7 +3,7 @@
  How to create a pull request to Namada testnet 15
 </h1>
 
-Download binaries
+## Download binaries
 ```
 cd $HOME
 rm -rf $HOME/namada
@@ -15,21 +15,21 @@ rm namada-v0.28.0-Linux-x86_64.tar.gz
 cd namada-v0.28.0-Linux-x86_64
 sudo mv namada namadan namadac namadaw /usr/local/bin/
 ```
-Create a new address
+## Create a new address
 ```
 namadaw --pre-genesis key gen --alias $ALIAS
 ```
-Save base directory path if needed
+## Save base directory path if needed
 ```
 echo "export BASE_DIR="$HOME/.local/share/namada"" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 ```
-Init genesis established account
+## Init genesis established account
 ```
 TX_FILE_PATH="$BASE_DIR/pre-genesis/transactions.toml"
 namadac utils init-genesis-established-account --path $TX_FILE_PATH --aliases $ALIAS
 ```
-Put the established account address, email, validator address
+## Put the established account address, email, validator address
 ```
 ESTABLISHED_ACCOUNT_ADDRESS=<Derived_established_account_address>
 EMAIL="<your-email>"
@@ -45,13 +45,14 @@ namadac utils init-genesis-validator \
   --email $EMAIL \
   --path $TX_FILE_PATH
 ```
-Sign genesis
+## Sign genesis
 ```
 namadac utils sign-genesis-txs \
     --path $TX_FILE_PATH \
     --output $BASE_DIR/pre-genesis/signed-transactions.toml \
     --alias $VALIDATOR_ALIAS
 ```
+## A few steps left:
 Fork this repository: https://github.com/anoma/namada-testnets/tree/main/namada-public-testnet-15   
 
 Create a new file in repository and name it <your_alias_name>.toml   
