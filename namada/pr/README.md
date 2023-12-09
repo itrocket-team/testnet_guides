@@ -1,4 +1,8 @@
-# How to create a pool request to Namada testnet 15
+<h1 align="left"> 
+<img src="https://raw.githubusercontent.com/itrocket-team/testnet_guides/main/utils/basket/namada.jpg" alt="Namada" width="30" height="30">
+ How to create a pull request to Namada testnet 15
+</h1>
+
 Download binaries
 ```
 cd $HOME
