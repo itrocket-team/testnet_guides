@@ -24,20 +24,23 @@ cur_time=0
 avg_time=0
 block_count=0
 last_check_time=0
-check_interval=10
+check_interval=5
+proposal_status_checked=false
 
 # Function check_proposal_status
 check_proposal_status() {
   response=$(curl -s -X 'GET' $PROPOSAL_API)
   status=$(echo "$response" | jq -r '.proposal.status')
-  
+
   if [[ $status == "PROPOSAL_STATUS_REJECTED" ]]; then
     echo "Proposal rejected, the session will be terminated automatically after 15 min"
     echo "$(date): Upgrade rejected because PROPOSAL $PROPOSAL_API was REJECTED" >> $PROJECT_HOME/upgrade.log
     sleep 900
     tmux kill-session
+    exit 0
   elif [[ $status == "PROPOSAL_STATUS_PASSED" ]]; then
     echo "Proposal passed. Continuing with the script."
+    proposal_status_checked=true
   fi
 }
 
@@ -69,7 +72,10 @@ sleep 2
 for((;;)); do
   height=$(curl -s localhost:$PORT_RPC/status | jq -r .result.sync_info.latest_block_height)
   
-  check_proposal_status
+  if ! $proposal_status_checked && (( cur_time - last_check_time > check_interval )); then
+    check_proposal_status
+    last_check_time=$cur_time
+  fi
 
   # Calculate current time
   cur_time=$(date +%s)
