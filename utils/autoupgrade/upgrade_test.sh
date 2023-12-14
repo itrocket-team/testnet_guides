@@ -8,7 +8,7 @@ while getopts u:b:v:n:o:p:h:i:r: flag; do
   v) VERSION=$OPTARG ;;
   n) NEW_BIN_PATH=$OPTARG ;;
   o) OLD_BIN_PATH=$OPTARG ;;
-  p) PROPOSAL_ID=$OPTARG ;;
+  p) PROPOSAL_API=$OPTARG ;;
   h) PROJECT_HOME=$OPTARG ;;
   i) CHAIN_ID=$OPTARG ;;
   r) PORT_RPC=$OPTARG ;;
@@ -23,6 +23,16 @@ prev_time=$(date +%s)
 cur_time=0
 avg_time=0
 block_count=0
+proposal_status="unknown"
+last_check_time=0
+check_interval=10
+
+# Function check_proposal_status
+check_proposal_status() {
+  response=$(curl -s -X 'GET' "https://lava-testnet-api.itrocket.net/cosmos/gov/v1/proposals/$PROPOSAL_ID")
+  status=$(echo "$response" | jq -r '.proposal.status')
+  echo "$status"
+}
 
 while true; do
     VER=$($NEW_BIN_PATH version 2>&1 | tr -d '\n')
@@ -33,7 +43,7 @@ while true; do
         echo -e "RPC port: $GREEN $PORT_RPC ${NC}"
         echo -e "NEW bin path: $GREEN $NEW_BIN_PATH ${NC}"
         echo -e "OLD bin path: $GREEN $OLD_BIN_PATH ${NC}"
-        echo -e "Proposal №: $GREEN $PROPOSAL_ID ${NC}"
+        echo -e "Proposal API: $GREEN $PROPOSAL_ID ${NC}"
         break
     else
         echo -e "$RED The binary file is missing. Please BUILD the binary first and then run this script again. ${NC}"
@@ -51,10 +61,18 @@ sleep 2
 
 for((;;)); do
   height=$(curl -s localhost:$PORT_RPC/status | jq -r .result.sync_info.latest_block_height)
-
-  # Calculate current time
   cur_time=$(date +%s)
 
+  # Check proposal status every 10 seconds
+  if [[ $status_confirmed == false && (( cur_time - last_check_time > check_interval )) ]]; then
+    proposal_status=$(check_proposal_status)
+    last_check_time=$cur_time
+    echo -e "Checked proposal status: $proposal_status"
+  if [[ "$proposal_status" == "PROPOSAL_STATUS_PASSED" ]]; then
+      status_confirmed=true
+    fi
+  fi
+ 
   # Calculate time interval between blocks
   time_interval=$((cur_time - prev_time))
   prev_time=$cur_time
@@ -74,18 +92,24 @@ for((;;)); do
   echo -e Upgr Height: ${BLUE}$UPD_HEIGHT${NC}
   echo -e "Estimated Time: ${BLUE}${readable_remaining_time}${NC} | Remaining Blocks: ${BLUE}${remaining_blocks}${NC} | Average Time per Block: ${BLUE}${avg_time}s${NC}"
 
-  if ((height==$UPD_HEIGHT)); then
-    sudo mv $NEW_BIN_PATH $OLD_BIN_PATH
-    sudo systemctl restart $BINARY
-    printLine
-    echo -e "$GREEN Your node has been updated and restarted, the session will be terminated automatically after 15 min${NC}"   
-    printLine
-    break
+  if ((height == $UPD_HEIGHT)); then
+    if [[ "$proposal_status" == "PROPOSAL_STATUS_PASSED" ]]; then
+      sudo mv $NEW_BIN_PATH $OLD_BIN_PATH
+      sudo systemctl restart $BINARY
+      printLine
+      echo -e "$GREEN Your node has been updated and restarted, the session will be terminated automatically after 15 min${NC}"
+      echo "$(date): Your node successfully upgraded to v${VER}" >> $PROJECT_HOME/upgrade.log   
+      printLine
+      break
+    else
+      echo -e "$RED Update aborted: Proposal status is not PASSED, the session will be terminated automatically after 15 min${NC} ${NC}"
+      echo "$(date): Update aborted: Proposal status is not PASSED at height $UPD_HEIGHT" >> $PROJECT_HOME/upgrade.log 
+      break
+    fi
   fi
 
   sleep 4
 done
 
-echo "$(date): Your node successfully upgraded to v${VER}" >> $PROJECT_HOME/upgrade.log
 sleep 900
 tmux kill-session
