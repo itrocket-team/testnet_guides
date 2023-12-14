@@ -24,6 +24,7 @@ cur_time=0
 avg_time=0
 block_count=0
 proposal_status="unknown"
+status_confirmed=false
 last_check_time=0
 check_interval=10
 
