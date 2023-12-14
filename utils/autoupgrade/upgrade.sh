@@ -33,6 +33,7 @@ check_proposal_status() {
   status=$(echo "$response" | jq -r '.proposal.status')
 
   if [[ $status == "PROPOSAL_STATUS_REJECTED" ]]; then
+    printLine
     echo "Proposal rejected, the session will be terminated automatically after 15 min"
     echo "$(date): Upgrade rejected because PROPOSAL $PROPOSAL_API was REJECTED" >> $PROJECT_HOME/upgrade.log
     sleep 900
