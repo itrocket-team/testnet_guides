@@ -62,6 +62,8 @@ sleep 2
 
 for((;;)); do
   height=$(curl -s localhost:$PORT_RPC/status | jq -r .result.sync_info.latest_block_height)
+  
+  check_proposal_status
 
   # Calculate current time
   cur_time=$(date +%s)
