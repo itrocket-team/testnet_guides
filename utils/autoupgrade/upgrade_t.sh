@@ -68,7 +68,7 @@ for((;;)); do
     proposal_status=$(check_proposal_status)
     last_check_time=$cur_time
     echo -e "Checked proposal status: $proposal_status"
-  if [[ "$proposal_status" == "PROPOSAL_STATUS_PASSED" ]]; then
+    if [[ "$proposal_status" == "PROPOSAL_STATUS_PASSED" ]]; then
       status_confirmed=true
     fi
   fi
