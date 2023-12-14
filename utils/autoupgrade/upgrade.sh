@@ -74,25 +74,18 @@ for((;;)); do
   echo -e Upgr Height: ${BLUE}$UPD_HEIGHT${NC}
   echo -e "Estimated Time: ${BLUE}${readable_remaining_time}${NC} | Remaining Blocks: ${BLUE}${remaining_blocks}${NC} | Average Time per Block: ${BLUE}${avg_time}s${NC}"
 
-  if ((remaining_blocks <= 5)); then
-    PROPOSAL_STATUS=$($OLD_BIN_PATH query gov proposal $PROPOSAL_ID -o json | jq -r .status 2>/dev/null)
-    if [[ $PROPOSAL_STATUS != "PROPOSAL_STATUS_PASSED" ]]; then
-      echo "$(date): Update halted as proposal status is not passed." >> $PROJECT_HOME/upgrade.log
-      break
-    fi
-  fi
-
   if ((height==$UPD_HEIGHT)); then
     sudo mv $NEW_BIN_PATH $OLD_BIN_PATH
     sudo systemctl restart $BINARY
     printLine
     echo -e "$GREEN Your node has been updated and restarted, the session will be terminated automatically after 15 min${NC}"   
     printLine
-    echo "$(date): Your node successfully upgraded to v${VER}" >> $PROJECT_HOME/upgrade.log
     break
   fi
 
   sleep 4
 done
+
+echo "$(date): Your node successfully upgraded to v${VER}" >> $PROJECT_HOME/upgrade.log
 sleep 900
 tmux kill-session
