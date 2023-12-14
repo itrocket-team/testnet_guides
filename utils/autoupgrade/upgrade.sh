@@ -75,11 +75,18 @@ for((;;)); do
   echo -e "Estimated Time: ${BLUE}${readable_remaining_time}${NC} | Remaining Blocks: ${BLUE}${remaining_blocks}${NC} | Average Time per Block: ${BLUE}${avg_time}s${NC}"
 
   if ((height==$UPD_HEIGHT)); then
-    sudo mv $NEW_BIN_PATH $OLD_BIN_PATH
-    sudo systemctl restart $BINARY
-    printLine
-    echo -e "$GREEN Your node has been updated and restarted, the session will be terminated automatically after 15 min${NC}"   
-    printLine
+    PROPOSAL_STATUS=$($OLD_BIN_PATH query gov proposal $PROPOSAL_ID -o json | jq -r .status 2>/dev/null)
+    if [[ $PROPOSAL_STATUS == "PROPOSAL_STATUS_PASSED" ]] || [[ -z $PROPOSAL_STATUS ]]; then
+      sudo mv $NEW_BIN_PATH $OLD_BIN_PATH
+      sudo systemctl restart $BINARY
+      printLine
+      echo -e "$GREEN Your node has been updated and restarted, the session will be terminated automatically after 15 min${NC}"   
+      printLine
+      echo "$(date): Your node successfully upgraded to v${VER}" >> $PROJECT_HOME/upgrade.log
+    else
+      echo "$(date): Your node don't upgraded to v${VER} as the proposal status is not passed" >> $PROJECT_HOME/upgrade.log
+      break
+    fi
     break
   fi
 
