@@ -23,6 +23,17 @@ prev_time=$(date +%s)
 cur_time=0
 avg_time=0
 block_count=0
+proposal_status="unknown"
+status_confirmed=false
+last_check_time=0
+check_interval=10
+
+# Function check_proposal_status
+check_proposal_status() {
+  response=$(curl -s -X 'GET' $PROPOSAL_API)
+  status=$(echo "$response" | jq -r '.proposal.status')
+  echo "$status"
+}
 
 while true; do
     VER=$($NEW_BIN_PATH version 2>&1 | tr -d '\n')
