@@ -107,7 +107,7 @@ for((;;)); do
     sudo systemctl restart $BINARY
     printLine
     echo -e "$GREEN Your node has been updated and restarted, the session will be terminated automatically after 15 min${NC}"
-    echo "$(date): Your node successfully upgraded to v${VER}" >> $PROJECT_HOME/upgrade.log
+    echo "$(date): Your node successfully upgraded to ${VER}" >> $PROJECT_HOME/upgrade.log
     printLine
     break
   else
