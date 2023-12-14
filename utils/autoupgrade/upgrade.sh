@@ -8,7 +8,7 @@ while getopts u:b:v:n:o:p:h:i:r: flag; do
   v) VERSION=$OPTARG ;;
   n) NEW_BIN_PATH=$OPTARG ;;
   o) OLD_BIN_PATH=$OPTARG ;;
-  p) PROPOSAL_ID=$OPTARG ;;
+  p) PROPOSAL_API=$OPTARG ;;
   h) PROJECT_HOME=$OPTARG ;;
   i) CHAIN_ID=$OPTARG ;;
   r) PORT_RPC=$OPTARG ;;
@@ -44,7 +44,7 @@ while true; do
         echo -e "RPC port: $GREEN $PORT_RPC ${NC}"
         echo -e "NEW bin path: $GREEN $NEW_BIN_PATH ${NC}"
         echo -e "OLD bin path: $GREEN $OLD_BIN_PATH ${NC}"
-        echo -e "Proposal №: $GREEN $PROPOSAL_ID ${NC}"
+        echo -e "Proposal API: $GREEN $PROPOSAL_API ${NC}"
         break
     else
         echo -e "$RED The binary file is missing. Please BUILD the binary first and then run this script again. ${NC}"
