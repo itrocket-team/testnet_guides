@@ -24,7 +24,7 @@ cur_time=0
 avg_time=0
 block_count=0
 last_check_time=0
-check_interval=5
+check_interval=3
 proposal_status_checked=false
 
 # Function check_proposal_status
