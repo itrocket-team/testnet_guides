@@ -23,8 +23,6 @@ prev_time=$(date +%s)
 cur_time=0
 avg_time=0
 block_count=0
-proposal_status="unknown"
-status_confirmed=false
 last_check_time=0
 check_interval=10
 
@@ -32,7 +30,13 @@ check_interval=10
 check_proposal_status() {
   response=$(curl -s -X 'GET' $PROPOSAL_API)
   status=$(echo "$response" | jq -r '.proposal.status')
-  echo "$status"
+  
+  if [[ $status == "PROPOSAL_STATUS_REJECTED" ]]; then
+    echo "Proposal rejected. Exiting script."
+    exit 1
+  elif [[ $status == "PROPOSAL_STATUS_PASSED" ]]; then
+    echo "Proposal passed. Continuing with the script."
+  fi
 }
 
 while true; do
