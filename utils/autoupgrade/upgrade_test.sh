@@ -29,7 +29,7 @@ check_interval=10
 
 # Function check_proposal_status
 check_proposal_status() {
-  response=$(curl -s -X 'GET' "https://lava-testnet-api.itrocket.net/cosmos/gov/v1/proposals/$PROPOSAL_ID")
+  response=$(curl -s -X 'GET' $PROPOSAL_API)
   status=$(echo "$response" | jq -r '.proposal.status')
   echo "$status"
 }
@@ -43,7 +43,7 @@ while true; do
         echo -e "RPC port: $GREEN $PORT_RPC ${NC}"
         echo -e "NEW bin path: $GREEN $NEW_BIN_PATH ${NC}"
         echo -e "OLD bin path: $GREEN $OLD_BIN_PATH ${NC}"
-        echo -e "Proposal API: $GREEN $PROPOSAL_ID ${NC}"
+        echo -e "Proposal API: $GREEN $PROPOSAL_API ${NC}"
         break
     else
         echo -e "$RED The binary file is missing. Please BUILD the binary first and then run this script again. ${NC}"
