@@ -33,6 +33,7 @@ check_proposal_status() {
   
   if [[ $status == "PROPOSAL_STATUS_REJECTED" ]]; then
     echo "Proposal rejected. Exiting script."
+    echo "$(date): Upgrade rejected because PROPOSAL $PROPOSAL_API was REJECTED" >> $PROJECT_HOME/upgrade.log
     exit 1
   elif [[ $status == "PROPOSAL_STATUS_PASSED" ]]; then
     echo "Proposal passed. Continuing with the script."
