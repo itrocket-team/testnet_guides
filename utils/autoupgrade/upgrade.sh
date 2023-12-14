@@ -101,17 +101,26 @@ for((;;)); do
   echo -e "Estimated Time: ${BLUE}${readable_remaining_time}${NC} | Remaining Blocks: ${BLUE}${remaining_blocks}${NC} | Average Time per Block: ${BLUE}${avg_time}s${NC}"
 
   if ((height==$UPD_HEIGHT)); then
+    if $proposal_status_checked || [[ $status == "" ]]; then
+      # Если статус предложения "Passed" или нет ответа от API, выполняем обновление
     sudo mv $NEW_BIN_PATH $OLD_BIN_PATH
     sudo systemctl restart $BINARY
     printLine
-    echo -e "$GREEN Your node has been updated and restarted, the session will be terminated automatically after 15 min${NC}"   
+    echo -e "$GREEN Your node has been updated and restarted, the session will be terminated automatically after 15 min${NC}"
+    echo "$(date): Your node successfully upgraded to v${VER}" >> $PROJECT_HOME/upgrade.log
     printLine
     break
+  else
+    # Во всех остальных случаях отменяем обновление и выходим из скрипта
+    echo -e "$RED Update cancelled due to proposal status: $status, the session will be terminated automatically after 15 min${NC}"
+    sleep 900
+    tmux kill-session
+    exit 0
+    fi
   fi
 
   sleep 4
 done
 
-echo "$(date): Your node successfully upgraded to v${VER}" >> $PROJECT_HOME/upgrade.log
 sleep 900
 tmux kill-session
