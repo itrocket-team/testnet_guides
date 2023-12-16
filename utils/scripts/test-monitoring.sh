@@ -3,6 +3,8 @@
 # Ваши переменные
 TELEGRAM_BOT_TOKEN=""
 TELEGRAM_CHAT_ID=""
+VALIDATOR_ADDRESS="0x0474cfC127F208E5E01361791b7400C3A9Ce47ea"
+MESSAGE="🚨𝐀𝐥𝐞𝐫𝐭: Validator address $VALIDATOR_ADDRESS is missing from the current 𝐀𝐮𝐭𝐨𝐧𝐢𝐭𝐲 𝐜𝐨𝐦𝐦𝐢𝐭𝐭𝐞𝐞 𝐥𝐢𝐬𝐭"
 RPC="http://:8646"
 PARRENT_RPC="https://rpc1.piccadilly.autonity.org"
 
