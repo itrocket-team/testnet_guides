@@ -1,8 +1,8 @@
 ```
 cd $HOME
 NETWORK="$USER"
-TELEGRAM_BOT_TOKEN="REDACTED"
-TELEGRAM_CHAT_ID="-724741147"
+TELEGRAM_BOT_TOKEN=""
+TELEGRAM_CHAT_ID=""
 RPC="https://x1-testnet-rpc.itrocket.net:443"
 SLEEP="1m"
 ```
