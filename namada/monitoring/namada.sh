@@ -206,7 +206,7 @@ check_node() {
   echo "Getting Validator Info..."
   get_validator_info
   
-  echo "Sleeping for 10 minutes..."
+  echo "Sleeping for 15 minutes..."
     echo "--------------------------------------------------------------------"
 }
 
