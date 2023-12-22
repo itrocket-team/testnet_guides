@@ -213,5 +213,5 @@ check_node() {
 # Infinite loop to check the node every 15 minutes
 while true; do
   check_node
-  sleep 600
+  sleep 900
 done
