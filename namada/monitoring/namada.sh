@@ -15,8 +15,8 @@ TELEGRAM_BOT_TOKEN="<TELEGRAM_TOKEN>"
 # Alert threshold for the block height difference between the node and network
 BLOCK_GAP_ALARM=100
 
-# Change to false if you don't want to allow the node restart function
-RESTART=true
+# Change to true if you want to allow the node restart function
+RESTART=false
 
 # External RPC server address to get the expected block height
 EXTERNAL_RPC_SERVER="https://namada-testnet-rpc.itrocket.net:443"
