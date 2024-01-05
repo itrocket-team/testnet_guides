@@ -133,7 +133,7 @@ wallet_info
 ~~~
 
 **Enable staking**
-Enable staking for your address, replace your Wallet address `<YOUR_PASSWORD>` without `<>` 
+Enable staking for your address, replace your Wallet address `<YOUR_WALLET_ADDRESS>` without `<>` 
 >You need to see `Keys successfully added!`
 
 ~~~bash
