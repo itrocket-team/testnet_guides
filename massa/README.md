@@ -35,9 +35,9 @@ Download and unzip software
 ~~~bash
 cd $HOME
 rm -rf $HOME/massa
-wget https://github.com/massalabs/massa/releases/download/TEST.27.0/massa_TEST.27.0_release_linux.tar.gz
-tar zxvf massa_TEST.27.0_release_linux.tar.gz
-rm massa_TEST.27.0_release_linux.tar.gz
+wget https://github.com/massalabs/massa/releases/download/MAIN.1.0/massa_MAIN.1.0_release_linux.tar.gz
+tar zxvf massa_MAIN.1.0_release_linux.tar.gz
+rm massa_MAIN.1.0_release_linux.tar.gz
 ~~~
 
 Config  app
