@@ -103,7 +103,8 @@ cd $HOME/massa/massa-client/
 ~~~
 
 ## Create or restore wallet
-To create a new wallet, use the following command, don’t forget to save `$HOME/massa/massa-client/wallet.dat` and `$HOME/massa/massa-node/config/node_privkey.key` 
+**Create a new wallet**
+>To create a new wallet, use the following command, don’t forget to save `$HOME/massa/massa-client/wallet.dat` and `$HOME/massa/massa-node/config/node_privkey.key` 
 
 ~~~bash
 wallet_generate_secret_key
@@ -119,14 +120,10 @@ Get public key
 wallet_get_public_key <YOUR_WALLET_ADDRESS>
 ~~~
 
->(optional) To restore exexuting wallet, put you backup files `wallet.dat` to `$HOME/massa/massa-client/wallet.dat` and `node_privkey.key` to `$HOME/massa/massa-node/config/node_privkey.key`
-
-
->Restore keys `skip this point if it your first installation`
-
-~~~bash
-cp $HOME/node_privkey.key_backup $HOME/massa/massa-node/config/node_privkey.key
-cp -r $HOME/wallets_backup $HOME/massa/massa-client/wallets
+**Restore Executing wallet**
+>To restore Executing wallet using secret key use
+~~~
+wallet_add_secret_keys <your_secret_key>
 ~~~
 
 To view the wallet address use this command:
@@ -135,6 +132,7 @@ To view the wallet address use this command:
 wallet_info
 ~~~
 
+**Enable staking**
 Enable staking for your address, replace your Wallet address `<YOUR_PASSWORD>` without `<>` 
 >You need to see `Keys successfully added!`
 
@@ -142,15 +140,14 @@ Enable staking for your address, replace your Wallet address `<YOUR_PASSWORD>` w
 node_start_staking <YOUR_WALLET_ADDRESS>
 ~~~
 
->- Fund your wallet, go to the Massa discord server and navigate to `testnet-faucet` channel, put your wallet address
-
 After a while, the balance will be displayed in the client interface, usually 1-10 minutes
 
 ~~~bash
 wallet_info
 ~~~
 
-## Buy rolls
+## Useful commands 
+### Buy rolls
 Open client interface if you closed
 
 ~~~bash
@@ -165,20 +162,16 @@ buy_rolls <YOUR_WALLET_ADDRESS> 1 0
 ~~~
 >We are waiting for 2 hours until the roll becomes active, you need to see `Rolls: active=1` in `wallet_info` command
 
-## Register your node on discord server
-Go to Massa discord server `testnet-rewwards-registration` channel and write `hi`, you will receive a message from masa-bot, opent this chat and send a message with your ip address
+### Restore wallet and nodekey
+>To restore exexuting wallet put you backup files `wallet.dat` to `$HOME/massa/massa-client/wallet.dat` and `node_privkey.key` to `$HOME/massa/massa-node/config/node_privkey.key`
+
+
+>Restore keys `skip this point if it your first installation`
 
 ~~~bash
-wget -qO- eth0.me
+cp $HOME/node_privkey.key_backup $HOME/massa/massa-node/config/node_privkey.key
+cp -r $HOME/wallets_backup $HOME/massa/massa-client/wallets
 ~~~
-
-Now you need to regitrer your node, replace your Wallet address `<YOUR_WALLET_ADDRESS>` and `<DISCORD_ID>` without `<>`.  You will find `Discord ID` in the message from massa-bot
->Example: node_testnet_rewards_program_ownership_proof your_staking_address `69703435236262333`
-
-~~~bash
-node_testnet_rewards_program_ownership_proof <YOUR_WALLET_ADDRESS> <DISCORD_ID>
-~~~
->- In response, you will receive a key that you need to copy and paste into the Massa-bot chat
 
 ### Security
 To protect you keys please save and don`t share your keys, and follow a basic security rules
