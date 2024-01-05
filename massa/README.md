@@ -4,7 +4,7 @@
 </div>
 
 Official documentation:
->- [Installing a node](https://docs.massa.net/en/latest/testnet/install.html)
+>- [Installing a node](https://docs.massa.net/docs/node/initial)
 
 
 ## Hardware Requirements
