@@ -15,8 +15,8 @@ TELEGRAM_BOT_TOKEN="<TELEGRAM_TOKEN>"
 # Alert threshold for the block height difference between the node and network
 BLOCK_GAP_ALARM=100
 
-# Change to true if you want to allow the node restart function
-RESTART=false
+# Change to false if you don`t want to allow the node restart function
+RESTART=true
 
 # External RPC server address to get the expected block height
 EXTERNAL_RPC_SERVER="https://namada-testnet-rpc.itrocket.net:443"
@@ -93,7 +93,9 @@ while true; do
       > but restart is disabled."
       echo "${block_height}/${expected_block_height} diff $(($expected_block_height - $block_height)), but restart is disabled, rechecking after 10 min..."
     fi
-    sleep 600  # 10 minutes in seconds
+    sleep 600
+    block_height=$(echo "$response" | jq -r '.result.sync_info.latest_block_height')
+    expected_block_height=$(curl -s "$EXTERNAL_RPC_SERVER/status" | jq -r '.result.sync_info.latest_block_height')
   else
     break  # Exit the loop if the condition is met
   fi
@@ -196,7 +198,7 @@ check_node() {
   echo "Getting Validator Info..."
   get_validator_info
   
-# Вызов функции проверки активности валидатора
+# Calling the Validator activity check function
   if [ -n "$block_height" ] && [ "$voting_power" -gt 0 ]; then
     check_validator_activity "$block_height"
   fi
