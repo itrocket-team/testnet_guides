@@ -30,15 +30,15 @@ while true; do
         # Service is active, now check for the log message
         if ! sudo journalctl -u ${SERVICE} --since "${SLEEP} ago" --no-pager --output cat | grep -i "${MESSAGE}"; then
             # Message not found, stopping and restarting the service
-            echo "No '${MESSAGE}' message found in the logs for the past ${SLEEP} minutes. Restarting service."
+            echo "No '${MESSAGE}' message found in the logs for the past ${SLEEP}. Restarting service."
             sudo systemctl stop ${SERVICE}
             sleep 30
             sudo systemctl restart ${SERVICE}
             # Sending a message to Telegram
-            send_telegram_message "Service ${SERVICE} has been restarted after not finding a success message in the past ${SLEEP} minutes."
+            send_telegram_message "Service ${SERVICE} has been restarted after not finding a success message in the past ${SLEEP}."
         else
             # Message found, continuing normal operation
-            echo "Service ${SERVICE} is operating normally, waiting ${SLEEP} min..."
+            echo "Service ${SERVICE} is operating normally, waiting ${SLEEP}..."
         fi
     else
         # Service is not active, trying to start it
