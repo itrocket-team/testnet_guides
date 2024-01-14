@@ -173,6 +173,12 @@ cp $HOME/node_privkey.key_backup $HOME/massa/massa-node/config/node_privkey.key
 cp -r $HOME/wallets_backup $HOME/massa/massa-client/wallets
 ~~~
 
+### Get node status
+
+~~~bash
+cd $HOME/massa/massa-client/ && echo "get_status" | ./massa-client
+~~~
+
 ### Security
 To protect you keys please save and don`t share your keys, and follow a basic security rules
 
