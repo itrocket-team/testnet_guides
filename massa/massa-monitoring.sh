@@ -6,7 +6,7 @@ BOT_TOKEN="<YOUR_BOT_TOKEN>"
 CHAT_ID_ALARM="<YOUR_CHAT_ID>"
 
 # set vars
-read -p "Enter massa-client password: " PASSWORD
+read -s -p "Enter massa-client password: " PASSWORD
 PASSWORD=$PASSWORD
 SLEEP=900
 DIR=$(pwd)
