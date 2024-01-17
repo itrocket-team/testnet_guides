@@ -1,5 +1,5 @@
 #!/bin/bash
-#start with /bin/bash buyrolls.sh
+#start with /bin/bash massa-monitoring.sh
 
 # Configure telegram bot and chat id token
 BOT_TOKEN="<YOUR_BOT_TOKEN>"
