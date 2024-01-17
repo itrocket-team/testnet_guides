@@ -162,7 +162,7 @@ buy_rolls <YOUR_WALLET_ADDRESS> 1 0
 ~~~
 >We are waiting for 2 hours until the roll becomes active, you need to see `Rolls: active=1` in `wallet_info` command
 
-Get balances, replace your Wallet address `<YOUR_WALLET_ADDRESS>` without `<>`
+Get wallet info, replace your Wallet address `<YOUR_WALLET_ADDRESS>` without `<>`
 
 ~~~bash 
 get_addresses  <YOUR_WALLET_ADDRESS>
