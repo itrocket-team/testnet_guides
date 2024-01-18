@@ -46,7 +46,7 @@ rm massa_MAIN.2.1_release_linux.tar.gz
 Config  app
 
 ~~~bash
-sudo tee <<EOF >/dev/null $HOME/massa/massa-node/config/config.toml
+tee <<EOF >/dev/null $HOME/massa/massa-node/config/config.toml
 [network]
 routable_ip = "`wget -qO- eth0.me`"
 EOF
@@ -188,7 +188,7 @@ cp -r $HOME/backup/wallets_bakup $HOME/massa/massa-client/wallets
 Config  app
 
 ~~~bash
-sudo tee <<EOF >/dev/null $HOME/massa/massa-node/config/config.toml
+tee <<EOF >/dev/null $HOME/massa/massa-node/config/config.toml
 [network]
 routable_ip = "`wget -qO- eth0.me`"
 EOF
