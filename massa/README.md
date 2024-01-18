@@ -52,6 +52,10 @@ routable_ip = "`wget -qO- eth0.me`"
 EOF
 ~~~
 
+~~~
+sed -i.bak -e "s/retry_delay =.*/retry_delay = 10000/; " $HOME/massa/massa-node/base_config/config.toml
+~~~
+
 Start Node and create password
 
 ~~~bash
@@ -188,6 +192,10 @@ sudo tee <<EOF >/dev/null $HOME/massa/massa-node/config/config.toml
 [network]
 routable_ip = "`wget -qO- eth0.me`"
 EOF
+~~~
+
+~~~
+sed -i.bak -e "s/retry_delay =.*/retry_delay = 10000/; " $HOME/massa/massa-node/base_config/config.toml
 ~~~
 
 Start service
