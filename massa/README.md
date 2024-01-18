@@ -181,6 +181,15 @@ cp -r $HOME/backup/staking_wallets_backup $HOME/massa/massa-node/config/staking_
 cp -r $HOME/backup/wallets_bakup $HOME/massa/massa-client/wallets
 ~~~
 
+Config  app
+
+~~~bash
+sudo tee <<EOF >/dev/null $HOME/massa/massa-node/config/config.toml
+[network]
+routable_ip = "`wget -qO- eth0.me`"
+EOF
+~~~
+
 Start service
 
 ~~~bash
