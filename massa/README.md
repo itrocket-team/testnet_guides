@@ -153,7 +153,7 @@ After a while, the balance will be displayed in the client interface, usually 1-
 wallet_info
 ~~~
 
-### Upgrade
+## Upgrade
 
 Backup keys
 
