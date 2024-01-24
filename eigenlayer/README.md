@@ -42,5 +42,5 @@ Don't stop process with `CTRL+C`, if you want to disconnect the session use `CTR
 
 >If you want to connect disconnected session use:
 ```
-tmux attach -t monitoring
+tmux attach -t eigenlayer-monitoring
 ```
