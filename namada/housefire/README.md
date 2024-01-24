@@ -199,45 +199,10 @@ After a couple of minutes, the check the balance
 namadac balance --owner $WALLET
 ~~~
 
-Create validator
-
->before creating a validator, you need to check the balance and make sure that the node is synched
-
 Check Sync status, once your node is fully synced, the output from above will say `false`
 
 ~~~bash
 curl http://127.0.0.1:26657/status | jq .result.sync_info.catching_up
-~~~
-
-Check your balance
-
-~~~bash
-namada client balance --owner $ALIAS --token NAM
-~~~
-
-Init validator
-
-~~~bash
-namada client init-validator \
-  --alias $ALIAS \
-  --source $WALLET \
-  --commission-rate 0.1 \
-  --max-commission-rate-change 0.01
-~~~
-  
-Stake your funds
-
-~~~bash
-namada client bond \
-  --validator $ALIAS \
-  --amount 1500 \
-  --gas-limit 10000000
-  ~~~
-  
-Waiting more than 2 epoch and check your status
-
-~~~bash
-namada client bonds --owner $ALIAS
 ~~~
 
 ## 🔒 Security
