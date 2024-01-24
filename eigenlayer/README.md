@@ -1,6 +1,8 @@
 # Simple script for monitoring Eigenlayer node
+- This script is not a full-fledged monitoring tool, but it can serve as a good complement to a comprehensive monitoring tool using Prometheus and Grafana https://docs.eigenlayer.xyz/operator-guides/avs-installation-and-registration/eigenda-operator-guide/eigenda-metrics-and-monitoring
+- This script monitors the state of the container and the presence of the message "StoreChunks succeeded" in the container logs every 15 minutes, reporting any issues to Telegram
 
-## Download namada.sh file
+## Download eigenlayer-monitoring.sh file
 To begin, download the `eigenlayer-monitoring.sh` script using the following commands:
 ```
 cd $HOME
