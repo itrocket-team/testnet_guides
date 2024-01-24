@@ -172,6 +172,17 @@ Create wallet
 namadaw gen --alias $WALLET
 ~~~
 
+Delete wallet
+
+~~~bash
+namadaw remove --alias $WALLET --do-it
+~~~
+
+Restore executing wallet 
+~~~bash
+namadaw derive --alias $WALLET
+~~~
+
 Find your wallet address
 
 ~~~bash
@@ -180,7 +191,13 @@ namadaw find --alias $WALLET
 >Copy the implicit address (starts with tnam...) for the next step
 
 
-Fund your wallet from [faucet](https://faucet.housefire.luminara.icu/)
+- Fund your wallet from [faucet](https://faucet.housefire.luminara.icu/)
+
+After a couple of minutes, the check the balance
+
+~~~bash
+namadac balance --owner $WALLET
+~~~
 
 Create validator
 
