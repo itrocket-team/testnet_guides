@@ -231,31 +231,6 @@ Check logs
 sudo journalctl -u namadad -f
 ~~~
 
-Check your validator bond status
-~~~bash
-namada client bonds --owner $ALIAS
-~~~
-
-Check all bonded nodes
-~~~bash
-namada client bonded-stake
-~~~
-
-Check balance
-
-~~~bash
-namada client balance --owner $ALIAS --token NAM
-~~~
-
-Stake funds
-
-~~~bash
-namada client bond \
-  --validator $ALIAS \
-  --amount 1500 \
-  --gas-limit 10000000
-~~~
-
 Check Sync status and node info
 
 ~~~bash
