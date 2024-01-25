@@ -222,6 +222,16 @@ namadac init-validator --commission-rate 0.07 --max-commission-rate-change 1 --s
 
 >query the set of validators: `namadac bonded-stake`
 
+Check epoch
+~~~bash
+namada client epoch
+~~~
+
+Find your “established” validator address (or just use your validator’s alias)
+~~~bash
+namadaw list
+~~~
+
 ## 🔒 Security
 
 ❗To protect you keys please don`t share your privkey, mnemonic and follow a basic security rules
