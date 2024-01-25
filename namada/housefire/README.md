@@ -168,7 +168,7 @@ Create wallet
 namadaw gen --alias $WALLET
 ~~~
 
-Restore executing wallet 
+Restore existing wallet
 ~~~bash
 namadaw derive --alias $WALLET
 ~~~
@@ -317,4 +317,43 @@ Your validator votes (prevote)
 curl -s http://localhost:26657/dump_consensus_state | jq '.result.round_state.votes[0].prevotes' | grep $(curl -s http://localhost:26657/status | jq -r '.result.validator_info.address[:12]')
 ~~~
 
+## Wallet operations
 
+Create test wallets
+~~~bash
+namada wallet gen --alias ${WALLET}1
+~~~
+~~~bash
+namada wallet gen --alias ${WALLET}2
+~~~
+
+Restore existing wallets
+~~~bash
+namada wallet derive --alias ${WALLET}1
+~~~
+
+Find your wallet address
+
+~~~bash
+namada wallet find --alias ${WALLET}1
+~~~
+
+- Fund your wallet from [faucet](https://faucet.housefire.luminara.icu/)
+
+>After a couple of minutes, the check the balance
+
+Check balance
+~~~bash
+namada client balance --owner ${WALLET}1
+~~~
+
+Check keys
+~~~bash
+namada wallet list
+~~~
+
+Send payment from your address to other address
+
+~~~bash
+namada client transfer --source ${WALLET}1 --target ${WALLET}2 --token NAM --amount 100 --signing-keys ${WALLET}1
+~~~
