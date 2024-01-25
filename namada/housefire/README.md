@@ -165,8 +165,7 @@ sudo systemctl enable namadad
 sudo systemctl restart namadad && sudo journalctl -u namadad -f
 ~~~
 
-## Create and fund wallet
-
+## 🔎 Create and fund wallet 
 Create wallet
 
 ~~~bash
@@ -212,7 +211,7 @@ Check Sync status, once your node is fully synced, the output from above will sa
 curl http://127.0.0.1:26657/status | jq .result.sync_info.catching_up
 ~~~
 
-# Turn your full node into a validator
+## 🧑‍🎓 Turn your full node into a validator
 
 Initiate a validator 
 
