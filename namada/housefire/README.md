@@ -220,6 +220,18 @@ Initiate a validator
 namadac init-validator --commission-rate 0.07 --max-commission-rate-change 1 --signing-keys $WALLET --alias $ALIAS --email <EMAIL_ADDRESS> --account-keys $WALLET
 ~~~
 
+Find your `established` validator address
+~~~bash
+namadaw list | grep -A 1 "$ALIAS" | grep "Established"
+~~~
+
+Replace your Validator address, save and import variables into system
+~~~bash
+VALIDATOR_ADDRESS=$(namadaw list | grep -A 1 "$ALIAS" | grep "Established" | awk '{print $3}')
+echo "export VALIDATOR_ADDRESS="$VALIDATOR_ADDRESS"" >> $HOME/.bash_profile
+source $HOME/.bash_profile
+~~~
+
 Restart the node and wait for 2 epochs
 ~~~bash
 sudo systemctl restart namadad && sudo journalctl -u namadad -f
@@ -230,14 +242,19 @@ Check epoch
 namada client epoch
 ~~~
 
+Delegate tokens (aka “bond” or “stake”) to established validator address
+~~~bash
+namadac bond --validator $ALIAS --source $WALLET --amount 1000
+~~~
+
+Three epochs must pass before your validator is in the consensus set 
+~~~bash
+namadac validator-state --validator $ALIAS
+~~~
+
 Query the set of validators 
 ~~~bash
 namadac bonded-stake
-~~~
-
-Find your `established` validator address
-~~~bash
-namadaw list | grep -A 1 "$ALIAS" | grep "Established"
 ~~~
 
 ## 🔒 Security
