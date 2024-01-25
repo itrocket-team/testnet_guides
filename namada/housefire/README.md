@@ -285,37 +285,7 @@ Query the set of validators
 namadac bonded-stake
 ~~~
 
-## 📝 Useful commands
-
-Check logs
-
-~~~bash
-sudo journalctl -u namadad -f
-~~~
-
-Check Sync status and node info
-
-~~~bash
-curl http://127.0.0.1:26657/status | jq
-~~~
-
-Check consensus state
-
-~~~bash
-curl -s localhost:26657/consensus_state | jq .result.round_state.height_vote_set[0].prevotes_bit_array
-~~~
-
-Full consensus state
-
-~~~bash
-curl -s localhost:26657/dump_consensus_state | jq
-~~~
-
-Your validator votes (prevote)
-
-~~~bash
-curl -s http://localhost:26657/dump_consensus_state | jq '.result.round_state.votes[0].prevotes' | grep $(curl -s http://localhost:26657/status | jq -r '.result.validator_info.address[:12]')
-~~~
+# 📝 Useful commands
 
 ## Wallet operations
 
@@ -356,4 +326,37 @@ Send payment from your address to other address
 
 ~~~bash
 namada client transfer --source ${WALLET}1 --target ${WALLET}2 --token NAM --amount 100 --signing-keys ${WALLET}1
+~~~
+
+## Validator operations
+
+Check consensus state
+
+~~~bash
+curl -s localhost:26657/consensus_state | jq .result.round_state.height_vote_set[0].prevotes_bit_array
+~~~
+
+Full consensus state
+
+~~~bash
+curl -s localhost:26657/dump_consensus_state | jq
+~~~
+
+Your validator votes (prevote)
+
+~~~bash
+curl -s http://localhost:26657/dump_consensus_state | jq '.result.round_state.votes[0].prevotes' | grep $(curl -s http://localhost:26657/status | jq -r '.result.validator_info.address[:12]')
+~~~
+
+## Sync and Consensus
+Check logs
+
+~~~bash
+sudo journalctl -u namadad -f
+~~~
+
+Check Sync status and node info
+
+~~~bash
+curl http://127.0.0.1:26657/status | jq
 ~~~
