@@ -251,6 +251,11 @@ Wait for 3 epochs and check validator is in the consensus set
 namadac validator-state --validator $ALIAS
 ~~~
 
+Check your validator bond status
+~~~bash
+namada client bonds --owner $ALIAS
+~~~
+
 Query the set of validators 
 ~~~bash
 namadac bonded-stake
