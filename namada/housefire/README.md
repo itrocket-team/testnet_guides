@@ -241,7 +241,7 @@ Check epoch
 namada client epoch
 ~~~
 
-Delegate tokens (aka “bond” or “stake”) to established validator address
+Delegate tokens
 ~~~bash
 namadac bond --validator $ALIAS --source $WALLET --amount 1000
 ~~~
