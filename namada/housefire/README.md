@@ -60,6 +60,7 @@ Install CometBFT
 
 ~~~
 cd $HOME
+rm -rf cometbft
 git clone https://github.com/cometbft/cometbft.git
 cd cometbft
 git checkout v0.37.2
@@ -169,24 +170,18 @@ sudo systemctl restart namadad && sudo journalctl -u namadad -f
 Create wallet
 
 ~~~bash
-namadaw gen --alias $ALIAS
-~~~
-
-Delete wallet
-
-~~~bash
-namadaw remove --alias $ALIAS --do-it
+namadaw gen --alias $WALLET
 ~~~
 
 Restore executing wallet 
 ~~~bash
-namadaw derive --alias $ALIAS
+namadaw derive --alias $WALLET
 ~~~
 
 Find your wallet address
 
 ~~~bash
-namadaw find --alias $ALIAS
+namadaw find --alias $WALLET
 ~~~
 >Copy the implicit address (starts with tnam...) for the next step
 
@@ -196,7 +191,19 @@ namadaw find --alias $ALIAS
 After a couple of minutes, the check the balance
 
 ~~~bash
-namadac balance --owner $ALIAS
+namadac balance --owner $WALLET
+~~~
+
+List known keys and addresses in the wallet
+
+~~~bash
+namadaw list
+~~~
+
+Delete wallet
+
+~~~bash
+namadaw remove --alias $WALLET --do-it
 ~~~
 
 Check Sync status, once your node is fully synced, the output from above will say `false`
