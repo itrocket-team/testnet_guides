@@ -256,6 +256,11 @@ Check your validator bond status
 namada client bonds --owner $WALLET
 ~~~
 
+Find your validator status
+~~~bash
+namada client validator-state --validator $VALIDATOR_ADDRESS
+~~~
+
 Query the set of validators 
 ~~~bash
 namadac bonded-stake
