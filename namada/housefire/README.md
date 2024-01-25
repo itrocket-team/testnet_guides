@@ -246,7 +246,7 @@ Delegate tokens (aka “bond” or “stake”) to established validator address
 namadac bond --validator $ALIAS --source $WALLET --amount 1000
 ~~~
 
-Three epochs must pass before your validator is in the consensus set 
+Wait for 3 epochs and check validator is in the consensus set 
 ~~~bash
 namadac validator-state --validator $ALIAS
 ~~~
