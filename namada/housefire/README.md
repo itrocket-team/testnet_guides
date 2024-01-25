@@ -93,11 +93,9 @@ namada --version
 ~~~
 
 
-<details>
-  <summary><strong>🔗 Join-network as Full node or Validator</strong></summary>
-  <br>
+Join-network as Full node
 
-  ~~~bash
+~~~bash
 cd $HOME
 namada client utils join-network --chain-id $CHAIN_ID --dont-prefetch-wasm
 wget https://housefire.luminara.icu/wasm.tar.gz
@@ -105,8 +103,6 @@ tar -xf wasm.tar.gz
 cp wasm/* ${BASE_DIR}/${CHAIN_ID}/wasm/
 rm -rf wasm.tar.gz wasm
 ~~~
-
-</details>
 
 <details>
   <summary><strong>🔗 Join-network via RPC Node</strong></summary>
