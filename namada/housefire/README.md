@@ -212,7 +212,7 @@ Check Sync status, once your node is fully synced, the output from above will sa
 curl http://127.0.0.1:26657/status | jq .result.sync_info.catching_up
 ~~~
 
-## Turn your full node into a validator
+# Turn your full node into a validator
 
 Initiate a validator 
 
@@ -220,16 +220,24 @@ Initiate a validator
 namadac init-validator --commission-rate 0.07 --max-commission-rate-change 1 --signing-keys $WALLET --alias $ALIAS --email <EMAIL_ADDRESS> --account-keys $WALLET
 ~~~
 
->query the set of validators: `namadac bonded-stake`
+Restart the node and wait for 2 epochs
+~~~bash
+sudo systemctl restart namadad && sudo journalctl -u namadad -f
+~~~
 
 Check epoch
 ~~~bash
 namada client epoch
 ~~~
 
-Find your “established” validator address (or just use your validator’s alias)
+Query the set of validators 
 ~~~bash
-namadaw list
+namadac bonded-stake
+~~~
+
+Find your `established` validator address
+~~~bash
+namadaw list | grep -A 1 "$ALIAS" | grep "Established"
 ~~~
 
 ## 🔒 Security
