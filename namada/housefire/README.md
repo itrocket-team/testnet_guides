@@ -169,24 +169,24 @@ sudo systemctl restart namadad && sudo journalctl -u namadad -f
 Create wallet
 
 ~~~bash
-namadaw gen --alias $WALLET
+namadaw gen --alias $ALIAS
 ~~~
 
 Delete wallet
 
 ~~~bash
-namadaw remove --alias $WALLET --do-it
+namadaw remove --alias $ALIAS --do-it
 ~~~
 
 Restore executing wallet 
 ~~~bash
-namadaw derive --alias $WALLET
+namadaw derive --alias $ALIAS
 ~~~
 
 Find your wallet address
 
 ~~~bash
-namadaw find --alias $WALLET
+namadaw find --alias $ALIAS
 ~~~
 >Copy the implicit address (starts with tnam...) for the next step
 
@@ -196,7 +196,7 @@ namadaw find --alias $WALLET
 After a couple of minutes, the check the balance
 
 ~~~bash
-namadac balance --owner $WALLET
+namadac balance --owner $ALIAS
 ~~~
 
 Check Sync status, once your node is fully synced, the output from above will say `false`
@@ -204,6 +204,16 @@ Check Sync status, once your node is fully synced, the output from above will sa
 ~~~bash
 curl http://127.0.0.1:26657/status | jq .result.sync_info.catching_up
 ~~~
+
+## Turn your full node into a validator
+
+Initiate a validator 
+
+~~~bash
+namadac init-validator --commission-rate 0.07 --max-commission-rate-change 1 --signing-keys $WALLET --alias $ALIAS --email <EMAIL_ADDRESS> --account-keys $WALLET
+~~~
+
+>query the set of validators: `namadac bonded-stake`
 
 ## 🔒 Security
 
