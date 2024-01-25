@@ -221,12 +221,12 @@ namadac init-validator --commission-rate 0.07 --max-commission-rate-change 1 --s
 
 Find your `established` validator address
 ~~~bash
-namadaw list | grep -A 1 "$ALIAS" | grep "Established"
+namadaw list | grep -A 1 "\"$ALIAS\"" | grep "Established"
 ~~~
 
 Replace your Validator address, save and import variables into system
 ~~~bash
-VALIDATOR_ADDRESS=$(namadaw list | grep -A 1 "$ALIAS" | grep "Established" | awk '{print $3}')
+VALIDATOR_ADDRESS=$(namadaw list | grep -A 1 "\"$ALIAS\"" | grep "Established" | awk '{print $3}')
 echo "export VALIDATOR_ADDRESS="$VALIDATOR_ADDRESS"" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 ~~~
