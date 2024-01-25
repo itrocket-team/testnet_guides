@@ -308,7 +308,7 @@ curl -s localhost:26657/consensus_state | jq .result.round_state.height_vote_set
 Full consensus state
 
 ~~~bash
-curl -s localhost:12657/dump_consensus_state
+curl -s localhost:26657/dump_consensus_state
 ~~~
 
 Your validator votes (prevote)
