@@ -261,6 +261,11 @@ Find your validator status
 namada client validator-state --validator $VALIDATOR_ADDRESS
 ~~~
 
+Add stake
+~~~bash
+namadac bond --source $WALLET --validator $VALIDATOR_ADDRESS --amount 1000
+~~~
+
 Query the set of validators 
 ~~~bash
 namadac bonded-stake
