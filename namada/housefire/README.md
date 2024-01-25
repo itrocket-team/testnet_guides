@@ -161,6 +161,24 @@ sudo systemctl enable namadad
 sudo systemctl restart namadad && sudo journalctl -u namadad -f
 ~~~
 
+## 🔒 Security
+
+❗To protect you keys please don`t share your privkey, mnemonic and follow a basic security rules
+
+
+### Set up ssh keys for authentication
+You can use this [guide](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys-on-ubuntu-20-04) to configure ssh authentication and disable password authentication on your server
+
+Set the default to allow outgoing connections, deny all incoming, allow ssh and node p2p port
+
+~~~bash
+sudo ufw default allow outgoing 
+sudo ufw default deny incoming 
+sudo ufw allow ssh/tcp 
+sudo ufw allow 26656/tcp
+sudo ufw enable
+~~~
+
 ## 🔎 Create and fund wallet 
 Create wallet
 
@@ -265,24 +283,6 @@ namadac bond --source $WALLET --validator $VALIDATOR_ADDRESS --amount 1000
 Query the set of validators 
 ~~~bash
 namadac bonded-stake
-~~~
-
-## 🔒 Security
-
-❗To protect you keys please don`t share your privkey, mnemonic and follow a basic security rules
-
-
-### Set up ssh keys for authentication
-You can use this [guide](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys-on-ubuntu-20-04) to configure ssh authentication and disable password authentication on your server
-
-Set the default to allow outgoing connections, deny all incoming, allow ssh and node p2p port
-
-~~~bash
-sudo ufw default allow outgoing 
-sudo ufw default deny incoming 
-sudo ufw allow ssh/tcp 
-sudo ufw allow 26656/tcp
-sudo ufw enable
 ~~~
 
 ## 📝 Useful commands
