@@ -253,7 +253,7 @@ namadac validator-state --validator $ALIAS
 
 Check your validator bond status
 ~~~bash
-namada client bonds --owner $ALIAS
+namada client bonds --owner $WALLET
 ~~~
 
 Query the set of validators 
