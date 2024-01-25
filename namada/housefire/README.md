@@ -105,7 +105,7 @@ rm -rf wasm.tar.gz wasm
 ~~~
 
 <details>
-  <summary><strong>🔗 Join-network via RPC Node</strong></summary>
+  <summary><strong>🔗 Join-network via RPC Node (optional)</strong></summary>
 
 ~~~bash
 cd $HOME
