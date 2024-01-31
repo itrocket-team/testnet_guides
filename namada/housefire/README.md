@@ -1,6 +1,6 @@
 <h1 align="left"> 
 <img src="https://raw.githubusercontent.com/itrocket-team/testnet_guides/main/utils/basket/namada.jpg" alt="Namada" width="30" height="30">
- Anoma Namada Setup // Testnet — housefire.50d5126dba66f595d2cc   
+ Anoma Namada Setup // Testnet — housefire-4.209c78b921c910acdb   
 </h1>
 
 Official documentation: [validator setup instructions](https://knowabl.notion.site/Housefire-burner-net-0a0d670d5dad412ea5715fcc97b9433d)
@@ -50,7 +50,7 @@ echo "export ALIAS="CHOOSE_A_NAME_FOR_YOUR_VALIDATOR"" >> $HOME/.bash_profile
 echo "export WALLET="CHOOSE_A_WALLET_NAME"" >> $HOME/.bash_profile
 echo "export PUBLIC_IP=$(wget -qO- eth0.me)" >> $HOME/.bash_profile
 echo "export TM_HASH="v0.1.4-abciplus"" >> $HOME/.bash_profile
-echo "export CHAIN_ID="housefire.50d5126dba66f595d2cc"" >> $HOME/.bash_profile
+echo "export CHAIN_ID="housefire-4.209c78b921c910acdb"" >> $HOME/.bash_profile
 echo "export BASE_DIR="$HOME/.local/share/namada"" >> $HOME/.bash_profile
 echo "export NAMADA_NETWORK_CONFIGS_SERVER="https://housefire.luminara.icu/configs"" >> $HOME/.bash_profile
 source $HOME/.bash_profile
@@ -123,7 +123,7 @@ rm -rf wasm.tar.gz wasm
 
 Configure peers
 ~~~bash
-PEERS="tcp://b2cb012cbece6a378ccb96091af4f386cb45abbb@namada-testnet-peer.itrocket.net:33656,tcp://a3e17c8968bf3dff073d8156187045532a7e144c@142.93.149.122:26656"
+PEERS="tcp://3cbd31aa7fee9f21d651b721c4a802f36b6cef7e@142.93.149.122:26656"
 sed -i 's|^persistent_peers *=.*|persistent_peers = "'$PEERS'"|' ${BASE_DIR}/${CHAIN_ID}/config.toml
 ~~~
 
