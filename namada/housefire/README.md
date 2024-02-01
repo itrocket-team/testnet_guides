@@ -285,6 +285,21 @@ Query the set of validators
 namadac bonded-stake
 ~~~
 
+Unbond the tokens
+~~~bash
+namadac unbond --source $WALLET --validator $VALIDATOR_ADDRESS --amount 1000
+~~~
+
+Wait for 6 epochs, then check when the unbonded tokens can be withdrawed
+~~~bash
+namadac bonds --owner $WALLET
+~~~
+
+Withdraw the unbonded tokens
+~~~bash
+namadac withdraw --source $WALLET --validator $VALIDATOR_ADDRESS
+~~~
+
 # 📝 Useful commands
 
 ## Wallet operations
