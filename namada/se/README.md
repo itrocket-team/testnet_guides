@@ -47,6 +47,7 @@ Replace your Validator and Wallet name, save and import variables into system
 
 ~~~bash
 echo "export ALIAS="CHOOSE_A_NAME_FOR_YOUR_VALIDATOR"" >> $HOME/.bash_profile
+echo "export MEMO="YOUR_tpknam1_ADDR"" >> $HOME/.bash_profile
 echo "export WALLET="wallet"" >> $HOME/.bash_profile
 echo "export PUBLIC_IP=$(wget -qO- eth0.me)" >> $HOME/.bash_profile
 echo "export TM_HASH="v0.1.4-abciplus"" >> $HOME/.bash_profile
