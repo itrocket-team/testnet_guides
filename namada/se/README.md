@@ -203,7 +203,7 @@ curl http://127.0.0.1:26657/status | jq .result.sync_info.catching_up
 Initiate a validator 
 
 ~~~bash
-namadac init-validator --commission-rate 0.07 --max-commission-rate-change 1 --signing-keys $WALLET --alias $ALIAS --email <EMAIL_ADDRESS> --account-keys $WALLET
+namadac init-validator --commission-rate 0.07 --max-commission-rate-change 1 --signing-keys $WALLET --alias $ALIAS --email <EMAIL_ADDRESS> --account-keys $WALLET --memo $MEMO
 ~~~
 
 Find your `established` validator address
@@ -230,7 +230,7 @@ namada client epoch
 
 Delegate tokens
 ~~~bash
-namadac bond --validator $ALIAS --source $WALLET --amount 1000
+namadac bond --validator $ALIAS --source $WALLET --amount 1000 --memo $MEMO
 ~~~
 
 Wait for 3 epochs and check validator is in the consensus set 
