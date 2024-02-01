@@ -98,23 +98,8 @@ Join-network as Full node
 namada client utils join-network --chain-id $CHAIN_ID
 ~~~
 
-
-<details>
-  <summary><strong>🔗 Join-network via RPC Node (optional)</strong></summary>
-
-~~~bash
-cd $HOME
-namada client utils join-network --chain-id $CHAIN_ID --dont-prefetch-wasm
-wget https://housefire.luminara.icu/wasm.tar.gz
-tar -xf wasm.tar.gz
-cp wasm/* ${BASE_DIR}/${CHAIN_ID}/wasm/
-rm -rf wasm.tar.gz wasm
-~~~
-
 >You can now execute commands on the chain without syncing a full node, by using the public RPC http://rpc.housefire.luminara.icu. To do so, input the command as normal but include the
 --nodeflag to specify that you wish to use an external RPC. For example: `namadac epoch --node tcp://rpc.housefire.luminara.icu:80`
-
-</details>
 
 Create Service file
 
