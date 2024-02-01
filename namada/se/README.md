@@ -98,18 +98,6 @@ Join-network as Full node
 namada client utils join-network --chain-id $CHAIN_ID
 ~~~
 
-Download Genesis and config
-
-~~~
-cd $HOME
-rm -rf download
-mkdir download
-cd download
-wget https://github.com/anoma/namada-shielded-expedition/releases/download/shielded-expedition.b40d8e9055/shielded-expedition.b40d8e9055.tar.gz
-tar -xvf shielded-expedition.b40d8e9055.tar.gz
-rm shielded-expedition.b40d8e9055.tar.gz 
-~~~
-
 
 <details>
   <summary><strong>🔗 Join-network via RPC Node (optional)</strong></summary>
@@ -127,12 +115,6 @@ rm -rf wasm.tar.gz wasm
 --nodeflag to specify that you wish to use an external RPC. For example: `namadac epoch --node tcp://rpc.housefire.luminara.icu:80`
 
 </details>
-
-Configure peers
-~~~bash
-PEERS="tcp://3cbd31aa7fee9f21d651b721c4a802f36b6cef7e@142.93.149.122:26656"
-sed -i 's|^persistent_peers *=.*|persistent_peers = "'$PEERS'"|' ${BASE_DIR}/${CHAIN_ID}/config.toml
-~~~
 
 Create Service file
 
