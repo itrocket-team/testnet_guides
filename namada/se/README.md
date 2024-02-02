@@ -174,7 +174,7 @@ namadaw find --alias $WALLET
 
 - Fund your wallet from [faucet](https://faucet.housefire.luminara.icu/)
 
-After a couple of minutes, the check the balance
+After a couple of minutes, check the balance
 
 ~~~bash
 namadac balance --owner $WALLET
