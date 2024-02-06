@@ -1,6 +1,6 @@
 <h1 align="left"> 
 <img src="https://raw.githubusercontent.com/itrocket-team/testnet_guides/main/utils/basket/namada.jpg" alt="Namada" width="30" height="30">
- Anoma Namada Setup // Testnet — shielded-expedition.b40d8e9055   
+ Anoma Namada Setup // Testnet — shielded-expedition.88f17d1d14   
 </h1>
 
 Official documentation: [validator setup instructions](https://knowabl.notion.site/Housefire-burner-net-0a0d670d5dad412ea5715fcc97b9433d)
