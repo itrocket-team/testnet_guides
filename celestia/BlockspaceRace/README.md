@@ -1,5 +1,5 @@
 # <img src="https://avatars.githubusercontent.com/u/54859940?s=200&v=4" style="border-radius: 50%; vertical-align: middle;" width="35" height="35" /> Celestia Node Setup Guide
-> For Celestia Testnet — blockspacerace-0
+> For Celestia Testnet — mocha-4
 
 Celestia is a new modular blockchain technology that powers, scales and secures Web3 applications. In this guide we will share our installation commands of a Celestia Validator node with the help of <img src="https://itrocket.net//whiteLogoCrop.ico" style="border-radius: 50%; vertical-align: middle;" width="15" height="15" /> ITRocket Team  services. 
 
@@ -35,7 +35,7 @@ sudo apt install curl git wget htop tmux build-essential jq make gcc -y
 CELESTIA_PORT=11
 echo "export WALLET="<YOUR_WALLET_NAME>"" >> $HOME/.bash_profile
 echo "export MONIKER="<YOUR_MONIKER>"" >> $HOME/.bash_profile
-echo "export CHAIN_ID="blockspacerace-0"" >> $HOME/.bash_profile
+echo "export CHAIN_ID="mocha-4"" >> $HOME/.bash_profile
 echo "export CELESTIA_PORT="${CELESTIA_PORT}"" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 ```
@@ -43,7 +43,7 @@ source $HOME/.bash_profile
 ```bash
 cd ~
 ! [ -x "$(command -v go)" ] && {
-VER="1.19.3"
+VER="1.21.1"
 wget "https://golang.org/dl/go$VER.linux-amd64.tar.gz"
 sudo rm -rf /usr/local/go
 sudo tar -C /usr/local -xzf "go$VER.linux-amd64.tar.gz"
@@ -61,7 +61,7 @@ cd $HOME
 rm -rf celestia-app 
 git clone https://github.com/celestiaorg/celestia-app.git 
 cd celestia-app/ 
-APP_VERSION=v0.13.2 
+APP_VERSION=v1.6.0 
 git checkout tags/$APP_VERSION -b $APP_VERSION 
 make install
 ```
