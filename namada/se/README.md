@@ -76,10 +76,10 @@ cd $HOME
 rm -rf namada
 git clone https://github.com/anoma/namada
 cd namada
-wget https://github.com/anoma/namada/releases/download/v0.31.1/namada-v0.31.1-Linux-x86_64.tar.gz
-tar -xvf namada-v0.31.1-Linux-x86_64.tar.gz
-rm namada-v0.31.1-Linux-x86_64.tar.gz
-cd namada-v0.31.1-Linux-x86_64
+wget https://github.com/anoma/namada/releases/download/v0.31.2/namada-v0.31.2-Linux-x86_64.tar.gz
+tar -xvf namada-v0.31.2-Linux-x86_64.tar.gz
+rm namada-v0.31.2-Linux-x86_64.tar.gz
+cd namada-v0.31.2-Linux-x86_64
 sudo mv namad* /usr/local/bin/
 if [ ! -d "$BASE_DIR" ]; then
     mkdir -p "$BASE_DIR"
