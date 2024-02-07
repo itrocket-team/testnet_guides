@@ -156,7 +156,7 @@ curl -s http://localhost:26659/balance | jq
 (Optional) If you want transferring keys to another server, you will need to add permissions
 
 ~~~
-chmod -R 700 .celestia-bridge-blockspacerace-0
+chmod -R 700 .celestia-bridge-mocha-4
 ~~~
 
 
