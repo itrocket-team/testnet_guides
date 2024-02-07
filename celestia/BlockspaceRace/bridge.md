@@ -1,5 +1,5 @@
 <div>
-<h1 align="left" style="display: flex;"> Celestia Bridge node Setup Setup for Blockspace Race Testnet — blockspacerace-0</h1>
+<h1 align="left" style="display: flex;"> Celestia Bridge node Setup Setup for Blockspace Race Testnet — mocha-4</h1>
 <img src="https://avatars.githubusercontent.com/u/54859940?s=200&v=4"  style="float: right;" width="100" height="100"></img>
 </div>
 
@@ -35,7 +35,7 @@ install go
 ```bash
 cd ~
 ! [ -x "$(command -v go)" ] && {
-VER="1.20.1"
+VER="1.21.1"
 wget "https://golang.org/dl/go$VER.linux-amd64.tar.gz"
 sudo rm -rf /usr/local/go
 sudo tar -C /usr/local -xzf "go$VER.linux-amd64.tar.gz"
@@ -48,40 +48,52 @@ source ~/.bash_profile
 go version
 ```
 
-Download and build binaries
+Install Celestia-node
 
 ```bash
-cd $HOME 
-rm -rf celestia-node 
-git clone https://github.com/celestiaorg/celestia-node.git 
-cd celestia-node/ 
-git checkout tags/v0.10.4 
+cd $HOME
+rm -rf celestia-node
+git clone https://github.com/celestiaorg/celestia-node.git
+cd celestia-node/
+git checkout tags/v0.12.4 
 make build 
 sudo make install 
 make cel-key 
 ```
 
+Install Celestia-app
+
+```bash
+cd $HOME
+rm -rf celestia-app
+git clone https://github.com/celestiaorg/celestia-app.git
+cd celestia-app
+git checkout tags/v1.6.0 -b v1.6.0
+make install
+```
+
 Config and init app
 
 ```bash
-celestia bridge init --core.ip localhost --p2p.network blockspacerace
+celestia bridge init --core.ip <RPC_NODE_IP> --p2p.network mocha
 ```
 
 Once you start the Bridge Node, a wallet key will be generated for you. You will need to fund that address with Testnet tokens to pay for PayForBlob transactions. You can find the address by running the following command:
 
 ~~~bash
 cd $HOME/celestia-node
-./cel-key list --node.type bridge --keyring-backend test --p2p.network blockspacerace
+./cel-key list --node.type bridge --keyring-backend test --p2p.network mocha
 ~~~
 
 Reset node
 ~~~bash
-celestia bridge unsafe-reset-store --p2p.network blockspacerace
+celestia bridge unsafe-reset-store --p2p.network mocha
 ~~~
 
 Add your Full node RPC and gRPC ports
 
 ~~~bash
+RPC_IP="<PUT_FULL_NODE_RPC_IP>"
 RPC_PORT="<PUT_FULL_NODE_RPC_PORT>"
 GRPC_PORT="<PUT_FULL_NODE_GRPC_PORT>"
 ~~~
@@ -96,7 +108,7 @@ After=network-online.target
 
 [Service]
 User=$USER
-ExecStart=$(which celestia) bridge start  --core.ip localhost --core.grpc.port $GRPC_PORT --core.rpc.port $RPC_PORT --p2p.network blockspacerace --metrics.tls=false --metrics --metrics.endpoint otel.celestia.tools:4318  --gateway --gateway.addr localhost --gateway.port 26659 --keyring.accname my_celes_key
+ExecStart=$(which celestia) bridge start  --core.ip $RPC_IP --core.grpc.port $GRPC_PORT --core.rpc.port $RPC_PORT --p2p.network mocha --metrics.tls=true --metrics --metrics.endpoint otel.celestia.tools:4318 --keyring.accname my_celes_key
 Restart=on-failure
 RestartSec=3
 LimitNOFILE=65535
@@ -121,7 +133,7 @@ This is an RPC call in order to get your node's peerId information. NOTE: You ca
 
 ~~~bash
 NODE_TYPE=bridge
-AUTH_TOKEN=$(celestia $NODE_TYPE auth admin --p2p.network blockspacerace)
+AUTH_TOKEN=$(celestia $NODE_TYPE auth admin --p2p.network mocha)
 ~~~
 
 Then you can get the peerId of your node with the following curl command:
