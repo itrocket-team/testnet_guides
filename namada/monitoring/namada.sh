@@ -12,6 +12,9 @@ TELEGRAM_CHAT_ID="<TELEGRAM_CHAT_ID>"
 # Telegram bot token
 TELEGRAM_BOT_TOKEN="<TELEGRAM_TOKEN>"
 
+# Node name
+NODE_NAME="my_validatoe"
+
 # Alert threshold for the block height difference between the node and network
 BLOCK_GAP_ALARM=100
 
@@ -57,9 +60,9 @@ get_node_info() {
     if [ -z "$response" ]; then
       if [ "$RESTART" == "true" ]; then
         sudo systemctl restart namadad
-        send_telegram_message "NAMADA node not responding. But, service has been restarted."
+        send_telegram_message "NAMADA $NODE_NAME node not responding. But, service has been restarted."
       else
-        send_telegram_message "Namada Node is not responding, please check it."
+        send_telegram_message "Namada $NODE_NAME Node is not responding, please check it."
       fi
       echo "Waiting for 5 minutes before rechecking..."
       sleep 300
@@ -83,12 +86,12 @@ while true; do
   if [ $(($expected_block_height - $block_height)) -ge "$BLOCK_GAP_ALARM" ]; then
     if [ "$RESTART" == "true" ]; then
       sudo systemctl restart namadad
-      send_telegram_message "NAMADA node
+      send_telegram_message "NAMADA $NODE_NAME node
       >>> ${block_height}/${expected_block_height} diff $(($expected_block_height - $block_height)) 
       > but service has been restarted"
       echo "${block_height}/${expected_block_height} diff $(($expected_block_height - $block_height)), but service has been restarted, rechecking after 10 min... "
     else
-      send_telegram_message "NAMADA node
+      send_telegram_message "NAMADA $NODE_NAME node
       >>> ${block_height}/${expected_block_height} diff $(($expected_block_height - $block_height))
       > but restart is disabled."
       echo "${block_height}/${expected_block_height} diff $(($expected_block_height - $block_height)), but restart is disabled, rechecking after 10 min..."
@@ -167,7 +170,7 @@ check_validator_activity() {
   if [ $missed_blocks -gt $MAX_MISSED_BLOCKS ]; then
     echo "--------------------------------------------------------------------"
     echo "Validator $validator_address missed $missed_blocks out of the last 300 blocks, with $max_consecutive_missed missed in a row. Sending message to Telegram."
-    send_telegram_message "Validator $validator_address missed $missed_blocks out of the last 300 blocks, with $max_consecutive_missed missed in a row."
+    send_telegram_message "$NODE_NAME Validator $validator_address missed $missed_blocks out of the last 300 blocks, with $max_consecutive_missed missed in a row."
   else
     echo "--------------------------------------------------------------------"
     echo "Validator $validator_address missed $missed_blocks blocks out of the last 300."
@@ -182,7 +185,7 @@ check_voting_power_change() {
   if [ -n "$PREVIOUS_VOTING_POWER" ]; then
     # Send a message to Telegram if there is a change in the voting_power
     if [ "$current_voting_power" -ne "$PREVIOUS_VOTING_POWER" ]; then
-      send_telegram_message "Voting Power changed: Previous: $PREVIOUS_VOTING_POWER, Current: $current_voting_power"
+      send_telegram_message "$NODE_NAME Voting Power changed: Previous: $PREVIOUS_VOTING_POWER, Current: $current_voting_power"
       echo "Voting Power changed: Previous: $PREVIOUS_VOTING_POWER, Current: $current_voting_power"
     fi
   fi
