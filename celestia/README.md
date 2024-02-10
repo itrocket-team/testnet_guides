@@ -42,7 +42,7 @@ source $HOME/.bash_profile
 ```bash
 cd ~
 ! [ -x "$(command -v go)" ] && {
-VER="1.21.1"
+VER="1.21.3"
 wget "https://golang.org/dl/go$VER.linux-amd64.tar.gz"
 sudo rm -rf /usr/local/go
 sudo tar -C /usr/local -xzf "go$VER.linux-amd64.tar.gz"
@@ -85,8 +85,8 @@ wget -O $HOME/.celestia-app/config/addrbook.json https://testnet-files.itrocket.
 8. **Set seeds and peers**
 >You can find more peers here: https://itrocket.net/services/testnet/celestia/#peer
 ```bash
-SEEDS="fedea9723696360d429a23792225594779cc7cd7@celestia-testnet-seed.itrocket.net:11656"
-PEERS="193acd7bf7049b425d7b95c24e02250fce8ad45c@celestia-testnet-peer.itrocket.net:11656"
+SEEDS="5d0bf034d6e6a8b5ee31a2f42f753f1107b3a00e@celestia-testnet-seed.itrocket.net:11656"
+PEERS="daf2cecee2bd7f1b3bf94839f993f807c6b15fbf@celestia-testnet-peer.itrocket.net:11656"
 sed -i -e 's|^seeds *=.*|seeds = "'$SEEDS'"|; s|^persistent_peers *=.*|persistent_peers = "'$PEERS'"|' $HOME/.celestia-app/config/config.toml
 ```
 9. **Set custom ports in app.toml file**
@@ -111,7 +111,7 @@ s%^prometheus_listen_addr = \":26660\"%prometheus_listen_addr = \":${CELESTIA_PO
 ```bash
 sed -i -e "s/^pruning *=.*/pruning = \"nothing\"/" $HOME/.celestia-app/config/app.toml
 sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"100\"/" $HOME/.celestia-app/config/app.toml
-sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"10\"/" $HOME/.celestia-app/config/app.toml
+sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"50\"/" $HOME/.celestia-app/config/app.toml
 ```
 12. **Configure EXTERNAL_ADDRESS**
 ~~~bash
@@ -120,7 +120,7 @@ sed -i.bak -e "s/^external-address = \"\"/external-address = \"$EXTERNAL_ADDRESS
 ~~~
 13. **Set minimum gas price, enable prometheus and disable indexing**
 ```bash
-sed -i -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"0.01utia\"/" $HOME/.celestia-app/config/app.toml
+sed -i -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"0.002utia\"/" $HOME/.celestia-app/config/app.toml
 sed -i -e "s/prometheus = false/prometheus = true/" $HOME/.celestia-app/config/config.toml
 sed -i -e "s/^indexer *=.*/indexer = \"null\"/" $HOME/.celestia-app/config/config.toml
 ```
@@ -130,7 +130,7 @@ celestia-appd tendermint unsafe-reset-all --home $HOME/.celestia-app
 ~~~
 15. **Create Service file**
 ```bash
-sudo tee /etc/systemd/system/celestia-validatord.service > /dev/null <<EOF
+sudo tee /etc/systemd/system/celestia-appd.service > /dev/null <<EOF
 [Unit]
 Description=celestia
 After=network-online.target
@@ -154,13 +154,13 @@ curl https://testnet-files.itrocket.net/celestia/snap_celestia.tar.lz4 | lz4 -dc
 17. **Enable and start service**
 ```bash
 sudo systemctl daemon-reload
-sudo systemctl enable celestia-validatord
-sudo systemctl restart celestia-validatord && sudo journalctl -u celestia-validatord -f
+sudo systemctl enable celestia-appd
+sudo systemctl restart celestia-appd && sudo journalctl -u celestia-appd -f
 ```
 
 ## 💰 Create wallet
 
-### new flags should be added in the new blockspacerace-0 testnet 
+### new flags should be added in the new mocha-4 testnet 
 >`--evm-address` This flag should contain a 0x EVM address.  
  
 <details>
@@ -242,7 +242,7 @@ celestia-appd tx staking create-validator \
 
 ### Monitoring 🔍
 We'll also provide information on how to set up node monitoring, which is an important aspect of ensuring its smooth operation.  
-If you want to have set up a monitoring and alert system use [our Celestia nodes monitoring guide with tenderduty](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/BlockspaceRace/tenderduty.md)  
+If you want to have set up a monitoring and alert system use [our Celestia nodes monitoring guide with tenderduty](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/tenderduty.md)  
 Stay tuned!
   
 ### Security 🔒
@@ -257,7 +257,8 @@ Set the default to allow outgoing connections, deny all incoming, allow ssh and 
 sudo ufw default allow outgoing 
 sudo ufw default deny incoming 
 sudo ufw allow ssh/tcp 
-sudo ufw allow ${CELESTIA_PORT}656/tcp
+sudo ufw allow ${CELESTIA_PORT}656,2121/tcp
+sudo ufw allow 2121/udp
 sudo ufw enable
 ```
 
@@ -277,21 +278,21 @@ You have successfully installed and set up a Celestia validator node! Join the C
   
 check logs
 ```bash
-sudo journalctl -u celestia-validatord -f
+sudo journalctl -u celestia-appd -f
 ```
   
 stop service
 ```bash
-sudo systemctl stop celestia-validatord
+sudo systemctl stop celestia-appd
 ```
 start service
 ```bash
-sudo systemctl start celestia-validatord
+sudo systemctl start celestia-appd
 ```
 
 restart service
 ```bash
-sudo systemctl restart celestia-validatord
+sudo systemctl restart celestia-appd
 ```
 
 <h3> Wallet operation </h3>
@@ -445,9 +446,9 @@ curl localhost:${CELESTIA_PORT}657/consensus_state
 ### Delete node
 
 ```bash
-sudo systemctl stop celestia-validatord
-sudo systemctl disable celestia-validatord
-sudo rm -rf /etc/systemd/system/celestia-validatord*
+sudo systemctl stop celestia-appd
+sudo systemctl disable celestia-appd
+sudo rm -rf /etc/systemd/system/celestia-appd*
 sudo systemctl daemon-reload
 sudo rm $(which celestia-appd)
 sudo rm -rf $HOME/.celestia-app
