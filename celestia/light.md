@@ -81,9 +81,11 @@ cd ~/celestia-node
 ~~~
 
 Create Service file
-Replace FULL node ip address in `<PUT_FULL_NODE_IP>` without `<>`
+Replace FULL node ip, RPC and gRPC ports
 ~~~
-IP_ADDRESS="<PUT_FULL_NODE_IP>"
+RPC_IP="<PUT_FULL_NODE_RPC_IP>"
+RPC_PORT="<PUT_FULL_NODE_RPC_PORT>"
+GRPC_PORT="<PUT_FULL_NODE_GRPC_PORT>"
 ~~~
 ```bash
 sudo tee /etc/systemd/system/celestia-light.service > /dev/null <<EOF
@@ -93,7 +95,7 @@ After=network-online.target
 
 [Service]
 User=$USER
-ExecStart=$(which celestia) light start --core.ip $IP_ADDRESS --keyring.accname <key_name> --gateway --gateway.addr localhost --gateway.port 26659 --p2p.network mocha
+ExecStart=$(which celestia) light start --core.ip $RPC_IP --core.grpc.port $GRPC_PORT --core.rpc.port $RPC_PORT --keyring.accname my_celes_key --gateway --gateway.addr localhost --gateway.port 26659 --p2p.network mocha
 Restart=on-failure
 RestartSec=3
 LimitNOFILE=65535
