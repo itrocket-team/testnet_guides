@@ -126,9 +126,6 @@ sudo systemctl enable celestia-bridge
 sudo systemctl restart celestia-bridge && sudo journalctl -u celestia-bridge -f
 ```
 
-## Task: Deploy Bridge Node
->To complete task, put your wallet `address` and `Bridge Node ID` on [dahboard](https://celestia.knack.com/theblockspacerace)
-
 This is an RPC call in order to get your node's peerId information. NOTE: You can only generate an auth token after initializing and starting your celestia-node.
 
 ~~~bash
