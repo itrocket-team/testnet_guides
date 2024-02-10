@@ -14,7 +14,7 @@ In this tutorial, you'll learn how to create a `Movie Rating App` connected to `
 </ul>
 
 ## 🔧 Setup 
-1. **Prerequisites.** You must have a fully configured [Bridge](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/BlockspaceRace/bridge.md) or [Light](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/BlockspaceRace/light.md) node  
+1. **Prerequisites.** You must have a fully configured [Bridge](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/bridge.md) or [Light](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/light.md) node  
 >Please ensure that you check the balance on your account, which will be utilized for posting blocks to the local network. This verification will guarantee your ability to post roll up blocks to the Celestia for data availability (DA) and consensus purposes.
 You can find the address by running the following command:
 ```
