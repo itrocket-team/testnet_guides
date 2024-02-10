@@ -1,17 +1,17 @@
 <div>
-<h1 align="left" style="display: flex;"> Celestia Consensus Full node Setup for Blockspace Race Testnet — blockspacerace-0</h1>
+<h1 align="left" style="display: flex;"> Celestia Consensus Full node Setup for Mocha-4 Testnet — mocha-4</h1>
 <img src="https://avatars.githubusercontent.com/u/54859940?s=200&v=4"  style="float: right;" width="100" height="100"></img>
 </div>
 
 Official documentation:
->- [Validator setup instructions](https://docs.celestia.org/nodes/consensus-full-node/)
+>- [Validator setup instructions](https://docs.celestia.org/nodes/consensus-node)
 
 Explorer:
 >-  https://testnet.itrocket.net/celestia/staking
 
-- [Set up Bridge node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/BlockspaceRace/bridge.md) 
-- [Set up Validator node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/BlockspaceRace/README.md)
-- [Set up Light node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/BlockspaceRace/light.md)  
+- [Set up Bridge node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/bridge.md) 
+- [Set up Validator node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/README.md)
+- [Set up Light node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/light.md)  
 
 ## Set up Full node 
 ### Hardware Requirements
@@ -34,7 +34,7 @@ install go
 ```bash
 cd ~
 ! [ -x "$(command -v go)" ] && {
-VER="1.20.2"
+VER="1.21.3"
 wget "https://golang.org/dl/go$VER.linux-amd64.tar.gz"
 sudo rm -rf /usr/local/go
 sudo tar -C /usr/local -xzf "go$VER.linux-amd64.tar.gz"
@@ -53,7 +53,7 @@ Replace your `<YOUR_NODE_NAME>` without `<>`, save and import variables into sys
 ```bash
 CELESTIA_PORT=11
 echo "export NODENAME="<YOUR_NODE_NAME>"" >> $HOME/.bash_profile
-echo "export CHAIN_ID="blockspacerace-0"" >> $HOME/.bash_profile
+echo "export CHAIN_ID="mocha-4"" >> $HOME/.bash_profile
 echo "export CELESTIA_PORT="${CELESTIA_PORT}"" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 ```
@@ -65,7 +65,7 @@ cd $HOME
 rm -rf celestia-app 
 git clone https://github.com/celestiaorg/celestia-app.git 
 cd celestia-app/ 
-APP_VERSION=v0.13.2 
+APP_VERSION=v1.6.0 
 git checkout tags/$APP_VERSION -b $APP_VERSION 
 make install 
 ~~~
@@ -75,7 +75,7 @@ Setup the P2P networks
 ~~~bash
 cd $HOME
 rm -rf networks
-git clone https://github.com/celestiaorg/networks.git 
+git clone https://github.com/celestiaorg/networks.git
 ~~~
 
 Config and init app
@@ -89,15 +89,20 @@ celestia-appd init $NODENAME --chain-id $CHAIN_ID
 Copy the genesis.json file
 
 ~~~bash
-cp $HOME/networks/blockspacerace/genesis.json $HOME/.celestia-app/config 
+cp $HOME/networks/mocha-4/genesis.json $HOME/.celestia-app/config 
 ~~~
 
 Set seeds and peers:
 >You can find more peers here: https://itrocket.net/services/testnet/celestia/#peer
 ~~~bash
-SEEDS="fedea9723696360d429a23792225594779cc7cd7@celestia-testnet-seed.itrocket.net:11656"
-PEERS="193acd7bf7049b425d7b95c24e02250fce8ad45c@celestia-testnet-peer.itrocket.net:11656"
-sed -i -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.celestia-app/config/config.toml
+SEEDS=$(curl -sL https://raw.githubusercontent.com/celestiaorg/networks/master/mocha-4/seeds.txt | head -c -1 | tr '\n' ',')
+echo $SEEDS
+sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/" $HOME/.celestia-app/config/config.toml
+~~~
+~~~bash
+PERSISTENT_PEERS=$(curl -sL https://raw.githubusercontent.com/celestiaorg/networks/master/mocha-4/peers.txt | head -c -1 | tr '\n' ',')
+echo $PERSISTENT_PEERS
+sed -i.bak -e "s/^persistent_peers *=.*/persistent_peers = \"$PERSISTENT_PEERS\"/" $HOME/.celestia-app/config/config.toml
 ~~~
 
 Set gustom ports in app.toml file
@@ -122,12 +127,11 @@ s%^external_address = \"\"%external_address = \"$(wget -qO- eth0.me):${CELESTIA_
 s%^prometheus_listen_addr = \":26660\"%prometheus_listen_addr = \":${CELESTIA_PORT}660\"%" $HOME/.celestia-app/config/config.toml
 ```
 
-Config pruning
+Config pruning, enable indexer
 
 ```bash
 sed -i -e "s/^pruning *=.*/pruning = \"nothing\"/" $HOME/.celestia-app/config/app.toml
-sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"100\"/" $HOME/.celestia-app/config/app.toml
-sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"10\"/" $HOME/.celestia-app/config/app.toml
+sed -i -e "s/^indexer *=.*/indexer = \"kv\"/" $HOME/.celestia-app/config/config.toml
 ```
 
 Configure EXTERNAL_ADDRESS
@@ -137,12 +141,11 @@ EXTERNAL_ADDRESS=$(wget -qO- eth0.me)
 sed -i.bak -e "s/^external-address = \"\"/external-address = \"$EXTERNAL_ADDRESS:${CELESTIA_PORT}656\"/" $HOME/.celestia-app/config/config.toml
 ~~~
 
-Set minimum gas price, enable prometheus and disable indexing
+Set minimum gas price, enable prometheus
 
 ```bash
-sed -i -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"0.0utia\"/" $HOME/.celestia-app/config/app.toml
+sed -i -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"0.002utia\"/" $HOME/.celestia-app/config/app.toml
 sed -i -e "s/prometheus = false/prometheus = true/" $HOME/.celestia-app/config/config.toml
-sed -i -e "s/^indexer *=.*/indexer = \"null\"/" $HOME/.celestia-app/config/config.toml
 ```
 
 reset network
@@ -170,6 +173,19 @@ LimitNOFILE=65535
 WantedBy=multi-user.target
 EOF
 ```
+
+Download snapshot
+
+~~~bash
+cd $HOME
+rm -rf ~/.celestia-app/data
+mkdir -p ~/.celestia-app/data
+SNAP_NAME=$(curl -s https://snaps.qubelabs.io/celestia/ | \
+    egrep -o ">mocha-4.*tar" | tr -d ">")
+aria2c -x 16 -s 16 -o celestia-snap.tar "https://snaps.qubelabs.io/celestia/${SNAP_NAME}"
+tar xf celestia-snap.tar -C ~/.celestia-app/data/
+~~~
+
 
 Enable and start service
 
