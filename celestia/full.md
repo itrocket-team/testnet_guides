@@ -212,10 +212,9 @@ sudo ufw allow ${CELESTIA_PORT}656/tcp
 sudo ufw enable
 ~~~
 
-Please open access to RPC and gRPC ports for your Full node and light node IP addresses.
+Please open access to RPC and gRPC ports for your Full node
 
 ~~~bash
-IP_ADDRESS="<PUT_IP_ADDRESS>"
 sudo ufw allow from $IP_ADDRESS to any port ${CELESTIA_PORT}090
 sudo ufw allow from $IP_ADDRESS to any port ${CELESTIA_PORT}657
 ~~~
