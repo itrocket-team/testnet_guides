@@ -1,5 +1,5 @@
 # <img src="https://avatars.githubusercontent.com/u/54859940?s=200&v=4" style="border-radius: 50%; vertical-align: middle;" width="35" height="35" /> Deploy your own Celestia sovereign rollup
-> For Celestia Testnet — blockspacerace-0
+> For Celestia Testnet — mocha-4
 
 In this tutorial, you'll learn how to create a `Movie Rating App` connected to `Celestia's data availability (DA) layer` using `Rollkit`. We'll build a blockchain with read and write capabilities, enabling users to submit new ratings, view existing ones, update them, and delete them. By following this tutorial, you'll learn to build a `CRUD` application and how to add `custom fields` like `timestamp` to your posts.
 
