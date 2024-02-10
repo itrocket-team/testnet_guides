@@ -80,6 +80,12 @@ cd ~/celestia-node
 ./cel-key add <key_name> --keyring-backend test --node.type light --recover
 ~~~
 
+You can find the address by running the following command in the celestia-node directory
+~~~
+cd $HOME/celestia-node
+./cel-key list --node.type light --keyring-backend test --p2p.network mocha
+~~~
+
 Create Service file
 Replace FULL node ip, RPC and gRPC ports
 ~~~
@@ -112,6 +118,12 @@ sudo systemctl daemon-reload
 sudo systemctl enable celestia-light
 sudo systemctl restart celestia-light && sudo journalctl -u celestia-light -f
 ```
+
+Submit a blob to Celestia
+~~~
+AUTH_TOKEN=$(celestia light auth admin --p2p.network mocha)
+celestia blob submit 0x42690c204d39600fddd3 'gm' --token $AUTH_TOKEN
+~~~
 
 ## Delete light node 
 
