@@ -1,19 +1,22 @@
 <div>
-<h1 align="left" style="display: flex;"> Celestia Light node Setup for Testnet - mocha-4</h1>
+<h1 align="left" style="display: flex;"> Celestia Light node Setup for Testnet — blockspacerace-0</h1>
 <img src="https://avatars.githubusercontent.com/u/54859940?s=200&v=4"  style="float: right;" width="100" height="100"></img>
 </div>
 
 Official documentation:
->- [Validator setup instructions](https://docs.celestia.org/nodes/overview/)
+>- [Validator setup instructions](https://docs.celestia.org/nodes/consensus-full-node/)
 
 Explorer:
->-  https://celestia.explorers.guru/
+>-  https://testnet.itrocket.net/celestia/staking
 
+- [Set up Full node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/BlockspaceRace/full.md) 
+- [Set up Bridge node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/BlockspaceRace/bridge.md) 
+- [Set up Validator node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/BlockspaceRace/README.md) 
 
 ## Hardware Requirements
  - Memory: 2 GB RAM
  - CPU: Single Core
- - Disk: 25 GB SSD Storage (Recommended 50 GB SSD Storage)
+ - Disk: 25 GB SSD Storage
  - Bandwidth: 56 Kbps for Download/56 Kbps for Upload
 
 ## Set up a Celestia light node 
@@ -29,58 +32,56 @@ sudo apt install curl git wget htop tmux build-essential jq make gcc tar clang p
 install go
 
 ```bash
-cd $HOME
-VER="1.21.1"
+cd ~
+! [ -x "$(command -v go)" ] && {
+VER="1.20.2"
 wget "https://golang.org/dl/go$VER.linux-amd64.tar.gz"
+sudo rm -rf /usr/local/go
 sudo tar -C /usr/local -xzf "go$VER.linux-amd64.tar.gz"
-rm -rf  "go$VER.linux-amd64.tar.gz"
-echo "export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin" >> $HOME/.bash_profile
-source $HOME/.bash_profile
-go version
+rm "go$VER.linux-amd64.tar.gz"
+[ ! -f ~/.bash_profile ] && touch ~/.bash_profile
+echo "export PATH=$PATH:/usr/local/go/bin:~/go/bin" >> ~/.bash_profile
+source ~/.bash_profile
+}
+[ ! -d ~/go/bin ] && mkdir -p ~/go/bin
+go version 
 ```
-
-Save your cel-key wallet name and import variables into system
-
-~~~bash
-echo "export CEL_WALLET="wallet"" >> $HOME/.bash_profile
-source $HOME/.bash_profile
-~~~
 
 Download and build binaries
 
 ```bash
-cd $HOME
-rm -rf celestia-node
-git clone https://github.com/celestiaorg/celestia-node.git
-cd celestia-node/
-git checkout tags/v0.11.0
-make build
-sudo make install
-make cel-key
+cd $HOME 
+rm -rf celestia-node 
+git clone https://github.com/celestiaorg/celestia-node.git 
+cd celestia-node/ 
+git checkout tags/v0.10.4 
+make build 
+make install 
+make cel-key 
 ```
 
-Add cel_key `you can use your orchestrator address`
+Config and init app
 
-~~~bash
-cd ~/celestia-node
-./cel-key add $CEL_WALLET --keyring-backend test --node.type light
+```bash
+celestia light init --core.ip localhost --p2p.network blockspacerace
+```
+
+Create wallet
+>You will need to fund that address with Testnet tokens to pay for PayForBlob transactions.
+
+~~~
+./cel-key add <key_name> --keyring-backend test --node.type light --p2p.network blockspacerace
 ~~~
 
 (Optional) Restore an existing cel_key
 
 ~~~bash
 cd ~/celestia-node
-./cel-key add $CEL_WALLET --keyring-backend test --node.type light --recover
+./cel-key add <key_name> --keyring-backend test --node.type light --recover
 ~~~
 
-Initialize the light node
->Please enable RPC and gRPC on your validator node, and allow these ports in firewall rules
-
-```bash
-celestia light init --core.ip <RPC_NODE_IP> --core.grpc.port <RPC_NODE_GRPC_PORT> --core.rpc.port <RPC_NODE_RPC_PORT> --keyring.accname $CEL_WALLET
-```
-
 Create Service file
+Replace validator node ip address in `<PUT_VALIDATOR_NODE_IP>` without `<>`
 
 ```bash
 sudo tee /etc/systemd/system/celestia-light.service > /dev/null <<EOF
@@ -90,7 +91,7 @@ After=network-online.target
 
 [Service]
 User=$USER
-ExecStart=$(which celestia) light start
+ExecStart=$(which celestia) light start --core.ip localhost --keyring.accname <key_name> --gateway --gateway.addr localhost --gateway.port 26659 --p2p.network blockspacerace
 Restart=on-failure
 RestartSec=3
 LimitNOFILE=65535
