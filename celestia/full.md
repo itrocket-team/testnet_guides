@@ -215,8 +215,12 @@ sudo ufw enable
 Please open access to RPC and gRPC ports for your Full node
 
 ~~~bash
-sudo ufw allow from $IP_ADDRESS to any port ${CELESTIA_PORT}090
-sudo ufw allow from $IP_ADDRESS to any port ${CELESTIA_PORT}657
+LIGHT_NODE_IP_ADDRESS=<IP_ADDRESS>
+BRIDGE_NODE_IP_ADDRESS=<IP_ADDRESS>
+sudo ufw allow from $LIGHT_NODE_IP_ADDRESS to any port ${CELESTIA_PORT}090
+sudo ufw allow from $LIGHT_NODE_IP_ADDRESS to any port ${CELESTIA_PORT}657
+sudo ufw allow from $BRIDGE_NODE_IP_ADDRESS to any port ${CELESTIA_PORT}090
+sudo ufw allow from $BRIDGE_NODE_IP_ADDRESS to any port ${CELESTIA_PORT}657
 ~~~
 
 ## Delete full node 
