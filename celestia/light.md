@@ -82,7 +82,9 @@ cd ~/celestia-node
 
 Create Service file
 Replace FULL node ip address in `<PUT_FULL_NODE_IP>` without `<>`
+~~~
 IP_ADDRESS="<PUT_FULL_NODE_IP>"
+~~~
 ```bash
 sudo tee /etc/systemd/system/celestia-light.service > /dev/null <<EOF
 [Unit]
