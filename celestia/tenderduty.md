@@ -40,7 +40,7 @@ nano $HOME/tenderduty/config.yml
 
 For simple monitoring without notifications, just change these in the config:
 - `celestia to` <PROJECT_NAME>
-- chain_id: `blockspacerace-0` to chain_id: <YOUR_CHAIN_ID> 
+- chain_id: `mocha-4` to chain_id: <YOUR_CHAIN_ID> 
 - valoper_address: celestiavaloper1xxxxxxx... to valoper_address: <YOUR_VALOPER_ADDRESS>
 - `url: tcp://localhost:<VALIDATOR_NODE_RPC_PORT>` TO url: tcp://localhost:<YOUR_NODE_RPC_PORT>
 
@@ -55,7 +55,7 @@ If you want to add another node monitoring, you can dublicate this section on co
   # The user-friendly name that will be used for labels. Highly suggest wrapping in quotes.
   "Celestia":
     # chain_id is validated for a match when connecting to an RPC endpoint, also used as a label in several places.
-    chain_id: blockspacerace-0
+    chain_id: mocha-4
     # Hooray, in v2 we derive the valcons from abci queries so you don't have to jump through hoops to figure out how
     # to convert ed25519 keys to the appropriate bech32 address
     valoper_address: celestiavaloper1xxxxxxx...
