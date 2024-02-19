@@ -156,6 +156,35 @@ curl -s http://localhost:26659/balance | jq
 chmod -R 700 .celestia-bridge-mocha-4
 ~~~
 
+## Upgrade
+
+Stop bridge node
+~~~
+sudo systemctl stop celestia-bridge
+~~~
+
+Download binary
+~~~
+cd $HOME
+rm -rf celestia-node
+git clone https://github.com/celestiaorg/celestia-node.git
+cd celestia-node/
+git checkout tags/v0.13.0 
+make build 
+sudo make install 
+make cel-key 
+~~~
+
+Update
+~~~
+celestia bridge config-update --p2p.network mocha
+~~~
+
+Start bridge node
+~~~
+sudo systemctl restart celestia-bridge && sudo journalctl -u celestia-bridge -f
+~~~
+
 
 ## Delete bridge node
 
