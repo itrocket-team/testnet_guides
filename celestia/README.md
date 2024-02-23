@@ -104,7 +104,6 @@ sed -i.bak -e "s%^proxy_app = \"tcp://127.0.0.1:26658\"%proxy_app = \"tcp://127.
 s%^laddr = \"tcp://127.0.0.1:26657\"%laddr = \"tcp://0.0.0.0:${CELESTIA_PORT}657\"%; 
 s%^pprof_laddr = \"localhost:6060\"%pprof_laddr = \"localhost:${CELESTIA_PORT}060\"%;
 s%^laddr = \"tcp://0.0.0.0:26656\"%laddr = \"tcp://0.0.0.0:${CELESTIA_PORT}656\"%;
-s%^external_address = \"\"%external_address = \"$(wget -qO- eth0.me):${CELESTIA_PORT}656\"%;
 s%^prometheus_listen_addr = \":26660\"%prometheus_listen_addr = \":${CELESTIA_PORT}660\"%" $HOME/.celestia-app/config/config.toml
 ```
 11. **Config pruning**
@@ -196,7 +195,6 @@ WALLET_ADDRESS=$(celestia-appd keys show $WALLET -a)
 VALOPER_ADDRESS=$(celestia-appd keys show $WALLET --bech val -a)
 echo "export WALLET_ADDRESS="${WALLET_ADDRESS} >> $HOME/.bash_profile
 echo "export VALOPER_ADDRESS="${VALOPER_ADDRESS} >> $HOME/.bash_profile
-echo "export EVM_ADDRESS=""$ERC20_ADDRESS" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 ```
 
@@ -226,7 +224,6 @@ celestia-appd tx staking create-validator \
   --pubkey  $(celestia-appd tendermint show-validator) \
   --moniker $MONIKER \
   --chain-id $CHAIN_ID \
-  --evm-address $EVM_ADDRESS \
   --gas=auto \
   --gas-adjustment=1.5 \
   --fees 5000utia
