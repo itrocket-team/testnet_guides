@@ -20,6 +20,10 @@ Osmosis (osmo-test-5):
 Creation address: osmo1gu4vdcvqy3khelanwvatk983x49ngxujlp9pvd
 ~~~
 
+~~~
+ibc/C926823E7EE77571A143404EA9AC0A630234078565D7937B442F666077420E93
+~~~
+
 **`Test transactions:`**
 
 **IN OSMOSIS:** https://www.mintscan.io/osmosis-testnet/tx/CFF96CDA70B06C95F165EC4BF58DD880059A0B3F65E01DF0058B456E2554F3E8?height=5620123
