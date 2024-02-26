@@ -97,6 +97,7 @@ while true; do
       echo "${block_height}/${expected_block_height} diff $(($expected_block_height - $block_height)), but restart is disabled, rechecking after 10 min..."
     fi
     sleep 600
+    response=$(curl -s ${RPC_SERVER}/status)
     block_height=$(echo "$response" | jq -r '.result.sync_info.latest_block_height')
     expected_block_height=$(curl -s "$EXTERNAL_RPC_SERVER/status" | jq -r '.result.sync_info.latest_block_height')
   else
