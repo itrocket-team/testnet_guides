@@ -31,3 +31,16 @@ sudo mv $HOME/autonity/build/bin/autonity /usr/local/bin/
 sudo systemctl daemon-reload
 sudo systemctl restart antony && journalctl -u antony -f -o cat
 ~~~
+
+~~~
+sudo systemctl stop antoracle.service
+cd
+rm -rf autonity-oracle
+git clone https://github.com/autonity/autonity-oracle && cd autonity-oracle
+git fetch --all 
+git checkout v0.1.6 
+make autoracle
+sudo mv build/bin/autoracle /usr/local/bin
+autoracle version
+#v0.1.6
+~~~
