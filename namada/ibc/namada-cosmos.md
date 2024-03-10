@@ -20,6 +20,8 @@ Cosmos (theta-testnet-001):
 Creation address: cosmos1gu4vdcvqy3khelanwvatk983x49ngxujh6k36l
 ~~~
 
+**IBC channel open:** https://www.mintscan.io/cosmoshub-testnet/tx/29C4BB75FCFC7B61D4960E2BFDD6AE7343D09E4198C75C997BA2E960B4E499BA?height=20670075
+
 **`Test transactions:`**
 
 - **IN COSMOS:** https://www.mintscan.io/cosmoshub-testnet/tx/4F8FB5D8A7631F05809DF70BF35D55115676D1B24891329C2C45D1A419EDEC6B?height=20670186  
