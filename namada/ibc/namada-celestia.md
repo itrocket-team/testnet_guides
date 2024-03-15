@@ -4,18 +4,18 @@
 
 ~~~
 Namada (shielded-expedition.88f17d1d14)
-channel_id:    channel-438
-   client_id:     07-tendermint-1555
-   connection_id: connection-668
+channel_id:    channel-911
+   client_id:     07-tendermint-2914
+   connection_id: connection-1427
    port_id:       transfer
 Creation address: tnam1qpnhswjlnknhap6r3q792jlhmmqwqlvupyd22v55
 ~~~
 
 ~~~
 Celestia (mocha-4): 
-   channel_id:    channel-62
-   client_id:     07-tendermint-293
-   connection_id: connection-260
+   channel_id:    channel-71
+   client_id:     07-tendermint-330
+   connection_id: connection-272
    port_id:       transfer
 Creation address: celestia1gu4vdcvqy3khelanwvatk983x49ngxujxs8pqj
 ~~~
