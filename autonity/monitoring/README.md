@@ -7,8 +7,8 @@
 ## Download autonity-monitoring.sh
 ~~~
 cd $HOME
-wget -O autonity-monitoribng.sh https://raw.githubusercontent.com/itrocket-team/testnet_guides/main/autonity/monitoring/autonity-monitoring.sh
-chmod +x autonity-monitoribng.sh
+wget -O autonity-monitoring.sh https://raw.githubusercontent.com/itrocket-team/testnet_guides/main/autonity/monitoring/autonity-monitoring.sh
+chmod +x autonity-monitoring.sh
 ~~~
 
 ### Configure Telegram alerting:
