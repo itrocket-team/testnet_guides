@@ -7,7 +7,7 @@
 ## Download autonity-monitoring.sh
 ~~~
 cd $HOME
-wget -O autonity-monitoribng.sh https://raw.githubusercontent.com/linamrvaloper/namada-se/main/monitoring_and_voting/monitoring_and_voting.sh
+wget -O autonity-monitoribng.sh https://raw.githubusercontent.com/itrocket-team/testnet_guides/main/autonity/monitoring/autonity-monitoring.sh
 chmod +x autonity-monitoribng.sh
 ~~~
 
