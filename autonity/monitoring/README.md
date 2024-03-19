@@ -1,4 +1,4 @@
-# Autoniti Validator and RPC monitoring
+# Autoniti Validator and RPC monitoring script
 
 - **Tracks node status and height, and compares it with parent RPC (every 15m)**
 - **Monitors validator status and commitments (every 15m)**
