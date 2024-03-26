@@ -409,3 +409,46 @@ Query balance of the treasure wallet
 ~~~
 aut account info -k $HOME/.autonity/keystore/tresure.key
 ~~~
+
+## ⭐ Useful Commands 
+Check node info
+~~~
+aut node info
+~~~
+
+Check balance
+~~~
+aut account info
+# or
+aut account info <account_address>
+~~~
+
+Query validator list
+~~~
+aut validator list
+~~~
+
+Check validator info
+~~~
+aut validator info --validator <validator_address>
+~~~
+
+Check if the validator is in committee
+~~~
+aut protocol get-committee | grep <validator_address>
+~~~
+
+Check if the validator is in committee by enode
+~~~
+aut protocol get-committee-enodes | grep <enode>
+~~~
+
+Bond NTN (the bond will appear in next epoch)
+~~~
+aut validator bond --validator <validator_address> <amount> | aut tx sign - | aut tx send -
+~~~
+
+Unjail
+~~~
+aut validator activate --validator <validator_address> | aut tx sign - | aut tx send -
+~~~
