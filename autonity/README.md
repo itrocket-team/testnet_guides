@@ -1,4 +1,5 @@
-# <img width="35" alt="Screenshot 2024-03-25 at 22 01 42" src="https://github.com/itrocket-team/testnet_guides/assets/153367374/d409ddcd-293b-46cf-9c68-baccbc2f0388"> Autonity Node Setup Guide
+# <img width="35" alt="Screenshot 2024-03-25 at 22 01 42" src="https://github.com/itrocket-team/testnet_guides/assets/153367374/d409ddcd-293b-46cf-9c68-baccbc2f0388"> Autonity Guide: Node Setup + Useful Commands
+> Autonity Piccadilly Testnet R5
 
 - [Autonity Utility Tool installation](#-aut-installation)
 - [Autonity node installation](#-node-installation)
@@ -17,7 +18,7 @@ Prerequisites
 * C compiler (GCC or another) (Check if GCC is installed: ```gcc --version```)
 * GNU Make (Check if installed: ```make --version```)
 
-Install go, if needed
+Install go if needed
 ~~~
 cd $HOME
 VER="1.21.3"
@@ -29,21 +30,6 @@ rm "go$VER.linux-amd64.tar.gz"
 echo "export PATH=$PATH:/usr/local/go/bin:~/go/bin" >> ~/.bash_profile
 source $HOME/.bash_profile
 [ ! -d ~/go/bin ] && mkdir -p ~/go/bin
-~~~
-
-Download ethkey which we’ll need later
-~~~
-cd $HOME
-rm -rf autonity1
-git clone https://github.com/autonity/autonity.git autonity1
-cd autonity1
-make all
-sudo mv build/bin/ethkey /usr/local/bin
-~~~
-
-The ethkey version should be 0.13.0-4073f247-20240226
-~~~
-ethkey --version
 ~~~
 
 Install python and pipx
@@ -129,7 +115,7 @@ Create a directory for treasure.key and oracle.key
 mkdir -p $HOME/.autonity/keystore
 ~~~
 
-Create treasure and oracle wallets and save them
+Create oracle and treasure wallets
 ~~~
 aut account new -k $HOME/.autonity/keystore/oracle.key
 aut account new -k $HOME/.autonity/keystore/treasure.key
@@ -166,19 +152,7 @@ sudo systemctl enable autonity
 sudo systemctl restart autonity && sudo journalctl -u autonity -f
 ~~~
 
-Stop the node
-~~~
-sudo systemctl stop autonity
-~~~
-
-Delete old data
-~~~
-cd $HOME/autonity-chaindata/autonity/chaindata/
-rm -rf *
-~~~
-
 ## 🔧 Oracle Installation
-It is recommended that the Autonity Oracle operates on a separate device (VPS or another host that is always on and constantly available), and a separate server will be used for the Autonity Go client. It is implied that the oracle will operate via WSS.
 
 ### 📋 Hardware requirements and ports needed
 Requirements:
@@ -190,9 +164,8 @@ Requirements:
 
 Incoming traffic must be allowed on the following:
 * ```TCP 8546``` to make WebSocket RPC connections to the node.
-* Your validator node’s installation must also allow traffic on your validator node’s port ```TCP 8546``` to allow the Oracle Server’s WebSocket RPC connection to the node.
 
-Clone the Autonity Oracle Server repo:
+Download binary
 ~~~
 git clone https://github.com/autonity/autonity-oracle && cd autonity-oracle 
 git fetch --all 
@@ -206,11 +179,11 @@ Autoracle version should be v0.1.6
 autoracle version
 ~~~
 
-Un-comment lines at the end of the file and add the keys. To get them, follow all of the links and register:
-https://currencyfreaks.com
-https://openexchangerates.org
-https://currencylayer.com
-https://www.exchangerate-api.com
+Un-comment lines at the end of the ```plugins-conf.yml``` file and add the keys. To get them, follow all of the links and register:
+* https://currencyfreaks.com
+* https://openexchangerates.org
+* https://currencylayer.com
+* https://www.exchangerate-api.com
 
 ~~~
 nano $HOME/autonity-oracle/build/bin/plugins-conf.yml
@@ -218,7 +191,6 @@ nano $HOME/autonity-oracle/build/bin/plugins-conf.yml
 Here's an example of how it should look like:
 
 <img width="800" alt="Screenshot 2024-03-22 at 15 55 03" src="https://github.com/itrocket-team/testnet_guides/assets/153367374/ec27ac22-01f4-42a3-b1a8-4fdb46398179">
-
 
 Create the service file. Insert the key password instead of ```your_password```
 ~~~
@@ -253,12 +225,27 @@ aut account sign-message "I have read and agree to comply with the Piccadilly Ci
 
 **After tokens appear on your balance, you can continue.**
 
+Download ethkey
+~~~
+cd $HOME
+rm -rf autonity1
+git clone https://github.com/autonity/autonity.git autonity1
+cd autonity1
+make all
+sudo mv build/bin/ethkey /usr/local/bin
+~~~
+
+The ethkey version should be 0.13.0-4073f247-20240226
+~~~
+ethkey --version
+~~~
+
 Get the oracle private key
 ~~~
 ethkey inspect --private $HOME/.autonity/keystore/oracle.key
 ~~~
 
-Generate the proof and save the hex
+Generate the proof which we'll need later - save it
 ~~~
 autonity genOwnershipProof --autonitykeys $HOME/autonity-chaindata/autonity/autonitykeys --oraclekeyhex <ORACLE_PRIVKEY> <TREASURE_ADDRESS>
 ~~~
@@ -356,7 +343,6 @@ https GET https://cax.piccadilly.autonity.org/api/balances/ API-Key:$KEY
 The otput should be as on the screenshot:
 
 <img width="398" alt="Screenshot 2024-03-25 at 20 03 33" src="https://github.com/itrocket-team/testnet_guides/assets/153367374/67124e5a-4783-4842-8efc-04caa7c9ce19">
-
 
 Get the orderbooks
 ~~~
