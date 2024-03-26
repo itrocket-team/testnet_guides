@@ -5,6 +5,7 @@
 - [Oracle installation](#-oracle-installation)
 - [Validator registration](#-validator-registration)
 - [Using CAX](#-using-cax)
+- [Useful commands](#-useful-commands)
 
 _Official docs: https://docs.autonity.org/_
 
