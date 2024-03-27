@@ -327,7 +327,7 @@ pip install --upgrade httpie
 Get the API key
 ~~~
 MESSAGE=$(jq -nc --arg nonce "$(date +%s%N)" '$ARGS.named')
-aut account sign-message $MESSAGE message.sig -k ~/.autonity/keystore/tresure.key > message.sig
+aut account sign-message $MESSAGE message.sig -k ~/.autonity/keystore/treasure.key > message.sig
 echo -n $MESSAGE | https https://cax.piccadilly.autonity.org/api/apikeys api-sig:@/home/autonity/message.sig
 ~~~
 
@@ -395,7 +395,7 @@ aut tx make --to <recipient_address> --value <amount> --ntn | aut tx sign - | au
 
 Query balance of the treasure wallet
 ~~~
-aut account info -k $HOME/.autonity/keystore/tresure.key
+aut account info -k $HOME/.autonity/keystore/treasure.key
 ~~~
 
 ## ⭐ Useful Commands 
