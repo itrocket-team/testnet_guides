@@ -7,7 +7,7 @@
 - [Validator registration](#-validator-registration)
 - [Using CAX](#-using-cax)
 - [Useful commands](#-useful-commands)
-- [Monitoring d=script](https://github.com/itrocket-team/testnet_guides/tree/main/autonity/monitoring)
+- [Monitoring script](https://github.com/itrocket-team/testnet_guides/tree/main/autonity/monitoring)
 
 _Official docs: https://docs.autonity.org/_
 
