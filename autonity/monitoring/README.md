@@ -4,6 +4,8 @@
 - **Monitors validator status and commitments (every 15m)**
 - **Sends Telegram notifications if any problems are found**
 
+[Autonity Round 5: Node Setup + Useful Commands](https://github.com/itrocket-team/testnet_guides/blob/main/autonity/README.md)
+
 ## Download autonity-monitoring.sh
 ~~~
 cd $HOME
