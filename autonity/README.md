@@ -34,17 +34,9 @@ source $HOME/.bash_profile
 [ ! -d ~/go/bin ] && mkdir -p ~/go/bin
 ~~~
 
-Install python and pipx
+Install pipx
 ~~~
-# For Ubuntu 20.04
-cd $HOME
-sudo apt install python3-pip && sudo apt install python3.8-venv && sudo apt install pipx
-~~~
-
-~~~
-# For Ubuntu 22.04
-cd $HOME
-sudo apt install python3-pip && sudo apt install python3.10-venv && sudo apt install pipx
+sudo apt install pipx
 ~~~
 
 Download Autonity Utility Tool (aut)
@@ -104,7 +96,7 @@ autonity version
 Create a directory for autonity working data
 ~~~
 cd $HOME
-mkdir autonity-chaindata/autonity
+mkdir autonity-chaindata && mkdir autonity-chaindata/autonity
 ~~~
 
 Generate autonitykeys
