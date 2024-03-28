@@ -188,7 +188,7 @@ Here's an example of how it should look like:
 
 Create the service file. Insert the key password instead of ```your_password```
 ~~~
-sudo tee <<EOF >/dev/null /etc/systemd/system/antoracle.service
+sudo tee <<EOF >/dev/null /etc/systemd/system/autonity_oracle.service
 [Unit]  
 Description=Autonity Oracle Server  
 After=syslog.target network.target  
@@ -205,8 +205,8 @@ EOF
 Enable and start autoracle
 ~~~
 sudo systemctl daemon-reload
-sudo systemctl enable antoracle
-sudo systemctl restart antoracle && sudo journalctl -u antoracle -f
+sudo systemctl enable autonity_oracle
+sudo systemctl restart autonity_oracle && sudo journalctl -u autonity_oracle -f
 ~~~
 
 ## 👨‍💻 Validator Registration
@@ -408,14 +408,20 @@ Query validator list
 aut validator list
 ~~~
 
+Add a variable with your validator address
+~~~
+echo "export VALIDATOR_ADDRESS="your_validator_address"" >> $HOME/.bash_profile
+source $HOME/.bash_profile
+~~~
+
 Check validator info
 ~~~
-aut validator info --validator <validator_address>
+aut validator info --validator $VALIDATOR_ADDRESS
 ~~~
 
 Check if the validator is in committee
 ~~~
-aut protocol get-committee | grep <validator_address>
+aut protocol get-committee | grep $VALIDATOR_ADDRESS
 ~~~
 
 Check if the validator is in committee by enode
@@ -425,12 +431,12 @@ aut protocol get-committee-enodes | grep <enode>
 
 Bond NTN (the bond will appear in next epoch)
 ~~~
-aut validator bond --validator <validator_address> <amount> | aut tx sign - | aut tx send -
+aut validator bond --validator $VALIDATOR_ADDRESS <amount> | aut tx sign - | aut tx send -
 ~~~
 
 Unjail
 ~~~
-aut validator activate --validator <validator_address> | aut tx sign - | aut tx send -
+aut validator activate --validator $VALIDATOR_ADDRESS | aut tx sign - | aut tx send -
 ~~~
 
 ## Security
@@ -449,3 +455,6 @@ sudo ufw allow ssh/tcp
 sudo ufw allow 30303,20203/tcp
 sudo ufw enable
 ~~~
+
+
+_During the creation of the guide, Autonity official documentation and the guide by lesnik13utsa were used._
