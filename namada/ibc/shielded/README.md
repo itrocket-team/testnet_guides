@@ -26,3 +26,15 @@ Interactive Guidance: Offers interactive prompts for various actions like wallet
 In essence, this script is a powerful tool for anyone looking to engage with shielded transactions and cross-network operations without delving into the complexities of performing these actions in basic CLI context.
 
 _The functionality is planned to be recharged with new chains and other transaction types. Also, since shielded transactions from Namada are not available, there might be issues which couldn't have been tested. They will be managed as soon as shielded actions are back._
+
+Download script
+~~~
+cd $HOME
+wget -O ibc.sh https://raw.githubusercontent.com/itrocket-team/testnet_guides/main/namada/ibc/shielded/ibc.sh
+~~~
+
+Start script
+~~~
+cd $HOME
+bash ibc.sh
+~~~
