@@ -697,11 +697,12 @@ elif [[ tx_type -eq 2 ]]; then
     
     if confirm_transaction $osmo_wallet $shielded_addr $amount uosmo; then
       memo=$(cat $(echo $(namadac ibc-gen-shielded --target $shielded_addr --token uosmo --amount $amount --channel-id $nam_osmo_ch --node $rpc_nam) | awk '{print $NF}'))
-
+      shielded_znam=$(echo $(namadaw list | grep -oP "\"$shielded_addr\": \K[^ ]+"))
+      
       expect -c "
       set timeout -1
       log_user 0;
-      spawn osmosisd tx ibc-transfer transfer transfer $osmo_nam_ch $shielded_addr ${amount}uosmo --from $osmo_wallet --chain-id="osmo-test-5" --gas-prices 0.1uosmo --gas auto --gas-adjustment 1.3 -y --memo $memo --node $rpc_osmo
+      spawn osmosisd tx ibc-transfer transfer transfer $osmo_nam_ch $shielded_znam ${amount}uosmo --from $osmo_wallet --chain-id="osmo-test-5" --gas-prices 0.1uosmo --gas auto --gas-adjustment 1.3 -y --memo $memo --node $rpc_osmo
       log_user 1;
       expect \"Enter keyring passphrase (attempt *\"
       interact
@@ -709,6 +710,7 @@ elif [[ tx_type -eq 2 ]]; then
     fi
     osmo_wallet=""
     shielded_addr=""
+    shielded_znam=""
 elif [[ tx_type -eq 3 ]]; then
     checkCelestia
     
@@ -738,11 +740,12 @@ elif [[ tx_type -eq 4 ]]; then
 
     if confirm_transaction $tia_wallet $shielded_addr $amount utia; then
       memo=$(cat $(echo $(namadac ibc-gen-shielded --target $shielded_addr --token utia --amount $amount --channel-id $nam_tia_ch --node $rpc_nam) | awk '{print $NF}'))
-    
+      shielded_znam=$(echo $(namadaw list | grep -oP "\"$shielded_addr\": \K[^ ]+"))
+      
       expect -c "
       set timeout -1
       log_user 0;
-      spawn celestia-appd tx ibc-transfer transfer transfer $tia_nam_ch $shielded_addr ${amount}utia --from $tia_wallet --chain-id=“mocha-4” --gas-prices 0.1utia --gas auto --gas-adjustment 1.3 -y --memo $memo --node $rpc_tia
+      spawn celestia-appd tx ibc-transfer transfer transfer $tia_nam_ch $shielded_znam ${amount}utia --from $tia_wallet --chain-id=“mocha-4” --gas-prices 0.1utia --gas auto --gas-adjustment 1.3 -y --memo $memo --node $rpc_tia
       log_user 1;
       expect \"Enter keyring passphrase (attempt *\"
       interact
@@ -751,6 +754,7 @@ elif [[ tx_type -eq 4 ]]; then
     fi
     tia_wallet=""
     shielded_addr=""
+    shielded_znam=""
 elif [[ tx_type -eq 5 ]]; then
     printLine
     printBlue "Choose the Namada transfer type by printing the corresponding number:"
