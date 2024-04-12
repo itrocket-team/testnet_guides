@@ -8,6 +8,9 @@ Our Bash script streamlines the process of performing shielded transactions with
 4. Celestia  -->   Namada
 5. Namada internal transfer (shielding, shielded, unshielding)
 
+
+>You can view some of the features in the [demo video](https://testnet-files.itrocket.net/namada/itrocket_shielded_application.MP4)
+
 ### Key Functions of the Script:
 
 - **Dependency Management:** Checks for and installs any necessary dependencies, ensuring the environment is properly set up for transactions.
