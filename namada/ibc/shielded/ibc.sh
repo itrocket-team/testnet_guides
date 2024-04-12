@@ -172,7 +172,7 @@ function check_nam_wallet {
     if echo $(namadaw list) | grep -q "Alias \"$nam_wallet\""; then
       printGreen "Wallet found."
     else
-      printRed "Wallet not found."
+      printRed "Wallet not found. Choose an action"
       echo ""
       read -p "1. Enter another wallet name
 2. Recover existing wallet
@@ -199,7 +199,7 @@ Your answer: " action
          " | tee $tmpfile # Duplicate output to terminal and file
          echo ""
          # Check the temporary file for the specific error message
-         if grep -q "Failed to derive a keypair." $tmpfile; then
+         if grep -q "Failed to derive a keypair." $tmpfile || grep -q "Passphrases did not match" $tmpfile; then
            printRed "Failed to derive the wallet. Please try again."
            nam_wallet=""
            check_nam_wallet
@@ -235,7 +235,7 @@ function check_nam_shwallet {
     if echo $(namadaw list) | grep -q "Alias \"$shielded_sk\""; then
       printGreen "Wallet found."
     else
-      printRed "Wallet not found."
+      printRed "Wallet not found. Choose an action:"
       echo ""
       read -p "1. Enter another wallet name
 2. Recover existing wallet
@@ -262,7 +262,7 @@ Your answer: " action
          " | tee $tmpfile # Duplicate output to terminal and file
          echo ""
          # Check the temporary file for the specific error message
-         if grep -q "Failed to derive a keypair." $tmpfile; then
+         if grep -q "Failed to derive a keypair." $tmpfile || grep -q "Passphrases did not match" $tmpfile; then
            printRed "Failed to derive the wallet. Please try again."
            shielded_sk=""
            check_nam_shwallet
@@ -299,7 +299,7 @@ function check_nam_shaddr {
     if echo $(namadaw list) | grep -q "\"$shielded_addr\": znam1"; then
       printGreen "Shielded address with alias $shielded_addr found."
     else
-      printRed "Shielded address not found."
+      printRed "Shielded address not found. Choose an action:"
       echo ""
       read -p "1. Enter another shielded address alias
 2. Generate a shielded address based on existing or new shielded wallet
@@ -357,7 +357,7 @@ function getCelestiaWallet {
 
 function createCelestiaWallet {
     if [[ -z "$CELESTIA_WALLET_ADDRESS" ]]; then
-        echo "Celestia wallet named '$tia_wallet' not found. Please choose an action:"
+        printRed "Celestia wallet named '$tia_wallet' not found. Choose an action:"
         printLine
         echo "1. Enter another wallet name"
         echo "2. Create a new wallet"
@@ -424,7 +424,7 @@ function getOsmosisWallet {
 
 function createOsmosisWallet {
     if [[ -z "$OSMOSIS_WALLET_ADDRESS" ]]; then
-        echo "Osmosis wallet named '$osmo_wallet' not found. Please choose an action:"
+        printRed "Osmosis wallet named '$osmo_wallet' not found. Choose an action:"
         printLine
         echo "1. Enter another wallet name"
         echo "2. Create a new wallet"
@@ -487,6 +487,10 @@ function choose_token_and_amount {
             while IFS= read -r line; do
               # Skip lines that don't represent balances
               if [[ "$line" == *"Last committed epoch:"* ]] || [[ "$line" == *"converting current asset type to latest asset type"* ]]; then
+                  continue
+              elif [[ "$line" == *"The application panicked"* ]]; then
+                  printRed "A problem occured. Please try another wallet"
+                  check_nam_wallet
                   continue
               fi
               # Normalize the line to handle different spacings around ":"
@@ -737,7 +741,9 @@ elif [[ tx_type -eq 4 ]]; then
     
       expect -c "
       set timeout -1
+      log_user 0;
       spawn celestia-appd tx ibc-transfer transfer transfer $tia_nam_ch $shielded_addr ${amount}utia --from $tia_wallet --chain-id=“mocha-4” --gas-prices 0.1utia --gas auto --gas-adjustment 1.3 -y --memo $memo --node $rpc_tia
+      log_user 1;
       expect \"Enter keyring passphrase (attempt *\"
       interact
       expect eof
@@ -760,11 +766,11 @@ elif [[ tx_type -eq 5 ]]; then
 
     case $nam_tx_type in
     1)
-        printBlue "Choose the target of your transfer:"
         printLine
+        printBlue "Choose the target of your transfer:"
         options=("Your shielded address" "Another shielded address (znam..)")
         for i in "${!options[@]}"; do
-            printf "${BLUE}%s. %s${NC}\n" "$((i + 1))" "${options[$i]}"
+            printf "%s. %s\n" "$((i + 1))" "${options[$i]}"
         done
         read -rp "$(printBlue "Your answer:") " shielding_target
         if [[ $shielding_target -eq 1 ]]; then
@@ -808,11 +814,11 @@ elif [[ tx_type -eq 5 ]]; then
         shielded_target=""
         ;;
     3)
-        printBlue "Choose the target of your transfer:"
         printLine
+        printBlue "Choose the target of your transfer:"
         options=("Your Namada wallet" "Another transparent address (tnam..)")
         for i in "${!options[@]}"; do
-            printf "${BLUE}%s. %s${NC}\n" "$((i + 1))" "${options[$i]}"
+            printf "%s. %s\n" "$((i + 1))" "${options[$i]}"
         done
         read -rp "$(printBlue "Your answer:") " unshielding_target
         if [[ $unshielding_target -eq 1 ]]; then
