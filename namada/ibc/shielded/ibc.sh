@@ -3,6 +3,13 @@
 rpc_nam="https://namada-testnet-rpc.itrocket.net:443"
 rpc_tia="https://celestia-testnet-rpc.itrocket.net:443"
 rpc_osmo="https://osmosis-testnet-rpc.polkachu.com:443"
+
+nam_osmo_ch="channel-1323"
+osmo_nam_ch="channel-6915"
+nam_tia_ch="channel-1324"
+tia_nam_ch="channel-83"
+
+
 ######################################### Design functions ##############################################
 
 GREEN="\e[1m\e[1;32m" # green color
@@ -166,6 +173,7 @@ function check_nam_wallet {
       printGreen "Wallet found."
     else
       printRed "Wallet not found."
+      echo ""
       read -p "1. Enter another wallet name
 2. Recover existing wallet
 3. Create new wallet
@@ -176,25 +184,29 @@ Your answer: " action
         nam_wallet=""
         check_nam_wallet
       elif [[ action -eq 2 ]]; then
-        derive_output=$(expect -c "
-        set timeout -1
-        log_user 1;
-        spawn namadaw derive --alias $nam_wallet
-        expect \"Enter your encryption password:\"
-        interact
-        expect \"Enter same passphrase again:\"
-        interact
-        expect \"Input mnemonic code:\"
-        interact
-        expect eof
-        " | cat)
-        if echo "$derive_output" | grep -q "Failed to derive"; then
-          printRed "Failed to derive the wallet. Please try again."
-          nam_wallet=""
-          check_nam_wallet
-        else
-          printGreen "Wallet successfully derived."
-        fi
+        tmpfile=$(mktemp /tmp/derive_output.XXXXXX)
+        expect -c "
+         set timeout -1
+         log_user 1;
+         spawn namadaw derive --alias $nam_wallet
+         expect \"Enter your encryption password:\"
+         interact
+         expect \"Enter same passphrase again:\"
+         interact
+         expect \"Input mnemonic code:\"
+         interact
+         expect eof
+         " | tee $tmpfile # Duplicate output to terminal and file
+         echo ""
+         # Check the temporary file for the specific error message
+         if grep -q "Failed to derive a keypair." $tmpfile; then
+           printRed "Failed to derive the wallet. Please try again."
+           nam_wallet=""
+           check_nam_wallet
+         else
+           printGreen "Wallet successfully derived."
+         fi
+         rm -f $tmpfile
       elif [[ action -eq 3 ]]; then
         expect -c "
         set timeout -1
@@ -224,6 +236,7 @@ function check_nam_shwallet {
       printGreen "Wallet found."
     else
       printRed "Wallet not found."
+      echo ""
       read -p "1. Enter another wallet name
 2. Recover existing wallet
 3. Create new wallet
@@ -234,25 +247,30 @@ Your answer: " action
         shielded_sk=""
         check_nam_shwallet
       elif [[ action -eq 2 ]]; then
-        derive_output=$(expect -c "
-        set timeout -1
-        log_user 1;
-        spawn namadaw derive --alias $shielded_sk
-        expect \"Enter your encryption password:\"
-        interact
-        expect \"Enter same passphrase again:\"
-        interact
-        expect \"Input mnemonic code:\"
-        interact
-        expect eof
-        " | cat)
-        if echo "$derive_output" | grep -q "Failed to derive"; then
-          printRed "Failed to derive the wallet. Please try again."
-          shielded_sk=""
-          check_nam_shwallet
-        else
-          printGreen "Wallet successfully derived."
-        fi
+        tmpfile=$(mktemp /tmp/derive_output.XXXXXX)
+        expect -c "
+         set timeout -1
+         log_user 1;
+         spawn namadaw derive --alias $shielded_sk
+         expect \"Enter your encryption password:\"
+         interact
+         expect \"Enter same passphrase again:\"
+         interact
+         expect \"Input mnemonic code:\"
+         interact
+         expect eof
+         " | tee $tmpfile # Duplicate output to terminal and file
+         echo ""
+         # Check the temporary file for the specific error message
+         if grep -q "Failed to derive a keypair." $tmpfile; then
+           printRed "Failed to derive the wallet. Please try again."
+           shielded_sk=""
+           check_nam_shwallet
+         else
+           printGreen "Wallet successfully derived."
+         fi
+         rm -f $tmpfile
+         
       elif [[ action -eq 3 ]]; then
         expect -c "
         set timeout -1
@@ -282,6 +300,7 @@ function check_nam_shaddr {
       printGreen "Shielded address with alias $shielded_addr found."
     else
       printRed "Shielded address not found."
+      echo ""
       read -p "1. Enter another shielded address alias
 2. Generate a shielded address based on existing or new shielded wallet
 3. Exit
@@ -292,19 +311,22 @@ Your answer: " action
         check_nam_shaddr
       elif [[ action -eq 2 ]]; then
         check_nam_shwallet
-        gen_output=$(expect -c "
+        tmpfile=$(mktemp /tmp/derive_output.XXXXXX)
+        expect -c "
         set timeout -1
         log_user 1;
         spawn namadaw gen-payment-addr --key $shielded_sk --alias $shielded_addr
         expect eof
-        " | cat)
-        if echo "$gen_output" | grep -q "Unknown"; then
+        "
+        echo ""
+        if grep -q "Unknown" $tmpfile; then
           printRed "Failed to generate the address. Please try again."
           shielded_addr=""
           check_nam_shaddr
         else
           printGreen "Address successfully generated."
         fi
+        rm -f $tmpfile
       elif [[ action -eq 3 ]]; then
         echo "Exiting script."
         exit 0
@@ -464,7 +486,7 @@ function choose_token_and_amount {
           if [ "$wallet_type" == "namadac" ]; then
             while IFS= read -r line; do
               # Skip lines that don't represent balances
-              if [[ "$line" == *"Last committed epoch:"* ]]; then
+              if [[ "$line" == *"Last committed epoch:"* ]] || [[ "$line" == *"converting current asset type to latest asset type"* ]]; then
                   continue
               fi
               # Normalize the line to handle different spacings around ":"
@@ -481,43 +503,15 @@ function choose_token_and_amount {
                 token_names[i]="$tokens"
                 ((i++))
               done
+              read -p "$(printBlue "Choose the token you would like to transfer by printing the corresponding number:") " token_num
+              token="${token_names[$token_num]}"
           elif [ "$wallet_type" == "osmosisd" ]; then
-            # For osmosisd with simplified or JSON-converted output
-            while IFS= read -r line; do
-              echo "$line"  # Echo the line for user to see the choices
-              token=$(echo "$line" | awk -F'. ' '{split($2,a,": "); print a[1]}')
-              token_names[i]="$token"  # Store token name in array
-              ((i++))
-            done < <(echo "$(osmosisd q bank balances $(osmosisd keys show "$sender" -a) --node $rpc_osmo)" | awk 'BEGIN { i=1 } /amount:/ {
-                gsub(/"/, "", $2)
-                amount = $2
-                getline  # Get the next line for denom
-                gsub(/"/, "", $2)
-                denom = $2
-                # Print in the desired format for user selection
-                print i".", denom":", amount
-                i++
-            }' FS=': ')
+            echo "uosmo: "
+            echo "$(osmosisd q bank balances $OSMOSIS_WALLET_ADDRESS --node $rpc_osmo)" | awk -F': "' '/amount/ {amount=$2} /uosmo/ {print amount}' | tr -d '"'
           elif [ "$wallet_type" == "celestia-appd" ]; then
-            while IFS= read -r line; do
-              echo "$line"  # Echo the line for user to see the choices
-              token=$(echo "$line" | awk -F'. ' '{split($2,a,": "); print a[1]}')
-              token_names[i]="$token"  # Store token name in array
-              ((i++))
-            done < <(echo "$(celestia-appd q bank balances $(celestia-appd keys show "$sender" -a) --node $rpc_tia)" | awk 'BEGIN { i=1 } /amount:/ {
-                gsub(/"/, "", $2)
-                amount = $2
-                getline  # Get the next line for denom
-                gsub(/"/, "", $2)
-                denom = $2
-                # Print in the desired format for user selection
-                print i".", denom":", amount
-                i++
-            }' FS=': ')
+            echo "utia: "
+            echo "$(celestia-appd q bank balances $CELESTIA_WALLET_ADDRESS --node $rpc_tia)" | awk -F': "' '/amount/ {amount=$2} /utia/ {print amount}' | tr -d '"'
           fi
-  echo ""
-  read -p "$(printBlue "Choose the token you would like to transfer by printing the corresponding number:") " token_num
-  token="${token_names[$token_num]}"
   read -p "$(printBlue "Print the amount you would like to transfer:") " amount
 }
 
@@ -531,7 +525,9 @@ function offer_another_transaction {
 }
 
 function confirm_transaction {
-    printBlue "You're about to make the following transaction:"
+    printLine
+    echo ""
+    printBlue "You are about to make the following transaction:"
     printGreen "Sender: $1"
     printGreen "Receiver: $2"
     printGreen "Amount & token: $3 $4"
@@ -652,9 +648,9 @@ checkNamada
 ################################################## Transaction ###############################################
 
 while true; do
+echo ""
 printLine
 printBlue "Choose the shielded transfer direction by printing the corresponding number:"
-printLine
 options=(
   "Namada    -->   Osmosis"
   "Osmosis   -->   Namada"
@@ -676,16 +672,18 @@ if [[ tx_type -eq 1 ]]; then
     choose_token_and_amount namadac $shielded_sk
 
     if confirm_transaction $shielded_sk $osmo_wallet $amount $token; then
-      memo_path=$(echo $(namadac ibc-gen-shielded --target $OSMOSIS_WALLET_ADDRESS --token $token --amount $amount --channel-id channel-1249 --node $rpc_nam) | awk '{print $NF}')
+      memo_path=$(echo $(namadac ibc-gen-shielded --target $OSMOSIS_WALLET_ADDRESS --token $token --amount $amount --channel-id $nam_osmo_ch --node $rpc_nam) | awk '{print $NF}')
     
       expect -c "
       set timeout -1
-      spawn namadac ibc-transfer --source $shielded_sk --receiver $OSMOSIS_WALLET_ADDRESS --token $token --amount $amount --channel-id channel-1249 --memo-path "$memo_path" --node $rpc_nam
+      spawn namadac ibc-transfer --source $shielded_sk --receiver $OSMOSIS_WALLET_ADDRESS --token $token --amount $amount --channel-id $nam_osmo_ch --memo-path "$memo_path" --node $rpc_nam
       expect \"Enter your decryption password: \"
       interact
       expect eof
       "
     fi
+    shielded_sk=""
+    osmo_wallet=""
 elif [[ tx_type -eq 2 ]]; then
     checkOsmosis
 
@@ -693,19 +691,20 @@ elif [[ tx_type -eq 2 ]]; then
     check_osmo_wallet
     choose_token_and_amount osmosisd $osmo_wallet
     
-    if confirm_transaction $osmo_wallet $shielded_addr $amount $token; then
-      memo=$(cat $(echo $(namadac ibc-gen-shielded --target $shielded_addr --token $token --amount $amount --channel-id channel-1249 --node $rpc_nam) | awk '{print $NF}'))
+    if confirm_transaction $osmo_wallet $shielded_addr $amount uosmo; then
+      memo=$(cat $(echo $(namadac ibc-gen-shielded --target $shielded_addr --token uosmo --amount $amount --channel-id $nam_osmo_ch --node $rpc_nam) | awk '{print $NF}'))
 
       expect -c "
       set timeout -1
       log_user 0;
-      spawn osmosisd tx ibc-transfer transfer transfer channel-6747 $shielded_addr $amount$token --from $osmo_wallet --chain-id="osmo-test-5" --gas-prices 0.1uosmo --gas auto --gas-adjustment 1.3 -y --memo $memo --node $rpc_osmo
+      spawn osmosisd tx ibc-transfer transfer transfer $osmo_nam_ch $shielded_addr ${amount}uosmo --from $osmo_wallet --chain-id="osmo-test-5" --gas-prices 0.1uosmo --gas auto --gas-adjustment 1.3 -y --memo $memo --node $rpc_osmo
       log_user 1;
       expect \"Enter keyring passphrase (attempt *\"
       interact
       "
     fi
-
+    osmo_wallet=""
+    shielded_addr=""
 elif [[ tx_type -eq 3 ]]; then
     checkCelestia
     
@@ -714,17 +713,18 @@ elif [[ tx_type -eq 3 ]]; then
     choose_token_and_amount namadac $shielded_sk
 
     if confirm_transaction $shielded_sk $tia_wallet $amount $token; then
-      memo_path=$(echo $(namadac ibc-gen-shielded --target $CELESTIA_WALLET_ADDRESS --token $token --amount $amount --channel-id channel-<tia> --node $rpc_nam) | awk '{print $NF}')
+      memo_path=$(echo $(namadac ibc-gen-shielded --target $CELESTIA_WALLET_ADDRESS --token $token --amount $amount --channel-id $nam_tia_ch --node $rpc_nam) | awk '{print $NF}')
     
       expect -c "
       set timeout -1
-      spawn namadac ibc-transfer --source $shielded_sk --receiver $CELESTIA_WALLET_ADDRESS --token $token --amount $amount --channel-id channel-<tia> --memo-path "$memo_path" --node $rpc_nam
+      spawn namadac ibc-transfer --source $shielded_sk --receiver $CELESTIA_WALLET_ADDRESS --token $token --amount $amount --channel-id $nam_tia_ch --memo-path "$memo_path" --node $rpc_nam
       expect \"Enter your decryption password: \"
       interact
       expect eof
       "
     fi
-
+    shielded_sk=""
+    tia_wallet=""
 elif [[ tx_type -eq 4 ]]; then
     checkCelestia
 
@@ -732,34 +732,34 @@ elif [[ tx_type -eq 4 ]]; then
     check_tia_wallet
     choose_token_and_amount celestia-appd $tia_wallet
 
-    if confirm_transaction $tia_wallet $shielded_addr $amount $token; then
-      memo=$(cat $(echo $(namadac ibc-gen-shielded --target $shielded_addr --token $token --amount $amount --channel-id channel-<tia> --node $rpc_nam) | awk '{print $NF}'))
+    if confirm_transaction $tia_wallet $shielded_addr $amount utia; then
+      memo=$(cat $(echo $(namadac ibc-gen-shielded --target $shielded_addr --token utia --amount $amount --channel-id $nam_tia_ch --node $rpc_nam) | awk '{print $NF}'))
     
       expect -c "
       set timeout -1
-      spawn celestiad tx ibc-transfer transfer transfer channel-<tia> $shielded_addr $amount$token --from $tia_wallet --chain-id=“<tia-testnet>” --gas-prices 0.1utia --gas auto --gas-adjustment 1.3 -y --memo $memo --node $rpc_tia
+      spawn celestia-appd tx ibc-transfer transfer transfer $tia_nam_ch $shielded_addr ${amount}utia --from $tia_wallet --chain-id=“mocha-4” --gas-prices 0.1utia --gas auto --gas-adjustment 1.3 -y --memo $memo --node $rpc_tia
       expect \"Enter keyring passphrase (attempt *\"
       interact
       expect eof
       "
     fi
-
+    tia_wallet=""
+    shielded_addr=""
 elif [[ tx_type -eq 5 ]]; then
+    printLine
     printBlue "Choose the Namada transfer type by printing the corresponding number:"
-printLine
-namada_options=(
+    namada_options=(
     "Shielding: transparent --> shielded"
     "Shielded: shielded --> shielded"
     "Unshielding: shielded --> transparent"
-)
-for i in "${!namada_options[@]}"; do
-    printf "${BLUE}%s. %s${NC}\n" "$((i + 1))" "${namada_options[$i]}"
-done
-read -rp "$(printBlue "Your answer:") " nam_tx_type
+    )
+    for i in "${!namada_options[@]}"; do
+      printf "%s. %s\n" "$((i + 1))" "${namada_options[$i]}"
+    done
+    read -rp "$(printBlue "Your answer:") " nam_tx_type
 
-case $nam_tx_type in
+    case $nam_tx_type in
     1)
-        printGreen "You chose Shielding: transparent --> shielded"
         printBlue "Choose the target of your transfer:"
         printLine
         options=("Your shielded address" "Another shielded address (znam..)")
@@ -786,9 +786,10 @@ case $nam_tx_type in
           interact
           "
         fi
+        nam_wallet=""
+        shielding_target=""
         ;;
     2)
-        printGreen "You chose Shielded: shielded --> shielded"
         read -rp "$(printBlue "Insert the receiver shielded address (znam...):") " shielded_target
 
         check_nam_shwallet
@@ -803,9 +804,10 @@ case $nam_tx_type in
           interact
           "
         fi
+        shielded_sk=""
+        shielded_target=""
         ;;
     3)
-        printGreen "You chose Unshielding: shielded --> transparent"
         printBlue "Choose the target of your transfer:"
         printLine
         options=("Your Namada wallet" "Another transparent address (tnam..)")
@@ -823,15 +825,17 @@ case $nam_tx_type in
         check_nam_shwallet
         choose_token_and_amount namadac $shielded_sk
         
-        if confirm_transaction $shielded_sk $nam_wallet $amount $token; then
+        if confirm_transaction $shielded_sk $unshielding_target $amount $token; then
           expect -c "
           log_user 0;
-          spawn namadac transfer --source $shielded_sk --target $nam_wallet --amount $amount --token $token --signing-keys $nam_wallet --node $rpc_nam
+          spawn namadac transfer --source $shielded_sk --target $unshielding_target --amount $amount --token $token --signing-keys $nam_wallet --node $rpc_nam
           log_user 1;
           expect \"Enter your decryption password: \"
           interact
           "
         fi
+        shielded_sk=""
+        nam_wallet=""
         ;;
 esac
 fi
