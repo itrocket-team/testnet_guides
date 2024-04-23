@@ -4,7 +4,7 @@
 Celestia is a new modular blockchain technology that powers, scales and secures Web3 applications. In this guide we will share our installation commands of a Celestia Validator node with the help of <img src="https://itrocket.net//whiteLogoCrop.ico" style="border-radius: 50%; vertical-align: middle;" width="15" height="15" /> ITRocket Team  services. 
 
 Guides for bridge, full or light node can be found here:
-| Setup Full Consensus node           | [Link](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/full_consensus.md) |
+| Setup Full_Consensus node           | [Link](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/full_consensus.md) |
 |---------------------------|-------------------------------------|
 | Setup Bridge node         | [Link](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/bridge.md) |
 | Setup Light node          | [Link](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/light.md) |  
