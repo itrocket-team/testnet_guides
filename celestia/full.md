@@ -81,11 +81,6 @@ cd $HOME/celestia-node
 ./cel-key list --node.type full --keyring-backend test --p2p.network mocha
 ~~~
 
-Configure network paramseters
-~~~
-CELESTIA_CHAIN=mocha-4
-~~~
-
 Add your Core node endpoints
 
 ~~~bash
@@ -94,27 +89,19 @@ CORE_RPC_PORT="9090"
 CORE_GRPC_PORT="26657"
 ~~~
 
-Set RPC listen address and port
-~~~
-FULL_RPC_ADDR="0.0.0.0"
-FULL_RPC_PORT="26658"      # default is 26658
-GATEWAY_ADDR="0.0.0.0"
-GATEWAY_PORT="26659"        # default is 26659
-~~~
-
 Config and init app
 ~~~
 celestia full init \
+  --gateway \
+  --gateway.addr "0.0.0.0" \
+  --gateway.port "26659" \
+  --rpc.addr "0.0.0.0" \
+  --rpc.port "26658" \
+  --keyring.accname my_celes_key \
   --core.ip $CORE_IP \
   --core.rpc.port $CORE_IP_PORT \
   --core.grpc.port $CORE_GRPC_PORT \
-  --gateway \
-  --gateway.addr $GATEWAY_ADDR \
-  --gateway.port $GATEWAY_PORT \
-  --rpc.addr $FULL_RPC_ADDR \
-  --rpc.port $FULL_RPC_PORT \
-  --keyring.accname my_celes_key \
-  --p2p.network $CELESTIA_CHAIN
+  --p2p.network mocha-4
 ~~~
 
 
