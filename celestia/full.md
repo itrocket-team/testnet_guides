@@ -95,13 +95,15 @@ CORE_GRPC_PORT="26657"
 ~~~
 
 Set RPC listen address and port
+~~~
 FULL_RPC_ADDR="0.0.0.0"
 FULL_RPC_PORT="26658"      # default is 26658
-
 GATEWAY_ADDR="0.0.0.0"
 GATEWAY_PORT="26659"        # default is 26659
+~~~
 
 Config and init app
+~~~
 celestia full init \
   --core.ip $CORE_IP \
   --core.rpc.port $CORE_IP_PORT \
@@ -113,6 +115,7 @@ celestia full init \
   --rpc.port $FULL_RPC_PORT \
   --keyring.accname my_celes_key \
   --p2p.network $CELESTIA_CHAIN
+~~~
 
 
 Config and init app
