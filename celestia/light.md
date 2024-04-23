@@ -9,7 +9,7 @@ Official documentation:
 Explorer:
 >-  https://testnet.itrocket.net/celestia/staking
 
-- [Set up Full node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/full.md) 
+- [Set up Full_Consensus node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/full_consensus.md) 
 - [Set up Bridge node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/bridge.md) 
 - [Set up Validator node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/README.md) 
 
