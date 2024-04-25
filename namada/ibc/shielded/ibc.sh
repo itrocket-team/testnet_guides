@@ -597,7 +597,7 @@ fi
 
 echo $(go version) && sleep 1
 
-sudo apt-get install -y git-core libssl-dev pkg-config libclang-12-dev protobuf-compiler
+sudo apt-get install -y git-core libssl-dev pkg-config libclang-12-dev protobuf-compiler expect
 
 printLine
 printCyan "Checking for Rust & Cargo installation..." && sleep 1
