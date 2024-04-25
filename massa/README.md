@@ -260,3 +260,12 @@ sudo ufw allow ssh/tcp
 sudo ufw allow 31244 && sudo ufw allow 31245
 sudo ufw enable
 ~~~
+
+### Delete node
+
+~~~bash
+sudo systemctl stop massad
+sudo systemctl disable massad
+sudo rm /etc/systemd/system/massad.service
+sudo systemctl daemon-reload
+~~~
