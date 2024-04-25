@@ -196,9 +196,8 @@ Your answer: " action
          expect \"Input mnemonic code:\"
          interact
          expect eof
-         " | tee $tmpfile # Duplicate output to terminal and file
+         " | tee $tmpfile
          echo ""
-         # Check the temporary file for the specific error message
          if grep -q "Failed to derive a keypair." $tmpfile || grep -q "Passphrases did not match" $tmpfile; then
            printRed "Failed to derive the wallet. Please try again."
            nam_wallet=""
@@ -259,9 +258,8 @@ Your answer: " action
          expect \"Input mnemonic code:\"
          interact
          expect eof
-         " | tee $tmpfile # Duplicate output to terminal and file
+         " | tee $tmpfile
          echo ""
-         # Check the temporary file for the specific error message
          if grep -q "Failed to derive a keypair." $tmpfile || grep -q "Passphrases did not match" $tmpfile; then
            printRed "Failed to derive the wallet. Please try again."
            shielded_sk=""
@@ -477,15 +475,14 @@ function check_osmo_wallet {
 
 function choose_token_and_amount {
   local wallet_type="$1"
-  local sender="$2"  # The wallet name/address is passed as an argument
-  declare -A token_balances  # Declare an associative array for token balances
+  local sender="$2"
+  declare -A token_balances
 
   printBlue "Parcing the balance of $sender: "
           i=1
           declare -a token_names
           if [ "$wallet_type" == "namadac" ]; then
             while IFS= read -r line; do
-              # Skip lines that don't represent balances
               if [[ "$line" == *"Last committed epoch:"* ]] || [[ "$line" == *"converting current asset type to latest asset type"* ]]; then
                   continue
               elif [[ "$line" == *"The application panicked"* ]]; then
@@ -493,10 +490,8 @@ function choose_token_and_amount {
                   check_nam_wallet
                   continue
               fi
-              # Normalize the line to handle different spacings around ":"
               clean_line=$(echo "$line" | sed -e 's/ *: */:/g')
 
-              # Extract token name and amount. Note that awk prints the first and last fields assuming the amount is always last.
               tokens=$(echo "$clean_line" | awk -F ':' '{print $1}')
               amount=$(echo "$clean_line" | awk -F ':' '{print $NF}')
 
@@ -550,7 +545,7 @@ function confirm_transaction {
 
 printLine
 printGreen "Checking Go version and Installing if needed..." && sleep 1
-# install go, if needed
+# Install go if needed
 cd $HOME
 goInstallationNeeded=true
 
@@ -624,10 +619,10 @@ fi
 
 printLine
 printGreen "Checking CometBFT..." && sleep 1
-# Check if CometBFT is already installed
+# Check if CometBFT is installed
 if [ -x "/usr/local/bin/cometbft" ]; then
     echo "CometBFT is already installed."
-    # Optionally check and print the installed version
+    # Check and print the installed version
     cometbft version
     sleep 1
     echo "done"
@@ -640,7 +635,7 @@ else
     git checkout v0.37.2
     make build
     sudo cp build/cometbft /usr/local/bin/
-    # Optionally check and print the installed version
+    # Check and print the installed version
     cometbft version
     sleep 1
     echo "done"
