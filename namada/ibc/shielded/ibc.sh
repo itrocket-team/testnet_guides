@@ -4,8 +4,8 @@ rpc_nam="https://namada-testnet-rpc.itrocket.net:443"
 rpc_tia="https://celestia-testnet-rpc.itrocket.net:443"
 rpc_osmo="http://65.109.62.39:15657"
 
-nam_osmo_ch="channel-1323"
-osmo_nam_ch="channel-6915"
+nam_osmo_ch="channel-1335"
+osmo_nam_ch="channel-7760"
 nam_tia_ch="channel-1324"
 tia_nam_ch="channel-83"
 
