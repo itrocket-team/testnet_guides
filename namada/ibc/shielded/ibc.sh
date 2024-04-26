@@ -692,7 +692,7 @@ echo ""
   if echo $response | grep -q "Transaction was successfully applied" ; then
     printGreen "Tokens sent to "$address" successfully."
   else
-    printRed "Transaction failed."
+    printRed "Transaction failed. Please try again because the Namada network might be instable."
   fi
   echo "$response"
   echo ""
