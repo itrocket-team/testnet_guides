@@ -157,10 +157,10 @@ curl -X POST \
 ~~~
 
 ## Usefull commands
-Check bridge wallet balance
 
+Reset node
 ~~~bash
-curl -s http://localhost:26659/balance | jq
+celestia full unsafe-reset-store --p2p.network mocha
 ~~~
 
 (Optional) If you want transferring keys to another server, you will need to add permissions
@@ -169,14 +169,34 @@ curl -s http://localhost:26659/balance | jq
 chmod -R 700 .celestia-full-mocha-4
 ~~~
 
-Reset node
-~~~bash
-celestia full unsafe-reset-store --p2p.network mocha
+## Submitting a blob using curl
+
+~~~
+export CELESTIA_NODE_AUTH_TOKEN=$(celestia full auth admin --p2p.network mocha)
+~~~
+
+Post your blob with:
+~~~
+curl -H "Content-Type: application/json" -H "Authorization: Bearer $CELESTIA_NODE_AUTH_TOKEN" -X POST --data '{"id": 1,
+  "jsonrpc": "2.0",
+  "method": "blob.Submit",
+  "params": [
+    [
+      {
+        "namespace": "AAAAAAAAAAAAAAAAAAAAAAAAAAECAwQFBgcICRA=",
+        "data": "VGhpcyBpcyBhbiBleGFtcGxlIG9mIHNvbWUgYmxvYiBkYXRh",
+        "share_version": 0,
+        "commitment": "AD5EzbG0/EMvpw0p8NIjMVnoCP4Bv6K+V6gjmwdXUKU="
+      }
+    ],
+    0.002
+  ]
+}' 127.0.0.1:26658
 ~~~
 
 ## Upgrade
 
-Stop bridge node
+Stop Full Storage node
 ~~~
 sudo systemctl stop celestia-full
 ~~~
@@ -195,16 +215,16 @@ make cel-key
 
 Update
 ~~~
-celestia bridge config-update --p2p.network mocha
+celestia full config-update --p2p.network mocha
 ~~~
 
-Start bridge node
+Start full storage node
 ~~~
 sudo systemctl restart celestia-full && sudo journalctl -u celestia-full -f
 ~~~
 
 
-## Delete bridge node
+## Delete Full Storage node
 
 ~~~bash
 sudo systemctl stop celestia-full
