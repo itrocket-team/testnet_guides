@@ -158,6 +158,11 @@ curl -X POST \
 
 ## Usefull commands
 
+Check balance
+~~~
+celestia state balance --node.store ~/.celestia-full-mocha-4/
+~~~
+
 Reset node
 ~~~bash
 celestia full unsafe-reset-store --p2p.network mocha
