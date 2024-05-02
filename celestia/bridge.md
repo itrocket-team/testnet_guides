@@ -9,9 +9,10 @@ Official documentation:
 Explorer:
 >-  https://testnet.itrocket.net/celestia/staking
 
-- [Set up Full_Consensus node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/BlockspaceRace/full_consensus.md) 
-- [Set up Validator node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/BlockspaceRace/README.md)
-- [Set up Light node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/BlockspaceRace/light.md)  
+- [Set up Validator node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/README.md)
+- [Set up Consensus node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/consensus.md) 
+- [Set up Full Storage node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/full_storage.md)
+- [Set up Light node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/light.md)  
 
 ## Hardware Requirements
  - Memory: 8 GB RAM
