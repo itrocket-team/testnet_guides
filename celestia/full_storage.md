@@ -85,8 +85,8 @@ Add your Core node endpoints
 
 ~~~bash
 CORE_IP="http://127.0.0.1"
-CORE_RPC_PORT="9090"
-CORE_GRPC_PORT="26657"
+CORE_RPC_PORT="26657"
+CORE_GRPC_PORT="9090"
 ~~~
 
 Config and init app
@@ -97,19 +97,12 @@ celestia full init \
   --gateway.port "26659" \
   --rpc.addr "0.0.0.0" \
   --rpc.port "26658" \
-  --keyring.accname my_celes_key \
   --core.ip $CORE_IP \
-  --core.rpc.port $CORE_IP_PORT \
+  --core.rpc.port $CORE_RPC_PORT \
   --core.grpc.port $CORE_GRPC_PORT \
+  --keyring.accname my_celes_key \
   --p2p.network mocha-4
 ~~~
-
-
-Config and init app
-
-```bash
-celestia full init --p2p.network mocha
-```
 
 If keys have not been created previously, Once you start the Bridge Node, a wallet key will be generated for you. You will need to fund that address with Testnet tokens to pay for PayForBlob transactions. You can find the address by running the following command:
 
@@ -121,14 +114,14 @@ cd $HOME/celestia-node
 Create Service file
 
 ```bash
-sudo tee /etc/systemd/system/celestia-bridge.service > /dev/null <<EOF
+sudo tee /etc/systemd/system/celestia-full.service > /dev/null <<EOF
 [Unit]
 Description=celestia bridge
 After=network-online.target
 
 [Service]
 User=$USER
-ExecStart=$(which celestia) full start  --core.ip $CORE_IP --core.grpc.port $CORE_GRPC_PORT --core.rpc.port $CORE_RPC_PORT --p2p.network mocha --keyring.accname my_celes_key
+ExecStart=$(which celestia) full start --p2p.network mocha --keyring.accname my_celes_key
 Restart=on-failure
 RestartSec=3
 LimitNOFILE=65535
@@ -173,7 +166,7 @@ curl -s http://localhost:26659/balance | jq
 (Optional) If you want transferring keys to another server, you will need to add permissions
 
 ~~~
-chmod -R 700 .celestia-bridge-mocha-4
+chmod -R 700 .celestia-full-mocha-4
 ~~~
 
 Reset node
@@ -185,7 +178,7 @@ celestia full unsafe-reset-store --p2p.network mocha
 
 Stop bridge node
 ~~~
-sudo systemctl stop celestia-bridge
+sudo systemctl stop celestia-full
 ~~~
 
 Download binary
@@ -207,15 +200,15 @@ celestia bridge config-update --p2p.network mocha
 
 Start bridge node
 ~~~
-sudo systemctl restart celestia-bridge && sudo journalctl -u celestia-bridge -f
+sudo systemctl restart celestia-full && sudo journalctl -u celestia-full -f
 ~~~
 
 
 ## Delete bridge node
 
 ~~~bash
-sudo systemctl stop celestia-bridge
-sudo systemctl disable celestia-bridge
-sudo rm /etc/systemd/system/celestia-bridge*
-rm -rf $HOME/celestia-node $HOME/.celestia-app $HOME/.celestia-bridge-blockspacerace-0
+sudo systemctl stop celestia-full
+sudo systemctl disable celestia-full
+sudo rm /etc/systemd/system/celestia-full*
+rm -rf $HOME/celestia-node $HOME/.celestia-app $HOME/.celestia-full-blockspacerace-0
 ~~~
