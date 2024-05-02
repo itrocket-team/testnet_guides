@@ -87,21 +87,21 @@ celestia-appd config chain-id $CHAIN_ID
 celestia-appd init $NODENAME --chain-id $CHAIN_ID
 ~~~
 
-Copy the genesis.json file
+Download genesis.json file
 
 ~~~bash
-cp $HOME/networks/mocha-4/genesis.json $HOME/.celestia-app/config 
+celestia-appd download-genesis mocha-4
 ~~~
 
 Set seeds and peers:
 >You can find more peers here: https://itrocket.net/services/testnet/celestia/#peer
 ~~~bash
-SEEDS=$(curl -sL https://raw.githubusercontent.com/celestiaorg/networks/master/mocha-4/seeds.txt | head -c -1 | tr '\n' ',')
+SEEDS=$(curl -sL https://raw.githubusercontent.com/celestiaorg/networks/master/mocha-4/seeds.txt | tr '\n' ',')
 echo $SEEDS
 sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/" $HOME/.celestia-app/config/config.toml
 ~~~
 ~~~bash
-PERSISTENT_PEERS=$(curl -sL https://raw.githubusercontent.com/celestiaorg/networks/master/mocha-4/peers.txt | head -c -1 | tr '\n' ',')
+PERSISTENT_PEERS=$(curl -sL https://raw.githubusercontent.com/celestiaorg/networks/master/mocha-4/peers.txt | tr '\n' ',')
 echo $PERSISTENT_PEERS
 sed -i.bak -e "s/^persistent_peers *=.*/persistent_peers = \"$PERSISTENT_PEERS\"/" $HOME/.celestia-app/config/config.toml
 ~~~
@@ -209,19 +209,8 @@ Set the default to allow outgoing connections, deny all incoming, allow ssh and 
 sudo ufw default allow outgoing 
 sudo ufw default deny incoming 
 sudo ufw allow ssh/tcp 
-sudo ufw allow ${CELESTIA_PORT}656/tcp
+sudo ufw allow ${CELESTIA_PORT}656/tcp comment "Celestia node"
 sudo ufw enable
-~~~
-
-Please open access to RPC and gRPC ports for your Full node
-
-~~~bash
-LIGHT_NODE_IP_ADDRESS=<IP_ADDRESS>
-BRIDGE_NODE_IP_ADDRESS=<IP_ADDRESS>
-sudo ufw allow from $LIGHT_NODE_IP_ADDRESS to any port ${CELESTIA_PORT}090
-sudo ufw allow from $LIGHT_NODE_IP_ADDRESS to any port ${CELESTIA_PORT}657
-sudo ufw allow from $BRIDGE_NODE_IP_ADDRESS to any port ${CELESTIA_PORT}090
-sudo ufw allow from $BRIDGE_NODE_IP_ADDRESS to any port ${CELESTIA_PORT}657
 ~~~
 
 ## Delete full node 
