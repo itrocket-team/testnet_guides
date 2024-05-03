@@ -121,7 +121,7 @@ After=network-online.target
 
 [Service]
 User=$USER
-ExecStart=$(which celestia) full start --p2p.network mocha --keyring.accname my_celes_key
+ExecStart=$(which celestia) full start --p2p.network mocha --keyring.accname my_celes_key --metrics.tls=true --metrics --metrics.endpoint otel.celestia-mocha.com
 Restart=on-failure
 RestartSec=3
 LimitNOFILE=65535
