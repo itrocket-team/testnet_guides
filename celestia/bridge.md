@@ -151,6 +151,11 @@ Check bridge wallet balance
 celestia state balance --node.store ~/.celestia-bridge-mocha-4/
 ~~~
 
+Check bridge node status
+~~~
+celestia header sync-state --node.store "/home/celbridge/.celestia-bridge-mocha-4/"
+~~~
+
 (Optional) If you want transferring keys to another server, you will need to add permissions
 
 ~~~
