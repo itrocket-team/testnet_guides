@@ -109,7 +109,7 @@ After=network-online.target
 
 [Service]
 User=$USER
-ExecStart=$(which celestia) bridge start  --core.ip $RPC_IP --core.grpc.port $GRPC_PORT --core.rpc.port $RPC_PORT --p2p.network mocha --metrics.tls=true --metrics --metrics.endpoint otel.celestia-mocha.com --keyring.accname my_celes_key
+ExecStart=$(which celestia) bridge start  --core.ip $RPC_IP --core.grpc.port $GRPC_PORT --core.rpc.port $RPC_PORT --p2p.network mocha --metrics.tls=true --metrics --metrics.endpoint otel.celestia-mocha.com --keyring.accname my_celes_key --gateway --gateway.addr 0.0.0.0 --gateway.port 26659 --rpc.addr 0.0.0.0 --rpc.port 26658
 Restart=on-failure
 RestartSec=3
 LimitNOFILE=65535
