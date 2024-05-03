@@ -160,7 +160,7 @@ Create Service file
 ```bash
 sudo tee /etc/systemd/system/celestia-appd.service > /dev/null <<EOF
 [Unit]
-Description=celestia-full
+Description=celestia-consensus-node
 After=network-online.target
 
 [Service]
