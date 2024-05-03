@@ -148,7 +148,7 @@ curl -X POST \
 Check bridge wallet balance
 
 ~~~bash
-curl -s http://localhost:26659/balance | jq
+celestia state balance --node.store ~/.celestia-bridge-mocha-4/
 ~~~
 
 (Optional) If you want transferring keys to another server, you will need to add permissions
