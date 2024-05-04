@@ -71,14 +71,17 @@ Create wallet
 >You will need to fund that address with Testnet tokens to pay for PayForBlob transactions.
 
 ~~~
-./cel-key add <key_name> --keyring-backend test --node.type light --p2p.network mocha
+KEY_NAME="my_celes_key"
+cd ~/celestia-node
+./cel-key add $KEY_NAME --keyring-backend test --node.type light --p2p.network mocha
 ~~~
 
 (Optional) Restore an existing cel_key
 
 ~~~bash
+KEY_NAME="my_celes_key"
 cd ~/celestia-node
-./cel-key add <key_name> --keyring-backend test --node.type light --recover
+./cel-key add $KEY_NAME --keyring-backend test --node.type light --recover
 ~~~
 
 You can find the address by running the following command in the celestia-node directory
@@ -90,9 +93,10 @@ cd $HOME/celestia-node
 Create Service file
 Replace FULL node ip, RPC and gRPC ports
 ~~~
-RPC_IP="<PUT_FULL_NODE_RPC_IP>"
-RPC_PORT="<PUT_FULL_NODE_RPC_PORT>"
-GRPC_PORT="<PUT_FULL_NODE_GRPC_PORT>"
+CORE_IP="<PUT_FULL_NODE_RPC_IP>"
+CORE_RPC_PORT="<PUT_FULL_NODE_RPC_PORT>"
+CORE_GRPC_PORT="<PUT_FULL_NODE_GRPC_PORT>"
+KEY_NAME="my_celes_key"
 ~~~
 ```bash
 sudo tee /etc/systemd/system/celestia-light.service > /dev/null <<EOF
@@ -102,7 +106,18 @@ After=network-online.target
 
 [Service]
 User=$USER
-ExecStart=$(which celestia) light start --core.ip $RPC_IP --core.grpc.port $GRPC_PORT --core.rpc.port $RPC_PORT --keyring.accname my_celes_key --gateway --gateway.addr localhost --gateway.port 26659 --p2p.network mocha
+ExecStart=$(which celestia) light start \
+--core.ip $CORE_IP \
+--core.rpc.port $CORE_RPC_PORT \
+--core.grpc.port $CORE_GRPC_PORT \
+--keyring.accname $KEY_NAME \
+--gateway --gateway.addr 0.0.0.0 \
+--gateway.port 26659 \
+--rpc.addr 0.0.0.0 \
+--rpc.port 26658 \
+--p2p.network mocha \
+--metrics.tls=true \
+--metrics --metrics.endpoint otel.celestia-mocha.com
 Restart=on-failure
 RestartSec=3
 LimitNOFILE=65535
@@ -120,10 +135,28 @@ sudo systemctl enable celestia-light
 sudo systemctl restart celestia-light && sudo journalctl -u celestia-light -f
 ```
 
+## Usefull commands
+Check Light Node wallet balance
+
+~~~bash
+celestia state balance --node.store ~/.celestia-light-mocha-4/
+~~~
+
+Check Light node status
+~~~
+celestia header sync-state --node.store "/home/celbridge/.celestia-light-mocha-4/"
+~~~
+
 Submit a blob to Celestia
 ~~~
 AUTH_TOKEN=$(celestia light auth admin --p2p.network mocha)
 celestia blob submit 0x42690c204d39600fddd3 'gm' --token $AUTH_TOKEN
+~~~
+
+(Optional) If you want transferring keys to another server, you will need to add permissions
+
+~~~
+chmod -R 700 .celestia-light-mocha-4
 ~~~
 
 ## Delete light node 
