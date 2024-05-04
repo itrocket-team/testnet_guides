@@ -144,7 +144,7 @@ celestia state balance --node.store ~/.celestia-light-mocha-4/
 
 Check Light node status
 ~~~
-celestia header sync-state --node.store "/home/celbridge/.celestia-light-mocha-4/"
+celestia header sync-state --node.store ~/.celestia-light-mocha-4/
 ~~~
 
 Submit a blob to Celestia
