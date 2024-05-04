@@ -203,5 +203,5 @@ sudo systemctl restart celestia-bridge && sudo journalctl -u celestia-bridge -f
 sudo systemctl stop celestia-bridge
 sudo systemctl disable celestia-bridge
 sudo rm /etc/systemd/system/celestia-bridge*
-rm -rf $HOME/celestia-node $HOME/.celestia-app $HOME/.celestia-bridge-blockspacerace-0
+rm -rf $HOME/celestia-node $HOME/.celestia-app $HOME/.celestia-bridge-mocha-4
 ~~~
