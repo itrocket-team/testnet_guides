@@ -81,7 +81,7 @@ cd ~/celestia-node
 ~~~bash
 KEY_NAME="my_celes_key"
 cd ~/celestia-node
-./cel-key add $KEY_NAME --keyring-backend test --node.type light --recover
+./cel-key add $KEY_NAME --keyring-backend test --node.type light  --p2p.network mocha --recover
 ~~~
 
 You can find the address by running the following command in the celestia-node directory
