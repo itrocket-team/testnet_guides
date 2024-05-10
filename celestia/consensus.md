@@ -158,7 +158,7 @@ celestia-appd tendermint unsafe-reset-all --home $HOME/.celestia-app
 Create Service file
 
 ```bash
-sudo tee /etc/systemd/system/celestia-appd.service > /dev/null <<EOF
+sudo tee /etc/systemd/system/celestia-consensus.service > /dev/null <<EOF
 [Unit]
 Description=celestia-consensus-node
 After=network-online.target
@@ -192,8 +192,8 @@ Enable and start service
 
 ```bash
 sudo systemctl daemon-reload
-sudo systemctl enable celestia-appd
-sudo systemctl restart celestia-appd && sudo journalctl -u celestia-appd -f
+sudo systemctl enable celestia-consensus
+sudo systemctl restart celestia-consensus && sudo journalctl -u celestia-consensus -f
 ```
 
 Check Sync status, once your node is fully synced, the output from above will say `false`
@@ -216,8 +216,8 @@ sudo ufw enable
 ## Delete full node 
 
 ~~~bash
-sudo systemctl stop celestia-appd
-sudo systemctl disable celestia-appd
+sudo systemctl stop celestia-consensus
+sudo systemctl disable celestia-consensus
 sudo rm /etc/systemd/system/celestia-appd*
 rm -rf $HOME/networks $HOME/celestia-app
 ~~~
