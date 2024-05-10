@@ -69,7 +69,7 @@ cd $HOME
 rm -rf celestia-app
 git clone https://github.com/celestiaorg/celestia-app.git
 cd celestia-app
-git checkout tags/v1.8.0 -b v1.8.0
+git checkout tags/v1.9.0 -b v1.9.0
 make install
 ```
 
