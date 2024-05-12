@@ -1,5 +1,5 @@
 # <img src="https://avatars.githubusercontent.com/u/54859940?s=200&v=4" style="border-radius: 50%; vertical-align: middle;" width="35" height="35" /> Celestia Node Setup Guide
-> For Celestia Testnet — mocha-4
+> For Celestia Mainnet — celestia
 
 Celestia is a new modular blockchain technology that powers, scales and secures Web3 applications. In this guide we will share our installation commands of a Celestia Validator node with the help of <img src="https://itrocket.net//whiteLogoCrop.ico" style="border-radius: 50%; vertical-align: middle;" width="15" height="15" /> ITRocket Team  services. 
 
@@ -35,7 +35,7 @@ sudo apt install curl git wget htop tmux build-essential jq make gcc -y
 CELESTIA_PORT=11
 echo "export WALLET="<YOUR_WALLET_NAME>"" >> $HOME/.bash_profile
 echo "export MONIKER="<YOUR_MONIKER>"" >> $HOME/.bash_profile
-echo "export CHAIN_ID="mocha-4"" >> $HOME/.bash_profile
+echo "export CHAIN_ID="celestia"" >> $HOME/.bash_profile
 echo "export CELESTIA_PORT="${CELESTIA_PORT}"" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 ```
@@ -61,7 +61,7 @@ cd $HOME
 rm -rf celestia-app 
 git clone https://github.com/celestiaorg/celestia-app.git 
 cd celestia-app/ 
-APP_VERSION=v1.9.0 
+APP_VERSION=v1.7.0
 git checkout tags/$APP_VERSION -b $APP_VERSION 
 make install
 ```
@@ -80,14 +80,14 @@ celestia-appd init $MONIKER --chain-id $CHAIN_ID
 ```
 7. **Download genesis**
 ```bash
-wget -O $HOME/.celestia-app/config/genesis.json https://testnet-files.itrocket.net/celestia/genesis.json
-wget -O $HOME/.celestia-app/config/addrbook.json https://testnet-files.itrocket.net/celestia/addrbook.json
+wget -O $HOME/.celestia-app/config/genesis.json https://mainnet-files.itrocket.net/celestia/genesis.json
+wget -O $HOME/.celestia-app/config/addrbook.json https://mainnet-files.itrocket.net/celestia/addrbook.json
 ```
 8. **Set seeds and peers**
->You can find more peers here: https://itrocket.net/services/testnet/celestia/#peer
+>You can find more peers here: https://itrocket.net/services/mainnet/celestia/#peer
 ```bash
-SEEDS="5d0bf034d6e6a8b5ee31a2f42f753f1107b3a00e@celestia-testnet-seed.itrocket.net:11656"
-PEERS="daf2cecee2bd7f1b3bf94839f993f807c6b15fbf@celestia-testnet-peer.itrocket.net:11656"
+SEEDS="12ad7c73c7e1f2460941326937a039139aa78884@celestia-mainnet-seed.itrocket.net:40656"
+PEERS="d535cbf8d0efd9100649aa3f53cb5cbab33ef2d6@celestia-mainnet-peer.itrocket.net:40656"
 sed -i -e 's|^seeds *=.*|seeds = "'$SEEDS'"|; s|^persistent_peers *=.*|persistent_peers = "'$PEERS'"|' $HOME/.celestia-app/config/config.toml
 ```
 9. **Set custom ports in app.toml file**
@@ -147,9 +147,9 @@ WantedBy=multi-user.target
 EOF
 ```
 16. **Download snapshot**
->You can find more services on our website: https://itrocket.net/services/testnet/celestia/
+>You can find more services on our website: https://itrocket.net/services/mainnet/celestia/
 ~~~bash
-curl https://testnet-files.itrocket.net/celestia/snap_celestia.tar.lz4 | lz4 -dc - | tar -xf - -C $HOME/.celestia-app
+curl https://mainnet-files.itrocket.net/celestia/snap_celestia.tar.lz4 | lz4 -dc - | tar -xf - -C $HOME/.celestia-app
 ~~~
 17. **Enable and start service**
 ```bash
@@ -189,9 +189,7 @@ $request <YOUR_WALLET_ADDRESS>
 ```
 
 3. **Save wallets and validator addresses**
->Replace your ERC-20 address `PUT_YOUR_ERC20_ADDRESS>` without `<>`
 ```bash
-ERC20_ADDRESS="<PUT_YOUR_ERC20_ADDRESS>"
 WALLET_ADDRESS=$(celestia-appd keys show $WALLET -a)
 VALOPER_ADDRESS=$(celestia-appd keys show $WALLET --bech val -a)
 echo "export WALLET_ADDRESS="${WALLET_ADDRESS} >> $HOME/.bash_profile
