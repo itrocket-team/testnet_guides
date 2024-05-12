@@ -160,18 +160,6 @@ sudo systemctl restart celestia-appd && sudo journalctl -u celestia-appd -f
 
 ## 💰 Create wallet
 
-### new flags should be added in the new mocha-4 testnet 
->`--evm-address` This flag should contain a 0x EVM address.  
- 
-<details>
-  <summary>How do I create a new Ethereum wallet?</summary>
-<blockquote> Visit https://metamask.io/ and locate the extension that is compatible with your browser. 
-Click and install the appropriate extension.
-Once downloaded and installed, click on the extension icon and follow the prompts to create and confirm your password.  
-Next, accept the term of use and give the extension the go-ahead to reveal your seed phrase. It is advisable to store multiple copies of these secret words in secure locations. Once you have backed up your seed phrase, the account registration process is complete.  
-To view your ETH or ERC-20 address, navigate and select the Deposit Ether Directly tab. Then click on View Account to see and copy your ERC-20 address.
-</details>
-
 1. **Create a new Celestia wallet.** Don’t forget to save the mnemonic. 
 ```bash
 celestia-appd keys add $WALLET
