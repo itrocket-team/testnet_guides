@@ -1,5 +1,5 @@
 <div>
-<h1 align="left" style="display: flex;"> Celestia Light node Setup for Testnet — mocha-4</h1>
+<h1 align="left" style="display: flex;"> Celestia Light node Setup for Mainnet — celestia</h1>
 <img src="https://avatars.githubusercontent.com/u/54859940?s=200&v=4"  style="float: right;" width="100" height="100"></img>
 </div>
 
@@ -64,7 +64,7 @@ make cel-key
 Config and init app
 
 ```bash
-celestia light init --p2p.network mocha
+celestia light init
 ```
 
 Create wallet
@@ -73,7 +73,7 @@ Create wallet
 ~~~
 KEY_NAME="my_celes_key"
 cd ~/celestia-node
-./cel-key add $KEY_NAME --keyring-backend test --node.type light --p2p.network mocha
+./cel-key add $KEY_NAME --keyring-backend test --node.type light
 ~~~
 
 (Optional) Restore an existing cel_key
@@ -81,13 +81,13 @@ cd ~/celestia-node
 ~~~bash
 KEY_NAME="my_celes_key"
 cd ~/celestia-node
-./cel-key add $KEY_NAME --keyring-backend test --node.type light  --p2p.network mocha --recover
+./cel-key add $KEY_NAME --keyring-backend test --node.type light  --recover
 ~~~
 
 You can find the address by running the following command in the celestia-node directory
 ~~~
 cd $HOME/celestia-node
-./cel-key list --node.type light --keyring-backend test --p2p.network mocha
+./cel-key list --node.type light --keyring-backend test
 ~~~
 
 Create Service file
@@ -115,9 +115,8 @@ ExecStart=$(which celestia) light start \
 --gateway.port 26659 \
 --rpc.addr 0.0.0.0 \
 --rpc.port 26658 \
---p2p.network mocha \
 --metrics.tls=true \
---metrics --metrics.endpoint otel.celestia-mocha.com
+--metrics --metrics.endpoint otel.celestia.observer
 Restart=on-failure
 RestartSec=3
 LimitNOFILE=65535
@@ -139,24 +138,24 @@ sudo systemctl restart celestia-light && sudo journalctl -u celestia-light -f
 Check Light Node wallet balance
 
 ~~~bash
-celestia state balance --node.store ~/.celestia-light-mocha-4/
+celestia state balance --node.store ~/.celestia-light/
 ~~~
 
 Check Light node status
 ~~~
-celestia header sync-state --node.store ~/.celestia-light-mocha-4/
+celestia header sync-state --node.store ~/.celestia-light/
 ~~~
 
 Submit a blob to Celestia
 ~~~
-AUTH_TOKEN=$(celestia light auth admin --p2p.network mocha)
+AUTH_TOKEN=$(celestia light auth admin)
 celestia blob submit 0x42690c204d39600fddd3 'gm' --token $AUTH_TOKEN
 ~~~
 
 (Optional) If you want transferring keys to another server, you will need to add permissions
 
 ~~~
-chmod -R 700 .celestia-light-mocha-4
+chmod -R 700 .celestia-light
 ~~~
 
 ## Delete light node 
