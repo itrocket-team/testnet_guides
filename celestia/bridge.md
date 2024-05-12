@@ -1,5 +1,5 @@
 <div>
-<h1 align="left" style="display: flex;"> Celestia Bridge node Setup Setup for Mocha Race Testnet — mocha-4</h1>
+<h1 align="left" style="display: flex;"> Celestia Bridge node Setup Setup for Celestia Mainnet - celestia</h1>
 <img src="https://avatars.githubusercontent.com/u/54859940?s=200&v=4"  style="float: right;" width="100" height="100"></img>
 </div>
 
@@ -7,7 +7,7 @@ Official documentation:
 >- [Validator setup instructions](https://docs.celestia.org/nodes/bridge-node/)
 
 Explorer:
->-  https://testnet.itrocket.net/celestia/staking
+>-  https://mainnet.itrocket.net/celestia/staking
 
 - [Set up Validator node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/README.md)
 - [Set up Consensus node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/consensus.md) 
@@ -15,10 +15,10 @@ Explorer:
 - [Set up Light node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/light.md)  
 
 ## Hardware Requirements
- - Memory: 8 GB RAM
+ - Memory: 16 GB RAM
  - CPU: 6 cores
- - Disk: 500 GB SSD Storage
- - Bandwidth: 1 Gbps for Download/100 Mbps for Upload
+ - Disk: 10 TB SSD Storage
+ - Bandwidth: 1 Gbps
 
 ## Set up a Celestia bridge node 
 ### Manual installation
@@ -56,7 +56,7 @@ cd $HOME
 rm -rf celestia-node
 git clone https://github.com/celestiaorg/celestia-node.git
 cd celestia-node/
-git checkout tags/v0.13.4 
+git checkout tags/v0.13.4
 make build 
 sudo make install 
 make cel-key 
@@ -65,30 +65,31 @@ make cel-key
 Install Celestia-app
 
 ```bash
-cd $HOME
-rm -rf celestia-app
-git clone https://github.com/celestiaorg/celestia-app.git
-cd celestia-app
-git checkout tags/v1.9.0 -b v1.9.0
+cd $HOME 
+rm -rf celestia-app 
+git clone https://github.com/celestiaorg/celestia-app.git 
+cd celestia-app/ 
+APP_VERSION=v1.7.0
+git checkout tags/$APP_VERSION -b $APP_VERSION 
 make install
 ```
 
 Config and init app
 
 ```bash
-celestia bridge init --core.ip <RPC_NODE_IP> --p2p.network mocha
+celestia bridge init --core.ip <RPC_NODE_IP>
 ```
 
-Once you start the Bridge Node, a wallet key will be generated for you. You will need to fund that address with Testnet tokens to pay for PayForBlob transactions. You can find the address by running the following command:
+Once you start the Bridge Node, a wallet key will be generated for you. You will need to fund that address with Mainnet tokens to pay for PayForBlob transactions. You can find the address by running the following command:
 
 ~~~bash
 cd $HOME/celestia-node
-./cel-key list --node.type bridge --keyring-backend test --p2p.network mocha
+./cel-key list --node.type bridge --keyring-backend test
 ~~~
 
 Reset node
 ~~~bash
-celestia bridge unsafe-reset-store --p2p.network mocha
+celestia bridge unsafe-reset-store
 ~~~
 
 Add your Full node RPC and gRPC ports
@@ -109,7 +110,7 @@ After=network-online.target
 
 [Service]
 User=$USER
-ExecStart=$(which celestia) bridge start  --core.ip $RPC_IP --core.grpc.port $GRPC_PORT --core.rpc.port $RPC_PORT --p2p.network mocha --metrics.tls=true --metrics --metrics.endpoint otel.celestia-mocha.com --keyring.accname my_celes_key --gateway --gateway.addr 0.0.0.0 --gateway.port 26659 --rpc.addr 0.0.0.0 --rpc.port 26658
+ExecStart=$(which celestia) bridge start  --core.ip $RPC_IP --core.grpc.port $GRPC_PORT --core.rpc.port $RPC_PORT --metrics.tls=true --metrics --metrics.endpoint otel.celestia.observer --keyring.accname my_celes_key --gateway --gateway.addr 0.0.0.0 --gateway.port 26659 --rpc.addr 0.0.0.0 --rpc.port 26658
 Restart=on-failure
 RestartSec=3
 LimitNOFILE=65535
@@ -131,7 +132,7 @@ This is an RPC call in order to get your node's peerId information. NOTE: You ca
 
 ~~~bash
 NODE_TYPE=bridge
-AUTH_TOKEN=$(celestia $NODE_TYPE auth admin --p2p.network mocha)
+AUTH_TOKEN=$(celestia $NODE_TYPE auth admin)
 ~~~
 
 Then you can get the peerId of your node with the following curl command:
@@ -148,23 +149,23 @@ curl -X POST \
 Check bridge wallet balance
 
 ~~~bash
-celestia state balance --node.store ~/.celestia-bridge-mocha-4/
+celestia state balance --node.store ~/.celestia-bridge/
 ~~~
 
 Check bridge node status
 ~~~
-celestia header sync-state --node.store "/home/celbridge/.celestia-bridge-mocha-4/"
+celestia header sync-state --node.store "/home/celbridge/.celestia-bridge/"
 ~~~
 
 Get Node ID
 ~~~
-celestia p2p info --node.store ~/.celestia-bridge-mocha-4/
+celestia p2p info --node.store ~/.celestia-bridge/
 ~~~
 
 (Optional) If you want transferring keys to another server, you will need to add permissions
 
 ~~~
-chmod -R 700 .celestia-bridge-mocha-4
+chmod -R 700 .celestia-bridge
 ~~~
 
 ## Upgrade
@@ -188,7 +189,7 @@ make cel-key
 
 Update
 ~~~
-celestia bridge config-update --p2p.network mocha
+celestia bridge config-update
 ~~~
 
 Start bridge node
@@ -203,5 +204,5 @@ sudo systemctl restart celestia-bridge && sudo journalctl -u celestia-bridge -f
 sudo systemctl stop celestia-bridge
 sudo systemctl disable celestia-bridge
 sudo rm /etc/systemd/system/celestia-bridge*
-rm -rf $HOME/celestia-node $HOME/.celestia-app $HOME/.celestia-bridge-mocha-4
+rm -rf $HOME/celestia-node $HOME/.celestia-app $HOME/.celestia-bridge
 ~~~
