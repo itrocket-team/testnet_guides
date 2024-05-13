@@ -92,14 +92,6 @@ CORE_GRPC_PORT="9090"
 Config and init app
 ~~~
 celestia full init \
-  --gateway \
-  --gateway.addr "0.0.0.0" \
-  --gateway.port "26659" \
-  --rpc.addr "0.0.0.0" \
-  --rpc.port "26658" \
-  --core.ip $CORE_IP \
-  --core.rpc.port $CORE_RPC_PORT \
-  --core.grpc.port $CORE_GRPC_PORT \
   --keyring.accname my_celes_key \
   --p2p.network mocha-4
 ~~~
@@ -111,8 +103,15 @@ cd $HOME/celestia-node
 ./cel-key list --node.type bridge --keyring-backend test --p2p.network mocha
 ~~~
 
-Create Service file
+Replace Consensus node ip, RPC and gRPC ports
+~~~
+CORE_IP="<PUT_RPC_IP>"
+CORE_RPC_PORT="<PUT_RPC_PORT>"
+CORE_GRPC_PORT="<PUT_GRPC_PORT>"
+KEY_NAME="my_celes_key"
+~~~
 
+Create Service file
 ```bash
 sudo tee /etc/systemd/system/celestia-full.service > /dev/null <<EOF
 [Unit]
@@ -121,7 +120,18 @@ After=network-online.target
 
 [Service]
 User=$USER
-ExecStart=$(which celestia) full start --p2p.network mocha --keyring.accname my_celes_key --metrics.tls=true --metrics --metrics.endpoint otel.celestia-mocha.com
+ExecStart=$(which celestia) full start \
+--core.ip $CORE_IP \
+--core.rpc.port $CORE_RPC_PORT \
+--core.grpc.port $CORE_GRPC_PORT \
+--gateway \
+--gateway.addr "0.0.0.0" \
+--gateway.port "26659" \
+--rpc.addr "0.0.0.0" \
+--rpc.port "26658" \
+--p2p.network mocha \
+--keyring.accname $KEY_NAME \
+--metrics.tls=true --metrics --metrics.endpoint otel.celestia-mocha.com
 Restart=on-failure
 RestartSec=3
 LimitNOFILE=65535
