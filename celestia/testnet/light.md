@@ -159,6 +159,35 @@ celestia blob submit 0x42690c204d39600fddd3 'gm' --token $AUTH_TOKEN
 chmod -R 700 .celestia-light-mocha-4
 ~~~
 
+## Upgrade
+
+Stop light node
+~~~
+sudo systemctl stop celestia-light
+~~~
+
+Download binary
+~~~
+cd $HOME
+rm -rf celestia-node
+git clone https://github.com/celestiaorg/celestia-node.git
+cd celestia-node/
+git checkout tags/v0.13.5 
+make build 
+sudo make install 
+make cel-key 
+~~~
+
+Update
+~~~
+celestia light config-update --p2p.network mocha
+~~~
+
+Start light node
+~~~
+sudo systemctl restart celestia-light && sudo journalctl -u celestia-light -f
+~~~
+
 ## Delete light node 
 
 ~~~bash
