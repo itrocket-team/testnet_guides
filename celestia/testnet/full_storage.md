@@ -81,14 +81,6 @@ cd $HOME/celestia-node
 ./cel-key list --node.type full --keyring-backend test --p2p.network mocha
 ~~~
 
-Add your Core node endpoints
-
-~~~bash
-CORE_IP="http://127.0.0.1"
-CORE_RPC_PORT="26657"
-CORE_GRPC_PORT="9090"
-~~~
-
 Config and init app
 ~~~
 celestia full init \
