@@ -83,9 +83,7 @@ cd $HOME/celestia-node
 
 Config and init app
 ~~~
-celestia full init \
-  --keyring.accname my_celes_key \
-  --p2p.network mocha-4
+celestia full init --keyring.accname my_celes_key --p2p.network mocha-4
 ~~~
 
 If keys have not been created previously, Once you start the Bridge Node, a wallet key will be generated for you. You will need to fund that address with Testnet tokens to pay for PayForBlob transactions. You can find the address by running the following command:
