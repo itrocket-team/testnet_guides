@@ -100,8 +100,7 @@ celestia full init \
   --core.ip $CORE_IP \
   --core.rpc.port $CORE_RPC_PORT \
   --core.grpc.port $CORE_GRPC_PORT \
-  --keyring.accname my_celes_key \
- -4
+  --keyring.accname my_celes_key
 ~~~
 
 If keys have not been created previously, Once you start the Bridge Node, a wallet key will be generated for you. You will need to fund that address with Mainnet tokens to pay for PayForBlob transactions. You can find the address by running the following command:
