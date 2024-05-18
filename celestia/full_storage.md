@@ -1,5 +1,5 @@
 <div>
-<h1 align="left" style="display: flex;"> Celestia Full Storage node Setup Setup for Mocha Race Testnet — mocha-4</h1>
+<h1 align="left" style="display: flex;"> Celestia Full Storage node Setup Setup for Mainnet — celestia</h1>
 <img src="https://avatars.githubusercontent.com/u/54859940?s=200&v=4"  style="float: right;" width="100" height="100"></img>
 </div>
 
@@ -7,7 +7,7 @@ Official documentation:
 >- [Full Storage node setup instructions](https://docs.celestia.org/nodes/full-storage-node)
 
 Explorer:
->-  https://testnet.itrocket.net/celestia/staking
+>-  https://mainnet.itrocket.net/celestia/staking
 
 - [Set up Validator node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/README.md)
 - [Set up Consensus node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/consensus.md) 
@@ -62,10 +62,10 @@ make cel-key
 ```
 
 Create wallet
->You will need to fund that address with Testnet tokens to pay for PayForBlob transactions.
+>You will need to fund that address with Mainnet tokens to pay for PayForBlob transactions.
 
 ~~~
-./cel-key add my_celes_key --keyring-backend test --node.type full --p2p.network mocha
+./cel-key add my_celes_key --keyring-backend test --node.type full
 ~~~
 
 (Optional) Restore an existing cel_key
@@ -78,7 +78,7 @@ cd ~/celestia-node
 You can find the address by running the following command in the celestia-node directory
 ~~~
 cd $HOME/celestia-node
-./cel-key list --node.type full --keyring-backend test --p2p.network mocha
+./cel-key list --node.type full --keyring-backend test
 ~~~
 
 Add your Core node endpoints
@@ -101,14 +101,14 @@ celestia full init \
   --core.rpc.port $CORE_RPC_PORT \
   --core.grpc.port $CORE_GRPC_PORT \
   --keyring.accname my_celes_key \
-  --p2p.network mocha-4
+ -4
 ~~~
 
-If keys have not been created previously, Once you start the Bridge Node, a wallet key will be generated for you. You will need to fund that address with Testnet tokens to pay for PayForBlob transactions. You can find the address by running the following command:
+If keys have not been created previously, Once you start the Bridge Node, a wallet key will be generated for you. You will need to fund that address with Mainnet tokens to pay for PayForBlob transactions. You can find the address by running the following command:
 
 ~~~bash
 cd $HOME/celestia-node
-./cel-key list --node.type bridge --keyring-backend test --p2p.network mocha
+./cel-key list --node.type full --keyring-backend test
 ~~~
 
 Create Service file
@@ -121,7 +121,7 @@ After=network-online.target
 
 [Service]
 User=$USER
-ExecStart=$(which celestia) full start --p2p.network mocha --keyring.accname my_celes_key --metrics.tls=true --metrics --metrics.endpoint otel.celestia-mocha.com
+ExecStart=$(which celestia) full start --keyring.accname my_celes_key --metrics.tls=true --metrics --metrics.endpoint otel.celestia.observer
 Restart=on-failure
 RestartSec=3
 LimitNOFILE=65535
@@ -143,7 +143,7 @@ This is an RPC call in order to get your node's peerId information. NOTE: You ca
 
 ~~~bash
 NODE_TYPE=full
-AUTH_TOKEN=$(celestia $NODE_TYPE auth admin --p2p.network mocha)
+AUTH_TOKEN=$(celestia $NODE_TYPE auth admin)
 ~~~
 
 Then you can get the peerId of your node with the following curl command:
@@ -160,24 +160,24 @@ curl -X POST \
 
 Check balance
 ~~~
-celestia state balance --node.store ~/.celestia-full-mocha-4/
+celestia state balance --node.store ~/.celestia-full/
 ~~~
 
 Reset node
 ~~~bash
-celestia full unsafe-reset-store --p2p.network mocha
+celestia full unsafe-reset-store
 ~~~
 
 (Optional) If you want transferring keys to another server, you will need to add permissions
 
 ~~~
-chmod -R 700 .celestia-full-mocha-4
+chmod -R 700 .celestia-full
 ~~~
 
 ## Submitting a blob using curl
 
 ~~~
-export CELESTIA_NODE_AUTH_TOKEN=$(celestia full auth admin --p2p.network mocha)
+export CELESTIA_NODE_AUTH_TOKEN=$(celestia full auth admin)
 ~~~
 
 Post your blob with:
@@ -220,7 +220,7 @@ make cel-key
 
 Update
 ~~~
-celestia full config-update --p2p.network mocha
+celestia full config-update
 ~~~
 
 Start full storage node
@@ -235,5 +235,5 @@ sudo systemctl restart celestia-full && sudo journalctl -u celestia-full -f
 sudo systemctl stop celestia-full
 sudo systemctl disable celestia-full
 sudo rm /etc/systemd/system/celestia-full*
-rm -rf $HOME/celestia-node $HOME/.celestia-app $HOME/.celestia-full-blockspacerace-0
+rm -rf $HOME/celestia-node $HOME/.celestia-app $HOME/.celestia-full
 ~~~
