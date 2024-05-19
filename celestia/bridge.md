@@ -152,6 +152,19 @@ Check bridge wallet balance
 celestia state balance --node.store ~/.celestia-bridge/
 ~~~
 
+Get wallet address
+~~~bash
+cd $HOME/celestia-node
+./cel-key list --node.type bridge --keyring-backend test
+~~~
+
+Restore an existing cel_key
+~~~bash
+KEY_NAME="my_celes_key"
+cd ~/celestia-node
+./cel-key add $KEY_NAME --keyring-backend test --node.type bridge  --recover
+~~~
+
 Check bridge node status
 ~~~
 celestia header sync-state --node.store "/home/celbridge/.celestia-bridge/"
