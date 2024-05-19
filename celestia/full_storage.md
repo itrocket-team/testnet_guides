@@ -162,6 +162,12 @@ Check balance
 celestia state balance --node.store ~/.celestia-full/
 ~~~
 
+Get wallet address
+~~~
+cd $HOME/celestia-node
+./cel-key list --node.type full --keyring-backend test
+~~~
+
 Reset node
 ~~~bash
 celestia full unsafe-reset-store

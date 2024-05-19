@@ -7,7 +7,7 @@ Official documentation:
 >- [Validator setup instructions](https://docs.celestia.org/nodes/light-node)
 
 Explorer:
->-  https://testnet.itrocket.net/celestia/staking
+>-  https://mainnet.itrocket.net/celestia/staking
 
 - [Set up Validator node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/README.md)
 - [Set up Consensus node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/consensus.md)
@@ -68,7 +68,7 @@ celestia light init
 ```
 
 Create wallet
->You will need to fund that address with Testnet tokens to pay for PayForBlob transactions.
+>You will need to fund that address with Mainnet tokens to pay for PayForBlob transactions.
 
 ~~~
 KEY_NAME="my_celes_key"
@@ -141,6 +141,12 @@ Check Light Node wallet balance
 celestia state balance --node.store ~/.celestia-light/
 ~~~
 
+Get wallet address
+~~~
+cd $HOME/celestia-node
+./cel-key list --node.type light --keyring-backend test
+~~~
+
 Check Light node status
 ~~~
 celestia header sync-state --node.store ~/.celestia-light/
@@ -164,5 +170,5 @@ chmod -R 700 .celestia-light
 sudo systemctl stop celestia-light
 sudo systemctl disable celestia-light
 sudo rm /etc/systemd/system/celestia-light*
-rm -rf $HOME/celestia-node $HOME/.celestia-app $HOME/.celestia-light-mocha
+rm -rf $HOME/celestia-node $HOME/.celestia-app $HOME/.celestia-light
 ~~~
