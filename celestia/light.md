@@ -12,7 +12,7 @@ Explorer:
 - [Set up Validator node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/README.md)
 - [Set up Consensus node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/consensus.md)
 - [Set up Full Storage node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/full_storage.md) 
-- [Set up Bridge node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/bridge.md)   
+- [Set up light node](https://github.com/itrocket-team/testnet_guides/blob/main/celestia/light.md)   
 
 ## Hardware Requirements
  - Memory: 500 MB RAM (minimum)
@@ -162,6 +162,35 @@ celestia blob submit 0x42690c204d39600fddd3 'gm' --token $AUTH_TOKEN
 
 ~~~
 chmod -R 700 .celestia-light
+~~~
+
+## Upgrade
+
+Stop light node
+~~~
+sudo systemctl stop celestia-light
+~~~
+
+Download binary
+~~~
+cd $HOME
+rm -rf celestia-node
+git clone https://github.com/celestiaorg/celestia-node.git
+cd celestia-node/
+git checkout tags/v0.13.5 
+make build 
+sudo make install 
+make cel-key 
+~~~
+
+Update
+~~~
+celestia light config-update
+~~~
+
+Start light node
+~~~
+sudo systemctl restart celestia-light && sudo journalctl -u celestia-light -f
 ~~~
 
 ## Delete light node 
