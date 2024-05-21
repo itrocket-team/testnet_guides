@@ -235,5 +235,5 @@ sudo systemctl restart celestia-full && sudo journalctl -u celestia-full -f
 sudo systemctl stop celestia-full
 sudo systemctl disable celestia-full
 sudo rm /etc/systemd/system/celestia-full*
-rm -rf $HOME/celestia-node $HOME/.celestia-app $HOME/.celestia-full-blockspacerace-0
+rm -rf $HOME/celestia-node $HOME/.celestia-app $HOME/.celestia-full-mocha-4
 ~~~
