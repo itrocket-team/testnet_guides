@@ -7,7 +7,6 @@ NODE_NAME="Cel_M_bridge"
 SERVICE="celestia-bridge"
 CELESTIA_APP_BIN="/home/celbridge/go/bin/celestia-appd"
 PARENT_RPC="https://celestia-mainnet-rpc.itrocket.net"
-WALLETS=("celestia1yqwje60pkydrhnuhjnz5yr6s46dd4tjqpd5fmg") # List addresses in quotes, separated by spaces, without commas.
 MIN_BALANCE=100000 #utia
 BLOCK_DIFF=1
 SLEEP=15m
