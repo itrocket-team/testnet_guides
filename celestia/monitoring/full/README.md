@@ -15,8 +15,14 @@ Open Telegram and find `@BotFather`
 After creating telegram bot and group, specify the variables:
 - set values for `TELEGRAM_BOT_TOKEN=` and `TELEGRAM_CHAT_ID=""`
 ~~~
-TELEGRAM_BOT_TOKEN="<BOT_TOKEN>"
-TELEGRAM_CHAT_ID="<CHAT_ID>"
+TELEGRAM_BOT_TOKEN="<BOT_TOKEN>" # Telegram bot token
+TELEGRAM_CHAT_ID="<CHAT_ID>" # Telegram chat ID for notifications
+NODE_NAME="Celestia_Mainnet_Full_Node" # Name of the node
+SERVICE_FILE_NAME="celestia-full" # Service file name for Celestia Full node
+PARENT_RPC="https://celestia-mainnet-rpc.itrocket.net" # URL of the parent RPC node
+MIN_BALANCE=1000000 # Minimum balance threshold in utia
+BLOCK_DIFF=1 # Block difference threshold
+SLEEP=15m # Sleep interval between checks
 ~~~
 
 ## Create monitoring-full.sh file
@@ -27,13 +33,13 @@ cat <<EOF >"$HOME/monitoring-full.sh"
 # Your variables
 TELEGRAM_BOT_TOKEN="$TELEGRAM_BOT_TOKEN"
 TELEGRAM_CHAT_ID="$TELEGRAM_CHAT_ID"
-NODE_NAME="Celestia_Mainnet_Full_Node"
-SERVICE="celestia-full" # Celestia Full node service file name
-PARENT_RPC="https://celestia-mainnet-rpc.itrocket.net"
+NODE_NAME="$NODE_NAME"
+SERVICE="$SERVICE_FILE_NAME"
+PARENT_RPC="$PARENT_RPC"
 WALLETS=("") # List addresses in quotes, separated by spaces, without commas.
-MIN_BALANCE=1000000 # Minimal utia balance
-BLOCK_DIFF=1
-SLEEP=15m
+MIN_BALANCE="$MIN_BALANCE" # Minimal utia balance
+BLOCK_DIFF="$BLOCK_DIFF"
+SLEEP="$SLEEP"
 
 # Function to send messages to Telegram
 send_telegram() {
