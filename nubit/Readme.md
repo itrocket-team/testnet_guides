@@ -17,7 +17,7 @@ After=network.target
 [Service]
 ExecStart=/bin/bash -c 'curl -sL1 https://nubit.sh | bash'
 Restart=always
-User=nobody
+User=nubit
 StandardOutput=journal
 StandardError=journal
 
