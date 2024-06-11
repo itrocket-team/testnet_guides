@@ -39,4 +39,4 @@ sudo systemctl restart nubitd && sudo journalctl -u nubitd -f
 
 ### Explore More Node Operations
 
-### Access Nubit DA Explorer
+**Nubit explorer to check the transactions: https://explorer.nubit.org/.**
