@@ -8,7 +8,7 @@ Create the service file and open it:
 sudo nano /etc/systemd/system/nubitd
 ~~~
 
-Insert the following into the file and save it (`Ctrl-X`, `y`):
+Insert the following into the file and save it (`Ctrl-X`, `y`, `Enter`):
 ~~~
 [Unit]
 Description=Nubit Node Service
