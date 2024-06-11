@@ -1,3 +1,5 @@
+# Nubit Guide: Light Node Setup & Interacting with DA 
+
 ## 1. Run a Light Node
 We will run a node with a service file.
 
