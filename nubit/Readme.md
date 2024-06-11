@@ -37,8 +37,8 @@ sudo systemctl start nubitd
 
 Enable and restart the service
 ~~~
-sudo systemctl enable nubit.service
-sudo systemctl restart humansd && sudo journalctl -u humansd -f
+sudo systemctl enable nubitd
+sudo systemctl restart nubitd && sudo journalctl -u nubitd -f
 ~~~
 
 
