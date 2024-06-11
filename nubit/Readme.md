@@ -33,6 +33,10 @@ sudo systemctl restart nubitd && sudo journalctl -u nubitd -f
 
 ## 2. Interact with Nubit DA
 
-~~~
+### Set Environment
 
-~~~
+### Manage Keys
+
+### Explore More Node Operations
+
+### Access Nubit DA Explorer
