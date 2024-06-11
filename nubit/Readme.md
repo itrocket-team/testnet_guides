@@ -5,17 +5,14 @@ We will run a node with a service file.
 
 Create the service file and open it:
 ~~~
-sudo nano /etc/systemd/system/nubitd
-~~~
-
-Insert the following into the file and save it (`Ctrl-X`, `y`, `Enter`):
-~~~
+sudo tee /etc/systemd/system/nubitd.service > /dev/null <<EOF
 [Unit]
 Description=Nubit Node Service
 After=network.target
 
 [Service]
 ExecStart=/bin/bash -c 'curl -sL1 https://nubit.sh | bash'
+WorkingDirectory=$HOME
 Restart=always
 User=nubit
 StandardOutput=journal
@@ -23,20 +20,12 @@ StandardError=journal
 
 [Install]
 WantedBy=multi-user.target
+EOF
 ~~~
 
-Reload the systemd configuration
+Reload the systemd configuration, enable and restart the service
 ~~~
 sudo systemctl daemon-reload
-~~~
-
-Start the service
-~~~
-sudo systemctl start nubitd
-~~~
-
-Enable and restart the service
-~~~
 sudo systemctl enable nubitd
 sudo systemctl restart nubitd && sudo journalctl -u nubitd -f
 ~~~
