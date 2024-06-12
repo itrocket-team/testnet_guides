@@ -120,6 +120,7 @@ It should return the following:
 }
 ~~~
 
+**Use the alpha-testnet-faucet on [Discord](https://discord.gg/nubit) to get testnet tokens.**
 
 ### Transaction
 **Initiate a Transaction**
@@ -138,7 +139,7 @@ nubit state transfer [address] [amount] [fee] [gasLimit]  --node.store $store
 
 Example
 ~~~
-nubit state transfer nubit1pehkl4edqwc6kar2zmhy2gw8feek68hvpe8d49 1 fee? gasLimit? --node.store $store
+nubit state transfer nubit1pehkl4edqwc6kar2zmhy2gw8feek68hvpe8d49 1 1 1000 --node.store $store
 ~~~
 
 It should return the following:
