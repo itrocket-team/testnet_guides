@@ -83,12 +83,12 @@ Download binary
 cd $HOME
 rm -rf autonity
 git clone https://github.com/autonity/autonity && cd autonity 
-git checkout tags/v0.13.0 -b v0.13.0 
+git checkout tags/v0.14.0 -b v0.14.0 
 make autonity 
 sudo mv $HOME/autonity/build/bin/autonity /usr/local/bin/
 ~~~
 
-Autonity version should be 0.13.0
+Autonity version should be 0.14.0
 ~~~
 autonity version
 ~~~
@@ -163,12 +163,12 @@ Download binary
 ~~~
 git clone https://github.com/autonity/autonity-oracle && cd autonity-oracle 
 git fetch --all 
-git checkout v0.1.6 
+git checkout v0.1.9 
 make autoracle 
 sudo mv build/bin/autoracle /usr/local/bin
 ~~~
 
-Autoracle version should be v0.1.6
+Autoracle version should be v0.1.9
 ~~~
 autoracle version
 ~~~
