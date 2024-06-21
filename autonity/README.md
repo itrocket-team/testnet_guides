@@ -130,7 +130,7 @@ After=network.target
 [Service] 
 User=$USER 
 Type=simple 
-ExecStart=$(which autonity) --datadir $HOME/autonity-chaindata --syncmode full --piccadilly --http --http.addr 0.0.0.0 --http.api aut,eth,net,txpool,web3,admin --http.vhosts \* --ws --ws.addr 127.0.0.1 --ws.api aut,eth,net,txpool,web3,admin --autonitykeys $HOME/autonity-chaindata/autonity/autonitykeys --nat extip:$(curl 2ip.ru) --bootnodes "enode://f7a632ab392e93112cbeb7f08a4b71a4dd7a99e3b09906e56a378c1b888de23d215bc8918c2c543c8fd875135cceb9a0b19e1b6fa970095aba2bb02fcdd881a5@65.108.72.253:30303,enode://343972169784dc5400d36bd1e4abbcc54dfba7fa243db1be52aef761598909c0c1a5e5384f6c19c27b57a74d3470034b3f470eacc20e3f1493b08cf7021ee8bf@195.201.197.4:30353"
+ExecStart=$(which autonity) --datadir $HOME/autonity-chaindata --syncmode full --piccadilly --http --http.addr 0.0.0.0 --http.api aut,eth,net,txpool,web3,admin --http.vhosts \* --ws --ws.addr 127.0.0.1 --ws.api aut,eth,net,txpool,web3,admin --autonitykeys $HOME/autonity-chaindata/autonity/autonitykeys --nat extip:$(curl 2ip.ru)
 Restart=on-failure 
 LimitNOFILE=65535 
 
