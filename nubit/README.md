@@ -221,3 +221,24 @@ For more interaction with Nubit DA Alpha Testnet, please refer to Nubit DA Node 
 
 **Nubit explorer to check the transactions: https://explorer.nubit.org/.**
 Official docs: https://docs.nubit.org/.
+
+### Useful Commands
+
+Check node status
+~~~
+$HOME/nubit-node/bin/nubit das sampling-stats --node.store $HOME/.nubit-light-nubit-alphatestnet-1
+~~~
+
+>You will receive a response similar to the following to verify that your node is running successfully
+~~~
+{
+  "result": {
+    "head_of_sampled_chain": 143124,
+    "head_of_catchup": 143124,
+    "network_head_height": 143124,
+    "concurrency": 0,
+    "catch_up_done": true,
+    "is_running": true
+  }
+}
+~~~
