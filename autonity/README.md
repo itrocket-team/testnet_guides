@@ -1,16 +1,18 @@
 # <img width="35" alt="Screenshot 2024-03-25 at 22 01 42" src="https://github.com/itrocket-team/testnet_guides/assets/153367374/d409ddcd-293b-46cf-9c68-baccbc2f0388"> Autonity Guide: Node Setup + Useful Commands
-> Autonity Piccadilly Testnet R5
+> Autonity Piccadilly Testnet R6
 
 - [Autonity Utility Tool installation](#-aut-installation)
 - [Autonity node installation](#-node-installation)
 - [Oracle installation](#-oracle-installation)
-- [Validator registration](#-validator-registration)
+- [Validator creation and registration](#-validator-creation-and-registration)
 - [Using CAX](#-using-cax)
 - [Useful commands](#-useful-commands)
 - [Security](#security)
 - [Monitoring script](https://github.com/itrocket-team/testnet_guides/tree/main/autonity/monitoring)
 
 _Official docs: https://docs.autonity.org/_
+
+_If you haven’t partiicipated in previous rounds, register here: https://game.autonity.org/getting-started/register.html_
 
 ## 🔧 Aut Installation
 
@@ -209,17 +211,9 @@ sudo systemctl enable autonity_oracle
 sudo systemctl restart autonity_oracle && sudo journalctl -u autonity_oracle -f
 ~~~
 
-## 👨‍💻 Validator Registration
-If you haven’t partiicipated in R4, register here: https://game.autonity.org/getting-started/register.html
-* Autonity address is the treasure address
-* Signature is the hash you should get by running the command:
-~~~
-aut account sign-message "I have read and agree to comply with the Piccadilly Circus Games Competition Terms and Conditions published on IPFS with CID QmVghJVoWkFPtMBUcCiqs7Utydgkfe19wkLunhS5t57yEu"
-~~~
+## 👨‍💻 Validator Creation and Registration
 
-**After tokens appear on your balance, you can continue.**
-
-Download ethkey
+Download ethkey if needed
 ~~~
 cd $HOME
 rm -rf autonity1
@@ -234,24 +228,19 @@ The ethkey version should be 0.13.0-4073f247-20240226
 ethkey --version
 ~~~
 
-Get the oracle private key
+Generate the proof and `save` it - you will need it later
 ~~~
-ethkey inspect --private $HOME/.autonity/keystore/oracle.key
-~~~
-
-Generate the proof which we'll need later - save it
-~~~
-autonity genOwnershipProof --autonitykeys $HOME/autonity-chaindata/autonity/autonitykeys --oraclekeyhex <ORACLE_PRIVKEY> <TREASURE_ADDRESS>
+autonity genOwnershipProof --autonitykeys $HOME/autonity-chaindata/autonity/autonitykeys --oraclekey $HOME/.autonity/keystore/oracle.key <TREASURE_ADDRESS>
 ~~~
 
-Find ```enode```
+Find ```admin_enode```
 ~~~
 aut node info
 ~~~
 
-Find validator address
+Compute validator address
 ~~~
-aut validator compute-address <enode>
+aut validator compute-address <admin_enode>
 ~~~
 
 Insert the address instead of ```validator_address``` to add a variable
@@ -289,24 +278,6 @@ Bond NTN to your validator (it will appear in next epoch)
 ~~~
 aut validator bond --validator $VALIDATOR_ADDRESS 1 | aut tx sign - | aut tx send -
 ~~~
-
-**Register your validator here**: https://game.autonity.org/awards/register-validator.html
-
-To sign the "validator onboarded" message, do the following:
-* Prepare the node private key to sign the transaction
-~~~
-# extract the private node key and write it into ```autonitykeys.priv```
-head -c 64 $HOME/autonity-chaindata/autonity/autonitykeys > $HOME/nodekey.priv
-# import the private key
-aut account import-private-key $HOME/nodekey.priv
-# rename the generated key file
-mv $HOME/.autonity/keystore/UTC* $HOME/.autonity/keystore/nodekey.key
-~~~
-* Sign the transaction
-~~~
-aut account sign-message "validator onboarded" -k $HOME/.autonity/keystore/nodekey.key
-~~~
-
 
 ## 💰 Using CAX
 ### Preparation
