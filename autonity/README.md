@@ -290,7 +290,7 @@ pip install --upgrade httpie
 Get the API key
 ~~~
 MESSAGE=$(jq -nc --arg nonce "$(date +%s%N)" '$ARGS.named')
-aut account sign-message $MESSAGE message.sig -k ~/.autonity/keystore/treasure.key > message.sig
+aut account sign-message $MESSAGE message.sig -k ~/.autonity/keystore/tresure.key > message.sig
 echo -n $MESSAGE | https https://cax.piccadilly.autonity.org/api/apikeys api-sig:@/home/autonity/message.sig
 ~~~
 
