@@ -362,6 +362,11 @@ aut account info -k $HOME/.autonity/keystore/treasure.key
 ~~~
 
 ## ⭐ Useful Commands 
+Export prived key
+~~~
+ethkey inspect --private "/home/autonity/.autonity/keystore/tresure.key"
+~~~
+
 Check node info
 ~~~
 aut node info
