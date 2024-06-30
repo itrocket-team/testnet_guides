@@ -300,6 +300,10 @@ KEY=<API_KEY>
 ~~~
 
 ### CAX Commands
+Deposit USDC to CAX
+~~~
+aut token transfer --token 0x3a60C03a86eEAe30501ce1af04a6C04Cf0188700 0x11F62c273dD23dbe4D1713C5629fc35713Aa5a94 <USDC_AMOUNT> | aut tx sign - | aut tx send -
+~~~
 
 Check the off-chain balance
 ~~~
