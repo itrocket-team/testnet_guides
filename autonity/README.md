@@ -318,21 +318,21 @@ Get the orderbooks
 https GET https://cax.piccadilly.autonity.org/api/orderbooks/ API-Key:$KEY
 ~~~
 
-Get the current price (NTN-USD)
+Get the current price (NTN-USDC)
 ~~~
-https GET https://cax.piccadilly.autonity.org/api/orderbooks/NTN-USD/quote API-Key:$KEY
+https GET https://cax.piccadilly.autonity.org/api/orderbooks/NTN-USDC/quote API-Key:$KEY
 ~~~
 
-Get the current price (ATN-USD)
+Get the current price (ATN-USDC)
 ~~~
-https GET https://cax.piccadilly.autonity.org/api/orderbooks/ATN-USD/quote API-Key:$KEY
+https GET https://cax.piccadilly.autonity.org/api/orderbooks/ATN-USDC/quote API-Key:$KEY
 ~~~
 
 Trade NTN (limit order)
-* pair: ```NTN-USD``` or ```ATN-USD```
+* pair: ```NTN-USDC``` or ```ATN-USDC```
 * side: ```bid``` or ```ask```
 ~~~
-https POST https://cax.piccadilly.autonity.org/api/orders/ API-Key:$KEY pair=NTN-USD side=bid price=<price> amount=<amount>
+https POST https://cax.piccadilly.autonity.org/api/orders/ API-Key:$KEY pair=NTN-USDC side=bid price=<price> amount=<amount>
 ~~~
 
 Check the order status (use ```order_id``` from the trade command output)
