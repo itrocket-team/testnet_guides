@@ -3,8 +3,8 @@
 # Replace with your bot token and chat ID
 TOKEN="your_bot_token"
 CHAT_ID="your_chat_id"
-URL="https://api.telegram.org/bot$TOKEN/sendMessage"
 compose_directory="/home/USER/nwaku-compose/"
+URL="https://api.telegram.org/bot$TOKEN/sendMessage"
 # Messages for various node states
 message1="WAKU_NODE(health): Node stopped or turned off"
 message2="WAKU_NODE(health): An error occurred with the node"
