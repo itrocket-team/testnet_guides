@@ -24,21 +24,24 @@ The script periodically checks the health of the Waku node using HTTP requests t
 2. **Configure Telegram Alerts**:
    - Open Telegram and find `@BotFather` to create a new bot.
    - Obtain your `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` as instructed by @BotFather.
-   - Specify these variables in `monitoring-waku.sh`:
+   - Specify these variables in `monitoring-waku.sh`.
+   - Replace "USER" with your username:
      ```bash
      nano ~/monitoring-waku.sh
      TELEGRAM_BOT_TOKEN="your_bot_token"
      TELEGRAM_CHAT_ID="your_chat_id"
+     compose_directory="/home/USER/nwaku-compose/
      ```
 
-3. **Make the Script Executable**:
+4. **Make the Script Executable**:
    ```bash
    chmod +x ~/monitoring-waku.sh
    ```
 
 **Step 2: Create Service File**
 
-Create a systemd service file to ensure the script runs continuously:
+Create a systemd service file to ensure the script runs continuously.
+Don't forget to specify the user in the "User=" line.:
 
 ```bash
 sudo tee /etc/systemd/system/monitoring-waku.service > /dev/null <<EOF
@@ -57,7 +60,6 @@ RestartSec=5
 WantedBy=multi-user.target
 EOF
 ```
-Don't forget to specify the user in the "User=" line.
 
 **Step 3: Enable and Start the Service**
 
