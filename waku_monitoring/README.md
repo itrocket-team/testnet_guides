@@ -40,8 +40,7 @@ The script periodically checks the health of the Waku node using HTTP requests t
 
 **Step 2: Create Service File**
 
-Create a systemd service file to ensure the script runs continuously.
-Don't forget to specify the user in the "User=" line.:
+Create a systemd service file to ensure the script runs continuously:
 
 ```bash
 sudo tee /etc/systemd/system/monitoring-waku.service > /dev/null <<EOF
