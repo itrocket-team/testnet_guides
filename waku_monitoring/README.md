@@ -25,7 +25,7 @@ The script periodically checks the health of the Waku node using HTTP requests t
    - Open Telegram and find `@BotFather` to create a new bot.
    - Obtain your `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` as instructed by @BotFather.
    - Specify these variables in `monitoring-waku.sh`.
-   - Replace "USER" with your username:
+   - Replace your nwake-compose directory path, example /root/nwaku-compose":
      ```bash
      nano ~/monitoring-waku.sh
      TELEGRAM_BOT_TOKEN="your_bot_token"
@@ -50,7 +50,7 @@ Description=Waku Node Health Service
 After=network-online.target
 
 [Service]
-User=User
+User=$USER
 WorkingDirectory=$HOME
 ExecStart=/bin/bash $HOME/monitoring-waku.sh
 Restart=always
