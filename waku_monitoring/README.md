@@ -18,7 +18,7 @@ The script periodically checks the health of the Waku node using HTTP requests t
 1. **Download the Script**:
    ```bash
    cd $HOME
-   wget -O monitoring-waku.sh https://raw.githubusercontent.com/mART321/waku_monitor/main/monitoring-waku.sh
+   wget -O monitoring-waku.sh https://raw.githubusercontent.com/itrocket-team/testnet_guides/main/waku_monitoring/monitoring-waku.sh
    ```
 
 2. **Configure Telegram Alerts**:
