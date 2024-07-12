@@ -9,11 +9,14 @@ URL="https://api.telegram.org/bot$TOKEN/sendMessage"
 message1="WAKU_NODE(health): Node stopped or turned off"
 message2="WAKU_NODE(health): An error occurred with the node"
 message3="WAKU_NODE(health): Unknown node status: ${response}"
+message_normal="WAKU_NODE(health): Node is back to normal"
 
 # IP address and output setting
 ip_address="localhost:8645"
 plain_text_out=false
 POSITIONAL_ARGS=()
+ALARM=0
+
 while [[ $# -gt 0 ]]; do
   cd "$compose_directory" || { echo "Failed to change directory to $compose_directory"; exit 1; }
   case $1 in
@@ -67,18 +70,31 @@ while true; do
   fi
   node_health=$(echo "${response}" | jq -r '.nodeHealth')
   if [[ "${node_health}" == "Ready" ]]; then
-         echo "Node is ready and working normally."
+    echo "Node is ready and working normally."
+    if [[ "$ALARM" -eq 1 ]]; then
+      curl -s -X POST "$URL" -d chat_id="$CHAT_ID" -d text="$message_normal" -d parse_mode="HTML"
+      ALARM=0
+    fi
   elif [[ "${node_health}" == "initializing" ]]; then
-         echo "Node is initializing or loading."
+    echo "Node is initializing or loading."
   elif [[ "${node_health}" == "stopped" ]]; then
-         echo "Node stopped or turned off."
-         curl -s -X POST "$URL" -d chat_id="$CHAT_ID" -d text="$message1" -d parse_mode="HTML"
+    echo "Node stopped or turned off."
+    if [[ "$ALARM" -eq 0 ]]; then
+      curl -s -X POST "$URL" -d chat_id="$CHAT_ID" -d text="$message1" -d parse_mode="HTML"
+      ALARM=1
+    fi
   elif [[ "${node_health}" == *"error"* ]]; then
-         echo "An error occurred with the node."
-         curl -s -X POST "$URL" -d chat_id="$CHAT_ID" -d text="$message2" -d parse_mode="HTML"
+    echo "An error occurred with the node."
+    if [[ "$ALARM" -eq 0 ]]; then
+      curl -s -X POST "$URL" -d chat_id="$CHAT_ID" -d text="$message2" -d parse_mode="HTML"
+      ALARM=1
+    fi
   else
-         echo "Unknown node status: ${response}"
-         curl -s -X POST "$URL" -d chat_id="$CHAT_ID" -d text="$message3" -d parse_mode="HTML"
+    echo "Unknown node status: ${response}"
+    if [[ "$ALARM" -eq 0 ]]; then
+      curl -s -X POST "$URL" -d chat_id="$CHAT_ID" -d text="$message3" -d parse_mode="HTML"
+      ALARM=1
+    fi
   fi
   sleep 300
   echo "----------------------------------------"
