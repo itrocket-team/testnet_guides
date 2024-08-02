@@ -5,7 +5,7 @@
 Navigate to your home directory and download the monitoring script:
 ```bash
 cd $HOME
-wget -O 0g-monitoring.sh https://raw.githubusercontent.com/mART321/0g-monitoring/main/0g-monitoring.sh
+wget -O 0g-monitoring.sh https://raw.githubusercontent.com/itrocket-team/testnet_guides/main/0g/0g-monitoring.sh
 chmod +x 0g-monitoring.sh
 ```
 #### Step 2: Configure Telegram Alerts
