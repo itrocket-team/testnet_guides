@@ -1,6 +1,6 @@
 ## Warden Node and Slinky Monitoring Script
 
-This script monitors the status of a Warden node & Slynki oracle, sends Telegram notifications in case of errors or node shutdown. Developed by ITRocket for the community, it enhances the functionality of the existing warden node script.
+This script monitors the status of a Warden node & Slynki oracle, sends Telegram notifications in case of errors or node shutdown. Developed by ITRocket for the community.
 
 ### Description
 
