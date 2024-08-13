@@ -101,7 +101,7 @@ check_oracle_prices() {
         send_telegram "$NODE_NAME: No price data found or price data is empty in response from Oracle at $ORACLE_URL."
         echo "Error: No price data found or price data is empty in response from Oracle at $ORACLE_URL."
     else
-        echo "Oracle price data is present and correct."
+        echo "Oracle price data is present."
     fi
 }
 
