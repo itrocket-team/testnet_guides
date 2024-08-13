@@ -4,7 +4,7 @@ This script monitors the status of a Warden node & Slynki oracle, sends Telegram
 
 ### Description
 
-The script periodically checks the Warden node's health via /health and the Oracle's status, notifying via console and Telegram if there's no response, incorrect data, or missing price information.
+It can be a useful addition to other monitoring methods
 
 ### Key Features
 
