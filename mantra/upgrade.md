@@ -44,6 +44,6 @@ mantrachaind version --long | grep -e version -e commit
 
 Start node
 ~~~
-sudo systemctl restart mantrachaind && sudo journalctl -u mantrachaind -f
+sudo systemctl start mantrachaind && sudo journalctl -u mantrachaind -f
 ~~~
 You can restore your node using our guide, but after any reboot, the node will go into AppHash error.
