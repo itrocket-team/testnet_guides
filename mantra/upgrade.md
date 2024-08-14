@@ -25,14 +25,12 @@ sudo systemctl restart mantrachaind && sudo journalctl -u mantrachaind -f
 
 We wait for a message in the logs indicating that an update is required, and then we update the binary
 ~~~
-cd $HOME
-rm -rf download
-mkdir download
-cd download
-wget https://github.com/MANTRA-Finance/public/releases/download/v2.0.0/mantrachaind-2.0.0-linux-amd64.tar.gz
-tar -xvf mantrachaind-2.0.0-linux-amd64.tar.gz
-rm $HOME/download/mantrachaind-2.0.0-linux-amd64.tar.gz
+upgrade_version="2.0.0"
+if [ "$(uname -m)" == "aarch64" ]; then export ARCH="arm64"; else export ARCH="amd64"; fi
+wget https://github.com/MANTRA-Finance/public/releases/download/v$upgrade_version/mantrachaind-$upgrade_version-linux-$ARCH.tar.gz
+# extract the binary
+tar -xvf mantrachaind-$upgrade_version-linux-$ARCH.tar.gz
 chmod +x mantrachaind
-sudo mv $HOME/download/mantrachaind $(which mantrachaind)
+sudo mv $HOME/mantrachaind $(which mantrachaind)
 sudo systemctl restart mantrachaind && sudo journalctl -u mantrachaind -f
 ~~~
