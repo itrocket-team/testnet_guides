@@ -32,5 +32,17 @@ wget https://github.com/MANTRA-Finance/public/releases/download/v$upgrade_versio
 tar -xvf mantrachaind-$upgrade_version-linux-$ARCH.tar.gz
 chmod +x mantrachaind
 sudo mv $HOME/mantrachaind $(which mantrachaind)
+~~~
+
+Check binnary version and commit
+~~~
+mantrachaind version --long | grep -e version -e commit
+#commit: c0b4618
+#version: 2.0.0
+~~~
+
+Start node
+~~~
 sudo systemctl restart mantrachaind && sudo journalctl -u mantrachaind -f
 ~~~
+
