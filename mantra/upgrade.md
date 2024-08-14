@@ -23,7 +23,7 @@ mv $HOME/.mantrachain/priv_validator_state.json.backup $HOME/.mantrachain/data/p
 sudo systemctl restart mantrachaind && sudo journalctl -u mantrachaind -f
 ~~~
 
-We wait for a message in the logs indicating that an update is required, and then we update the binary
+>We wait for a message in the logs indicating that an update is required, and then we update the binary
 ~~~
 upgrade_version="2.0.0"
 if [ "$(uname -m)" == "aarch64" ]; then export ARCH="arm64"; else export ARCH="amd64"; fi
