@@ -1,0 +1,38 @@
+### Guide to Fixing AppHash After Migration
+Downgrade binary
+~~~
+cd $HOME
+sudo wget -O /usr/lib/libwasmvm.x86_64.so https://github.com/CosmWasm/wasmvm/releases/download/v1.3.1/libwasmvm.x86_64.so
+wget https://github.com/MANTRA-Finance/public/raw/main/mantrachain-hongbai/mantrachaind-linux-amd64.zip
+unzip mantrachaind-linux-amd64.zip
+rm mantrachaind-linux-amd64.zip
+sudo mv mantrachaind $(which mantrachaind)
+~~~
+
+Download the pre-upgrade snapshot
+~~~
+sudo systemctl stop mantrachaind
+
+cp $HOME/.mantrachain/data/priv_validator_state.json $HOME/.mantrachain/priv_validator_state.json.backup
+
+rm -rf $HOME/.mantrachain/data $HOME/.mantrachain/wasm
+curl https://server-4.itrocket.net/mantra_2024-08-14_1631626_snap.tar.lz4 | lz4 -dc - | tar -xf - -C $HOME/.mantrachain
+
+mv $HOME/.mantrachain/priv_validator_state.json.backup $HOME/.mantrachain/data/priv_validator_state.json
+
+sudo systemctl restart mantrachaind && sudo journalctl -u mantrachaind -f
+~~~
+
+We wait for a message in the logs indicating that an update is required, and then we update the binary
+~~~
+cd $HOME
+rm -rf download
+mkdir download
+cd download
+wget https://github.com/MANTRA-Finance/public/releases/download/v2.0.0/mantrachaind-2.0.0-linux-amd64.tar.gz
+tar -xvf mantrachaind-2.0.0-linux-amd64.tar.gz
+rm $HOME/download/mantrachaind-2.0.0-linux-amd64.tar.gz
+chmod +x mantrachaind
+sudo mv $HOME/download/mantrachaind $(which mantrachaind)
+sudo systemctl restart mantrachaind && sudo journalctl -u mantrachaind -f
+~~~
