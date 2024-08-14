@@ -1,4 +1,4 @@
-### Guide to Fixing AppHash After Migration
+### Guide to Fixing AppHash After Migration 
 Downgrade binary
 ~~~
 cd $HOME
@@ -46,4 +46,4 @@ Start node
 ~~~
 sudo systemctl restart mantrachaind && sudo journalctl -u mantrachaind -f
 ~~~
-
+You can restore your node using our guide, but after any reboot, the node will go into AppHash error.
