@@ -24,4 +24,17 @@ mv $HOME/.layer/priv_validator_state.json.backup $HOME/.layer/data/priv_validato
 sudo systemctl start layerd && sudo journalctl -u layerd -f
 ~~~
 
-> ### *You can restore your node using our guide, but after any reboot, the node will go into AppHash error... https://github.com/cosmos/cosmos-sdk/issues/20489*
+> ### **⚠️ Attention:**
+> 
+> ### **You can restore your node using our guide, but after any reboot, the node will go into an AppHash error... [GitHub Issue #20489](https://github.com/cosmos/cosmos-sdk/issues/20489)**
+
+
+Check sync status
+~~~
+layerd status | jq
+~~~
+
+After `catching_up: false` try to unjail the validator
+~~~
+layerd tx slashing unjail --from $WALLET --chain-id layertest-1 --fees 500loya -y 
+~~~
