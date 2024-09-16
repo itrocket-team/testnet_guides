@@ -420,6 +420,11 @@ Re-activate a validator
 aut validator activate --validator $VALIDATOR_ADDRESS | aut tx sign - | aut tx send -
 ~~~
 
+Check epoch
+~~~
+aut protocol epoch-id --rpc-endpoint https://rpc1.piccadilly.autonity.org
+~~~
+
 Bond NTN (the bond will appear in next epoch)
 ~~~
 aut validator bond --validator $VALIDATOR_ADDRESS <amount> | aut tx sign - | aut tx send -
