@@ -409,6 +409,17 @@ Check if the validator is in committee by enode
 aut protocol get-committee-enodes | grep <enode>
 ~~~
 
+Pause as a validator
+~~~
+aut validator pause --validator $VALIDATOR_ADDRESS | aut tx sign - | aut tx send -
+~~~
+>This will return a Validator object. The state property will be 1 (paused). `aut validator info --validator $VALIDATOR_ADDRESS`
+
+Re-activate a validator
+~~~
+aut validator activate --validator $VALIDATOR_ADDRESS | aut tx sign - | aut tx send -
+~~~
+
 Bond NTN (the bond will appear in next epoch)
 ~~~
 aut validator bond --validator $VALIDATOR_ADDRESS <amount> | aut tx sign - | aut tx send -
