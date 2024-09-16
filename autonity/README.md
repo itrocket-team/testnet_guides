@@ -85,7 +85,7 @@ Download binary
 cd $HOME
 rm -rf autonity
 git clone https://github.com/autonity/autonity && cd autonity 
-git checkout tags/v0.14.0 -b v0.14.0 
+git checkout tags/v0.14.1 -b v0.14.1 
 make autonity 
 sudo mv $HOME/autonity/build/bin/autonity /usr/local/bin/
 ~~~
