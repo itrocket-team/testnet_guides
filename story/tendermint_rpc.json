@@ -31,6 +31,10 @@
     {
       "url": "https://story-rpc.mandragora.io",
       "provider": "Daniel | Mandragora"
-    }
+    },
+    {
+      "url": "https://story-testnet-rpc.shachopra.com",
+      "provider": "shachopra"
+    }    
   ]
 }
