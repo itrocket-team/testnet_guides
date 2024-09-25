@@ -1,0 +1,12 @@
+{
+  "evm_rpc": [
+    {
+      "url": "http://story-evm-rpc.xxxigm.xyz",
+      "provider": "xxxigm"
+    },
+    {
+      "url": "https://story-testnet-evm.itrocket.net",
+      "provider": "ITRocket"
+    }
+   ]
+}
