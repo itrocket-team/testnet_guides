@@ -21,7 +21,7 @@
       "provider": "Zstake"
     },
     {
-      "url": "ttps://story-cosmos-testnet-rpc.tech-coha05.xyz",
+      "url": "https://story-cosmos-testnet-rpc.tech-coha05.xyz",
       "provider": "Coha05"
     },
     {
@@ -31,16 +31,6 @@
     {
       "url": "https://story-rpc.mandragora.io",
       "provider": "Daniel | Mandragora"
-    }
-  ],
-  "evm_rpc": [
-    {
-      "url": "http://story-evm-rpc.xxxigm.xyz",
-      "provider": "xxxigm"
-    },
-    {
-      "url": "https://story-testnet-evm.itrocket.net",
-      "provider": "ITRocket"
     }
   ]
 }
