@@ -1,0 +1,46 @@
+{
+  "tendermint_rpc": [
+    {
+      "url": "https://story-testnet-cosmos-rpc.crouton.digital",
+      "provider": "CroutonDigital"
+    },
+    {
+      "url": "https://rpc-story.ongtrong.xyz",
+      "provider": "OngTrong"
+    },
+    {
+      "url": "http://story-cosmos-rpc.xxxigm.xyz",
+      "provider": "xxxigm"
+    },
+    {
+      "url": "http://story-cosmos-rpc.empirex.tech",
+      "provider": "Empirex"
+    },
+    {
+      "url": "https://story-testnet-rpc.zstake.xyz",
+      "provider": "Zstake"
+    },
+    {
+      "url": "ttps://story-cosmos-testnet-rpc.tech-coha05.xyz",
+      "provider": "Coha05"
+    },
+    {
+      "url": "https://story-testnet-rpc.cumulo.me",
+      "provider": "cumulo.pro"
+    },
+    {
+      "url": "https://story-rpc.mandragora.io",
+      "provider": "Daniel | Mandragora"
+    }
+  ],
+  "evm_rpc": [
+    {
+      "url": "http://story-evm-rpc.xxxigm.xyz",
+      "provider": "xxxigm"
+    },
+    {
+      "url": "https://story-testnet-evm.itrocket.net",
+      "provider": "ITRocket"
+    }
+  ]
+}
