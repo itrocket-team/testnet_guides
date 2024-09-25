@@ -7,6 +7,10 @@
     {
       "url": "https://story-testnet-evm.itrocket.net",
       "provider": "ITRocket"
+    },
+    {
+      "url": "https://evm-rpc-story.obiwank107.xyz",
+      "provider": "Obiwank107"
     }
    ]
 }
