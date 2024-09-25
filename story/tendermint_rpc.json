@@ -35,6 +35,10 @@
     {
       "url": "https://story-testnet-rpc.shachopra.com",
       "provider": "shachopra"
-    }    
+    },
+    {
+      "url": "https://rpc-story.obiwank107.xyz",
+      "provider": "Obiwank107"
+    }
   ]
 }
