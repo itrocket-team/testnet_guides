@@ -28,7 +28,7 @@ slow_print "     #+#     #+#     #+#   #+#   #+#     #+# #+#         #+#   #+#  
 slow_print "     ###     ###     ###     ### ########### ########### ###     ### ###########     ###     " 0.003
 
 echo -e "$GREEN"
-slow_print "                                                                          itrocket.net" 0.01
+echo "                                                                          itrocket.net"
 
 # Добавление слогана
 slow_print "Welcome aboard" 0.01
