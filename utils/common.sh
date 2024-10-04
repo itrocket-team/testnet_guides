@@ -1,6 +1,7 @@
 GREEN="\e[1m\e[1;32m" # green color
 RED="\e[1m\e[1;31m" # red color
 BLUE='\033[0;34m'   # blue color
+YELLOW="\e[1m\e[1;33m"  # yellow color
 NC="\e[0m"          # no color
 
 function printLogo {
@@ -21,6 +22,10 @@ function printRed {
 
 function printBlue {
   echo -e "${BLUE}${1}${NC}"
+}
+
+function printYellow {
+  echo -e "${YELLOW}${1}${NC}"
 }
 
 function addToPath {
