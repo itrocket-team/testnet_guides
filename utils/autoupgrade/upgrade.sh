@@ -18,6 +18,21 @@ done
 
 printLogo
 
+CHAT_ID_ALARM=""
+BOT_TOKEN=""
+
+# Function to send messages to Telegram
+send_telegram() {
+    local message=$1
+    if [ -n "$BOT_TOKEN" ] && [ -n "$CHAT_ID_ALARM" ]; then
+        local response=$(curl -s -X POST "https://api.telegram.org/bot$BOT_TOKEN/sendMessage" \
+            -d chat_id="$CHAT_ID_ALARM" -d text="$message" > /dev/null 2>&1)
+        echo "Sent Telegram message: $message"
+    else
+        echo "BOT_TOKEN or CHAT_ID_ALARM not set. Telegram message not sent."
+    fi
+}
+
 # Initialize variables for time calculations
 prev_time=$(date +%s)
 cur_time=0
@@ -107,6 +122,8 @@ for((;;)); do
     sudo systemctl restart $BINARY
     printLine
     echo -e "$GREEN Your node has been updated and restarted, the session will be terminated automatically after 15 min${NC}"
+    MESSAGE="$BINARY updated to ${VER} and service restarted"
+    send_telegram "$MESSAGE"
     echo "$(date): Your node successfully upgraded to ${VER}" >> $PROJECT_HOME/upgrade.log
     printLine
     break
