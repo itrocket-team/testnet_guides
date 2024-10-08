@@ -19,13 +19,13 @@ done
 printLogo
 
 # Function to send messages to Telegram
-# If you want to receive Telegram notifications after updates, create a ~/tg.conf file with the following values:
+# If you want to receive Telegram notifications after updates, create a /root/tg.conf file with the following values:
 # CHAT_ID_ALARM=""
 # BOT_TOKEN=""
-if [ -f ~/tg.conf ]; then
-    source ~/tg.conf
+if [ -f /root/tg.conf ]; then
+    source /root/tg.conf
 else
-    echo "Telegram configuration file ~/tg.conf not found. Telegram notifications will be disabled."
+    echo "Telegram configuration file tg.conf not found. Telegram notifications will be disabled."
 fi
 send_telegram() {
     local message=$1
