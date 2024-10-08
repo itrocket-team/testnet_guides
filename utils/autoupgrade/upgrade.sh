@@ -19,6 +19,9 @@ done
 printLogo
 
 # Function to send messages to Telegram
+# If you want to receive Telegram notifications after updates, create a ~/tg.conf file with the following values:
+# CHAT_ID_ALARM=""
+# BOT_TOKEN=""
 source ./tg.conf
 send_telegram() {
     local message=$1
