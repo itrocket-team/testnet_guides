@@ -18,10 +18,9 @@ done
 
 printLogo
 
+# Function to send messages to Telegram
 CHAT_ID_ALARM=""
 BOT_TOKEN=""
-
-# Function to send messages to Telegram
 send_telegram() {
     local message=$1
     if [ -n "$BOT_TOKEN" ] && [ -n "$CHAT_ID_ALARM" ]; then
