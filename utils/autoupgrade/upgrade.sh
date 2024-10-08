@@ -22,7 +22,11 @@ printLogo
 # If you want to receive Telegram notifications after updates, create a ~/tg.conf file with the following values:
 # CHAT_ID_ALARM=""
 # BOT_TOKEN=""
-source ./tg.conf
+if [ -f ~/tg.conf ]; then
+    source ~/tg.conf
+else
+    echo "Telegram configuration file ~/tg.conf not found. Telegram notifications will be disabled."
+fi
 send_telegram() {
     local message=$1
     if [ -n "$BOT_TOKEN" ] && [ -n "$CHAT_ID_ALARM" ]; then
