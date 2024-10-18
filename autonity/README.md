@@ -47,7 +47,7 @@ pipx install --force git+https://github.com/autonity/aut
 sudo mv ~/.local/bin/aut /usr/local/bin/aut
 ~~~
 
-The aut version should be 0.4.0
+The aut version should be 0.5.0
 ~~~
 aut --version
 ~~~
@@ -90,7 +90,7 @@ make autonity
 sudo mv $HOME/autonity/build/bin/autonity /usr/local/bin/
 ~~~
 
-Autonity version should be 0.14.0
+Autonity version should be 0.14.1
 ~~~
 autonity version
 ~~~
@@ -223,7 +223,7 @@ make all
 sudo mv build/bin/ethkey /usr/local/bin
 ~~~
 
-The ethkey version should be 0.13.0-4073f247-20240226
+The ethkey version should be 0.14.0-15cd0164-20240619
 ~~~
 ethkey --version
 ~~~
