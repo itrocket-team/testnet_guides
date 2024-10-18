@@ -230,7 +230,7 @@ ethkey --version
 
 Generate the proof and `save` it - you will need it later
 ~~~
-autonity genOwnershipProof --autonitykeys $HOME/autonity-chaindata/autonity/autonitykeys --oraclekey $HOME/.autonity/keystore/oracle.key <TREASURE_ADDRESS>
+autonity genOwnershipProof --autonitykeys $HOME/autonity-chaindata/autonity/autonitykeys --oraclekeyhex <privatekey_oracle> <tresure_account_address>
 ~~~
 
 Find ```admin_enode```
