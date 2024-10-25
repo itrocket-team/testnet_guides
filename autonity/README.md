@@ -43,11 +43,11 @@ sudo apt install pipx
 
 Download Autonity Utility Tool (aut)
 ~~~
-pipx install --force git+https://github.com/autonity/aut
+pipx install autonity-cli
 sudo mv ~/.local/bin/aut /usr/local/bin/aut
 ~~~
 
-The aut version should be 0.5.0
+The aut version should be 0.6.0
 ~~~
 aut --version
 ~~~
