@@ -62,7 +62,7 @@ while true; do
     # Checking if the validator is signing blocks
     if [[ -n $VALIDATOR_ADDRESS ]]; then
         echo "Checking if the validator is committing blocks..."
-        OUTPUT=$(aut protocol get-committee 2>&1)
+        OUTPUT=$(aut protocol committee 2>&1)
 
         # Check for errors in the command execution
         if [ $? -ne 0 ]; then
