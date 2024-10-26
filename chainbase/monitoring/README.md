@@ -28,7 +28,7 @@ nano $HOME/monitoring-chainbase.sh
 /bin/bash $HOME/monitoring-chainbase.sh
 ```
 
-## Configure monitoring every 15 min
+## Configure monitoring every 10 min
 Open crontab `crontab -e` add these lines, and save
 ```
 # Chainbase node monitoring
