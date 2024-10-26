@@ -6,7 +6,6 @@
 To begin, download the `monitoring-chainbase.sh` script using the following commands:
 ```
 cd $HOME
-To begin, download the `monitoring-chainbase.sh` script using the following commands:
 wget -O monitoring-chainbase.sh https://raw.githubusercontent.com/itrocket-team/testnet_guides/main/chainbase/monitoring-chainbase.sh
 chmod +x $HOME/monitoring-chainbase.sh
 ```
