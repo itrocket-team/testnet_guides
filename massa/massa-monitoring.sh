@@ -38,7 +38,7 @@ buy_rolls() {
     if [ "$(echo "$balance > 101" | bc)" -eq 1 ]; then
         rolls_to_buy=$((balance / 100))
         echo -e "\033[0;32m"Address:${WALLET_ADDRESS} has Candidate=${CANDIDATE} Rolls, Balance=${BALANCE} MAS. Buying ${rolls_to_buy} rolls..."\033[0m"
-        TXH=$(./massa-client -p "$PASSWORD" buy_rolls ${WALLET_ADDRESS} ${rolls_to_buy} 0)
+        TXH=$(./massa-client -p "$PASSWORD" buy_rolls ${WALLET_ADDRESS} ${rolls_to_buy} 0.01)
         echo "We have bought ${rolls_to_buy} rolls TXH:$TXH"
         echo '--------------------------------'
     else
