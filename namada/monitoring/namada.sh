@@ -19,7 +19,7 @@ NODE_NAME="my_validatoe"
 BLOCK_GAP_ALARM=100
 
 # Change to false if you don`t want to allow the node restart function
-RESTART=true
+RESTART=false
 
 # External RPC server address to get the expected block height
 EXTERNAL_RPC_SERVER="https://namada-testnet-rpc.itrocket.net:443"
