@@ -84,13 +84,13 @@ Download binary
 ~~~
 cd $HOME
 rm -rf autonity
-git clone https://github.com/autonity/autonity && cd autonity 
-git checkout tags/v0.14.1 -b v0.14.1 
+git clone https://github.com/autonity/autonity.git && cd autonity 
+git checkout tags/v1.0.2-alpha -b v1.0.2-alpha 
 make autonity 
 sudo mv $HOME/autonity/build/bin/autonity /usr/local/bin/
 ~~~
 
-Autonity version should be 0.14.1
+Autonity version should be 1.0.2-alpha
 ~~~
 autonity version
 ~~~
