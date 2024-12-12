@@ -165,12 +165,12 @@ Download binary
 ~~~
 git clone https://github.com/autonity/autonity-oracle && cd autonity-oracle 
 git fetch --all 
-git checkout v0.1.9 
+git checkout v0.2.2 
 make autoracle 
 sudo mv build/bin/autoracle /usr/local/bin
 ~~~
 
-Autoracle version should be v0.1.9
+Autoracle version should be v0.2.2
 ~~~
 autoracle version
 ~~~
