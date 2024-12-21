@@ -3,7 +3,6 @@
 # Story Grafana Dashboard by ITRocket
 > This dashboard includes blockchain overview, validator data (uptime, missing blocks), block parameters, transactions & gas data, staking parameters, Geth overview, system health monitoring. Custom Prometheus exporter was developed as well to display additional validator metrics. Finally, alerts can be easily configured if needed.
 
-✅ **Grafana Dashboard:** https://grafana-story.itrocket.net/d/fe1cy2e7cydc0f/story-dashboard?orgId=1  
 ✅ **Json data:** https://github.com/itrocket-team/testnet_guides/blob/main/story/monitoring/dashboard.json
 
 - [Grafana Dashboard Functionality](#grafana-dashboard-functionality)
