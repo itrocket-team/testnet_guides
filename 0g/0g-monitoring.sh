@@ -8,11 +8,11 @@ fi
 # Configuration
 TELEGRAM_BOT_TOKEN=""
 TELEGRAM_CHAT_ID=""
-STORAGE_RPC_PORT="" # Default port 5678. If you don`t want to monitor storage node, leave the field empty
-VALIDATOR_RPC_PORT="" # Default port 26657. If you don`t want to monitor validator node, leave the field empty
+STORAGE_RPC_PORT="5678" # Default port 5678. If you don`t want to monitor storage node, leave the field empty
+# VALIDATOR_RPC_PORT="" # Default port 26657. If you don`t want to monitor validator node, leave the field empty
 NODE_NAME="0G_NODE"
 PARENT_RPC="https://og-testnet-rpc.itrocket.net"
-SLEEP_INTERVAL=15 # Script check interval
+SLEEP_TIME=15m # Script check interval
 MAX_ATTEMPTS=10   # Number of checks
 
 #Do not modify 
@@ -23,13 +23,6 @@ send_telegram() {
     local message="$1"
     echo "$message"
     curl -s -X POST "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" -d chat_id=$TELEGRAM_CHAT_ID -d text="$message"
-}
-
-time_to_next_interval() {
-    local current_minute=$(date +%M)
-    local next_interval=$(( (current_minute / SLEEP_INTERVAL + 1) * SLEEP_INTERVAL ))
-    local sleep_time=$(( next_interval * 60 - $(date +%s) % 3600 ))
-    echo $sleep_time
 }
 
 check_block_height_and_peers() {
@@ -152,14 +145,13 @@ while true; do
         echo "----------------------------------------"
     fi
 
-    if [[ -n "$VALIDATOR_RPC_PORT" ]]; then
-        echo "0G_VALIDATOR_NODE: Validator RPC: $VALIDATOR_RPC"
-        check_block_height "$VALIDATOR_RPC"
-        echo "----------------------------------------"
-    fi
+#    if [[ -n "$VALIDATOR_RPC_PORT" ]]; then
+#        echo "0G_VALIDATOR_NODE: Validator RPC: $VALIDATOR_RPC"
+#        check_block_height "$VALIDATOR_RPC"
+#        echo "----------------------------------------"
+#    fi
 
-    SLEEP_TIME=$(time_to_next_interval)
-    echo "0G_NODE: Waiting $SLEEP_TIME seconds before next check..."
+    echo "0G_NODE: Waiting $SLEEP_TIME before next check..."
     echo "----------------------------------------"
     sleep $SLEEP_TIME
 done
