@@ -5,8 +5,8 @@
 Navigate to your home directory and download the monitoring script:
 ```bash
 cd $HOME
-wget -O monitoring-ogstorage.sh https://raw.githubusercontent.com/itrocket-team/testnet_guides/main/0g/monitoring-ogstorage.sh
-chmod +x monitoring-ogstorage.sh
+wget -O monitoring-og.sh https://raw.githubusercontent.com/itrocket-team/testnet_guides/main/0g/monitoring-og.sh
+chmod +x monitoring-og.sh
 ```
 #### Step 2: Configure Telegram Alerts
 Open Telegram and find `@BotFather`
@@ -15,7 +15,7 @@ Open Telegram and find `@BotFather`
 
 #### Step 3: Edit script
 ```bash
-nano monitoring-ogstorage.sh
+nano monitoring-og.sh
 ```
 ```bash
 TELEGRAM_BOT_TOKEN=""
@@ -27,17 +27,18 @@ STORAGE_RPC_PORT="" # Default port 5678.
 
 Create and edit the service file:
 ```bash
-sudo tee /etc/systemd/system/monitoring-ogstorage.service > /dev/null <<EOF
+sudo tee /etc/systemd/system/monitoring-og.service > /dev/null <<EOF
 [Unit]
-Description=0G Storage Node Health Service
-After=network-online.target
+Description=OG Storage Node Monitoring
+After=network.target
 
 [Service]
 User=$USER
-ExecStart=$HOME/monitoring-ogstorage.sh
+ExecStart=${HOME}/monitoring-og.sh
+WorkingDirectory=$HOME
 StandardOutput=inherit
 StandardError=inherit
-Restart=always 
+Restart=always
 
 [Install]
 WantedBy=multi-user.target
@@ -49,8 +50,8 @@ EOF
 Reload the systemd daemon and enable the service to start on boot:
 ```bash
 sudo systemctl daemon-reload
-sudo systemctl enable monitoring-ogstorage
-sudo systemctl restart monitoring-ogstorage && sudo journalctl -u monitoring-ogstorage -o cat
+sudo systemctl enable monitoring-og
+sudo systemctl restart monitoring-og && sudo journalctl -u monitoring-og -fo cat
 ```
 
 #### Removing the Service and Script (if needed)
@@ -59,9 +60,9 @@ If you need to remove the service and script, execute the following commands:
 
 Stop and disable the service, then remove the service file and script:
 ```bash
-sudo systemctl stop monitoring-ogstorage
-sudo systemctl disable monitoring-ogstorage
-sudo rm -rf /etc/systemd/system/monitoring-ogstorage.service
-rm ~/monitoring-ogstorage.sh
+sudo systemctl stop monitoring-og
+sudo systemctl disable monitoring-og
+sudo rm -rf /etc/systemd/system/monitoring-og.service
+rm ~/monitoring-og.sh
 sudo systemctl daemon-reload
 ```
