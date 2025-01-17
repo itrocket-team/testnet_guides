@@ -1,4 +1,4 @@
-### Guide for Setting Up 0G Node Monitoring
+### 0G Storage node Monitoring script
 
 #### Step 1: Download the Monitoring Script
 
@@ -20,8 +20,8 @@ nano 0g-monitoring.sh
 ```bash
 TELEGRAM_BOT_TOKEN=""
 TELEGRAM_CHAT_ID=""
-STORAGE_RPC_PORT="" # Default port 5678. If you don`t want to monitor storage node, leave the field empty
-VALIDATOR_RPC_PORT="" # Default port 26657. If you don`t want to monitor validator node, leave the field empty
+STORAGE_RPC_PORT="" # If you don`t want to monitor storage node, leave the field empty. Default port 5678.
+VALIDATOR_RPC_PORT="" # If you don`t want to monitor validator node, leave the field empty. Default port 26657
 ```
 
 #### Step 4: Set Up the Systemd Service
