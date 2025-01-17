@@ -20,8 +20,7 @@ nano monitoring-0g.sh
 ```bash
 TELEGRAM_BOT_TOKEN=""
 TELEGRAM_CHAT_ID=""
-STORAGE_RPC_PORT="" # If you don`t want to monitor storage node, leave the field empty. Default port 5678.
-VALIDATOR_RPC_PORT="" # If you don`t want to monitor validator node, leave the field empty. Default port 26657
+STORAGE_RPC_PORT="" # Default port 5678.
 ```
 
 #### Step 4: Set Up the Systemd Service
