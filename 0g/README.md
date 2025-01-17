@@ -5,8 +5,8 @@
 Navigate to your home directory and download the monitoring script:
 ```bash
 cd $HOME
-wget -O 0g-monitoring.sh https://raw.githubusercontent.com/itrocket-team/testnet_guides/main/0g/0g-monitoring.sh
-chmod +x 0g-monitoring.sh
+wget -O monitoring-0g.sh https://raw.githubusercontent.com/itrocket-team/testnet_guides/main/0g/monitoring-0g.sh
+chmod +x monitoring-0g.sh
 ```
 #### Step 2: Configure Telegram Alerts
 Open Telegram and find `@BotFather`
@@ -15,7 +15,7 @@ Open Telegram and find `@BotFather`
 
 #### Step 3: Edit script
 ```bash
-nano 0g-monitoring.sh
+nano monitoring-0g.sh
 ```
 ```bash
 TELEGRAM_BOT_TOKEN=""
@@ -30,13 +30,13 @@ Create and edit the service file:
 ```bash
 sudo tee /etc/systemd/system/monitoring-0g.service > /dev/null <<EOF
 [Unit]
-Description=0G Node Health Service
+Description=0G Storage Node Health Service
 After=network-online.target
 
 [Service]
 User=$USER
 WorkingDirectory=$HOME
-ExecStart=/bin/bash $HOME/0g-monitoring.sh
+ExecStart=/bin/bash $HOME/monitoring-0g.sh
 Restart=always
 RestartSec=5
 
@@ -63,6 +63,6 @@ Stop and disable the service, then remove the service file and script:
 sudo systemctl stop monitoring-0g
 sudo systemctl disable monitoring-0g
 sudo rm -rf /etc/systemd/system/monitoring-0g.service
-rm ~/0g-monitoring.sh
+rm ~/monitoring-0g.sh
 sudo systemctl daemon-reload
 ```
