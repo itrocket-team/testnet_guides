@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Ensure required dependencies are installed
 if ! command -v jq &> /dev/null || ! command -v curl &> /dev/null; then
     echo "jq and curl are required but not installed. Please install them and try again."
     exit 1
@@ -8,150 +9,96 @@ fi
 # Configuration
 TELEGRAM_BOT_TOKEN=""
 TELEGRAM_CHAT_ID=""
-STORAGE_RPC_PORT="5678" # Default port 5678. If you don`t want to monitor storage node, leave the field empty
-VALIDATOR_RPC_PORT="" # Default port 26657. If you don`t want to monitor validator node, leave the field empty
+STORAGE_RPC_PORT="5678" # Leave empty if storage node monitoring is not needed
 NODE_NAME="0G_NODE"
 PARENT_RPC="https://og-testnet-rpc.itrocket.net"
-SLEEP_TIME=15m # Script check interval
-MAX_ATTEMPTS=10   # Number of checks
+SLEEP_TIME=15m # Interval between checks
+MAX_ATTEMPTS=10 # Number of retry attempts for parent RPC
 
-#Do not modify 
+# Derived variable
 STORAGE_RPC="http://localhost:$STORAGE_RPC_PORT"
-VALIDATOR_RPC="http://localhost:$VALIDATOR_RPC_PORT"
 
+# Function to send Telegram notifications
 send_telegram() {
     local message="$1"
     echo "$message"
-    curl -s -X POST "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" -d chat_id=$TELEGRAM_CHAT_ID -d text="$message"
+    curl -s -X POST "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" \
+        -d chat_id=$TELEGRAM_CHAT_ID \
+        -d text="$message" &> /dev/null
 }
 
+# Function to fetch JSON field safely
+fetch_json_field() {
+    local json="$1"
+    local field="$2"
+    echo "$json" | jq -r "$field" 2>/dev/null
+}
+
+# Function to check block height and peers
 check_block_height_and_peers() {
-    local RPC=$1
-    echo "0G_STORAGE_NODE: Checking RPC block height and connected peers for $RPC..."
+    local rpc="$1"
+    echo "$NODE_NAME: Checking RPC block height and connected peers for $rpc..."
 
-    RESPONSE=$(curl -s -X POST $RPC -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"zgs_getStatus","params":[],"id":1}')
-    if [[ $? -ne 0 ]]; then
-        echo "0G_STORAGE_NODE: Error: Failed to get response from $RPC"
-        send_telegram "0G_STORAGE_NODE: Failed to get response from $RPC"
+    local response=$(curl -s -X POST "$rpc" -H "Content-Type: application/json" \
+        -d '{"jsonrpc":"2.0","method":"zgs_getStatus","params":[],"id":1}')
+
+    if [[ -z "$response" ]]; then
+        send_telegram "$NODE_NAME: Failed to get response from $rpc"
         return 1
     fi
 
-    HEIGHT=$(echo $RESPONSE | jq -r '.result.logSyncHeight' 2>/dev/null)
-    PEERS=$(echo $RESPONSE | jq -r '.result.connectedPeers' 2>/dev/null)
+    local height=$(fetch_json_field "$response" '.result.logSyncHeight')
+    local peers=$(fetch_json_field "$response" '.result.connectedPeers')
 
-    echo "0G_STORAGE_NODE: Storage node height: $HEIGHT"
-    echo "0G_STORAGE_NODE: Connected peers: $PEERS"
-
-    if [[ -z $HEIGHT || -z $PEERS ]]; then
-        echo "0G_STORAGE_NODE: Error: Invalid response from RPC $RPC"
-        send_telegram "0G_STORAGE_NODE: Invalid response from RPC $RPC"
+    if [[ -z "$height" || -z "$peers" ]]; then
+        send_telegram "$NODE_NAME: Invalid response from RPC $rpc"
         return 1
     fi
 
-    if [[ $PEERS -eq 0 ]]; then
-        send_telegram "0G_STORAGE_NODE: RPC $RPC has 0 connected peers."
-        echo "0G_STORAGE_NODE: Alert: RPC $RPC has 0 connected peers."
+    echo "$NODE_NAME: Storage node height: $height"
+    echo "$NODE_NAME: Connected peers: $peers"
+
+    if [[ $peers -eq 0 ]]; then
+        send_telegram "$NODE_NAME: RPC $rpc has 0 connected peers."
     fi
 
-    ATTEMPTS=0
-    while [[ $ATTEMPTS -lt $MAX_ATTEMPTS ]]; do
-        PARENT_HEIGHT=$(curl -s --max-time 10 "$PARENT_RPC/block" | jq -r '.result.block.header.height' 2>/dev/null)
-        if [[ $PARENT_HEIGHT =~ ^[0-9]+$ ]]; then
+    # Check parent RPC block height
+    for attempt in $(seq 1 $MAX_ATTEMPTS); do
+        local parent_height=$(curl -s --max-time 10 "$PARENT_RPC/block" | jq -r '.result.block.header.height' 2>/dev/null)
+        if [[ $parent_height =~ ^[0-9]+$ ]]; then
             break
         fi
-        ATTEMPTS=$((ATTEMPTS + 1))
-        echo "0G_STORAGE_NODE: Attempt $ATTEMPTS/$MAX_ATTEMPTS: Parent RPC $PARENT_RPC is down or sent an invalid response. Retrying in 5 seconds..."
+        echo "$NODE_NAME: Attempt $attempt/$MAX_ATTEMPTS: Parent RPC $PARENT_RPC is unavailable. Retrying in 5 seconds..."
         sleep 5
     done
 
-    if [[ $ATTEMPTS -eq $MAX_ATTEMPTS ]]; then
-        send_telegram "0G_STORAGE_NODE: Parent RPC $PARENT_RPC is down or sent an invalid response after $MAX_ATTEMPTS attempts."
-        echo "0G_STORAGE_NODE: Error: Parent RPC $PARENT_RPC is down or sent an invalid response after $MAX_ATTEMPTS attempts."
+    if [[ -z $parent_height || ! $parent_height =~ ^[0-9]+$ ]]; then
+        send_telegram "$NODE_NAME: Parent RPC $PARENT_RPC is unavailable after $MAX_ATTEMPTS attempts."
         return 1
     fi
 
-    echo "0G_STORAGE_NODE: Parent RPC block height: $PARENT_HEIGHT"
+    echo "$NODE_NAME: Parent RPC block height: $parent_height"
 
-    if [[ $HEIGHT -ne 0 ]] && [[ $PARENT_HEIGHT -ne 0 ]]; then
-        DIFF=$((PARENT_HEIGHT - HEIGHT))
-        if [[ $DIFF -gt 25 ]]; then
-            send_telegram "0G_STORAGE_NODE: RPC block height difference $DIFF. RPC: $HEIGHT, Parent RPC: $PARENT_HEIGHT."
-            echo "0G_STORAGE_NODE: Block height difference is $DIFF. RPC: $HEIGHT, Parent RPC: $PARENT_HEIGHT."
-        else
-            echo "0G_STORAGE_NODE: Block height within acceptable range."
-        fi
+    # Compare block heights
+    local diff=$((parent_height - height))
+    if [[ $diff -gt 25 ]]; then
+        send_telegram "$NODE_NAME: Block height difference is $diff. RPC: $height, Parent RPC: $parent_height."
+    else
+        echo "$NODE_NAME: Block height is within acceptable range."
     fi
 
     return 0
 }
 
-check_block_height() {
-    local RPC=$1
-    echo "0G_VALIDATOR_NODE: Checking RPC block height for $RPC..."
-
-    RESPONSE=$(curl -s --max-time 3 "$RPC/block")
-    if [[ $? -ne 0 ]]; then
-        echo "0G_VALIDATOR_NODE: Error: Failed to get response from $RPC"
-        send_telegram "0G_VALIDATOR_NODE: Failed to get response from $RPC"
-        return 1
-    fi
-
-    HEIGHT=$(echo $RESPONSE | jq -r '.result.block.header.height' 2>/dev/null)
-
-    echo "0G_VALIDATOR_NODE: Current RPC block height: $HEIGHT"
-
-    if [[ -z $HEIGHT ]]; then
-        echo "0G_VALIDATOR_NODE: Error: Invalid response from RPC $RPC"
-        send_telegram "0G_VALIDATOR_NODE: Invalid response from RPC $RPC"
-        return 1
-    fi
-
-    ATTEMPTS=0
-    while [[ $ATTEMPTS -lt $MAX_ATTEMPTS ]]; do
-        PARENT_HEIGHT=$(curl -s --max-time 10 "$PARENT_RPC/block" | jq -r '.result.block.header.height' 2>/dev/null)
-        if [[ $PARENT_HEIGHT =~ ^[0-9]+$ ]]; then
-            break
-        fi
-        ATTEMPTS=$((ATTEMPTS + 1))
-        echo "0G_VALIDATOR_NODE: Attempt $ATTEMPTS/$MAX_ATTEMPTS: Parent RPC $PARENT_RPC is down or sent an invalid response. Retrying in 5 seconds..."
-        sleep 5
-    done
-
-    if [[ $ATTEMPTS -eq $MAX_ATTEMPTS ]]; then
-        send_telegram "0G_VALIDATOR_NODE: Parent RPC $PARENT_RPC is down or sent an invalid response after $MAX_ATTEMPTS attempts."
-        echo "0G_VALIDATOR_NODE: Error: Parent RPC $PARENT_RPC is down or sent an invalid response after $MAX_ATTEMPTS attempts."
-        return 1
-    fi
-
-    echo "0G_VALIDATOR_NODE: Parent RPC block height: $PARENT_HEIGHT"
-
-    if [[ $HEIGHT -ne 0 ]] && [[ $PARENT_HEIGHT -ne 0 ]]; then
-        DIFF=$((PARENT_HEIGHT - HEIGHT))
-        if [[ $DIFF -gt 25 ]]; then
-            send_telegram "0G_VALIDATOR_NODE: RPC block height difference $DIFF. RPC: $HEIGHT, Parent RPC: $PARENT_HEIGHT."
-            echo "0G_VALIDATOR_NODE: Alert: Block height difference is $DIFF. RPC: $HEIGHT, Parent RPC: $PARENT_HEIGHT."
-        else
-            echo "0G_VALIDATOR_NODE: Block height within acceptable range."
-        fi
-    fi
-
-    return 0
-}
-
+# Main loop
 while true; do
     if [[ -n "$STORAGE_RPC_PORT" ]]; then
-        echo "0G_STORAGE_NODE: Storage RPC: $STORAGE_RPC"
+        echo "$NODE_NAME: Storage RPC: $STORAGE_RPC"
         check_block_height_and_peers "$STORAGE_RPC"
         echo "----------------------------------------"
     fi
 
-    if [[ -n "$VALIDATOR_RPC_PORT" ]]; then
-        echo "0G_VALIDATOR_NODE: Validator RPC: $VALIDATOR_RPC"
-        check_block_height "$VALIDATOR_RPC"
-        echo "----------------------------------------"
-    fi
-
-    echo "0G_NODE: Waiting $SLEEP_TIME before next check..."
+    echo "$NODE_NAME: Waiting $SLEEP_TIME before next check..."
     echo "----------------------------------------"
     sleep $SLEEP_TIME
 done
