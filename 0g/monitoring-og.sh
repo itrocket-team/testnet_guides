@@ -12,7 +12,7 @@ STORAGE_RPC_PORT="5678" # Default port 5678. If you don`t want to monitor storag
 VALIDATOR_RPC_PORT="" # Default port 26657. If you don`t want to monitor validator node, leave the field empty
 NODE_NAME="0G_NODE"
 PARENT_RPC="https://og-testnet-rpc.itrocket.net"
-SLEEP_INTERVAL=15m # Script check interval
+SLEEP_TIME=15m # Script check interval
 MAX_ATTEMPTS=10   # Number of checks
 
 #Do not modify 
@@ -158,7 +158,6 @@ while true; do
         echo "----------------------------------------"
     fi
 
-    SLEEP_TIME=$(SLEEP_INTERVAL)
     echo "0G_NODE: Waiting $SLEEP_TIME before next check..."
     sleep $SLEEP_TIME
 done
