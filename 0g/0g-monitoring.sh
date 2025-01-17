@@ -39,7 +39,7 @@ check_block_height_and_peers() {
     HEIGHT=$(echo $RESPONSE | jq -r '.result.logSyncHeight' 2>/dev/null)
     PEERS=$(echo $RESPONSE | jq -r '.result.connectedPeers' 2>/dev/null)
 
-    echo "0G_STORAGE_NODE: Current RPC block height: $HEIGHT"
+    echo "0G_STORAGE_NODE: Storage node height: $HEIGHT"
     echo "0G_STORAGE_NODE: Connected peers: $PEERS"
 
     if [[ -z $HEIGHT || -z $PEERS ]]; then
