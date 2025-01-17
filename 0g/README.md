@@ -51,7 +51,7 @@ Reload the systemd daemon and enable the service to start on boot:
 ```bash
 sudo systemctl daemon-reload
 sudo systemctl enable monitoring-0g
-sudo systemctl restart monitoring-0g && sudo journalctl -u monitoring-0g -f
+sudo systemctl restart monitoring-0g && sudo journalctl -u monitoring-0g -o cat
 ```
 
 #### Removing the Service and Script (if needed)
