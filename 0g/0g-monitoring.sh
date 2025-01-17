@@ -9,7 +9,7 @@ fi
 TELEGRAM_BOT_TOKEN=""
 TELEGRAM_CHAT_ID=""
 STORAGE_RPC_PORT="5678" # Default port 5678. If you don`t want to monitor storage node, leave the field empty
-# VALIDATOR_RPC_PORT="" # Default port 26657. If you don`t want to monitor validator node, leave the field empty
+VALIDATOR_RPC_PORT="" # Default port 26657. If you don`t want to monitor validator node, leave the field empty
 NODE_NAME="0G_NODE"
 PARENT_RPC="https://og-testnet-rpc.itrocket.net"
 SLEEP_TIME=15m # Script check interval
@@ -145,11 +145,11 @@ while true; do
         echo "----------------------------------------"
     fi
 
-#    if [[ -n "$VALIDATOR_RPC_PORT" ]]; then
-#        echo "0G_VALIDATOR_NODE: Validator RPC: $VALIDATOR_RPC"
-#        check_block_height "$VALIDATOR_RPC"
-#        echo "----------------------------------------"
-#    fi
+    if [[ -n "$VALIDATOR_RPC_PORT" ]]; then
+        echo "0G_VALIDATOR_NODE: Validator RPC: $VALIDATOR_RPC"
+        check_block_height "$VALIDATOR_RPC"
+        echo "----------------------------------------"
+    fi
 
     echo "0G_NODE: Waiting $SLEEP_TIME before next check..."
     echo "----------------------------------------"
