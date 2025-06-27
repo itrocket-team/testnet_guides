@@ -158,8 +158,8 @@ create_validator() {
     fi
 
     meta_type=$(IFS=,; echo "${validator_types[*]}")
-    meta_tuple=$(printf ',%s' "${validator_meta[@]}")
-    meta_tuple="(${meta_tuple:1})"
+    meta_tuple=$(printf ',\"%s\"' "${validator_meta[@]}")
+    meta_tuple="(${meta_tuple:2})"
     fn_sig="createAndInitializeValidatorIfNecessary(($meta_type),uint32,uint96,bytes,bytes)(address)"
 
     while true; do
