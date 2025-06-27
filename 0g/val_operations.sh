@@ -4,7 +4,6 @@ RPC_URL="https://evmrpc-testnet.0g.ai"
 VAL_COMMISSION=50000
 VAL_WITHDRAW_FEE=1
 VALUE="32.1ether"
-IDENTITY="keybase-id"
 
 source <(curl -s https://raw.githubusercontent.com/itrocket-team/testnet_guides/main/utils/common.sh)
 
@@ -38,6 +37,7 @@ get_validator_info() {
     if [[ -f $file ]]; then
         MONIKER=$(_json_val moniker)
         WEBSITE=$(_json_val website)
+        IDENTITY=$(_json_val identity)
         CONTACT=$(_json_val contact)
         DETAILS=$(_json_val details)
         echo "✅ Loaded validator info from $file"
@@ -45,6 +45,7 @@ get_validator_info() {
         printBlue "Please enter your validator info:"
         read -rp " • Moniker  : " MONIKER
         read -rp " • Website  : " WEBSITE
+        read -rp " • Identity : " IDENTITY
         read -rp " • Contact  : " CONTACT
         read -rp " • Details  : " DETAILS
 
@@ -52,6 +53,7 @@ get_validator_info() {
 {
   "moniker": "$(echo "$MONIKER"  | sed 's/"/\\"/g')",
   "website": "$(echo "$WEBSITE"  | sed 's/"/\\"/g')",
+  "identity": "$(echo "$IDENTITY"  | sed 's/"/\\"/g')",
   "contact": "$(echo "$CONTACT"  | sed 's/"/\\"/g')",
   "details": "$(echo "$DETAILS"  | sed 's/"/\\"/g')"
 }
