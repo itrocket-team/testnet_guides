@@ -199,6 +199,7 @@ create_validator() {
 
 delegate() {
     printBlue "Coming soon!"
+    sleep 1
 }
 
 get_delegation_info() { 
