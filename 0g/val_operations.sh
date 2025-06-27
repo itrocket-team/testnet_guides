@@ -204,6 +204,7 @@ delegate() {
 
 get_delegation_info() { 
     printBlue "Coming soon!"
+    sleep 1
 }
 
 printLogo
