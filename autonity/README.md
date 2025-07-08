@@ -47,7 +47,7 @@ pipx install autonity-cli
 sudo mv ~/.local/bin/aut /usr/local/bin/aut
 ~~~
 
-The aut version should be 0.6.0
+The aut version should be 1.0.0
 ~~~
 aut --version
 ~~~
@@ -86,8 +86,9 @@ cd $HOME
 rm -rf autonity
 git clone https://github.com/autonity/autonity.git && cd autonity 
 git checkout tags/v1.0.2-alpha -b v1.0.2-alpha 
-make autonity 
+make autonity ethkey
 sudo mv $HOME/autonity/build/bin/autonity /usr/local/bin/
+sudo mv $HOME/autonity/build/bin/ethkey /usr/local/bin/
 ~~~
 
 Autonity version should be 1.0.2-alpha
@@ -369,6 +370,10 @@ aut account info -k $HOME/.autonity/keystore/treasure.key
 Export prived key
 ~~~
 ethkey inspect --private "/home/autonity/.autonity/keystore/tresure.key"
+~~~
+
+~~~
+ethkey inspect --private "/home/autonity/.autonity/keystore/oracle.key"
 ~~~
 
 Check node info
