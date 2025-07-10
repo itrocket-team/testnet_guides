@@ -104,7 +104,7 @@ ethkey --version
 Create a directory for autonity working data
 ~~~
 cd $HOME
-mkdir autonity-chaindata && mkdir autonity-chaindata/autonity
+mkdir -p autonity-chaindata/autonity
 ~~~
 
 Generate autonitykeys
@@ -138,7 +138,7 @@ After=network.target
 [Service] 
 User=$USER 
 Type=simple 
-ExecStart=$(which autonity) --datadir $HOME/autonity-chaindata --syncmode full --piccadilly --http --http.addr 0.0.0.0 --http.api aut,eth,net,txpool,web3,admin --http.vhosts \* --ws --ws.addr 127.0.0.1 --ws.api aut,eth,net,txpool,web3,admin --autonitykeys $HOME/autonity-chaindata/autonity/autonitykeys --nat extip:$(curl 2ip.ru) --port 30303 --metrics.port 6060
+ExecStart=$(which autonity) --datadir $HOME/autonity-chaindata --syncmode full --bakerloo --http --http.addr 0.0.0.0 --http.api aut,eth,net,txpool,web3,admin --http.vhosts \* --ws --ws.addr 127.0.0.1 --ws.api aut,eth,net,txpool,web3,admin --autonitykeys $HOME/autonity-chaindata/autonity/autonitykeys --nat extip:$(curl 2ip.ru) --port 30303 --metrics.port 6060
 Restart=on-failure 
 LimitNOFILE=65535 
 
@@ -249,6 +249,11 @@ Find ```oracle address```
 ~~~
 aut account info -k $HOME/.autonity/keystore/oracle.key
 ~~~
+
+Inspect prived key
+```
+ethkey inspect --private "/home/autonity/.autonity/keystore/oracle.key"
+```
 
 Send the transaction to register your validator and save the ```transaction hash```
 ~~~
