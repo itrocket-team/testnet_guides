@@ -86,7 +86,7 @@ cd $HOME
 rm -rf autonity
 git clone https://github.com/autonity/autonity.git && cd autonity 
 git checkout tags/v1.0.2-alpha -b v1.0.2-alpha 
-make autonity ethkey
+make all
 sudo mv $HOME/autonity/build/bin/autonity /usr/local/bin/
 sudo mv $HOME/autonity/build/bin/ethkey /usr/local/bin/
 ~~~
