@@ -96,6 +96,11 @@ Autonity version should be 1.0.2-alpha
 autonity version
 ~~~
 
+ethkey version should be `1.0.2-alpha-8be1825c-20241209`
+~~~
+ethkey --version
+~~~
+
 Create a directory for autonity working data
 ~~~
 cd $HOME
@@ -213,21 +218,6 @@ sudo systemctl restart autonity_oracle && sudo journalctl -u autonity_oracle -f
 ~~~
 
 ## 👨‍💻 Validator Creation and Registration
-
-Download ethkey if needed
-~~~
-cd $HOME
-rm -rf autonity1
-git clone https://github.com/autonity/autonity.git autonity1
-cd autonity1
-make all
-sudo mv build/bin/ethkey /usr/local/bin
-~~~
-
-The ethkey version should be 0.14.0-15cd0164-20240619
-~~~
-ethkey --version
-~~~
 
 Generate the proof and `save` it - you will need it later
 ~~~
