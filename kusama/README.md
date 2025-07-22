@@ -18,7 +18,7 @@
 
 **Kusama** is a scalable and flexible network closely tied to the Polkadot ecosystem. By participating in staking, you help secure the network and earn passive income.
 
-**ITROCKET** has launched validator Pool #213. This guide will help you quickly join the pool and start earning.
+**ITRocket team** has launched Validator Pool #213. This guide will help you quickly join the pool and start earning.
 
 ---
 ###### 💡 Click ► to open/close image  
@@ -97,7 +97,7 @@ Your wallet should appear like this:
 <img src="https://github.com/mART321/ITstake/blob/main/img/23.jpeg" style="width: 60%; height: 60%; object-fit: cover;" />
 </details>
 
-If you see the value `100000000000`, it corresponds to **0.1 KSM**. In the Kusama network, one KSM equals 1,000,000,000,000 plancks — the smallest unit. This threshold is defined by network parameters and may change, so it is recommended to check it manually before staking.
+If you see the value `100,000,000,000`, it corresponds to **0.1 KSM**. In the Kusama network, one KSM equals 10^12 Plancks — the smallest unit. This threshold is defined by network parameters and may change, so it is recommended to check it manually before staking.
 
 ---
 
@@ -113,7 +113,7 @@ Make sure the amount exceeds the minimum threshold — **for example, 0.2–0.3 
 
 1. Visit the [Staking → Pools section](https://polkadot.js.org/apps/?rpc=wss://kusama-mainnet-rpc.itrocket.net#/staking/pools)
 
-2. In the list of available nomination pools, you can use the search function to find one that suits your preferences. For example, you may consider Pool ID **213**, maintained by the ITROCKET team.
+2. In the list of available nomination pools, you can use the search function to find one that suits your preferences. For example, you may consider Pool ID **213**, maintained by the ITRocket team.
 
 <details open>
 <img src="https://github.com/mART321/ITstake/blob/main/img/3.png" style="width: 50%; height: 50%; object-fit: cover;" />
@@ -157,7 +157,7 @@ Make sure the amount exceeds the minimum threshold — **for example, 0.2–0.3 
 
 ## 🏁 Conclusion <a id="conclusion"></a>
 
-Congratulations! 🎉 You have successfully staked your KSM tokens and joined a nomination pool. If you selected Pool #213 by ITROCKET, welcome aboard!
+Congratulations! 🎉 You have successfully staked your KSM tokens and joined a nomination pool. If you selected Pool #213 by ITRocket, welcome aboard!
 
 Now your tokens are working for you — earning rewards and supporting Kusama network decentralization.
 
