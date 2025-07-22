@@ -18,7 +18,7 @@
 
 **Polkadot** is a scalable multi-chain network that enables interoperability between different blockchains. Staking DOT tokens helps secure the network and allows you to earn rewards.
 
-This guide walks you through the steps to join a nomination pool using the Polkadot.js interface.
+This guide walks you through the steps to join a nomination pool using the `Polkadot.js` interface.
 
 ---
 
@@ -34,7 +34,7 @@ This guide walks you through the steps to join a nomination pool using the Polka
 </details>
 
 <details open>
-<summary>2. Open the extensions menu and find polkadot{.js}</summary>
+<summary>2. Open the extensions menu and find Polkadot{.js}</summary>
 
 Ensure the extension is active and visible.
 </details>
@@ -96,7 +96,7 @@ The wallet should look like this:
 <img src="https://github.com/mART321/ITstake/blob/main/img/pd4.png" style="width: 60%; height: 60%; object-fit: cover;" />
 </details>
 
-Note: If the result is `2,500,000,000,000`, that means **2.5 DOT**. One DOT equals 10^10 plancks. Thresholds may change, so check before staking.
+Note: If the result is `2,500,000,000,000`, that means **2.5 DOT**. One DOT equals 10^12 Plancks. Thresholds may change, so check before staking.
 
 ---
 
