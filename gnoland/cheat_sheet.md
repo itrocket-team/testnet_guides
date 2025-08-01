@@ -41,7 +41,15 @@ sudo journalctl -u gnoland -f --no-hostname -o cat
 
 Delete node
 ```
-sudo systemctl stop gnoland && sudo systemctl disable gnoland && sudo rm /etc/systemd/system/gnoland.service && sudo systemctl daemon-reload && sudo rm -rf $(which gnoland) && sudo rm -rf $(which gnogenesis) && sudo rm -rf $(which gnokey) && rm -rf $HOME/gnoland-data && rm -rf $HOME/gno
+sudo systemctl stop gnoland
+sudo systemctl disable gnoland
+sudo rm /etc/systemd/system/gnoland.service
+sudo systemctl daemon-reload
+sudo rm -rf $(which gnoland)
+sudo rm -rf $(which gnogenesis)
+sudo rm -rf $(which gnokey)
+rm -rf $HOME/gnoland-data
+rm -rf $HOME/gno
 ```
 
 ### Key Management
