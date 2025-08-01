@@ -198,14 +198,176 @@ create_validator() {
 }
 
 delegate() {
-    printBlue "Coming soon!"
-    sleep 1
+    printBlue "Starting delegation…" >&2 && sleep 1
+
+    while :; do
+        [[ -n ${PRIVATE_KEY:-} ]] || read -srp "Enter your private key (0x…64-hex): " PRIVATE_KEY
+        echo >&2
+        [[ $PRIVATE_KEY =~ ^0x[0-9a-fA-F]{64}$ ]] && break
+        printRed "❌ Invalid private-key format; must be 0x + 64 hex symbols." >&2
+        echo ""
+        unset PRIVATE_KEY
+    done
+    DELEGATOR_ADDR=$(cast wallet address "$PRIVATE_KEY")
+
+    while :; do
+        read -rp "Enter amount to delegate in ETH (e.g. 0.1): " AMT_ETH
+        [[ $AMT_ETH =~ ^([0-9]+([.][0-9]+)?)$ ]] && break
+        printRed "❌ Invalid amount. Use integer or decimal with dot." >&2
+        echo ""
+    done
+    DELEGATE_VALUE="${AMT_ETH}ether"
+
+    ETH_PUBKEY=$(extract_pubkey) || exit 1
+
+    VALIDATOR_ADDR=$(run_cmd "getValidator" \
+        cast call "$VAL_CREATION_CONTRACT" \
+        "getValidator(bytes)(address)" \
+        "$ETH_PUBKEY" \
+        --rpc-url "$RPC_URL") || return 1
+
+    if [[ $VALIDATOR_ADDR == 0x0000000000000000000000000000000000000000 ]]; then
+        printRed "❌ Validator not found / not initialized." >&2
+        return 1
+    fi
+
+    local raw tx_hash
+    raw=$(run_cmd "delegate()" \
+          cast send "$VALIDATOR_ADDR" \
+          "delegate(address)" "$DELEGATOR_ADDR" \
+          --value  "$DELEGATE_VALUE" \
+          --rpc-url "$RPC_URL" \
+          --private-key "$PRIVATE_KEY") || return 1
+
+    tx_hash=$(echo "$raw" | awk '/transactionHash/ {print $2}')
+
+    if [[ -n $tx_hash ]]; then
+        printGreen "✅ Delegation TX sent: $tx_hash" >&2
+    else
+        printRed "❌ Process failed: tx hash not found." >&2
+        return 1
+    fi
 }
 
-get_delegation_info() { 
-    printBlue "Coming soon!"
-    sleep 1
+get_delegation_info() {
+    echo "" >&2
+    printBlue "Fetching delegation info…" >&2 && sleep 1
+
+    while :; do
+        read -rp "Enter delegator address (0x…40-hex) or press Enter to derive from private key: " DELEGATOR_ADDR
+        if [[ -z $DELEGATOR_ADDR ]]; then
+            while :; do
+                read -srp "Enter your private key (0x…64-hex): " PRIVATE_KEY
+                echo >&2
+                [[ $PRIVATE_KEY =~ ^0x[0-9a-fA-F]{64}$ ]] && break
+                printRed "❌ Invalid private-key format. Try again." >&2
+                echo ""
+            done
+            DELEGATOR_ADDR=$(cast wallet address "$PRIVATE_KEY")
+            printGreen "Delegator address derived: $DELEGATOR_ADDR" >&2
+        fi
+        [[ $DELEGATOR_ADDR =~ ^0x[0-9a-fA-F]{40}$ ]] && break
+        printRed "❌ Invalid Ethereum address format. Try again." >&2
+        echo ""
+    done
+
+    ETH_PUBKEY=$(extract_pubkey) || exit 1
+
+    VALIDATOR_ADDR=$(run_cmd "getValidator" \
+        cast call "$VAL_CREATION_CONTRACT" \
+        "getValidator(bytes)(address)" \
+        "$ETH_PUBKEY" \
+        --rpc-url "$RPC_URL") || return 1
+
+    if [[ $VALIDATOR_ADDR == 0x0000000000000000000000000000000000000000 ]]; then
+        printRed "❌ Validator not found / not initialized." >&2
+        return 1
+    fi
+
+    local raw shares
+    raw=$(run_cmd "getDelegation" \
+          cast call "$VALIDATOR_ADDR" \
+          "getDelegation(address)(address,uint256)" \
+          "$DELEGATOR_ADDR" \
+          --rpc-url "$RPC_URL") || return 1
+
+    if [[ $raw =~ ^\([^,]+,([0-9]+)\)$ ]]; then
+        shares=${BASH_REMATCH[1]}
+    else
+        printRed "❌ Could not parse shares." >&2
+        return 1
+    fi
+
+    total_tokens=$(run_cmd "tokens()"           \
+        cast call "$VALIDATOR_ADDR" "tokens()(uint256)" --rpc-url "$RPC_URL") || return 1
+    total_shares=$(run_cmd "delegatorShares()"  \
+        cast call "$VALIDATOR_ADDR" "delegatorShares()(uint256)" --rpc-url "$RPC_URL") || return 1
+
+    est_tokens=0
+    if [[ $total_shares -gt 0 ]]; then
+        est_tokens=$(( shares * total_tokens / total_shares ))
+    fi
+
+    printGreen "✅ Delegation info:" >&2
+    echo " • Shares          : $shares"
+    echo " • Estimated tokens: $est_tokens"
 }
+
+undelegate() {
+    printBlue "Starting undelegation…" >&2 && sleep 1
+
+    while :; do
+        [[ -n ${PRIVATE_KEY:-} ]] || read -srp "Enter your private key (0x…64-hex): " PRIVATE_KEY
+        echo >&2
+        [[ $PRIVATE_KEY =~ ^0x[0-9a-fA-F]{64}$ ]] && break
+        printRed "❌ Invalid private-key format; must be 0x + 64 hex symbols." >&2
+        echo ""
+        unset PRIVATE_KEY
+    done
+    DELEGATOR_ADDR=$(cast wallet address "$PRIVATE_KEY")
+
+    while :; do
+        read -rp "Enter the number of shares to undelegate (e.g. 1): " NUM_SHARES
+        [[ $NUM_SHARES =~ ^([0-9]+([.][0-9]+)?)$ ]] && break
+        printRed "❌ Invalid number of shares. Use integer or decimal with dot." >&2
+        echo ""
+    done
+
+    ETH_PUBKEY=$(extract_pubkey) || exit 1
+
+    VALIDATOR_ADDR=$(run_cmd "getValidator" \
+        cast call "$VAL_CREATION_CONTRACT" \
+        "getValidator(bytes)(address)" \
+        "$ETH_PUBKEY" \
+        --rpc-url "$RPC_URL") || return 1
+
+    if [[ $VALIDATOR_ADDR == 0x0000000000000000000000000000000000000000 ]]; then
+        printRed "❌ Validator not found / not initialized." >&2
+        return 1
+    fi
+
+    FEE_GWEI=$(cast call $VALIDATOR_ADDR "withdrawalFeeInGwei()(uint96)" --rpc-url $RPC_URL)
+    FEE=$(cast to-wei $FEE_GWEI gwei)
+
+    local raw tx_hash
+    raw=$(run_cmd "undelegate()" \
+          cast send "$VALIDATOR_ADDR" \
+          "undelegate(address,uint256)" "$DELEGATOR_ADDR" \
+          --value  "$NUM_SHARES" \
+          --value $FEE \
+          --rpc-url "$RPC_URL" \
+          --private-key "$PRIVATE_KEY") || return 1
+
+    tx_hash=$(echo "$raw" | awk '/transactionHash/ {print $2}')
+
+    if [[ -n $tx_hash ]]; then
+        printGreen "✅ Delegation TX sent: $tx_hash" >&2
+    else
+        printRed "❌ Process failed: tx hash not found." >&2
+        return 1
+    fi
+}
+
 
 printLogo
 echo "0G Validator Creation & Delegation Tool"
@@ -221,7 +383,7 @@ echo "✅ Foundry is installed: $(command -v foundryup)" && sleep 1
 cast --version
 
 action=0
-while [[ $action -ne 4 ]]; do
+while [[ $action -ne 5 ]]; do
 echo ""
 printLine
 printLine
@@ -229,7 +391,8 @@ printBlue "Which action would you like to perform?"
 echo "1. Create a validator
 2. Delegate to a validator
 3. Check delegation
-4. Exit"
+4. Undelegate
+5. Exit"
 
 read -rp "Your answer: " action
 echo ""
@@ -252,9 +415,13 @@ elif [[ $action -eq 3 ]]; then
     get_delegation_info
 
 elif [[ $action -eq 4 ]]; then
+    printLine
+    undelegate
+
+elif [[ $action -eq 5 ]]; then
     printRed "Exiting the script..." && sleep 1
 
-elif [[ $action -ne 4 ]]; then
+elif [[ $action -ne 5 ]]; then
     printRed "Invalid choice. Try again." && sleep 1
 
 fi
