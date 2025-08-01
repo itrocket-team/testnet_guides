@@ -85,18 +85,18 @@ Download binary
 cd $HOME
 rm -rf autonity
 git clone https://github.com/autonity/autonity.git && cd autonity 
-git checkout tags/v1.0.2-alpha -b v1.0.2-alpha 
+git checkout tags/v1.1.1 -b v1.1.1
 make all
 sudo mv $HOME/autonity/build/bin/autonity /usr/local/bin/
 sudo mv $HOME/autonity/build/bin/ethkey /usr/local/bin/
 ~~~
 
-Autonity version should be 1.0.2-alpha
+Autonity version should be 1.1.1
 ~~~
 autonity version
 ~~~
 
-ethkey version should be `1.0.2-alpha-8be1825c-20241209`
+ethkey version should be `1.1.1`
 ~~~
 ethkey --version
 ~~~
