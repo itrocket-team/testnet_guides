@@ -9,7 +9,7 @@ VALIDATOR_ADDRESS=""
 # Missing validator alert text
 MESSAGE="Alert: Autonity Validator address $VALIDATOR_ADDRESS is missing from the current Autonity committee list"
 # Parrent RPC address
-PARRENT_RPC="https://rpc1.piccadilly.autonity.org"
+PARRENT_RPC="https://rpc1.bakerloo.autonity.org"
 # Threshold for block height difference
 BLOCK_HEIGHT_DIFF="2"
 
