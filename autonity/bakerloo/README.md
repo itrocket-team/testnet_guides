@@ -176,7 +176,7 @@ make autoracle-bakerloo
 sudo mv build/bin/autoracle /usr/local/bin
 ~~~
 
-Autoracle version should be v0.2.3
+Autoracle version should be v0.2.6
 ~~~
 autoracle version
 ~~~
