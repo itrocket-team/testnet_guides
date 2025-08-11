@@ -171,8 +171,8 @@ Download binary
 ~~~
 git clone https://github.com/autonity/autonity-oracle && cd autonity-oracle 
 git fetch --all 
-git checkout v0.2.3 
-make autoracle 
+git checkout v0.2.6 
+make autoracle-bakerloo  
 sudo mv build/bin/autoracle /usr/local/bin
 ~~~
 
