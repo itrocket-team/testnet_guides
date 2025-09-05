@@ -399,6 +399,11 @@ Check validator info
 aut validator info --validator $VALIDATOR_ADDRESS
 ~~~
 
+Update enode address
+```
+aut validator update-enode --validator $VALIDATOR_ADDRESS <ENODE> | aut tx sign - | aut tx send -
+```
+
 Check if the validator is in committee
 ~~~
 aut protocol get-committee | grep $VALIDATOR_ADDRESS
