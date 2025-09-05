@@ -202,7 +202,7 @@ Description=Autonity Oracle Server
 After=syslog.target network.target  
 [Service]  
 Type=simple  
-ExecStart=$(which autoracle) -key.file="$HOME/.autonity/keystore/oracle.key" -plugin.dir="$HOME/autonity-oracle/build/bin/plugins/" -plugin.conf="$HOME/autonity-oracle/build/bin/plugins-conf.yml" -key.password="your_password" -ws="ws://127.0.0.1:8546"
+ExecStart=$(which autoracle) $HOME/autonity-oracle/build/bin/oracle_config.yml
 Restart=on-failure  
 RestartSec=5  
 [Install]  
