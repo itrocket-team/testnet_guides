@@ -203,7 +203,7 @@ After=syslog.target network.target
 [Service]  
 Type=simple  
 ExecStart=$(which autoracle) $HOME/autonity-oracle/build/bin/oracle_config.yml
-Restart=on-failure  
+Restart=no  
 RestartSec=5  
 [Install]  
 WantedBy=multi-user.target
