@@ -38,9 +38,9 @@ Download and unzip software
 ~~~bash
 cd $HOME
 rm -rf $HOME/massa
-wget https://github.com/massalabs/massa/releases/download/MAIN.3.0/massa_MAIN.3.0_release_linux.tar.gz
-tar zxvf massa_MAIN.3.0_release_linux.tar.gz
-rm massa_MAIN.3.0_release_linux.tar.gz
+wget https://github.com/massalabs/massa/releases/download/MAIN.4.0/massa_MAIN.4.0_release_linux.tar.gz
+tar zxvf massa_MAIN.4.0_release_linux.tar.gz
+rm massa_MAIN.4.0_release_linux.tar.gz
 ~~~
 
 Config  app
@@ -172,9 +172,9 @@ Download and unzip software
 ~~~bash
 cd $HOME
 rm -rf $HOME/massa
-wget https://github.com/massalabs/massa/releases/download/MAIN.3.0/massa_MAIN.3.0_release_linux.tar.gz
-tar zxvf massa_MAIN.3.0_release_linux.tar.gz
-rm massa_MAIN.3.0_release_linux.tar.gz
+wget https://github.com/massalabs/massa/releases/download/MAIN.4.0/massa_MAIN.4.0_release_linux.tar.gz
+tar zxvf massa_MAIN.4.0_release_linux.tar.gz
+rm massa_MAIN.4.0_release_linux.tar.gz
 ~~~
 
 Restore keys
