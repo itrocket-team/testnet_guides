@@ -138,7 +138,7 @@ After=network.target
 [Service] 
 User=$USER 
 Type=simple 
-ExecStart=$(which autonity) --datadir $HOME/autonity-chaindata --syncmode full --bakerloo --http --http.addr 0.0.0.0 --http.api aut,eth,net,txpool,web3,admin --http.vhosts \* --ws --ws.addr 127.0.0.1 --ws.api aut,eth,net,txpool,web3,admin --autonitykeys $HOME/autonity-chaindata/autonity/autonitykeys --nat extip:$(curl 2ip.ru) --port 30303 --metrics.port 6060
+ExecStart=$(which autonity) --datadir $HOME/autonity-chaindata --syncmode full --http --http.addr 0.0.0.0 --http.api aut,eth,net,txpool,web3,admin --http.vhosts \* --ws --ws.addr 127.0.0.1 --ws.api aut,eth,net,txpool,web3,admin --autonitykeys $HOME/autonity-chaindata/autonity/autonitykeys --nat extip:$(curl 2ip.ru) --port 30303 --metrics.port 6060
 Restart=on-failure 
 LimitNOFILE=65535 
 
