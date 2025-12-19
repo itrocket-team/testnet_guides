@@ -406,7 +406,7 @@ aut validator update-enode --validator $VALIDATOR_ADDRESS <ENODE> | aut tx sign 
 
 Check if the validator is in committee
 ~~~
-aut protocol get-committee | grep $VALIDATOR_ADDRESS
+aut protocol committee | grep $VALIDATOR_ADDRESS
 ~~~
 
 Check if the validator is in committee by enode
