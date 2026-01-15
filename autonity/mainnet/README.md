@@ -435,6 +435,11 @@ Bond NTN (the bond will appear in next epoch)
 aut validator bond --validator $VALIDATOR_ADDRESS <amount> | aut tx sign - | aut tx send -
 ~~~
 
+Unbond NTN (the unbond will appear in next epoch)
+```
+aut validator unbond --validator $VALIDATOR_ADDRESS <amount> | aut tx sign - | aut tx send -
+```
+
 Unjail
 ~~~
 aut validator activate --validator $VALIDATOR_ADDRESS | aut tx sign - | aut tx send -
