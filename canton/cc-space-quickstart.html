@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>CC Space Quickstart</title>
+<style>
+  /* ---- Tokens: bare :root is the complete light palette ---- */
+  :root {
+    --bg:        #F5F6F8;
+    --surface:   #FFFFFF;
+    --surface-2: #EDEFF3;
+    --ink:       #161A22;
+    --muted:     #5C6575;
+    --line:      #DCE0E7;
+    --accent:    #15507A;
+    --accent-bg: #E6EEF5;
+    --ochre:     #8A5A12;
+    --ochre-bg:  #F6EFE2;
+    --redact:    #C3C9D4;
+    --code-bg:   #12161D;
+    --code-ink:  #DDE3EC;
+    --code-dim:  #7C8798;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg:        #0E1117;
+      --surface:   #161A22;
+      --surface-2: #1D222C;
+      --ink:       #E4E8EF;
+      --muted:     #97A1B2;
+      --line:      #2A313D;
+      --accent:    #7FB4DC;
+      --accent-bg: #182A38;
+      --ochre:     #D7A860;
+      --ochre-bg:  #2B2418;
+      --redact:    #3A424F;
+      --code-bg:   #0A0D12;
+      --code-ink:  #DDE3EC;
+      --code-dim:  #6C7789;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg:        #0E1117;
+    --surface:   #161A22;
+    --surface-2: #1D222C;
+    --ink:       #E4E8EF;
+    --muted:     #97A1B2;
+    --line:      #2A313D;
+    --accent:    #7FB4DC;
+    --accent-bg: #182A38;
+    --ochre:     #D7A860;
+    --ochre-bg:  #2B2418;
+    --redact:    #3A424F;
+    --code-bg:   #0A0D12;
+    --code-ink:  #DDE3EC;
+    --code-dim:  #6C7789;
+  }
+
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0 1.25rem 4rem;
+  }
+  .wrap { max-width: 42rem; margin: 0 auto; }
+
+  header.masthead {
+    display: flex; flex-direction: column; gap: .7rem;
+    padding: 3rem 0 1.4rem;
+    border-bottom: 2px solid var(--ink);
+  }
+  .eyebrow {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: .7rem; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--muted); margin: 0;
+  }
+  h1 {
+    font-size: clamp(2.1rem, 7vw, 3rem); line-height: 1.05;
+    letter-spacing: -.03em; font-weight: 700;
+    margin: 0; text-wrap: balance;
+  }
+  /* Four pillars: the product is more than an explorer, and the chips say so
+     without stretching the headline into a sentence. */
+  .pillars { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .1rem; }
+  .pillar {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: .74rem; letter-spacing: .03em;
+    padding: .26rem .55rem; border-radius: 3px;
+    background: var(--accent-bg); color: var(--accent);
+    font-weight: 600;
+  }
+  .standfirst { font-size: 1.03rem; color: var(--muted); margin: .3rem 0 0; max-width: 33rem; }
+  .standfirst strong { color: var(--ink); font-weight: 600; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: .2rem; }
+  .chip {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: .76rem; padding: .28rem .55rem; border-radius: 3px;
+    background: var(--surface-2); color: var(--muted);
+    border: 1px solid var(--line); text-decoration: none;
+  }
+  a.chip:hover { color: var(--accent); border-color: var(--accent); }
+  .chip.free { background: var(--ochre-bg); color: var(--ochre); border-color: transparent; font-weight: 600; }
+
+  section { padding-top: 2.25rem; }
+  /* Flex with a baseline-aligned number column: the digit sits on the title's
+     own baseline, and a title that wraps stays in its own column instead of
+     running back under the number. */
+  h2 {
+    display: flex; align-items: baseline; gap: .6rem;
+    font-size: 1.3rem; letter-spacing: -.015em; font-weight: 700;
+    margin: 0 0 .9rem;
+  }
+  /* The numbers are real: these are the three things the starter pack
+     promises, in the order you work through them. */
+  h2 .num {
+    flex: none;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+  /* Subheading inside a section. The page's h2s are the three things the
+     starter pack promised; anything supporting them sits a level down. */
+  h3 {
+    font-size: 1.02rem; letter-spacing: -.01em; font-weight: 700;
+    margin: 1.9rem 0 .7rem;
+  }
+  p { margin: 0 0 .9rem; }
+  p:last-child { margin-bottom: 0; }
+  ol, ul { margin: 0 0 .9rem; padding-left: 1.3rem; }
+  ol > li { margin-bottom: .35rem; }
+  ol ul { margin: .35rem 0 0; }
+  ol ul > li { margin-bottom: .25rem; }
+  li::marker { color: var(--muted); }
+  a { color: var(--accent); text-underline-offset: 3px; }
+  a:focus-visible, .chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+  strong { font-weight: 600; }
+  .run-in { font-weight: 600; }
+
+  /* The six capabilities: a run-in label and one sentence each. Tighter gap
+     than body paragraphs, so the group reads as a list without bullets. */
+  .features { display: flex; flex-direction: column; gap: .5rem; }
+  .features p { margin: 0; }
+
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: .875em;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: .08em .35em;
+    word-break: break-word;
+  }
+
+  .scroller { overflow-x: auto; margin: 0 0 .9rem; border: 1px solid var(--line); border-radius: 5px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .92rem; }
+  th, td { text-align: left; padding: .65rem .85rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tbody tr:last-child td { border-bottom: 0; }
+  thead th {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: .66rem; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--muted); font-weight: 600; background: var(--surface-2);
+    white-space: nowrap;
+  }
+  td:first-child { color: var(--muted); width: 34%; }
+  td strong { color: var(--ink); }
+
+  pre {
+    background: var(--code-bg); color: var(--code-ink);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: .8rem; line-height: 1.55;
+    padding: .9rem 1rem; border-radius: 5px;
+    overflow-x: auto; margin: 0 0 .9rem;
+  }
+  pre code { background: none; border: 0; padding: 0; font-size: inherit; color: inherit; word-break: normal; }
+  pre .u { color: #86C5E8; }
+
+  /* ---- The redaction figure: the page's one visual idea ---- */
+  figure.redaction {
+    margin: 0 0 .9rem; border: 1px solid var(--line); border-radius: 5px;
+    background: var(--surface); overflow: hidden;
+  }
+  .redaction .row {
+    display: grid; grid-template-columns: 1.45fr 1.15fr 5rem 4rem; gap: .7rem;
+    align-items: center; padding: .55rem .85rem;
+    border-bottom: 1px solid var(--line);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: .76rem;
+  }
+  .redaction .row.head {
+    background: var(--surface-2); color: var(--muted);
+    font-size: .64rem; letter-spacing: .12em; text-transform: uppercase;
+  }
+  .redaction .amt { text-align: right; font-variant-numeric: tabular-nums; }
+  .redaction .tag { color: var(--muted); }
+  .redaction .tag.priv { color: var(--ochre); }
+  .bar {
+    display: block; height: .78em; border-radius: 2px;
+    background: repeating-linear-gradient(135deg, var(--redact) 0 5px, transparent 5px 10px), var(--redact);
+  }
+  .bar.w1 { width: 72%; }
+  .bar.w2 { width: 55%; margin-left: auto; }
+  figcaption { font-size: .83rem; color: var(--muted); padding: .65rem .85rem; background: var(--surface-2); border-top: 1px solid var(--line); }
+
+  /* ---- Gotchas: labelled by symptom, not numbered ---- */
+  dl.gotchas { margin: 0; display: flex; flex-direction: column; gap: 1.15rem; }
+  dl.gotchas dt {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: .75rem; letter-spacing: .04em;
+    color: var(--ochre); background: var(--ochre-bg);
+    display: inline-block; padding: .22rem .5rem; border-radius: 3px;
+    margin-bottom: .4rem;
+  }
+  dl.gotchas dd { margin: 0; }
+
+  /* Announcement panel: reads as a notice, not as another section. */
+  .callout {
+    margin-top: 2.25rem;
+    border: 1px solid var(--accent);
+    border-radius: 6px;
+    background: var(--accent-bg);
+    padding: 1.1rem 1.2rem;
+  }
+  .callout h2 { margin-bottom: .6rem; }
+  .callout .prize {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: .7rem; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--accent); margin: 0 0 .5rem;
+  }
+  .callout .smallprint { font-size: .87rem; color: var(--muted); margin-bottom: 0; }
+
+  footer {
+    margin-top: 2.5rem; padding-top: 1.1rem;
+    border-top: 1px solid var(--line);
+    font-size: .88rem; color: var(--muted);
+  }
+  @media (max-width: 34rem) {
+    .redaction .row { grid-template-columns: 1fr 1fr 4.5rem; }
+    .redaction .row > :nth-child(4) { display: none; }
+    td:first-child { width: auto; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="eyebrow">Canton Network · Starter pack</p>
+    <h1>CC Space</h1>
+    <div class="pillars">
+      <span class="pillar">Explorer</span>
+      <span class="pillar">Data API</span>
+      <span class="pillar">Monitoring</span>
+      <span class="pillar">Analytics</span>
+    </div>
+    <p class="standfirst">Built by ITRocket. <strong>If you know Etherscan, you know the first part</strong>: paste an identifier, read balances and transfers. The rest is a REST API over the same indexed data, alerting on top of it, and network analytics.</p>
+    <div class="chips">
+      <a class="chip" href="https://cc.itrocket.space">cc.itrocket.space</a>
+      <span class="chip free">500 free credits</span>
+    </div>
+  </header>
+
+  <section>
+    <h2><span class="num">1.</span>What CC Space is</h2>
+    <p>The Canton Network explorer and data API: <a href="https://cc.itrocket.space">cc.itrocket.space</a>. Mainnet fully indexed, from the first migration to the update landing now. Six ways in:</p>
+    <div class="features">
+      <p><span class="run-in">Explorer.</span> Search any party, transfer, validator or CNS name and read it as a page.</p>
+      <p><span class="run-in">Data API.</span> The same data over REST, around 50 endpoints, plus an x402 door where agents pay per request with no signup.</p>
+      <p><span class="run-in">Ask the API.</span> A question in plain language, answered from live data by an AI assistant that calls the endpoints for you.</p>
+      <p><span class="run-in">Analytics.</span> Network charts for traffic, supply, rewards and featured-app compliance.</p>
+      <p><span class="run-in">Updates &amp; News.</span> Canton forum posts, releases, blog announcements and the SV operations schedule, all in one place, sorted by source, topic and who it concerns. Filter it down, then subscribe to exactly that slice.</p>
+      <p><span class="run-in">Alerts.</span> Downtime, balance changes, governance votes and news, pushed to email, Telegram, Slack or PagerDuty.</p>
+    </div>
+
+    <h3>Three main differences from Ethereum</h3>
+    <div class="scroller">
+      <table>
+        <thead>
+          <tr><th scope="col">On Ethereum</th><th scope="col">On Canton</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Address <code>0x1a2b…</code></td><td><strong>Party ID</strong> <code>name::1220&lt;64 hex&gt;</code>. The whole string is the identifier; truncate it and lookups fail.</td></tr>
+          <tr><td>Gas, paid per transaction from your wallet</td><td><strong>Traffic</strong>, bought in advance by the validator that hosts your party.</td></tr>
+          <tr><td>Everything is public</td><td><strong>Private by default.</strong> Public data is a subset, and the explorer shows you less than Etherscan does, on purpose.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">2.</span>Your first task</h2>
+    <p>Look up a party ID and read its transfers, first by eye, then in code.</p>
+
+    <h3>In the explorer, no account</h3>
+    <p>Paste a party ID into search, or go straight to the URL. This is a real mainnet validator, so open it and follow along:</p>
+    <pre><code>https://cc.itrocket.space/blockchain/parties/<span class="u">ITRocket-validator-1::12200ac965a56eff577aa6754516dbc0dd07265a0bf9361466c573e71ab7491ec369</span></code></pre>
+    <p>You get the party's main details plus an <strong>Operations</strong> table of everything it has done, split by type.</p>
+    <h3>How to create or access an account</h3>
+    <ol>
+      <li>Click <strong>Sign in</strong> in the upper right corner of <a href="https://cc.itrocket.space/">cc.itrocket.space</a>.</li>
+      <li>Choose one of the following options:
+        <ul>
+          <li>Sign in with a Google account.</li>
+          <li>Sign up with an email address and verify it via the link sent to that address. If it does not arrive within a few minutes, check your Spam and Junk folders.</li>
+        </ul>
+      </li>
+    </ol>
+    <h3>Wallet creation</h3>
+    <ol>
+      <li>Go to the Credits page: <a href="https://cc.itrocket.space/account">cc.itrocket.space/account</a></li>
+      <li>Click <strong>Create wallet and Enable Deposits</strong></li>
+      <li>Download the secret key and store it somewhere safe. It is the only way back into your wallet, and nobody can recover it for you</li>
+      <li>Protect your wallet via:
+        <ul>
+          <li><strong>Passkey</strong>: click <strong>Protect with passkey &amp; continue</strong> to unlock later with Touch ID, Windows Hello, or your device PIN.</li>
+          <li><strong>Password</strong>: click <strong>Use a wallet password</strong>, then set and confirm a password and click <strong>Encrypt wallet &amp; continue</strong>.</li>
+        </ul>
+      </li>
+    </ol>
+    <p>After this you get <strong>500 free credits</strong>, enough to try the paid features before you decide to fund the wallet.</p>
+
+    <h3>API access via key</h3>
+    <ol>
+      <li>Go to <a href="https://cc.itrocket.space/account/settings/api-keys">Settings → API keys</a></li>
+      <li>Click <strong>Create key</strong>, give it a name (e.g. <em>Testing</em>), click <strong>Create</strong></li>
+      <li>Copy and store the key, it is shown only once</li>
+      <li>Send a test request with the key as a bearer token. This one reads your balance, which is free and never billed, so confirming the key works costs nothing:</li>
+    </ol>
+<pre><code>curl https://cc-api.itrocket.space/api/v1/credits/balance \
+  -H "Authorization: Bearer YOUR_API_KEY"</code></pre>
+    <p>Then the same party you just opened in the browser, this time its transfers:</p>
+<pre><code>curl "https://cc-api.itrocket.space/api/v1/parties/ITRocket-validator-1::12200ac965a56eff577aa6754516dbc0dd07265a0bf9361466c573e71ab7491ec369/operations?type=transfer&amp;limit=25" \
+  -H "Authorization: Bearer YOUR_API_KEY"</code></pre>
+    <p>The first call is free, the second costs one credit.</p>
+    <p>API reference: <a href="https://cc.itrocket.space/api-reference">cc.itrocket.space/api-reference</a></p>
+  </section>
+
+  <section class="callout">
+    <p class="prize">First 20 participants · 100 CC each</p>
+    <h2>Extra task</h2>
+    <p>Top up your wallet with <strong>10 Canton Coin</strong> and convert it into credits. The first <strong>20</strong> people to complete both steps get <strong>100 CC</strong> added to their wallet. Counting starts on <strong>17 September 2026 at 00:00 UTC</strong>. This is also how you top up once the free credits run out, so it is optional otherwise: 500 credits are enough for testing.</p>
+    <ol>
+      <li>Go to <a href="https://cc.itrocket.space/account">cc.itrocket.space/account</a> and copy the PartyID</li>
+      <li>Send Canton Coin to that PartyID from any exchange that lists Canton Coin, Bybit and Kraken among them, or from your own wallet</li>
+      <li>The balance shows up after a short delay. Once it does, enter the Canton Coin amount under <strong>Convert CC to Credits</strong>, check the displayed rate and credit amount, then click <strong>Convert</strong></li>
+    </ol>
+    <p class="smallprint">Deposited funds, the 100 CC bonus included, can only be converted to credits: no withdrawals, no transfers, no going back. Deposit only the amount you intend to convert. The bonus arrives in your in-app wallet within 24 hours, and the offer runs until 20 wallets have been topped up.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">3.</span>What trips people up</h2>
+    <dl class="gotchas">
+
+      <dt>Recipient and amount are hidden</dt>
+      <dd>
+        <p>Not a bug, it's privacy. A row under <strong>Private</strong> shows who sent it, which validator submitted it, and which asset moved. The recipient and the amount stay hidden.</p>
+        <figure class="redaction">
+          <div class="row head"><span>From</span><span>To</span><span class="amt">Amount</span><span>Coin</span></div>
+          <div class="row"><span>Cantex::122033…226b</span><span>pool-custodian::122038…9b8c</span><span class="amt">326.34</span><span class="tag">CC</span></div>
+          <div class="row"><span>7185632::122038…bb2a</span><span><i class="bar w1"></i></span><span class="amt"><i class="bar w2"></i></span><span class="tag priv">raUSD</span></div>
+          <figcaption>The second row is not broken. You can see who sent it and in which asset, just not who received it or how much.</figcaption>
+        </figure>
+        <p>So you can't reconcile a party's totals from public transfers alone. Coming from a transparent chain, this is the number one source of “the explorer is wrong”.</p>
+      </dd>
+
+      <dt>402</dt>
+      <dd><p>A <code>402</code> means you are out of credits: the body carries what the call costs, your balance, and where to top up.</p></dd>
+
+      <dt>The explorer host is not the API host</dt>
+      <dd><p>The site you browse is <code>cc.itrocket.space</code>; the API lives on <code>cc-api.itrocket.space</code>. Send an <code>/api/v1</code> call to the first one and you get an HTML <code>404</code> instead of JSON, which reads like the endpoint does not exist.</p></dd>
+
+      <dt>There are no page numbers</dt>
+      <dd><p>Paging is a cursor, not an offset. <code>limit</code> defaults to 10 and caps at 100; to go further back, pass the <code>next_cursor</code> from the previous response as <code>before=</code>.</p></dd>
+
+    </dl>
+  </section>
+
+  <footer>
+    <p>Building an agent? The same endpoints speak <strong>x402</strong>: it pays for each call in CC or USDCx as it goes, no signup or API key. <a href="https://cc.itrocket.space/api-reference#tag/x402">cc.itrocket.space/api-reference#tag/x402</a></p>
+  </footer>
+
+</div>
+</body>
+</html>
