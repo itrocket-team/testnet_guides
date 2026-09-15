@@ -90,23 +90,6 @@ The first call is free, the second costs one credit.
 
 API reference: https://cc.itrocket.space/api-reference
 
-## Extra task: first 20 participants get 100 CC each
-
-Top up your wallet with **10 Canton Coin** and convert it into credits. The first **20** people to
-complete both steps get **100 CC** added to their wallet. Counting starts on **17 September 2026 at
-00:00 UTC**. This is also how you top up once the free
-credits run out, so it is optional otherwise: 500 credits are enough for testing.
-
-1. Go to https://cc.itrocket.space/account and copy the PartyID
-2. Send Canton Coin to that PartyID from any exchange that lists Canton Coin, Bybit and Kraken
-   among them, or from your own wallet
-3. The balance shows up after a short delay. Once it does, enter the Canton Coin amount under
-   **Convert CC to Credits**, check the displayed rate and credit amount, then click **Convert**
-
-*Deposited funds, the 100 CC bonus included, can only be converted to credits: no withdrawals, no
-transfers, no going back. Deposit only the amount you intend to convert. The bonus arrives in your
-in-app wallet within 24 hours, and the offer runs until 20 wallets have been topped up.*
-
 ## 3. What trips people up
 
 **Recipient and amount are hidden.** Not a bug, it's privacy. A row under **Private** shows who
