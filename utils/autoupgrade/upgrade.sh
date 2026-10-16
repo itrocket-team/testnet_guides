@@ -93,7 +93,7 @@ sleep 2
 for((;;)); do
   height=$(curl -s localhost:$PORT_RPC/status | jq -r .result.sync_info.latest_block_height)
   
-  if ! $proposal_status_checked && (( cur_time - last_check_time > check_interval )); then
+  if [[ -n $PROPOSAL_API ]] && ! $proposal_status_checked && (( cur_time - last_check_time > check_interval )); then
     check_proposal_status
     last_check_time=$cur_time
   fi
